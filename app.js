@@ -138,13 +138,14 @@ const testCatalog = [
   },
   {
     id: 'igf-1',
-    name: 'IGF-1 (Growth Factor)',
+    name: 'HGH Qualification Test (IGF-1)',
     category: 'hormones',
-    description: 'Mediator of growth hormone effects. Important marker for muscle growth, recovery, and anti-aging protocols.',
+    description: 'REQUIRED before HGH therapy. Measures IGF-1, the key biomarker for growth hormone activity and HGH qualification.',
     price: 79,
     biomarkers: ['IGF-1'],
     turnaround: '24-48 hours',
-    fasting: false
+    fasting: false,
+    popular: true
   },
   {
     id: 'dht',
@@ -459,9 +460,9 @@ const testCatalog = [
   // Complete Panels
   {
     id: 'male-hormone-basic',
-    name: 'Male Hormone Basic Panel',
+    name: 'TRT Screening Panel',
     category: 'panels',
-    description: 'Essential hormone panel: Total T, Free T, Estradiol, and SHBG. Great starting point for hormone assessment.',
+    description: 'REQUIRED before starting TRT. Essential screening: Total T, Free T, Estradiol, and SHBG for therapy qualification.',
     price: 149,
     biomarkers: ['Total T', 'Free T', 'Estradiol', 'SHBG'],
     turnaround: '24-48 hours',
@@ -470,9 +471,9 @@ const testCatalog = [
   },
   {
     id: 'male-hormone-complete',
-    name: 'Male Hormone Complete Panel',
+    name: 'TRT Qualification Panel',
     category: 'panels',
-    description: 'Comprehensive hormone assessment with testosterone, estradiol, LH, FSH, prolactin, and thyroid.',
+    description: 'REQUIRED before starting TRT. Complete qualification assessment with testosterone, estradiol, LH, FSH, prolactin, and thyroid.',
     price: 249,
     biomarkers: ['Total T', 'Free T', 'Estradiol', 'SHBG', 'LH', 'FSH', 'Prolactin', 'TSH', 'Free T4'],
     turnaround: '24-48 hours',
@@ -481,9 +482,9 @@ const testCatalog = [
   },
   {
     id: 'performance-baseline',
-    name: 'Performance Baseline Panel',
+    name: 'TRT/HGH Pre-Therapy Panel',
     category: 'panels',
-    description: 'Complete baseline for athletes: hormones, thyroid, metabolic panel, lipids, and key vitamins.',
+    description: 'REQUIRED before TRT or HGH therapy. Complete pre-therapy screening: hormones, thyroid, metabolic panel, lipids, and key vitamins.',
     price: 299,
     biomarkers: ['Total T', 'Free T', 'Estradiol', 'TSH', 'Free T3', 'CMP', 'Lipid Panel', 'CBC', 'Vitamin D', 'Ferritin'],
     turnaround: '24-48 hours',
@@ -492,9 +493,9 @@ const testCatalog = [
   },
   {
     id: 'complete-performance',
-    name: 'Complete Performance Panel',
+    name: 'Full Injection Therapy Panel',
     category: 'panels',
-    description: 'Our most comprehensive panel with 15 key biomarkers. The gold standard for serious performance optimization.',
+    description: 'REQUIRED before TRT or HGH therapy. Our most comprehensive qualification panel with 15 key biomarkers for injection therapy approval.',
     price: 179,
     biomarkers: ['Total T', 'Free T', 'Estradiol', 'SHBG', 'LH', 'FSH', 'Prolactin', 'TSH', 'Free T3', 'Free T4', 'CMP', 'Lipid Panel', 'CBC', 'Vitamin D', 'hs-CRP'],
     turnaround: '24-48 hours',
@@ -1270,26 +1271,40 @@ function initEventListeners() {
 const aiResponses = {
   // TRT & Testosterone specific
   trt: {
-    message: "💪 Essential tests for TRT monitoring - track your gains!",
-    tests: ['testosterone-complete', 'estradiol', 'male-hormone-complete']
+    message: "💉 Ready to start TRT? These tests are REQUIRED before starting testosterone therapy. Get your baseline now!",
+    tests: ['testosterone-complete', 'estradiol', 'male-hormone-complete', 'lipid-panel']
   },
   testosterone: {
-    message: "💪 Testosterone testing options to optimize your T levels:",
+    message: "💪 Check your T levels! Low testosterone = low gains. These tests reveal if TRT could transform your physique:",
     tests: ['total-testosterone', 'free-testosterone', 'testosterone-complete', 'male-hormone-basic']
   },
   lowt: {
-    message: "💪 Tests for evaluating low testosterone - let's find out what's holding you back:",
+    message: "🔬 Symptoms of Low T: fatigue, low libido, can't build muscle? Get tested and see if you qualify for TRT:",
     tests: ['testosterone-complete', 'lh-fsh', 'prolactin', 'shbg']
+  },
+
+  // HGH specific
+  hgh: {
+    message: "🚀 HGH optimization starts with knowing your IGF-1 levels! These tests are essential before starting growth hormone therapy:",
+    tests: ['igf-1', 'testosterone-complete', 'fasting-insulin', 'cmp']
+  },
+  growth: {
+    message: "📈 Growth hormone is KEY for muscle, recovery, and anti-aging. Check your levels:",
+    tests: ['igf-1', 'testosterone-complete', 'cmp', 'thyroid-complete']
+  },
+  igf: {
+    message: "🧬 IGF-1 is the biomarker for growth hormone activity. Low IGF-1 = slower gains. Get tested:",
+    tests: ['igf-1', 'testosterone-complete', 'fasting-insulin', 'cmp']
   },
 
   // Muscle & Fitness
   muscle: {
-    message: "🏋️ Tests for maximum muscle building & performance:",
-    tests: ['testosterone-complete', 'igf-1', 'cmp', 'vitamin-d']
+    message: "🏋️ Can't build muscle? Your hormones might be the problem. TRT + HGH optimization starts here:",
+    tests: ['testosterone-complete', 'igf-1', 'estradiol', 'thyroid-complete']
   },
   gains: {
-    message: "📈 Optimize your gains with these essential tests:",
-    tests: ['testosterone-complete', 'igf-1', 'thyroid-complete', 'vitamin-d']
+    message: "📈 No gains? 90% of hardgainers have suboptimal testosterone or IGF-1. Find out if you need TRT/HGH:",
+    tests: ['testosterone-complete', 'igf-1', 'thyroid-complete', 'male-hormone-complete']
   },
   bodybuilding: {
     message: "🏆 Key tests for serious bodybuilders:",
@@ -1357,21 +1372,23 @@ const aiResponses = {
   },
 
   default: {
-    message: "💪 Based on your interest, here are recommended tests to optimize your gains:",
-    tests: ['testosterone-complete', 'thyroid-complete', 'cmp', 'vitamin-d']
+    message: "💉 Ready to get qualified for TRT or HGH? I'll help you pick the right screening panel. These are REQUIRED before starting injection therapy:",
+    tests: ['male-hormone-complete', 'igf-1', 'complete-performance', 'performance-baseline']
   },
   offTopic: {
-    message: "🤖 I specialize in lab test recommendations for gains optimization! Try asking about testosterone, TRT, muscle building, energy, or specific symptoms!",
+    message: "💉 I help warriors get qualified for TRT and HGH therapy! Ask me about TRT qualification, HGH screening, or which panels you need to start injection therapy!",
     tests: []
   }
 };
 
 // Priority keyword mappings for AI chat
 const priorityKeywords = {
-  'trt': 'trt', 'testosterone replacement': 'trt', 'on trt': 'trt',
+  'trt': 'trt', 'testosterone replacement': 'trt', 'on trt': 'trt', 'start trt': 'trt',
+  'hgh': 'hgh', 'growth hormone': 'hgh', 'human growth': 'hgh', 'gh therapy': 'hgh',
+  'igf': 'igf', 'igf-1': 'igf', 'igf1': 'igf',
   'low t': 'lowt', 'low testosterone': 'lowt',
   'build muscle': 'muscle', 'muscle building': 'muscle', 'bulking': 'muscle',
-  'gains': 'gains', 'maximize gains': 'gains', 'making gains': 'gains',
+  'gains': 'gains', 'maximize gains': 'gains', 'making gains': 'gains', 'no gains': 'gains',
   'bodybuilding': 'bodybuilding', 'bodybuilder': 'bodybuilding',
   'lifting': 'muscle', 'gym': 'muscle', 'workout': 'performance',
   'recovery': 'recovery', 'overtraining': 'recovery',
@@ -1381,7 +1398,8 @@ const priorityKeywords = {
   'fatigue': 'fatigue', 'exhausted': 'fatigue',
   'thyroid': 'thyroid', 'metabolism': 'metabolism',
   'weight': 'weight', 'lose weight': 'weight',
-  'checkup': 'checkup', 'baseline': 'checkup', 'full panel': 'complete'
+  'checkup': 'checkup', 'baseline': 'checkup', 'full panel': 'complete',
+  'injection': 'trt', 'injections': 'trt'
 };
 
 function handleAiKeypress(event) {
@@ -1393,28 +1411,34 @@ function handleAiKeypress(event) {
 function createAiTestCard(test) {
   const card = document.createElement('div');
   card.className = 'ai-test-card';
-  card.style.cssText = 'display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 8px; margin-top: 0.5rem; cursor: pointer; transition: all 0.2s;';
-  card.dataset.action = 'addToCartFromAI';
-  card.dataset.testId = test.id;
+  card.style.cssText = 'display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: rgba(0, 245, 255, 0.05); border: 1px solid rgba(0, 245, 255, 0.3); border-radius: 12px; margin-top: 0.5rem; transition: all 0.2s;';
 
   const emoji = document.createElement('span');
   emoji.style.fontSize = '1.25rem';
-  emoji.textContent = '💪';
+  emoji.textContent = '🧪';
 
   const info = document.createElement('div');
   info.style.flex = '1';
   const name = document.createElement('div');
   name.style.cssText = 'font-weight: 600; color: #fff; font-size: 0.85rem;';
   name.textContent = test.name;
+  const priceText = document.createElement('div');
+  priceText.style.cssText = 'color: #00f5ff; font-weight: 700; font-size: 0.9rem;';
+  priceText.textContent = `$${test.price}`;
   info.appendChild(name);
+  info.appendChild(priceText);
 
-  const price = document.createElement('div');
-  price.style.cssText = 'color: #D4AF37; font-weight: 700;';
-  price.textContent = `$${test.price}`;
+  const addBtn = document.createElement('button');
+  addBtn.style.cssText = 'padding: 0.5rem 1rem; background: linear-gradient(135deg, #00f5ff 0%, #bf00ff 100%); border: none; border-radius: 50px; color: #000; font-weight: 700; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 10px rgba(0, 245, 255, 0.4);';
+  addBtn.textContent = '+ Add';
+  addBtn.dataset.action = 'addToCartFromAI';
+  addBtn.dataset.testId = test.id;
+  addBtn.onmouseover = () => { addBtn.style.transform = 'scale(1.05)'; addBtn.style.boxShadow = '0 0 20px rgba(0, 245, 255, 0.6)'; };
+  addBtn.onmouseout = () => { addBtn.style.transform = 'scale(1)'; addBtn.style.boxShadow = '0 0 10px rgba(0, 245, 255, 0.4)'; };
 
   card.appendChild(emoji);
   card.appendChild(info);
-  card.appendChild(price);
+  card.appendChild(addBtn);
 
   return card;
 }
@@ -1565,7 +1589,7 @@ function closeWelcomePopup() {
 }
 
 function copyWelcomeCode() {
-  navigator.clipboard.writeText('FIRSTGAINS').then(() => {
+  navigator.clipboard.writeText('TRTWARRIOR').then(() => {
     showToast('Code copied to clipboard!');
   });
 }
@@ -1620,71 +1644,6 @@ function submitExitEmail() {
   }
 }
 
-// =============================================================================
-// Social Proof Notifications
-// =============================================================================
-
-const socialProofData = {
-  locations: ['Texas', 'California', 'Florida', 'Arizona', 'Colorado', 'Georgia', 'Ohio', 'Michigan', 'Pennsylvania', 'Illinois'],
-  names: ['Someone', 'A customer', 'A warrior'],
-  times: ['just now', '1 minute ago', '2 minutes ago', '3 minutes ago']
-};
-
-function initSocialProof() {
-  // Show first notification after 10 seconds
-  setTimeout(showSocialProof, 10000);
-  // Then every 45-90 seconds
-  setInterval(showSocialProof, Math.random() * 45000 + 45000);
-}
-
-function showSocialProof() {
-  const proofEl = document.getElementById('socialProof');
-  const nameEl = document.getElementById('proofName');
-  const productEl = document.getElementById('proofProduct');
-  const timeEl = document.getElementById('proofTime');
-
-  if (!proofEl || !nameEl || !productEl || !timeEl) return;
-
-  const location = socialProofData.locations[Math.floor(Math.random() * socialProofData.locations.length)];
-  const name = socialProofData.names[Math.floor(Math.random() * socialProofData.names.length)];
-  const time = socialProofData.times[Math.floor(Math.random() * socialProofData.times.length)];
-
-  const popularTests = testCatalog.filter(t => t.popular);
-  const test = popularTests[Math.floor(Math.random() * popularTests.length)] || testCatalog[0];
-
-  nameEl.textContent = `${name} in ${location}`;
-  productEl.textContent = test.name;
-  timeEl.textContent = time;
-
-  proofEl.classList.add('active');
-
-  setTimeout(() => {
-    proofEl.classList.remove('active');
-  }, 5000);
-}
-
-function closeSocialProof() {
-  const proofEl = document.getElementById('socialProof');
-  if (proofEl) proofEl.classList.remove('active');
-}
-
-// =============================================================================
-// Live Viewers Counter
-// =============================================================================
-
-function initLiveViewers() {
-  updateViewerCount();
-  setInterval(updateViewerCount, 30000);
-}
-
-function updateViewerCount() {
-  const viewerEl = document.getElementById('viewerCount');
-  if (viewerEl) {
-    const base = 35;
-    const variance = Math.floor(Math.random() * 30);
-    viewerEl.textContent = base + variance;
-  }
-}
 
 // =============================================================================
 // Page Transitions
@@ -2445,8 +2404,6 @@ function init() {
   // Initialize interactive features
   initWelcomePopup();
   initExitIntent();
-  initSocialProof();
-  initLiveViewers();
   initPageTransitions();
   initStickyCartBar();
   initCookieBanner();

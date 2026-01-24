@@ -38,6 +38,14 @@
   --spartan-gold-darker: #8B7500;
   --spartan-gold-bg: rgba(212, 175, 55, 0.15);
 
+  /* === NEON ACCENT COLORS === */
+  --neon-cyan: #00d4ff;
+  --neon-magenta: #ff00aa;
+  --neon-green: #00ff88;
+  --neon-purple: #aa00ff;
+  --neon-orange: #ff6b00;
+  --neon-pink: #ff0080;
+
   /* === COLOR PSYCHOLOGY PALETTE === */
 
   /* Trust Blue - Secondary */
@@ -91,7 +99,7 @@
 
   /* === SPACING === */
   --container-width: 1200px;
-  --section-padding: 3rem;
+  --section-padding: 2.5rem;
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
