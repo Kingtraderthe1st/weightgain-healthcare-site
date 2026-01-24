@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Complete your lab test order - WeightGain">
+  <title>Checkout - WeightGain | Built for Warriors</title>
+
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://js.stripe.com; connect-src 'self' https://api.stripe.com;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="logo">
+          <img src="logo.png" alt="WeightGain" class="logo-img">
+          <span class="logo-text">Weight Gain</span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="index.html#tests" class="nav-link">Lab Tests</a></li>
+          <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="results.html" class="nav-link">My Results</a></li>
+          <li><a href="account.html" class="nav-link">My Account</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="index.html" class="btn btn-secondary btn-small">Continue Shopping</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="checkout">
+    <div class="container">
+      <h1 style="margin-bottom: var(--space-8);">Checkout</h1>
+
+      <div class="checkout__container">
+        <!-- Main Form Area -->
+        <div class="checkout__main">
+          <!-- State Restriction Warning (hidden by default) -->
+          <div class="state-warning" id="state-warning" style="display: none;">
+            <div class="state-warning__title">Service Not Available</div>
+            <div class="state-warning__text">
+              Unfortunately, direct-to-consumer lab testing is not available in your state due to local regulations.
+              Affected states: New York, New Jersey, Hawaii, and Rhode Island.
+            </div>
+          </div>
+
+          <!-- Empty Cart State -->
+          <div class="empty-state" id="empty-cart" style="display: none;">
+            <svg class="empty-state__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="9" cy="21" r="1"/>
+              <circle cx="20" cy="21" r="1"/>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+            <h3 class="empty-state__title">Your cart is empty</h3>
+            <p class="empty-state__description">
+              Browse our performance biomarker tests and add items to get started.
+            </p>
+            <a href="index.html#tests" class="btn btn--primary">Browse Tests</a>
+          </div>
+
+          <!-- Step 1: Review Cart -->
+          <div class="checkout__step" id="step-cart">
+            <div class="checkout__step-header">
+              <span class="checkout__step-number">1</span>
+              <h2 class="checkout__step-title">Review Your Tests</h2>
+            </div>
+
+            <div id="cart-items">
+              <!-- Cart items will be loaded dynamically -->
+            </div>
+
+            <div style="margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--border-light);">
+              <a href="index.html#tests" style="font-size: var(--text-sm); color: var(--text-link);">
+                + Add more tests
+              </a>
+            </div>
+          </div>
+
+          <!-- Step 2: Your Information -->
+          <div class="checkout__step" id="step-info">
+            <div class="checkout__step-header">
+              <span class="checkout__step-number">2</span>
+              <h2 class="checkout__step-title">Your Information</h2>
+            </div>
+
+            <form id="checkout-form" novalidate>
+              <div style="display: grid; gap: var(--space-4); grid-template-columns: repeat(2, 1fr);">
+                <div class="form-group">
+                  <label for="firstName" class="form-label form-label--required">First Name</label>
+                  <input type="text" id="firstName" name="firstName" class="form-input" required autocomplete="given-name">
+                </div>
+
+                <div class="form-group">
+                  <label for="lastName" class="form-label form-label--required">Last Name</label>
+                  <input type="text" id="lastName" name="lastName" class="form-input" required autocomplete="family-name">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="form-label form-label--required">Email</label>
+                <input type="email" id="email" name="email" class="form-input" required autocomplete="email">
+                <p class="form-hint">We'll send your lab requisition and results here.</p>
+              </div>
+
+              <div class="form-group">
+                <label for="phone" class="form-label form-label--required">Phone</label>
+                <input type="tel" id="phone" name="phone" class="form-input" required autocomplete="tel">
+              </div>
+
+              <div class="form-group">
+                <label for="dob" class="form-label form-label--required">Date of Birth</label>
+                <input type="date" id="dob" name="dob" class="form-input" required>
+              </div>
+
+              <div class="form-group">
+                <label for="sex" class="form-label form-label--required">Biological Sex</label>
+                <select id="sex" name="sex" class="form-input form-select" required>
+                  <option value="">Select...</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+                <p class="form-hint">Required for accurate reference ranges.</p>
+              </div>
+
+              <hr style="border: none; border-top: 1px solid var(--border-light); margin: var(--space-6) 0;">
+
+              <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-4);">Address</h3>
+              <p style="font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-4);">
+                Used to verify eligibility and find lab locations near you.
+              </p>
+
+              <div class="form-group">
+                <label for="address" class="form-label form-label--required">Street Address</label>
+                <input type="text" id="address" name="address" class="form-input" required autocomplete="street-address">
+              </div>
+
+              <div style="display: grid; gap: var(--space-4); grid-template-columns: 2fr 1fr 1fr;">
+                <div class="form-group">
+                  <label for="city" class="form-label form-label--required">City</label>
+                  <input type="text" id="city" name="city" class="form-input" required autocomplete="address-level2">
+                </div>
+
+                <div class="form-group">
+                  <label for="state" class="form-label form-label--required">State</label>
+                  <select id="state" name="state" class="form-input form-select" required>
+                    <option value="">Select...</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="zip" class="form-label form-label--required">ZIP Code</label>
+                  <input type="text" id="zip" name="zip" class="form-input" required autocomplete="postal-code" pattern="[0-9]{5}">
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Step 3: Payment -->
+          <div class="checkout__step" id="step-payment">
+            <div class="checkout__step-header">
+              <span class="checkout__step-number">3</span>
+              <h2 class="checkout__step-title">Payment</h2>
+            </div>
+
+            <div class="alert alert--info" style="margin-bottom: var(--space-4);">
+              <svg class="alert__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 16v-4M12 8h.01"/>
+              </svg>
+              <span>HSA/FSA cards accepted. Lab tests are typically eligible expenses.</span>
+            </div>
+
+            <!-- Secure Payment via Stripe Elements -->
+            <div class="form-group">
+              <label for="stripe-card-element" class="form-label form-label--required">Card Details</label>
+              <div id="stripe-card-element" class="form-input" style="padding: var(--space-4); min-height: 44px;">
+                <!-- Stripe Elements will mount here -->
+                <noscript>Please enable JavaScript to complete payment.</noscript>
+              </div>
+              <div id="card-errors" role="alert" style="color: var(--error-red); font-size: var(--text-sm); margin-top: var(--space-2);"></div>
+              <p class="form-hint" style="margin-top: var(--space-2);">
+                <svg style="display: inline-block; vertical-align: middle; margin-right: var(--space-1);" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                Your card details are handled securely by Stripe. We never store your card information.
+              </p>
+            </div>
+
+            <!-- Hidden input for Stripe token -->
+            <input type="hidden" id="stripeToken" name="stripeToken">
+            <input type="hidden" name="_csrf" id="csrf-token">
+
+            <div class="form-group" style="margin-top: var(--space-4);">
+              <label class="form-check">
+                <input type="checkbox" class="form-check__input" id="terms" required>
+                <span class="form-check__label">
+                  I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+                  I understand that lab tests are non-refundable once the requisition is generated.
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" form="checkout-form" class="btn btn--primary btn--lg btn--full" id="submit-btn">
+            Complete Order
+          </button>
+
+          <p style="text-align: center; margin-top: var(--space-4); font-size: var(--text-sm); color: var(--text-tertiary);">
+            <svg style="display: inline-block; vertical-align: middle; margin-right: var(--space-1);" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            Your payment is secured with 256-bit SSL encryption
+          </p>
+        </div>
+
+        <!-- Order Summary Sidebar -->
+        <aside class="checkout__sidebar">
+          <div class="order-summary">
+            <h2 class="order-summary__title">Order Summary</h2>
+
+            <div id="summary-items">
+              <!-- Items will be loaded dynamically -->
+            </div>
+
+            <div class="order-summary__totals">
+              <div class="order-summary__row">
+                <span>Subtotal</span>
+                <span id="subtotal">$0.00</span>
+              </div>
+              <div class="order-summary__row">
+                <span>Processing Fee</span>
+                <span>$0.00</span>
+              </div>
+              <div class="order-summary__total">
+                <span>Total</span>
+                <span id="total">$0.00</span>
+              </div>
+            </div>
+
+            <div style="margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid var(--border-light);">
+              <h4 style="font-size: var(--text-sm); font-weight: var(--font-semibold); margin-bottom: var(--space-3);">What's Included</h4>
+              <ul style="font-size: var(--text-sm); color: var(--text-secondary);" role="list">
+                <li style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success-green)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                  Physician-authorized lab order
+                </li>
+                <li style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success-green)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                  Access to 2,500+ lab locations
+                </li>
+                <li style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success-green)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                  Results in 24-48 hours
+                </li>
+                <li style="display: flex; align-items: center; gap: var(--space-2);">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success-green)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                  AI-powered insights dashboard
+                </li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__bottom" style="border-top: none; margin-top: 0; padding-top: 0;">
+        <p class="footer__copyright">&copy; 2026 WeightGain Performance Labs. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="#" class="footer__legal-link">Privacy Policy</a>
+          <a href="#" class="footer__legal-link">Terms of Service</a>
+          <a href="#" class="footer__legal-link">HIPAA Notice</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Success Modal -->
+  <div class="modal" id="success-modal" style="display: none;" role="dialog" aria-labelledby="success-title" aria-modal="true">
+    <div class="modal__backdrop"></div>
+    <div class="modal__content" style="background: var(--bg-card); border-radius: var(--radius-2xl); padding: var(--space-8); max-width: 500px; margin: auto; position: relative; z-index: 1; text-align: center;">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--success-green)" stroke-width="2" style="margin: 0 auto var(--space-4);">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M9 12l2 2 4-4"/>
+      </svg>
+      <h2 id="success-title" style="margin-bottom: var(--space-2);">Order Confirmed!</h2>
+      <p style="color: var(--text-secondary); margin-bottom: var(--space-6);">
+        Your lab requisition has been sent to your email. You can visit any Quest Diagnostics location to complete your blood draw.
+      </p>
+      <div style="background: var(--bg-secondary); padding: var(--space-4); border-radius: var(--radius-lg); margin-bottom: var(--space-6);">
+        <p style="font-size: var(--text-sm); color: var(--text-tertiary); margin-bottom: var(--space-1);">Order Number</p>
+        <p style="font-size: var(--text-xl); font-weight: var(--font-bold);" id="order-number">WG-123456</p>
+      </div>
+      <a href="account.html" class="btn btn--primary btn--lg btn--full">View Your Dashboard</a>
+    </div>
+  </div>
+
+  <!-- Stripe.js for secure payment handling -->
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <script src="app.js"></script>
+  <script>
+    // Initialize Stripe (replace with your publishable key)
+    const stripePublishableKey = 'pk_test_placeholder'; // TODO: Replace with actual key
+    let stripe, cardElement;
+
+    if (typeof Stripe !== 'undefined') {
+      stripe = Stripe(stripePublishableKey);
+      const elements = stripe.elements();
+
+      // Create card element
+      cardElement = elements.create('card', {
+        style: {
+          base: {
+            color: '#ffffff',
+            fontFamily: 'Inter, system-ui, sans-serif',
+            fontSmoothing: 'antialiased',
+            fontSize: '16px',
+            '::placeholder': {
+              color: 'rgba(255, 255, 255, 0.5)'
+            }
+          },
+          invalid: {
+            color: '#ef4444',
+            iconColor: '#ef4444'
+          }
+        }
+      });
+
+      // Mount card element when DOM is ready
+      document.addEventListener('DOMContentLoaded', function() {
+        const cardContainer = document.getElementById('stripe-card-element');
+        if (cardContainer) {
+          cardElement.mount('#stripe-card-element');
+
+          // Handle card errors
+          cardElement.on('change', function(event) {
+            const displayError = document.getElementById('card-errors');
+            if (event.error) {
+              displayError.textContent = event.error.message;
+            } else {
+              displayError.textContent = '';
+            }
+          });
+        }
+      });
+    }
+
+    // State dropdown population
+    const stateSelect = document.getElementById('state');
+    const states = {
+      'AL': 'Alabama', 'AK': 'Alaska', 'AZ': 'Arizona', 'AR': 'Arkansas',
+      'CA': 'California', 'CO': 'Colorado', 'CT': 'Connecticut', 'DE': 'Delaware',
+      'FL': 'Florida', 'GA': 'Georgia', 'HI': 'Hawaii', 'ID': 'Idaho',
+      'IL': 'Illinois', 'IN': 'Indiana', 'IA': 'Iowa', 'KS': 'Kansas',
+      'KY': 'Kentucky', 'LA': 'Louisiana', 'ME': 'Maine', 'MD': 'Maryland',
+      'MA': 'Massachusetts', 'MI': 'Michigan', 'MN': 'Minnesota', 'MS': 'Mississippi',
+      'MO': 'Missouri', 'MT': 'Montana', 'NE': 'Nebraska', 'NV': 'Nevada',
+      'NH': 'New Hampshire', 'NJ': 'New Jersey', 'NM': 'New Mexico', 'NY': 'New York',
+      'NC': 'North Carolina', 'ND': 'North Dakota', 'OH': 'Ohio', 'OK': 'Oklahoma',
+      'OR': 'Oregon', 'PA': 'Pennsylvania', 'RI': 'Rhode Island', 'SC': 'South Carolina',
+      'SD': 'South Dakota', 'TN': 'Tennessee', 'TX': 'Texas', 'UT': 'Utah',
+      'VT': 'Vermont', 'VA': 'Virginia', 'WA': 'Washington', 'WV': 'West Virginia',
+      'WI': 'Wisconsin', 'WY': 'Wyoming', 'DC': 'District of Columbia'
+    };
+
+    Object.entries(states).forEach(([abbr, name]) => {
+      const option = document.createElement('option');
+      option.value = abbr;
+      option.textContent = name;
+      stateSelect.appendChild(option);
+    });
+
+    // Restricted states check
+    const restrictedStates = ['NY', 'NJ', 'HI', 'RI'];
+    stateSelect.addEventListener('change', function() {
+      const warning = document.getElementById('state-warning');
+      const submitBtn = document.getElementById('submit-btn');
+      if (restrictedStates.includes(this.value)) {
+        warning.style.display = 'block';
+        submitBtn.disabled = true;
+      } else {
+        warning.style.display = 'none';
+        submitBtn.disabled = false;
+      }
+    });
+
+    // Load cart items
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem('wg_cart')) || [];
+      const cartItems = document.getElementById('cart-items');
+      const summaryItems = document.getElementById('summary-items');
+      const emptyCart = document.getElementById('empty-cart');
+      const stepCart = document.getElementById('step-cart');
+      const stepInfo = document.getElementById('step-info');
+      const stepPayment = document.getElementById('step-payment');
+      const submitBtn = document.getElementById('submit-btn');
+
+      if (cart.length === 0) {
+        emptyCart.style.display = 'block';
+        stepCart.style.display = 'none';
+        stepInfo.style.display = 'none';
+        stepPayment.style.display = 'none';
+        submitBtn.style.display = 'none';
+        return;
+      }
+
+      // Render cart items using DOM methods for XSS safety
+      cartItems.textContent = '';
+      cart.forEach(item => {
+        const row = document.createElement('div');
+        row.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: var(--space-4) 0; border-bottom: 1px solid var(--border-light);';
+
+        const nameDiv = document.createElement('div');
+        const h4 = document.createElement('h4');
+        h4.style.cssText = 'font-size: var(--text-base); font-weight: var(--font-medium);';
+        h4.textContent = item.name;
+        nameDiv.appendChild(h4);
+
+        const actionDiv = document.createElement('div');
+        actionDiv.style.cssText = 'display: flex; align-items: center; gap: var(--space-4);';
+
+        const priceSpan = document.createElement('span');
+        priceSpan.style.fontWeight = 'var(--font-semibold)';
+        priceSpan.textContent = `$${item.price}`;
+
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'btn btn--ghost btn--sm';
+        removeBtn.setAttribute('aria-label', `Remove ${item.name}`);
+        removeBtn.dataset.removeId = item.id;
+        removeBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+
+        actionDiv.appendChild(priceSpan);
+        actionDiv.appendChild(removeBtn);
+        row.appendChild(nameDiv);
+        row.appendChild(actionDiv);
+        cartItems.appendChild(row);
+      });
+
+      // Event delegation for remove buttons
+      cartItems.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-remove-id]');
+        if (btn) {
+          removeItem(btn.dataset.removeId);
+        }
+      });
+
+      // Render summary items using DOM methods
+      summaryItems.textContent = '';
+      cart.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'order-summary__item';
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'order-summary__item-name';
+        nameSpan.textContent = item.name;
+        const priceSpan = document.createElement('span');
+        priceSpan.className = 'order-summary__item-price';
+        priceSpan.textContent = `$${item.price}`;
+        div.appendChild(nameSpan);
+        div.appendChild(priceSpan);
+        summaryItems.appendChild(div);
+      });
+
+      // Calculate total
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      document.getElementById('subtotal').textContent = `$${total.toFixed(2)}`;
+      document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+    }
+
+    function removeItem(id) {
+      let cart = JSON.parse(localStorage.getItem('wg_cart')) || [];
+      cart = cart.filter(item => item.id !== id);
+      localStorage.setItem('wg_cart', JSON.stringify(cart));
+      loadCart();
+    }
+
+    // Form submission with Stripe tokenization
+    document.getElementById('checkout-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const submitBtn = document.getElementById('submit-btn');
+      const originalText = submitBtn.textContent;
+
+      // Basic validation
+      if (!this.checkValidity()) {
+        this.reportValidity();
+        return;
+      }
+
+      if (!document.getElementById('terms').checked) {
+        alert('Please agree to the Terms of Service and Privacy Policy.');
+        return;
+      }
+
+      // Disable submit button
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Processing...';
+
+      try {
+        // Create Stripe token
+        if (stripe && cardElement) {
+          const { token, error } = await stripe.createToken(cardElement);
+
+          if (error) {
+            const errorElement = document.getElementById('card-errors');
+            errorElement.textContent = error.message;
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+            return;
+          }
+
+          // Store token in hidden field (would be sent to server)
+          document.getElementById('stripeToken').value = token.id;
+        }
+
+        // In production, this would be sent to your server
+        // For demo, simulate successful order
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        // Generate order number
+        const orderNumber = 'WG-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+        document.getElementById('order-number').textContent = orderNumber;
+
+        // Clear cart
+        localStorage.removeItem('wg_cart');
+
+        // Show success modal
+        document.getElementById('success-modal').style.display = 'flex';
+        document.getElementById('success-modal').style.cssText = `
+          display: flex;
+          position: fixed;
+          inset: 0;
+          z-index: 9999;
+          align-items: center;
+          justify-content: center;
+          padding: var(--space-4);
+        `;
+        document.querySelector('.modal__backdrop').style.cssText = `
+          position: absolute;
+          inset: 0;
+          background: rgba(0,0,0,0.5);
+        `;
+      } catch (err) {
+        console.error('Payment error:', err);
+        alert('An error occurred. Please try again.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+
+    // Initialize
+    loadCart();
+  </script>
+</body>
+</html>
