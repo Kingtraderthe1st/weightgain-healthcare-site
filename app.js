@@ -2391,6 +2391,16 @@ function initKeyboardNavigation() {
 // =============================================================================
 
 function init() {
+  // Scroll to top on page load (except checkout and lab finder sections)
+  const currentPath = window.location.pathname;
+  const currentHash = window.location.hash;
+  const isCheckout = currentPath.includes('checkout');
+  const isLabSection = currentHash === '#locations';
+
+  if (!isCheckout && !isLabSection) {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
   injectAnimationStyles();
   renderTests();
   initCategoryFilters();
@@ -2404,7 +2414,7 @@ function init() {
   // Initialize interactive features
   initWelcomePopup();
   initExitIntent();
-  initPageTransitions();
+  // initPageTransitions(); // Disabled - research shows users prefer instant navigation
   initStickyCartBar();
   initCookieBanner();
 

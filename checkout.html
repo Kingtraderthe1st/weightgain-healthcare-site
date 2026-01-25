@@ -46,7 +46,7 @@
   <!-- Main Content -->
   <main id="main-content" class="checkout">
     <div class="container">
-      <h1 style="margin-bottom: var(--space-8);">Checkout</h1>
+      <h1>Checkout</h1>
 
       <div class="checkout__container">
         <!-- Main Form Area -->
@@ -71,7 +71,7 @@
             <p class="empty-state__description">
               Browse our performance biomarker tests and add items to get started.
             </p>
-            <a href="index.html#tests" class="btn btn--primary">Browse Tests</a>
+            <a href="index.html#tests" class="btn btn-primary">Browse Tests</a>
           </div>
 
           <!-- Step 1: Review Cart -->
@@ -300,20 +300,20 @@
   <!-- Success Modal -->
   <div class="modal" id="success-modal" style="display: none;" role="dialog" aria-labelledby="success-title" aria-modal="true">
     <div class="modal__backdrop"></div>
-    <div class="modal__content" style="background: var(--bg-card); border-radius: var(--radius-2xl); padding: var(--space-8); max-width: 500px; margin: auto; position: relative; z-index: 1; text-align: center;">
-      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--success-green)" stroke-width="2" style="margin: 0 auto var(--space-4);">
+    <div class="modal__content">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" style="margin: 0 auto 1.5rem;">
         <circle cx="12" cy="12" r="10"/>
         <path d="M9 12l2 2 4-4"/>
       </svg>
-      <h2 id="success-title" style="margin-bottom: var(--space-2);">Order Confirmed!</h2>
-      <p style="color: var(--text-secondary); margin-bottom: var(--space-6);">
+      <h2 id="success-title" style="margin-bottom: 0.5rem;">Order Confirmed!</h2>
+      <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
         Your lab requisition has been sent to your email. You can visit any Quest Diagnostics location to complete your blood draw.
       </p>
-      <div style="background: var(--bg-secondary); padding: var(--space-4); border-radius: var(--radius-lg); margin-bottom: var(--space-6);">
-        <p style="font-size: var(--text-sm); color: var(--text-tertiary); margin-bottom: var(--space-1);">Order Number</p>
-        <p style="font-size: var(--text-xl); font-weight: var(--font-bold);" id="order-number">WG-123456</p>
+      <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); padding: 1.25rem; border-radius: 12px; margin-bottom: 1.5rem;">
+        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 0.25rem;">Order Number</p>
+        <p style="font-size: 1.5rem; font-weight: 800; color: #D4AF37;" id="order-number">WG-123456</p>
       </div>
-      <a href="account.html" class="btn btn--primary btn--lg btn--full">View Your Dashboard</a>
+      <a href="account.html" class="btn btn-primary btn-large" style="width: 100%;">View Your Dashboard</a>
     </div>
   </div>
 
