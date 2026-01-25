@@ -666,7 +666,7 @@ const state = {
 // =============================================================================
 
 const elements = {
-  testGrid: document.getElementById('test-grid'),
+  testGrid: document.getElementById('testsGrid'),
   cartCount: document.getElementById('cartCount'),
   cartToggle: document.getElementById('cart-toggle'),
   mobileToggle: document.getElementById('mobile-toggle'),

@@ -426,22 +426,23 @@ textarea:focus-visible {
   position: sticky;
   top: 0;
   z-index: var(--z-fixed);
-  background: transparent;
-  backdrop-filter: blur(20px);
+  background: var(--bg-darkest);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem 0;
+  gap: 2rem;
+  padding: 1rem 0;
 }
 
 .logo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0;
+  margin-top: -0.5rem;
 }
 
 .logo-img {
@@ -465,17 +466,16 @@ textarea:focus-visible {
 }
 
 .logo-text {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 800;
   background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-align: center;
-  letter-spacing: 0.05em;
   text-transform: uppercase;
-  letter-spacing: -0.5px;
-  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
+  letter-spacing: 0.1em;
+  margin-top: -0.5rem;
 }
 
 .nav-links {
@@ -552,6 +552,7 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  margin-left: auto;
 }
 
 .cart-btn {
