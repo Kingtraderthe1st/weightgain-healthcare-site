@@ -749,6 +749,22 @@ textarea:focus-visible {
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.5);
 }
+.btn--performance {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+}
+.btn--performance:hover {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+  transform: translateY(-2px);
+}
+.btn--accent {
+  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
+  color: #1a1a1a;
+  font-weight: 700;
+}
 
 /* ============================================
    Hero Section
@@ -2399,6 +2415,33 @@ textarea:focus-visible {
   border-radius: var(--border-radius-lg);
   padding: 1.25rem;
   text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.results-summary__card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.results-summary__card[data-filter="optimal"]:hover {
+  border-color: #22c55e;
+  box-shadow: 0 8px 25px rgba(34, 197, 94, 0.2);
+}
+
+.results-summary__card[data-filter="normal"]:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+}
+
+.results-summary__card[data-filter="attention"]:hover {
+  border-color: #f97316;
+  box-shadow: 0 8px 25px rgba(249, 115, 22, 0.2);
+}
+
+.results-summary__card[data-filter="critical"]:hover {
+  border-color: #ef4444;
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.2);
 }
 
 .results-summary__value {

@@ -80,19 +80,19 @@
 
       <!-- Performance Summary -->
       <div class="results-summary" role="list" aria-label="Results summary">
-        <div class="results-summary__card" role="listitem">
+        <div class="results-summary__card" role="listitem" data-filter="optimal" onclick="filterResults('optimal')">
           <div class="results-summary__value results-summary__value--optimal">8</div>
           <div class="results-summary__label">Optimal</div>
         </div>
-        <div class="results-summary__card" role="listitem">
+        <div class="results-summary__card" role="listitem" data-filter="normal" onclick="filterResults('normal')">
           <div class="results-summary__value results-summary__value--normal">4</div>
           <div class="results-summary__label">Normal</div>
         </div>
-        <div class="results-summary__card" role="listitem">
+        <div class="results-summary__card" role="listitem" data-filter="attention" onclick="filterResults('attention')">
           <div class="results-summary__value results-summary__value--attention">2</div>
           <div class="results-summary__label">Attention</div>
         </div>
-        <div class="results-summary__card" role="listitem">
+        <div class="results-summary__card" role="listitem" data-filter="critical" onclick="filterResults('critical')">
           <div class="results-summary__value results-summary__value--critical">1</div>
           <div class="results-summary__label">Action Needed</div>
         </div>
@@ -431,5 +431,41 @@
   </footer>
 
   <script src="app.js"></script>
+  <script>
+    function filterResults(status) {
+      const results = document.querySelectorAll('.result-item');
+      const cards = document.querySelectorAll('.results-summary__card');
+
+      // Update active state on summary cards
+      cards.forEach(card => {
+        card.style.opacity = card.dataset.filter === status ? '1' : '0.5';
+        card.style.transform = card.dataset.filter === status ? 'scale(1.05)' : 'scale(1)';
+      });
+
+      // Filter results
+      results.forEach(result => {
+        const resultStatus = result.querySelector('.result-item__status');
+        if (!resultStatus) return;
+
+        const statusText = resultStatus.textContent.toLowerCase();
+        const matches = statusText.includes(status) ||
+                       (status === 'critical' && statusText.includes('action'));
+
+        result.style.display = matches ? 'block' : 'none';
+      });
+
+      // Scroll to results
+      document.getElementById('results-list').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Reset filter when clicking "All Results" button
+    document.querySelector('.test-filter.active')?.addEventListener('click', () => {
+      document.querySelectorAll('.result-item').forEach(r => r.style.display = 'block');
+      document.querySelectorAll('.results-summary__card').forEach(c => {
+        c.style.opacity = '1';
+        c.style.transform = 'scale(1)';
+      });
+    });
+  </script>
 </body>
 </html>
