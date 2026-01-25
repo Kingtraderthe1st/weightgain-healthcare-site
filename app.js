@@ -1485,7 +1485,10 @@ function sendAiMessage(presetMessage = null) {
 
   // Add typing indicator using DOM methods
   messagesContainer.appendChild(createTypingIndicator());
-  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  // Scroll to bottom after user message
+  requestAnimationFrame(() => {
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  });
 
   // Get response after delay
   setTimeout(() => {
@@ -1512,7 +1515,11 @@ function sendAiMessage(presetMessage = null) {
 
     aiMsg.appendChild(aiContent);
     messagesContainer.appendChild(aiMsg);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    // Scroll to bottom after DOM update
+    requestAnimationFrame(() => {
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      aiMsg.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    });
   }, 1200);
 }
 

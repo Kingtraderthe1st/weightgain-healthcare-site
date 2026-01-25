@@ -434,13 +434,14 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 0;
+  padding: 1.25rem 0;
 }
 
 .logo {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.25rem;
 }
 
 .logo-img {
@@ -456,17 +457,23 @@ textarea:focus-visible {
 
 @media (max-width: 768px) {
   .logo-img {
-    height: 80px;
+    height: 70px;
+  }
+  .logo-text {
+    font-size: 1rem;
   }
 }
 
 .logo-text {
-  font-size: 2.1rem;
+  font-size: 1.4rem;
   font-weight: 800;
   background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   letter-spacing: -0.5px;
   filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
 }
@@ -481,11 +488,12 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  padding: 0.5rem 0.75rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.9rem;
-  font-weight: 500;
+  padding: 0.6rem 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.05rem;
+  font-weight: 600;
   border-radius: 6px;
+  letter-spacing: 0.01em;
   transition: all 0.2s;
 }
 
@@ -983,6 +991,11 @@ textarea:focus-visible {
 
 .ai-chat-messages-mini {
   margin-bottom: 1rem;
+  max-height: 350px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
 }
 
 .ai-message {
@@ -2307,8 +2320,8 @@ textarea:focus-visible {
   transition: all 0.3s;
 }
 
-#helpButton { bottom: 8rem; }
-#backToTop { bottom: 1.5rem; }
+#helpButton { bottom: 12rem; }
+#backToTop { bottom: 6rem; }
 
 #helpButton:hover,
 #backToTop:hover {
