@@ -302,8 +302,15 @@ function selectPlan(planId) {
   const price = plan.pricing.monthly;
   const billingLabel = 'Monthly';
 
-  // Clear cart and add subscription
-  state.cart = [{
+  // Check if already in cart
+  const existingItem = state.cart.find(item => item.id === plan.id);
+  if (existingItem) {
+    showNotification(`${plan.name} is already in your cart!`, 'info');
+    return;
+  }
+
+  // Add to cart (don't clear existing items)
+  state.cart.push({
     id: plan.id,
     name: plan.name,
     price: price,
@@ -311,13 +318,54 @@ function selectPlan(planId) {
     billingLabel: billingLabel,
     includes: plan.includes,
     quantity: 1
-  }];
+  });
 
   saveCart();
   updateCartUI();
 
-  // Redirect to checkout immediately
-  window.location.href = 'checkout.html';
+  // Show confirmation message
+  showPlanAddedModal(plan);
+}
+
+function showPlanAddedModal(plan) {
+  // Create modal overlay
+  const overlay = document.createElement('div');
+  overlay.id = 'planAddedOverlay';
+  overlay.style.cssText = 'position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 10000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px);';
+
+  // Create modal content
+  const modal = document.createElement('div');
+  modal.style.cssText = 'background: linear-gradient(135deg, #1a1a1a, #0d0d0d); border: 2px solid #D4AF37; border-radius: 16px; padding: 2rem; max-width: 450px; width: 90%; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.5);';
+
+  const emoji = plan.id === 'trt-therapy' ? '💉' : '🧬';
+  const otherPlan = plan.id === 'trt-therapy' ? 'hgh' : 'trt';
+
+  modal.innerHTML = `
+    <div style="font-size: 3rem; margin-bottom: 1rem;">${emoji}</div>
+    <h2 style="color: #D4AF37; font-size: 1.5rem; margin-bottom: 0.5rem;">Let's Get You Jacked!</h2>
+    <p style="color: #fff; font-size: 1.1rem; margin-bottom: 0.5rem;"><strong>${plan.name}</strong> added to cart</p>
+    <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">$${plan.pricing.monthly}/mo - Everything included</p>
+    <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+      <button id="goToCheckout" class="btn btn-primary btn-large" style="min-width: 150px;">Checkout Now</button>
+      <button id="keepBrowsing" class="btn btn-secondary" style="min-width: 150px;">Keep Browsing</button>
+    </div>
+  `;
+
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  // Event listeners
+  document.getElementById('goToCheckout').addEventListener('click', () => {
+    window.location.href = 'checkout.html';
+  });
+
+  document.getElementById('keepBrowsing').addEventListener('click', () => {
+    overlay.remove();
+  });
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) overlay.remove();
+  });
 }
 
 // =============================================================================
