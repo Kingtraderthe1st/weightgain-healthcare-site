@@ -30,7 +30,7 @@
         </a>
 
         <ul class="nav-links">
-          <li><a href="index.html#tests" class="nav-link">Lab Tests</a></li>
+          <li><a href="index.html#pricing" class="nav-link">Get Gains</a></li>
           <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
           <li><a href="results.html" class="nav-link">My Results</a></li>
           <li><a href="account.html" class="nav-link">My Account</a></li>
@@ -67,27 +67,27 @@
               <circle cx="20" cy="21" r="1"/>
               <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
             </svg>
-            <h3 class="empty-state__title">Your cart is empty</h3>
+            <h3 class="empty-state__title">No gains selected</h3>
             <p class="empty-state__description">
-              Browse our performance biomarker tests and add items to get started.
+              Choose TRT or HGH to start getting jacked.
             </p>
-            <a href="index.html#tests" class="btn btn-primary">Browse Tests</a>
+            <a href="index.html#pricing" class="btn btn-primary">View Get Gains</a>
           </div>
 
-          <!-- Step 1: Review Cart -->
+          <!-- Step 1: Review Plan -->
           <div class="checkout__step" id="step-cart">
             <div class="checkout__step-header">
               <span class="checkout__step-number">1</span>
-              <h2 class="checkout__step-title">Review Your Tests</h2>
+              <h2 class="checkout__step-title">Review Your Plan</h2>
             </div>
 
             <div id="cart-items">
-              <!-- Cart items will be loaded dynamically -->
+              <!-- Plan details will be loaded dynamically -->
             </div>
 
             <div style="margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--border-light);">
-              <a href="index.html#tests" style="font-size: var(--text-sm); color: var(--text-link);">
-                + Add more tests
+              <a href="index.html#pricing" style="font-size: var(--text-sm); color: var(--text-link);">
+                Change plan
               </a>
             </div>
           </div>
@@ -220,7 +220,7 @@
 
           <!-- Submit Button -->
           <button type="submit" form="checkout-form" class="btn btn--primary btn--lg btn--full" id="submit-btn">
-            Complete Order
+            Start Getting Gains
           </button>
 
           <p style="text-align: center; margin-top: var(--space-4); font-size: var(--text-sm); color: var(--text-tertiary);">
@@ -235,20 +235,20 @@
         <!-- Order Summary Sidebar -->
         <aside class="checkout__sidebar">
           <div class="order-summary">
-            <h2 class="order-summary__title">Order Summary</h2>
+            <h2 class="order-summary__title">Your Gains</h2>
 
             <div id="summary-items">
-              <!-- Items will be loaded dynamically -->
+              <!-- Plan details will be loaded dynamically -->
             </div>
 
             <div class="order-summary__totals">
               <div class="order-summary__row">
-                <span>Subtotal</span>
-                <span id="subtotal">$0.00</span>
+                <span>Plan</span>
+                <span id="plan-name">-</span>
               </div>
               <div class="order-summary__row">
-                <span>Processing Fee</span>
-                <span>$0.00</span>
+                <span>Billing</span>
+                <span id="billing-cycle">-</span>
               </div>
               <div class="order-summary__total">
                 <span>Total</span>
@@ -257,24 +257,9 @@
             </div>
 
             <div style="margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid var(--border-light);">
-              <h4 style="font-size: var(--text-sm); font-weight: var(--font-semibold); margin-bottom: var(--space-3);">What's Included</h4>
-              <ul style="font-size: var(--text-sm); color: var(--text-secondary);" role="list">
-                <li style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success-green)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                  Physician-authorized lab order
-                </li>
-                <li style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success-green)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                  Access to 2,500+ lab locations
-                </li>
-                <li style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success-green)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                  Results in 24-48 hours
-                </li>
-                <li style="display: flex; align-items: center; gap: var(--space-2);">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success-green)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-                  AI-powered insights dashboard
-                </li>
+              <h4 style="font-size: var(--text-sm); font-weight: var(--font-semibold); margin-bottom: var(--space-3);">Your Plan Includes</h4>
+              <ul id="plan-includes" style="font-size: var(--text-sm); color: var(--text-secondary);" role="list">
+                <!-- Populated dynamically -->
               </ul>
             </div>
           </div>
@@ -305,12 +290,12 @@
         <circle cx="12" cy="12" r="10"/>
         <path d="M9 12l2 2 4-4"/>
       </svg>
-      <h2 id="success-title" style="margin-bottom: 0.5rem;">Order Confirmed!</h2>
+      <h2 id="success-title" style="margin-bottom: 0.5rem;">Let's Get You Jacked!</h2>
       <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
-        Your lab requisition has been sent to your email. You can visit any Quest Diagnostics location to complete your blood draw.
+        Your gains subscription is active. Check your email for blood test info and your first telehealth appointment.
       </p>
       <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); padding: 1.25rem; border-radius: 12px; margin-bottom: 1.5rem;">
-        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 0.25rem;">Order Number</p>
+        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 0.25rem;">Subscription ID</p>
         <p style="font-size: 1.5rem; font-weight: 800; color: #D4AF37;" id="order-number">WG-123456</p>
       </div>
       <a href="account.html" class="btn btn-primary btn-large" style="width: 100%;">View Your Dashboard</a>
@@ -417,6 +402,9 @@
       const stepInfo = document.getElementById('step-info');
       const stepPayment = document.getElementById('step-payment');
       const submitBtn = document.getElementById('submit-btn');
+      const planNameEl = document.getElementById('plan-name');
+      const billingCycleEl = document.getElementById('billing-cycle');
+      const planIncludesEl = document.getElementById('plan-includes');
 
       if (cart.length === 0) {
         emptyCart.style.display = 'block';
@@ -427,66 +415,94 @@
         return;
       }
 
+      // Get the subscription item
+      const item = cart[0];
+      const isSubscription = item.billingCycle;
+
       // Render cart items using DOM methods for XSS safety
       cartItems.textContent = '';
-      cart.forEach(item => {
-        const row = document.createElement('div');
-        row.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: var(--space-4) 0; border-bottom: 1px solid var(--border-light);';
 
-        const nameDiv = document.createElement('div');
-        const h4 = document.createElement('h4');
-        h4.style.cssText = 'font-size: var(--text-base); font-weight: var(--font-medium);';
-        h4.textContent = item.name;
-        nameDiv.appendChild(h4);
+      const row = document.createElement('div');
+      row.style.cssText = 'padding: var(--space-4) 0; border-bottom: 1px solid var(--border-light);';
 
-        const actionDiv = document.createElement('div');
-        actionDiv.style.cssText = 'display: flex; align-items: center; gap: var(--space-4);';
+      const headerDiv = document.createElement('div');
+      headerDiv.style.cssText = 'display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-3);';
 
-        const priceSpan = document.createElement('span');
-        priceSpan.style.fontWeight = 'var(--font-semibold)';
-        priceSpan.textContent = `$${item.price}`;
+      const nameDiv = document.createElement('div');
+      const h4 = document.createElement('h4');
+      h4.style.cssText = 'font-size: var(--text-lg); font-weight: var(--font-semibold);';
+      h4.textContent = item.name;
+      nameDiv.appendChild(h4);
 
-        const removeBtn = document.createElement('button');
-        removeBtn.className = 'btn btn--ghost btn--sm';
-        removeBtn.setAttribute('aria-label', `Remove ${item.name}`);
-        removeBtn.dataset.removeId = item.id;
-        removeBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+      if (isSubscription) {
+        const billingBadge = document.createElement('span');
+        billingBadge.style.cssText = 'font-size: var(--text-sm); color: var(--spartan-gold); background: rgba(212, 175, 55, 0.1); padding: 0.25rem 0.75rem; border-radius: 50px;';
+        billingBadge.textContent = item.billingLabel;
+        nameDiv.appendChild(billingBadge);
+      }
 
-        actionDiv.appendChild(priceSpan);
-        actionDiv.appendChild(removeBtn);
-        row.appendChild(nameDiv);
-        row.appendChild(actionDiv);
-        cartItems.appendChild(row);
-      });
+      const priceSpan = document.createElement('span');
+      priceSpan.style.cssText = 'font-size: var(--text-xl); font-weight: var(--font-bold); color: var(--spartan-gold);';
+      const suffix = item.billingCycle === 'monthly' ? '/mo' : (item.billingCycle === 'yearly' ? '/yr' : '');
+      priceSpan.textContent = `$${item.price}${suffix}`;
 
-      // Event delegation for remove buttons
-      cartItems.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-remove-id]');
-        if (btn) {
-          removeItem(btn.dataset.removeId);
-        }
-      });
+      headerDiv.appendChild(nameDiv);
+      headerDiv.appendChild(priceSpan);
+      row.appendChild(headerDiv);
+
+      // Show includes for subscriptions
+      if (isSubscription && item.includes) {
+        const includesList = document.createElement('ul');
+        includesList.style.cssText = 'display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; font-size: var(--text-sm); color: var(--text-secondary);';
+        item.includes.forEach(inc => {
+          const li = document.createElement('li');
+          li.style.cssText = 'display: flex; align-items: center; gap: 0.5rem;';
+          li.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>';
+          const span = document.createElement('span');
+          span.textContent = inc;
+          li.appendChild(span);
+          includesList.appendChild(li);
+        });
+        row.appendChild(includesList);
+      }
+
+      cartItems.appendChild(row);
+
+      // Update sidebar
+      if (planNameEl) planNameEl.textContent = item.name;
+      if (billingCycleEl) billingCycleEl.textContent = item.billingLabel || 'One-Time';
+
+      // Populate includes in sidebar
+      if (planIncludesEl && item.includes) {
+        planIncludesEl.textContent = '';
+        item.includes.forEach(inc => {
+          const li = document.createElement('li');
+          li.style.cssText = 'display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2);';
+          li.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success-green)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>';
+          const span = document.createElement('span');
+          span.textContent = inc;
+          li.appendChild(span);
+          planIncludesEl.appendChild(li);
+        });
+      }
 
       // Render summary items using DOM methods
       summaryItems.textContent = '';
-      cart.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'order-summary__item';
-        const nameSpan = document.createElement('span');
-        nameSpan.className = 'order-summary__item-name';
-        nameSpan.textContent = item.name;
-        const priceSpan = document.createElement('span');
-        priceSpan.className = 'order-summary__item-price';
-        priceSpan.textContent = `$${item.price}`;
-        div.appendChild(nameSpan);
-        div.appendChild(priceSpan);
-        summaryItems.appendChild(div);
-      });
+      const div = document.createElement('div');
+      div.className = 'order-summary__item';
+      const itemNameSpan = document.createElement('span');
+      itemNameSpan.className = 'order-summary__item-name';
+      itemNameSpan.textContent = item.name;
+      const itemPriceSpan = document.createElement('span');
+      itemPriceSpan.className = 'order-summary__item-price';
+      itemPriceSpan.textContent = `$${item.price}${suffix}`;
+      div.appendChild(itemNameSpan);
+      div.appendChild(itemPriceSpan);
+      summaryItems.appendChild(div);
 
       // Calculate total
       const total = cart.reduce((sum, item) => sum + item.price, 0);
-      document.getElementById('subtotal').textContent = `$${total.toFixed(2)}`;
-      document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+      document.getElementById('total').textContent = `$${total.toFixed(2)}${suffix}`;
     }
 
     function removeItem(id) {

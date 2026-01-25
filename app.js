@@ -17,583 +17,52 @@ function safeJSONParse(str, fallback = null) {
 }
 
 // =============================================================================
-// Test Catalog Data - Performance Biomarker Tests
+// Subscription Plans Data - TRT & HGH Gains
 // =============================================================================
 
-const testCatalog = [
-  // Performance Hormones
-  {
-    id: 'total-testosterone',
-    name: 'Total Testosterone',
-    category: 'hormones',
-    description: 'The primary male sex hormone crucial for muscle mass, strength, energy, and overall performance. Essential baseline for any optimization protocol.',
-    price: 49,
-    biomarkers: ['Total T'],
-    turnaround: '24-48 hours',
-    fasting: false,
+const subscriptionPlans = {
+  trt: {
+    id: 'trt-therapy',
+    name: 'TRT Gains',
+    tagline: 'Testosterone Replacement Therapy',
+    includes: [
+      'Monthly testosterone delivery',
+      'Quarterly blood monitoring',
+      'Unlimited telehealth visits',
+      'AI-powered progress tracking',
+      'Priority support'
+    ],
+    pricing: {
+      oneTime: 199,
+      monthly: 149,
+      yearly: 1490
+    },
+    yearlySavings: 298,
+    monthlyEquivalent: 124,
     popular: true
   },
-  {
-    id: 'free-testosterone',
-    name: 'Free Testosterone',
-    category: 'hormones',
-    description: 'Measures the bioavailable testosterone not bound to proteins. More accurate indicator of actual testosterone activity in the body.',
-    price: 69,
-    biomarkers: ['Free T', 'Bioavailable T'],
-    turnaround: '24-48 hours',
-    fasting: false,
-    popular: true
-  },
-  {
-    id: 'testosterone-complete',
-    name: 'Testosterone Complete Panel',
-    category: 'hormones',
-    description: 'Comprehensive testosterone assessment including total T, free T, SHBG, and albumin. The gold standard for hormone optimization.',
-    price: 129,
-    biomarkers: ['Total T', 'Free T', 'SHBG', 'Albumin'],
-    turnaround: '24-48 hours',
-    fasting: false,
-    popular: true
-  },
-  {
-    id: 'estradiol',
-    name: 'Estradiol (E2)',
-    category: 'hormones',
-    description: 'Essential estrogen marker for men on TRT. Optimal E2 levels are crucial for mood, libido, joint health, and cardiovascular protection.',
-    price: 59,
-    biomarkers: ['Estradiol Sensitive'],
-    turnaround: '24-48 hours',
-    fasting: false,
-    popular: true
-  },
-  {
-    id: 'estradiol-ultrasensitive',
-    name: 'Estradiol Ultrasensitive (LC/MS)',
-    category: 'hormones',
-    description: 'Gold-standard LC/MS method for accurate estradiol measurement. Recommended for men where precise E2 monitoring is critical.',
-    price: 79,
-    biomarkers: ['Estradiol (LC/MS)'],
-    turnaround: '3-5 days',
-    fasting: false
-  },
-  {
-    id: 'shbg',
-    name: 'SHBG (Sex Hormone Binding Globulin)',
-    category: 'hormones',
-    description: 'Protein that binds testosterone. High SHBG reduces free testosterone availability. Key marker for understanding hormone bioavailability.',
-    price: 49,
-    biomarkers: ['SHBG'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'lh-fsh',
-    name: 'LH & FSH Panel',
-    category: 'hormones',
-    description: 'Pituitary hormones that regulate testosterone production. Essential for diagnosing primary vs secondary hypogonadism.',
-    price: 69,
-    biomarkers: ['LH', 'FSH'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'prolactin',
-    name: 'Prolactin',
-    category: 'hormones',
-    description: 'Elevated prolactin can suppress testosterone and cause sexual dysfunction. Important marker for hormone optimization.',
-    price: 49,
-    biomarkers: ['Prolactin'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'dhea-s',
-    name: 'DHEA-S',
-    category: 'hormones',
-    description: 'Precursor hormone that converts to testosterone and estrogen. Declines with age and affects energy, mood, and body composition.',
-    price: 49,
-    biomarkers: ['DHEA-Sulfate'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'progesterone',
-    name: 'Progesterone',
-    category: 'hormones',
-    description: 'Important neurosteroid for sleep, mood, and as a precursor to other hormones. Often overlooked in male hormone panels.',
-    price: 49,
-    biomarkers: ['Progesterone'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'cortisol-am',
-    name: 'Cortisol (Morning)',
-    category: 'hormones',
-    description: 'Primary stress hormone. Chronically elevated cortisol impairs testosterone production, recovery, and body composition.',
-    price: 49,
-    biomarkers: ['Cortisol AM'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'igf-1',
-    name: 'HGH Qualification Test (IGF-1)',
-    category: 'hormones',
-    description: 'REQUIRED before HGH therapy. Measures IGF-1, the key biomarker for growth hormone activity and HGH qualification.',
-    price: 79,
-    biomarkers: ['IGF-1'],
-    turnaround: '24-48 hours',
-    fasting: false,
-    popular: true
-  },
-  {
-    id: 'dht',
-    name: 'DHT (Dihydrotestosterone)',
-    category: 'hormones',
-    description: 'Potent androgen converted from testosterone. Affects hair, prostate, and masculinization. Important for 5-alpha reductase assessment.',
-    price: 89,
-    biomarkers: ['DHT'],
-    turnaround: '3-5 days',
-    fasting: false
-  },
-
-  // Thyroid Tests
-  {
-    id: 'tsh',
-    name: 'TSH',
-    category: 'thyroid',
-    description: 'Primary screening marker for thyroid function. Affects metabolism, energy, body composition, and cognitive function.',
-    price: 39,
-    biomarkers: ['TSH'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'thyroid-basic',
-    name: 'Thyroid Basic Panel',
-    category: 'thyroid',
-    description: 'TSH plus Free T4 for basic thyroid assessment. Good starting point for evaluating thyroid health.',
-    price: 59,
-    biomarkers: ['TSH', 'Free T4'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'thyroid-complete',
-    name: 'Thyroid Complete Panel',
-    category: 'thyroid',
-    description: 'Comprehensive thyroid assessment including TSH, Free T3, Free T4, and thyroid antibodies for autoimmune screening.',
-    price: 129,
-    biomarkers: ['TSH', 'Free T3', 'Free T4', 'TPO Antibodies', 'Thyroglobulin Ab'],
-    turnaround: '24-48 hours',
-    fasting: false,
-    popular: true
-  },
-  {
-    id: 'free-t3',
-    name: 'Free T3',
-    category: 'thyroid',
-    description: 'Active thyroid hormone at the cellular level. Low T3 can cause fatigue, weight gain, and poor performance despite normal TSH.',
-    price: 49,
-    biomarkers: ['Free T3'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'free-t4',
-    name: 'Free T4',
-    category: 'thyroid',
-    description: 'Storage form of thyroid hormone. Converted to active T3 in tissues. Important for full thyroid picture.',
-    price: 49,
-    biomarkers: ['Free T4'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'reverse-t3',
-    name: 'Reverse T3',
-    category: 'thyroid',
-    description: 'Inactive thyroid metabolite. Elevated rT3 can indicate stress, illness, or conversion issues despite normal TSH.',
-    price: 69,
-    biomarkers: ['Reverse T3'],
-    turnaround: '3-5 days',
-    fasting: false
-  },
-  {
-    id: 'thyroid-antibodies',
-    name: 'Thyroid Antibodies',
-    category: 'thyroid',
-    description: 'Tests for Hashimoto\'s and other autoimmune thyroid conditions. Important if you have family history or symptoms.',
-    price: 79,
-    biomarkers: ['TPO Antibodies', 'Thyroglobulin Ab'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-
-  // Metabolic Tests
-  {
-    id: 'cmp',
-    name: 'Comprehensive Metabolic Panel',
-    category: 'metabolic',
-    description: 'Standard 14-marker panel covering blood sugar, kidney function, electrolytes, and liver enzymes. Essential baseline.',
-    price: 39,
-    biomarkers: ['Glucose', 'BUN', 'Creatinine', 'Sodium', 'Potassium', 'Chloride', 'CO2', 'Calcium', 'Protein', 'Albumin', 'Bilirubin', 'Alk Phos', 'AST', 'ALT'],
-    turnaround: '24-48 hours',
-    fasting: true
-  },
-  {
-    id: 'lipid-panel',
-    name: 'Lipid Panel',
-    category: 'metabolic',
-    description: 'Complete cholesterol assessment including total cholesterol, LDL, HDL, and triglycerides. Important for cardiovascular health.',
-    price: 39,
-    biomarkers: ['Total Cholesterol', 'LDL', 'HDL', 'Triglycerides', 'VLDL'],
-    turnaround: '24-48 hours',
-    fasting: true,
-    popular: true
-  },
-  {
-    id: 'lipid-advanced',
-    name: 'Advanced Lipid Panel (NMR)',
-    category: 'metabolic',
-    description: 'Advanced particle testing including LDL-P, small dense LDL, and LP(a). Superior cardiovascular risk assessment.',
-    price: 99,
-    biomarkers: ['LDL-P', 'Small Dense LDL', 'LP(a)', 'ApoB', 'HDL-P'],
-    turnaround: '3-5 days',
-    fasting: true
-  },
-  {
-    id: 'hba1c',
-    name: 'HbA1c',
-    category: 'metabolic',
-    description: '3-month average blood sugar marker. Essential for detecting insulin resistance and diabetes risk.',
-    price: 39,
-    biomarkers: ['HbA1c'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'fasting-insulin',
-    name: 'Fasting Insulin',
-    category: 'metabolic',
-    description: 'Early marker of insulin resistance before blood sugar changes. Important for metabolic health optimization.',
-    price: 49,
-    biomarkers: ['Insulin'],
-    turnaround: '24-48 hours',
-    fasting: true
-  },
-  {
-    id: 'glucose-insulin',
-    name: 'Glucose & Insulin Panel',
-    category: 'metabolic',
-    description: 'Fasting glucose and insulin with HOMA-IR calculation for insulin resistance assessment.',
-    price: 69,
-    biomarkers: ['Glucose', 'Insulin', 'HOMA-IR'],
-    turnaround: '24-48 hours',
-    fasting: true
-  },
-  {
-    id: 'liver-panel',
-    name: 'Liver Function Panel',
-    category: 'metabolic',
-    description: 'Comprehensive liver assessment. Important for anyone using oral medications, supplements, or alcohol.',
-    price: 49,
-    biomarkers: ['AST', 'ALT', 'GGT', 'Bilirubin', 'Alk Phos', 'Albumin'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'kidney-panel',
-    name: 'Kidney Function Panel',
-    category: 'metabolic',
-    description: 'Assess kidney health with creatinine, BUN, eGFR, and urinalysis. Important for high protein diets and creatine users.',
-    price: 49,
-    biomarkers: ['Creatinine', 'BUN', 'eGFR', 'BUN/Creatinine Ratio'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'uric-acid',
-    name: 'Uric Acid',
-    category: 'metabolic',
-    description: 'Elevated levels associated with gout, kidney stones, and cardiovascular risk. Affected by diet and fructose intake.',
-    price: 29,
-    biomarkers: ['Uric Acid'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'homocysteine',
-    name: 'Homocysteine',
-    category: 'metabolic',
-    description: 'Cardiovascular risk marker affected by B-vitamin status. Elevated levels associated with heart disease and cognitive decline.',
-    price: 59,
-    biomarkers: ['Homocysteine'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'crp-hs',
-    name: 'hs-CRP (High Sensitivity)',
-    category: 'metabolic',
-    description: 'Systemic inflammation marker. Elevated hs-CRP associated with cardiovascular disease and chronic inflammation.',
-    price: 49,
-    biomarkers: ['hs-CRP'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'ferritin',
-    name: 'Ferritin',
-    category: 'metabolic',
-    description: 'Iron storage protein. Low ferritin causes fatigue even with normal hemoglobin. Important for energy and performance.',
-    price: 39,
-    biomarkers: ['Ferritin'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'iron-panel',
-    name: 'Iron Panel Complete',
-    category: 'metabolic',
-    description: 'Comprehensive iron assessment including ferritin, serum iron, TIBC, and transferrin saturation.',
-    price: 69,
-    biomarkers: ['Ferritin', 'Iron', 'TIBC', 'Transferrin Sat'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'vitamin-d',
-    name: 'Vitamin D, 25-Hydroxy',
-    category: 'metabolic',
-    description: 'Essential for testosterone production, immune function, bone health, and mood. Most people are deficient.',
-    price: 59,
-    biomarkers: ['Vitamin D'],
-    turnaround: '24-48 hours',
-    fasting: false,
-    popular: true
-  },
-  {
-    id: 'vitamin-b12',
-    name: 'Vitamin B12',
-    category: 'metabolic',
-    description: 'Essential for energy, nerve function, and red blood cell production. Deficiency causes fatigue and cognitive issues.',
-    price: 39,
-    biomarkers: ['B12'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'folate',
-    name: 'Folate (Folic Acid)',
-    category: 'metabolic',
-    description: 'B-vitamin important for DNA synthesis, methylation, and homocysteine metabolism.',
-    price: 39,
-    biomarkers: ['Folate'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'magnesium-rbc',
-    name: 'Magnesium (RBC)',
-    category: 'metabolic',
-    description: 'More accurate than serum magnesium. Essential for 300+ enzymatic reactions including testosterone production.',
-    price: 49,
-    biomarkers: ['Magnesium RBC'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'zinc',
-    name: 'Zinc',
-    category: 'metabolic',
-    description: 'Critical mineral for testosterone synthesis, immune function, and protein synthesis. Often depleted in athletes.',
-    price: 49,
-    biomarkers: ['Zinc'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'copper-zinc',
-    name: 'Copper & Zinc Ratio',
-    category: 'metabolic',
-    description: 'Copper/zinc balance affects hormone function, inflammation, and immune health. Important ratio to monitor.',
-    price: 69,
-    biomarkers: ['Copper', 'Zinc', 'Cu/Zn Ratio'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-
-  // Blood Health
-  {
-    id: 'cbc',
-    name: 'Complete Blood Count (CBC)',
-    category: 'metabolic',
-    description: 'Standard blood cell analysis including RBC, WBC, hemoglobin, hematocrit, and platelets. Essential baseline.',
-    price: 29,
-    biomarkers: ['WBC', 'RBC', 'Hemoglobin', 'Hematocrit', 'Platelets', 'MCV', 'MCH', 'MCHC'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'cbc-diff',
-    name: 'CBC with Differential',
-    category: 'metabolic',
-    description: 'Complete blood count plus white blood cell differential for immune function assessment.',
-    price: 39,
-    biomarkers: ['WBC', 'RBC', 'Hemoglobin', 'Hematocrit', 'Platelets', 'Neutrophils', 'Lymphocytes', 'Monocytes', 'Eosinophils', 'Basophils'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'psa',
-    name: 'PSA (Prostate Specific Antigen)',
-    category: 'metabolic',
-    description: 'Prostate health marker. Baseline recommended for men over 40 and those on testosterone therapy.',
-    price: 49,
-    biomarkers: ['PSA'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-
-  // Complete Panels
-  {
-    id: 'male-hormone-basic',
-    name: 'TRT Screening Panel',
-    category: 'panels',
-    description: 'REQUIRED before starting TRT. Essential screening: Total T, Free T, Estradiol, and SHBG for therapy qualification.',
-    price: 149,
-    biomarkers: ['Total T', 'Free T', 'Estradiol', 'SHBG'],
-    turnaround: '24-48 hours',
-    fasting: false,
-    popular: true
-  },
-  {
-    id: 'male-hormone-complete',
-    name: 'TRT Qualification Panel',
-    category: 'panels',
-    description: 'REQUIRED before starting TRT. Complete qualification assessment with testosterone, estradiol, LH, FSH, prolactin, and thyroid.',
-    price: 249,
-    biomarkers: ['Total T', 'Free T', 'Estradiol', 'SHBG', 'LH', 'FSH', 'Prolactin', 'TSH', 'Free T4'],
-    turnaround: '24-48 hours',
-    fasting: false,
-    popular: true
-  },
-  {
-    id: 'performance-baseline',
-    name: 'TRT/HGH Pre-Therapy Panel',
-    category: 'panels',
-    description: 'REQUIRED before TRT or HGH therapy. Complete pre-therapy screening: hormones, thyroid, metabolic panel, lipids, and key vitamins.',
-    price: 299,
-    biomarkers: ['Total T', 'Free T', 'Estradiol', 'TSH', 'Free T3', 'CMP', 'Lipid Panel', 'CBC', 'Vitamin D', 'Ferritin'],
-    turnaround: '24-48 hours',
-    fasting: true,
-    popular: true
-  },
-  {
-    id: 'complete-performance',
-    name: 'Full Injection Therapy Panel',
-    category: 'panels',
-    description: 'REQUIRED before TRT or HGH therapy. Our most comprehensive qualification panel with 15 key biomarkers for injection therapy approval.',
-    price: 179,
-    biomarkers: ['Total T', 'Free T', 'Estradiol', 'SHBG', 'LH', 'FSH', 'Prolactin', 'TSH', 'Free T3', 'Free T4', 'CMP', 'Lipid Panel', 'CBC', 'Vitamin D', 'hs-CRP'],
-    turnaround: '24-48 hours',
-    fasting: true,
-    popular: true,
-    featured: true
-  },
-  {
-    id: 'trt-monitoring',
-    name: 'TRT Monitoring Panel',
-    category: 'panels',
-    description: 'Designed for men on testosterone therapy. Includes testosterone, estradiol, hematocrit, PSA, and liver function.',
-    price: 199,
-    biomarkers: ['Total T', 'Free T', 'Estradiol', 'Hematocrit', 'Hemoglobin', 'PSA', 'AST', 'ALT', 'Lipid Panel'],
-    turnaround: '24-48 hours',
-    fasting: true
-  },
-  {
-    id: 'athlete-advanced',
-    name: 'Athlete Advanced Panel',
-    category: 'panels',
-    description: 'Advanced panel for competitive athletes: hormones, inflammation markers, iron panel, and recovery biomarkers.',
-    price: 349,
-    biomarkers: ['Total T', 'Free T', 'Cortisol', 'IGF-1', 'TSH', 'Free T3', 'Iron Panel', 'Ferritin', 'hs-CRP', 'Vitamin D', 'Magnesium RBC', 'Zinc'],
-    turnaround: '24-48 hours',
-    fasting: true
-  },
-  {
-    id: 'longevity-panel',
-    name: 'Longevity Panel',
-    category: 'panels',
-    description: 'Focus on healthspan markers: insulin sensitivity, inflammation, cardiovascular, and metabolic health.',
-    price: 279,
-    biomarkers: ['HbA1c', 'Fasting Insulin', 'HOMA-IR', 'hs-CRP', 'Homocysteine', 'Advanced Lipid', 'Vitamin D', 'TSH', 'Total T'],
-    turnaround: '3-5 days',
-    fasting: true
-  },
-  {
-    id: 'weight-loss',
-    name: 'Weight Loss Panel',
-    category: 'panels',
-    description: 'Key markers affecting metabolism and body composition: thyroid, hormones, insulin, and inflammation.',
-    price: 199,
-    biomarkers: ['TSH', 'Free T3', 'Free T4', 'Total T', 'Estradiol', 'Fasting Insulin', 'HbA1c', 'hs-CRP', 'Cortisol'],
-    turnaround: '24-48 hours',
-    fasting: true
-  },
-  {
-    id: 'energy-fatigue',
-    name: 'Energy & Fatigue Panel',
-    category: 'panels',
-    description: 'Comprehensive fatigue workup: thyroid, hormones, iron, B12, and adrenal markers.',
-    price: 229,
-    biomarkers: ['TSH', 'Free T3', 'Free T4', 'Total T', 'Free T', 'Cortisol', 'Iron Panel', 'B12', 'Folate', 'Vitamin D', 'CBC'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'stress-recovery',
-    name: 'Stress & Recovery Panel',
-    category: 'panels',
-    description: 'Assess stress impact on your body: cortisol, DHEA, testosterone, thyroid, and inflammation.',
-    price: 199,
-    biomarkers: ['Cortisol', 'DHEA-S', 'Total T', 'TSH', 'Free T3', 'hs-CRP', 'Magnesium RBC'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'sleep-optimization',
-    name: 'Sleep Optimization Panel',
-    category: 'panels',
-    description: 'Markers affecting sleep quality: hormones, thyroid, iron, and magnesium.',
-    price: 179,
-    biomarkers: ['Total T', 'Cortisol', 'TSH', 'Ferritin', 'Iron', 'B12', 'Magnesium RBC', 'Vitamin D'],
-    turnaround: '24-48 hours',
-    fasting: false
-  },
-  {
-    id: 'heart-health',
-    name: 'Heart Health Panel',
-    category: 'panels',
-    description: 'Comprehensive cardiovascular risk assessment with advanced lipids and inflammation markers.',
-    price: 199,
-    biomarkers: ['Advanced Lipid', 'hs-CRP', 'Homocysteine', 'HbA1c', 'Fasting Insulin', 'LP(a)'],
-    turnaround: '3-5 days',
-    fasting: true
-  },
-  {
-    id: 'immunity-panel',
-    name: 'Immunity Panel',
-    category: 'panels',
-    description: 'Assess immune function: CBC with differential, vitamin D, zinc, and inflammation markers.',
-    price: 149,
-    biomarkers: ['CBC with Diff', 'Vitamin D', 'Zinc', 'hs-CRP', 'Ferritin'],
-    turnaround: '24-48 hours',
-    fasting: false
+  hgh: {
+    id: 'hgh-therapy',
+    name: 'HGH Gains',
+    tagline: 'Human Growth Hormone Therapy',
+    includes: [
+      'Monthly HGH delivery',
+      'Monthly blood panels',
+      'Unlimited telehealth visits',
+      'Body composition tracking',
+      'AI-powered progress tracking',
+      'Priority support'
+    ],
+    pricing: {
+      oneTime: 249,
+      monthly: 199,
+      yearly: 1990
+    },
+    yearlySavings: 398,
+    monthlyEquivalent: 166,
+    popular: false
   }
-];
+};
 
 // =============================================================================
 // Restricted States (where direct-to-consumer testing is not available)
@@ -655,8 +124,8 @@ function validateCartData(data) {
 const state = {
   cart: validateCartData(safeJSONParse(localStorage.getItem('wg_cart'), [])),
   user: null, // User data should not be stored in localStorage - use sessionStorage or server-side sessions
-  currentCategory: 'all',
-  testsDisplayed: 6,
+  selectedPlan: null,
+  billingCycle: 'monthly',
   chatOpen: false,
   mobileMenuOpen: false
 };
@@ -769,7 +238,90 @@ function updateCartUI() {
 }
 
 // =============================================================================
-// Test Rendering Functions
+// Billing Toggle & Pricing Functions
+// =============================================================================
+
+function initBillingToggle() {
+  const billingOptions = document.querySelectorAll('.billing-option');
+  if (!billingOptions.length) return;
+
+  billingOptions.forEach(option => {
+    option.addEventListener('click', () => {
+      // Update active state
+      billingOptions.forEach(opt => opt.classList.remove('active'));
+      option.classList.add('active');
+
+      // Update state
+      state.billingCycle = option.dataset.billing;
+
+      // Update pricing display
+      updatePricingDisplay();
+    });
+  });
+}
+
+function updatePricingDisplay() {
+  const cycle = state.billingCycle;
+
+  Object.entries(subscriptionPlans).forEach(([key, plan]) => {
+    const card = document.querySelector(`[data-plan="${key}"]`);
+    if (!card) return;
+
+    const priceEl = card.querySelector('.subscription-price');
+    const periodEl = card.querySelector('.subscription-period');
+    const savingsEl = card.querySelector('.subscription-savings');
+
+    if (priceEl) {
+      if (cycle === 'oneTime') {
+        priceEl.textContent = `$${plan.pricing.oneTime}`;
+        if (periodEl) periodEl.textContent = 'one-time';
+        if (savingsEl) savingsEl.style.display = 'none';
+      } else if (cycle === 'monthly') {
+        priceEl.textContent = `$${plan.pricing.monthly}`;
+        if (periodEl) periodEl.textContent = '/month';
+        if (savingsEl) savingsEl.style.display = 'none';
+      } else if (cycle === 'yearly') {
+        priceEl.textContent = `$${plan.pricing.yearly}`;
+        if (periodEl) periodEl.textContent = '/year';
+        if (savingsEl) {
+          savingsEl.textContent = `Save $${plan.yearlySavings}`;
+          savingsEl.style.display = 'inline-block';
+        }
+      }
+    }
+  });
+}
+
+function selectPlan(planId) {
+  const plan = subscriptionPlans[planId];
+  if (!plan) return;
+
+  state.selectedPlan = planId;
+
+  // Default to monthly billing
+  const price = plan.pricing.monthly;
+  const billingLabel = 'Monthly';
+
+  // Clear cart and add subscription
+  state.cart = [{
+    id: plan.id,
+    name: plan.name,
+    price: price,
+    billingCycle: 'monthly',
+    billingLabel: billingLabel,
+    includes: plan.includes,
+    quantity: 1
+  }];
+
+  saveCart();
+  updateCartUI();
+
+  // Redirect to checkout immediately
+  window.location.href = 'checkout.html';
+}
+
+// =============================================================================
+// Test Rendering Functions (Legacy - kept for compatibility)
 // =============================================================================
 
 function createTestCard(test) {
@@ -1368,115 +920,79 @@ function initEventListeners() {
 // =============================================================================
 
 const aiResponses = {
-  // TRT & Testosterone specific
+  // TRT specific
   trt: {
-    message: "💉 Ready to start TRT? These tests are REQUIRED before starting testosterone therapy. Get your baseline now!",
-    tests: ['testosterone-complete', 'estradiol', 'male-hormone-complete', 'lipid-panel']
+    message: "💉 Ready to transform with TRT? Our TRT Gains subscription includes monthly testosterone delivery, blood monitoring, and unlimited telehealth visits - all for $149/mo. Everything you need to optimize your hormones!",
+    plan: 'trt'
   },
   testosterone: {
-    message: "💪 Check your T levels! Low testosterone = low gains. These tests reveal if TRT could transform your physique:",
-    tests: ['total-testosterone', 'free-testosterone', 'testosterone-complete', 'male-hormone-basic']
+    message: "💪 Low testosterone holding you back? Our TRT Gains plan gets you monthly testosterone delivery, required blood tests, and doctor consultations - all included for $149/mo!",
+    plan: 'trt'
   },
   lowt: {
-    message: "🔬 Symptoms of Low T: fatigue, low libido, can't build muscle? Get tested and see if you qualify for TRT:",
-    tests: ['testosterone-complete', 'lh-fsh', 'prolactin', 'shbg']
+    message: "🔬 Symptoms of Low T: fatigue, low libido, can't build muscle? Our TRT Gains subscription ($149/mo) includes everything - medication, blood monitoring, and telehealth visits!",
+    plan: 'trt'
   },
 
   // HGH specific
   hgh: {
-    message: "🚀 HGH optimization starts with knowing your IGF-1 levels! These tests are essential before starting growth hormone therapy:",
-    tests: ['igf-1', 'testosterone-complete', 'fasting-insulin', 'cmp']
+    message: "🚀 Ready for HGH therapy? Our HGH Gains subscription ($199/mo) includes monthly HGH delivery, monthly blood panels, body composition tracking, and unlimited telehealth visits!",
+    plan: 'hgh'
   },
   growth: {
-    message: "📈 Growth hormone is KEY for muscle, recovery, and anti-aging. Check your levels:",
-    tests: ['igf-1', 'testosterone-complete', 'cmp', 'thyroid-complete']
+    message: "📈 Growth hormone is KEY for muscle, recovery, and anti-aging. Our HGH Gains plan ($199/mo) includes everything - monthly delivery, blood monitoring, and doctor access!",
+    plan: 'hgh'
   },
   igf: {
-    message: "🧬 IGF-1 is the biomarker for growth hormone activity. Low IGF-1 = slower gains. Get tested:",
-    tests: ['igf-1', 'testosterone-complete', 'fasting-insulin', 'cmp']
+    message: "🧬 Want to optimize your IGF-1 and growth hormone? Our HGH Gains subscription includes monthly HGH delivery plus all the monitoring you need - $199/mo!",
+    plan: 'hgh'
   },
 
   // Muscle & Fitness
   muscle: {
-    message: "🏋️ Can't build muscle? Your hormones might be the problem. TRT + HGH optimization starts here:",
-    tests: ['testosterone-complete', 'igf-1', 'estradiol', 'thyroid-complete']
+    message: "🏋️ Can't build muscle? Hormones are likely the issue. TRT Gains ($149/mo) or HGH Gains ($199/mo) - both include medication delivery, blood tests, and telehealth!",
+    plan: 'trt'
   },
   gains: {
-    message: "📈 No gains? 90% of hardgainers have suboptimal testosterone or IGF-1. Find out if you need TRT/HGH:",
-    tests: ['testosterone-complete', 'igf-1', 'thyroid-complete', 'male-hormone-complete']
+    message: "📈 No gains? 90% of hardgainers have suboptimal hormones. Start TRT ($149/mo) or HGH ($199/mo) therapy - medication, monitoring, and doctor visits all included!",
+    plan: 'trt'
   },
   bodybuilding: {
-    message: "🏆 Key tests for serious bodybuilders:",
-    tests: ['testosterone-complete', 'estradiol', 'igf-1', 'lipid-panel']
-  },
-  performance: {
-    message: "⚡ Athletic performance optimization tests:",
-    tests: ['testosterone-complete', 'cbc', 'iron-panel', 'vitamin-d']
-  },
-  recovery: {
-    message: "🔄 Tests for optimal recovery:",
-    tests: ['cortisol-am', 'testosterone-complete', 'cbc', 'cmp']
+    message: "🏆 Serious about bodybuilding? TRT Gains ($149/mo) for testosterone optimization or HGH Gains ($199/mo) for growth hormone - both include everything you need!",
+    plan: 'trt'
   },
 
   // Energy & Fatigue
   tired: {
-    message: "😴 Tests for low energy and tiredness:",
-    tests: ['thyroid-complete', 'vitamin-b12', 'iron-panel', 'vitamin-d']
+    message: "😴 Always tired? Low testosterone is often the cause. Our TRT Gains ($149/mo) includes monthly medication, blood monitoring, and unlimited doctor consultations!",
+    plan: 'trt'
   },
   fatigue: {
-    message: "⚡ Comprehensive fatigue panel to find the cause:",
-    tests: ['thyroid-complete', 'cbc', 'cmp', 'testosterone-complete']
+    message: "⚡ Fatigue killing your gains? TRT Gains can help! $149/mo gets you monthly testosterone, blood tests, and telehealth visits - all included!",
+    plan: 'trt'
   },
   energy: {
-    message: "🔋 Tests to evaluate your energy levels:",
-    tests: ['thyroid-complete', 'vitamin-b12', 'iron-panel', 'testosterone-complete']
+    message: "🔋 Want more energy? TRT Gains ($149/mo) includes monthly testosterone delivery, required blood monitoring, and unlimited telehealth - everything to optimize your levels!",
+    plan: 'trt'
   },
 
-  // Hormones general
-  hormone: {
-    message: "⚗️ Comprehensive hormone panels:",
-    tests: ['male-hormone-complete', 'testosterone-complete', 'thyroid-complete', 'cortisol-am']
+  // Pricing questions
+  price: {
+    message: "💰 Our plans: TRT Gains is $149/mo (or $1,490/yr - save $298!). HGH Gains is $199/mo (or $1,990/yr - save $398!). Both include medication, blood tests, and telehealth!",
+    plan: null
   },
-  estrogen: {
-    message: "🔬 Estrogen testing options for hormone balance:",
-    tests: ['estradiol', 'estradiol-ultrasensitive', 'male-hormone-complete', 'shbg']
-  },
-
-  // Thyroid
-  thyroid: {
-    message: "🦋 Thyroid testing options:",
-    tests: ['thyroid-complete', 'tsh', 'thyroid-basic', 'reverse-t3']
-  },
-  metabolism: {
-    message: "🔥 Tests for metabolic health:",
-    tests: ['thyroid-complete', 'hba1c', 'cmp', 'fasting-insulin']
-  },
-
-  // Weight
-  weight: {
-    message: "⚖️ Tests for weight management:",
-    tests: ['thyroid-complete', 'testosterone-complete', 'hba1c', 'fasting-insulin']
-  },
-
-  // General wellness
-  checkup: {
-    message: "✅ Essential wellness panel:",
-    tests: ['cmp', 'cbc', 'lipid-panel', 'thyroid-basic']
-  },
-
-  // Complete panels
-  complete: {
-    message: "🏆 Our most comprehensive panels for serious optimization:",
-    tests: ['complete-performance', 'male-hormone-complete', 'athlete-advanced']
+  cost: {
+    message: "💰 TRT Gains: $149/mo or $1,490/yr (save $298). HGH Gains: $199/mo or $1,990/yr (save $398). Everything included - no hidden fees!",
+    plan: null
   },
 
   default: {
-    message: "💉 Ready to get qualified for TRT or HGH? I'll help you pick the right screening panel. These are REQUIRED before starting injection therapy:",
-    tests: ['male-hormone-complete', 'igf-1', 'complete-performance', 'performance-baseline']
+    message: "💉 Ready to transform? We offer TRT Gains ($149/mo) and HGH Gains ($199/mo) subscriptions. Both include monthly medication delivery, blood monitoring, and unlimited telehealth visits. Which interests you?",
+    plan: null
   },
   offTopic: {
-    message: "💉 I help warriors get qualified for TRT and HGH therapy! Ask me about TRT qualification, HGH screening, or which panels you need to start injection therapy!",
-    tests: []
+    message: "💉 I help warriors start TRT and HGH therapy! Our subscriptions include medication delivery, blood tests, and telehealth - all in one plan. Ask me about TRT ($149/mo) or HGH ($199/mo)!",
+    plan: null
   }
 };
 
@@ -2451,6 +1967,10 @@ const actions = {
     const category = e.target.closest('[data-category]')?.dataset.category;
     if (category) filterTests(category, e.target);
   },
+  selectPlan: (e) => {
+    const planId = e.target.closest('[data-plan-id]')?.dataset.planId;
+    if (planId) selectPlan(planId);
+  },
   closeUpsellModal: () => closeUpsellModal(),
   addUpsellToCart: () => addUpsellToCart(),
   openLabModal: () => openLabModal(),
@@ -2568,8 +2088,11 @@ function init() {
   }
 
   injectAnimationStyles();
-  renderTests();
-  initCategoryFilters();
+
+  // Initialize billing toggle for subscription pricing
+  initBillingToggle();
+  updatePricingDisplay();
+
   initEventListeners();
   initEventDelegation(); // Centralized event handling
   initKeyboardNavigation(); // Accessibility
@@ -2602,8 +2125,9 @@ window.WeightGain = {
   addToCart,
   removeFromCart,
   getCartTotal,
+  selectPlan,
   state,
-  testCatalog,
+  subscriptionPlans,
   restrictedStates,
   checkStateRestriction
 };
@@ -2629,6 +2153,9 @@ window.findLabs = findLabs;
 window.toggleCart = toggleCart;
 window.filterTests = filterTests;
 window.searchTests = searchTests;
+window.selectPlan = selectPlan;
+window.initBillingToggle = initBillingToggle;
+window.updatePricingDisplay = updatePricingDisplay;
 window.toggleMobileMenu = toggleMobileMenu;
 window.showUpsellModal = showUpsellModal;
 window.closeUpsellModal = closeUpsellModal;
