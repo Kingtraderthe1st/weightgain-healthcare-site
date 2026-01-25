@@ -114,8 +114,8 @@
 
               <div class="form-group">
                 <label for="email" class="form-label form-label--required">Email</label>
-                <input type="email" id="email" name="email" class="form-input" required autocomplete="email">
-                <p class="form-hint">We'll send your lab requisition and results here.</p>
+                <input type="email" id="email" name="email" class="form-input" required autocomplete="email" aria-describedby="email-hint">
+                <p class="form-hint" id="email-hint">We'll send your lab requisition and results here.</p>
               </div>
 
               <div class="form-group">
@@ -130,12 +130,12 @@
 
               <div class="form-group">
                 <label for="sex" class="form-label form-label--required">Biological Sex</label>
-                <select id="sex" name="sex" class="form-input form-select" required>
+                <select id="sex" name="sex" class="form-input form-select" required aria-describedby="sex-hint">
                   <option value="">Select...</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
-                <p class="form-hint">Required for accurate reference ranges.</p>
+                <p class="form-hint" id="sex-hint">Required for accurate reference ranges.</p>
               </div>
 
               <hr style="border: none; border-top: 1px solid var(--border-light); margin: var(--space-6) 0;">

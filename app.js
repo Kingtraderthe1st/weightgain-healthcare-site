@@ -684,6 +684,34 @@ const elements = {
 };
 
 // =============================================================================
+// Cached DOM Queries (Performance Optimization)
+// =============================================================================
+const cachedQueries = {
+  _categoryTabs: null,
+  _mobileNavLinks: null,
+
+  get categoryTabs() {
+    if (!this._categoryTabs) {
+      this._categoryTabs = document.querySelectorAll('.category-tab');
+    }
+    return this._categoryTabs;
+  },
+
+  get mobileNavLinks() {
+    if (!this._mobileNavLinks) {
+      this._mobileNavLinks = document.querySelectorAll('.mobile-nav__link');
+    }
+    return this._mobileNavLinks;
+  },
+
+  // Clear cache if DOM changes dynamically
+  invalidate() {
+    this._categoryTabs = null;
+    this._mobileNavLinks = null;
+  }
+};
+
+// =============================================================================
 // Cart Functions
 // =============================================================================
 
@@ -1149,40 +1177,100 @@ function showNotification(message, type = 'info') {
 }
 
 // =============================================================================
-// Navbar Scroll Effect
+// Optimized Scroll Handling (Combined for Performance)
 // =============================================================================
 
-function initNavbarScroll() {
-  const navbar = document.querySelector('.navbar');
-  if (!navbar) return;
+// Single scroll handler for all scroll-based effects (reduces event listener overhead)
+const scrollState = {
+  handler: null,
+  navbar: null,
+  backBtn: null,
+  helpBtn: null,
+  testsSection: null,
+  stickyBar: null,
+  lastScrollY: 0,
+  ticking: false
+};
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
+function initCombinedScrollHandler() {
+  // Cache DOM references
+  scrollState.navbar = document.querySelector('.navbar');
+  scrollState.backBtn = document.getElementById('backToTop');
+  scrollState.helpBtn = document.getElementById('helpButton');
+  scrollState.testsSection = document.getElementById('tests');
+  scrollState.stickyBar = document.getElementById('stickyCartBar');
+
+  // Remove existing handler if any
+  if (scrollState.handler) {
+    window.removeEventListener('scroll', scrollState.handler);
+  }
+
+  // Combined scroll handler using requestAnimationFrame for performance
+  scrollState.handler = () => {
+    scrollState.lastScrollY = window.scrollY;
+
+    if (!scrollState.ticking) {
+      window.requestAnimationFrame(() => {
+        handleScrollEffects(scrollState.lastScrollY);
+        scrollState.ticking = false;
+      });
+      scrollState.ticking = true;
     }
-  });
+  };
+
+  window.addEventListener('scroll', scrollState.handler, { passive: true });
+}
+
+function handleScrollEffects(scrollY) {
+  // Navbar scrolled effect
+  if (scrollState.navbar) {
+    if (scrollY > 50) {
+      scrollState.navbar.classList.add('scrolled');
+    } else {
+      scrollState.navbar.classList.remove('scrolled');
+    }
+  }
+
+  // Floating buttons visibility
+  const floatingVisible = scrollY > 500;
+  if (scrollState.backBtn) {
+    scrollState.backBtn.style.opacity = floatingVisible ? '1' : '0';
+    scrollState.backBtn.style.visibility = floatingVisible ? 'visible' : 'hidden';
+  }
+  if (scrollState.helpBtn) {
+    scrollState.helpBtn.style.opacity = floatingVisible ? '1' : '0';
+    scrollState.helpBtn.style.visibility = floatingVisible ? 'visible' : 'hidden';
+  }
+
+  // Sticky cart bar
+  if (scrollState.testsSection && scrollState.stickyBar) {
+    const rect = scrollState.testsSection.getBoundingClientRect();
+    if (rect.bottom < 0 && state.cart.length > 0) {
+      scrollState.stickyBar.classList.add('active');
+    } else {
+      scrollState.stickyBar.classList.remove('active');
+    }
+  }
+}
+
+// Legacy function names for compatibility
+function initNavbarScroll() {
+  // Now handled by combined scroll handler
 }
 
 function initFloatingButtons() {
-  const backBtn = document.getElementById('backToTop');
-  const helpBtn = document.getElementById('helpButton');
-
-  if (!backBtn && !helpBtn) return;
-
-  window.addEventListener('scroll', () => {
-    const visible = window.scrollY > 500;
-    if (backBtn) {
-      backBtn.style.opacity = visible ? '1' : '0';
-      backBtn.style.visibility = visible ? 'visible' : 'hidden';
-    }
-    if (helpBtn) {
-      helpBtn.style.opacity = visible ? '1' : '0';
-      helpBtn.style.visibility = visible ? 'visible' : 'hidden';
-    }
-  });
+  // Now handled by combined scroll handler
 }
+
+// Cleanup function for page unload (memory leak prevention)
+function cleanupScrollHandlers() {
+  if (scrollState.handler) {
+    window.removeEventListener('scroll', scrollState.handler);
+  }
+}
+
+// Cleanup on page unload
+window.addEventListener('pagehide', cleanupScrollHandlers);
 
 // =============================================================================
 // State Restriction Check
@@ -1215,7 +1303,9 @@ function initEventListeners() {
   // Chatbot send
   if (elements.chatbotSend) {
     elements.chatbotSend.addEventListener('click', () => {
-      handleChatMessage(elements.chatbotInput.value);
+      if (elements.chatbotInput) {
+        handleChatMessage(elements.chatbotInput.value);
+      }
     });
   }
 
@@ -1261,8 +1351,8 @@ function initEventListeners() {
     });
   }
 
-  // Close mobile menu on link click
-  document.querySelectorAll('.mobile-nav__link').forEach(link => {
+  // Close mobile menu on link click (uses cached query)
+  cachedQueries.mobileNavLinks.forEach(link => {
     link.addEventListener('click', () => toggleMobileMenu(false));
   });
 
@@ -1652,11 +1742,25 @@ function submitExitEmail() {
   const input = document.getElementById('exitEmail');
   const email = input ? input.value.trim() : '';
 
-  if (email && email.includes('@')) {
+  // Proper email validation regex (RFC 5322 compliant for common cases)
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+
+  if (email && emailRegex.test(email)) {
     showToast('Check your email for 25% OFF code!');
     closeExitPopup();
   } else if (input) {
     input.style.borderColor = '#ef4444';
+  }
+}
+
+// =============================================================================
+// Social Proof Popup
+// =============================================================================
+
+function closeSocialProof() {
+  const socialProof = document.getElementById('socialProofPopup');
+  if (socialProof) {
+    socialProof.classList.remove('active');
   }
 }
 
@@ -1695,19 +1799,8 @@ function navigateWithTransition(url) {
 // =============================================================================
 
 function initStickyCartBar() {
-  const testsSection = document.getElementById('tests');
-  const stickyBar = document.getElementById('stickyCartBar');
-
-  if (!testsSection || !stickyBar) return;
-
-  window.addEventListener('scroll', () => {
-    const rect = testsSection.getBoundingClientRect();
-    if (rect.bottom < 0 && state.cart.length > 0) {
-      stickyBar.classList.add('active');
-    } else {
-      stickyBar.classList.remove('active');
-    }
-  });
+  // Now handled by combined scroll handler
+  // Keep function for compatibility but scroll logic is centralized
 }
 
 function updateStickyCart() {
@@ -1939,31 +2032,52 @@ function searchLabsInModal() {
   if (!input || !resultsDiv) return;
 
   const zip = input.value.trim();
-  if (!zip || zip.length < 5) {
-    showToast('Please enter a valid ZIP code');
+  // Validate ZIP code format (5 digits)
+  const zipRegex = /^\d{5}$/;
+  if (!zip || !zipRegex.test(zip)) {
+    showToast('Please enter a valid 5-digit ZIP code');
     return;
   }
 
   // Check restricted states
   const restrictedZips = ['10', '11', '07', '08', '02', '96', '97'];
   if (restrictedZips.some(prefix => zip.startsWith(prefix))) {
-    resultsDiv.innerHTML = '<p style="color: #f59e0b; text-align: center; padding: 2rem;">Sorry, services are not available in NY, NJ, RI, or HI due to state regulations.</p>';
+    resultsDiv.textContent = '';
+    const errorP = document.createElement('p');
+    errorP.style.cssText = 'color: #f59e0b; text-align: center; padding: 2rem;';
+    errorP.textContent = 'Sorry, services are not available in NY, NJ, RI, or HI due to state regulations.';
+    resultsDiv.appendChild(errorP);
     return;
   }
 
-  // Show sample results
-  resultsDiv.innerHTML = `
-    <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 0.75rem; cursor: pointer;" onclick="selectLab(this)">
-      <strong style="color: #D4AF37;">Quest Diagnostics</strong>
-      <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin: 0.25rem 0;">123 Medical Center Dr - 0.8 miles</p>
-      <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">Mon-Fri 7AM-5PM, Sat 8AM-12PM</p>
-    </div>
-    <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; cursor: pointer;" onclick="selectLab(this)">
-      <strong style="color: #D4AF37;">LabCorp</strong>
-      <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin: 0.25rem 0;">456 Health Plaza - 1.2 miles</p>
-      <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">Mon-Fri 6:30AM-4PM</p>
-    </div>
-  `;
+  // Show sample results using safe DOM methods
+  resultsDiv.textContent = '';
+
+  const createLabCard = (name, address, hours) => {
+    const card = document.createElement('div');
+    card.style.cssText = 'padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 0.75rem; cursor: pointer;';
+    card.dataset.action = 'selectLab';
+
+    const nameEl = document.createElement('strong');
+    nameEl.style.color = '#D4AF37';
+    nameEl.textContent = name;
+
+    const addressP = document.createElement('p');
+    addressP.style.cssText = 'font-size: 0.85rem; color: rgba(255,255,255,0.7); margin: 0.25rem 0;';
+    addressP.textContent = address;
+
+    const hoursP = document.createElement('p');
+    hoursP.style.cssText = 'font-size: 0.8rem; color: rgba(255,255,255,0.5);';
+    hoursP.textContent = hours;
+
+    card.appendChild(nameEl);
+    card.appendChild(addressP);
+    card.appendChild(hoursP);
+    return card;
+  };
+
+  resultsDiv.appendChild(createLabCard('Quest Diagnostics', '123 Medical Center Dr - 0.8 miles', 'Mon-Fri 7AM-5PM, Sat 8AM-12PM'));
+  resultsDiv.appendChild(createLabCard('LabCorp', '456 Health Plaza - 1.2 miles', 'Mon-Fri 6:30AM-4PM'));
 }
 
 function selectLab(element) {
@@ -2081,32 +2195,52 @@ function findLabs() {
   if (!input || !resultsDiv || !listDiv) return;
 
   const zip = input.value.trim();
-  if (!zip) {
-    showToast('Please enter a ZIP code');
+  // Validate ZIP code format (5 digits)
+  const zipRegex = /^\d{5}$/;
+  if (!zip || !zipRegex.test(zip)) {
+    showToast('Please enter a valid 5-digit ZIP code');
     return;
   }
 
   // Check restricted states
   const restrictedZips = ['10', '11', '07', '08', '02', '96', '97'];
   if (restrictedZips.some(prefix => zip.startsWith(prefix))) {
-    listDiv.innerHTML = '<p style="color: #f59e0b;">Sorry, services are not available in NY, NJ, RI, or HI due to state regulations.</p>';
+    listDiv.textContent = '';
+    const errorP = document.createElement('p');
+    errorP.style.color = '#f59e0b';
+    errorP.textContent = 'Sorry, services are not available in NY, NJ, RI, or HI due to state regulations.';
+    listDiv.appendChild(errorP);
     resultsDiv.style.display = 'block';
     return;
   }
 
-  // Show sample results
-  listDiv.innerHTML = `
-    <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 0.75rem;">
-      <strong style="color: #D4AF37;">Quest Diagnostics</strong>
-      <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin: 0.25rem 0;">123 Medical Center Dr - 0.8 miles</p>
-      <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">Mon-Fri 7AM-5PM, Sat 8AM-12PM</p>
-    </div>
-    <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
-      <strong style="color: #D4AF37;">LabCorp</strong>
-      <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin: 0.25rem 0;">456 Health Plaza - 1.2 miles</p>
-      <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">Mon-Fri 6:30AM-4PM</p>
-    </div>
-  `;
+  // Show sample results using safe DOM methods
+  listDiv.textContent = '';
+
+  const createLabCard = (name, address, hours, isLast = false) => {
+    const card = document.createElement('div');
+    card.style.cssText = `padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;${isLast ? '' : ' margin-bottom: 0.75rem;'}`;
+
+    const nameEl = document.createElement('strong');
+    nameEl.style.color = '#D4AF37';
+    nameEl.textContent = name;
+
+    const addressP = document.createElement('p');
+    addressP.style.cssText = 'font-size: 0.85rem; color: rgba(255,255,255,0.7); margin: 0.25rem 0;';
+    addressP.textContent = address;
+
+    const hoursP = document.createElement('p');
+    hoursP.style.cssText = 'font-size: 0.8rem; color: rgba(255,255,255,0.5);';
+    hoursP.textContent = hours;
+
+    card.appendChild(nameEl);
+    card.appendChild(addressP);
+    card.appendChild(hoursP);
+    return card;
+  };
+
+  listDiv.appendChild(createLabCard('Quest Diagnostics', '123 Medical Center Dr - 0.8 miles', 'Mon-Fri 7AM-5PM, Sat 8AM-12PM'));
+  listDiv.appendChild(createLabCard('LabCorp', '456 Health Plaza - 1.2 miles', 'Mon-Fri 6:30AM-4PM', true));
   resultsDiv.style.display = 'block';
 }
 
@@ -2152,12 +2286,22 @@ function renderFilteredTests(tests) {
   const grid = document.getElementById('testsGrid');
   if (!grid) return;
 
+  grid.textContent = '';
+
   if (tests.length === 0) {
-    grid.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); grid-column: 1/-1;">No tests found matching your search.</p>';
+    const noResultsP = document.createElement('p');
+    noResultsP.style.cssText = 'text-align: center; color: rgba(255,255,255,0.6); grid-column: 1/-1;';
+    noResultsP.textContent = 'No tests found matching your search.';
+    grid.appendChild(noResultsP);
     return;
   }
 
-  grid.innerHTML = tests.map(test => createTestCardHTML(test)).join('');
+  // Use safe DOM methods via createTestCard (existing safe function)
+  const fragment = document.createDocumentFragment();
+  tests.forEach(test => {
+    fragment.appendChild(createTestCard(test));
+  });
+  grid.appendChild(fragment);
 }
 
 function createTestCardHTML(test) {
@@ -2255,19 +2399,25 @@ function validateCSRFToken(formToken) {
 
 const actions = {
   addToCart: (e) => {
-    const testId = e.target.closest('[data-test-id]')?.dataset.testId;
+    const actionEl = e.target.closest('[data-action]');
+    const testId = actionEl?.dataset.testId;
     if (testId) addToCart(testId);
   },
   addToCartFromAI: (e) => {
-    const testId = e.target.closest('[data-test-id]')?.dataset.testId;
+    const actionEl = e.target.closest('[data-action]');
+    const testId = actionEl?.dataset.testId;
     if (testId) addToCartFromAI(testId);
   },
   addToCartAndClose: (e) => {
-    const testId = e.target.dataset.testId;
+    const actionEl = e.target.closest('[data-action]');
+    const testId = actionEl?.dataset.testId;
     if (testId) {
       addToCart(testId);
       closeQuickView();
     }
+  },
+  selectLab: (e) => {
+    selectLab(e.target.closest('[data-action]'));
   },
   toggleMobileMenu: () => toggleMobileMenu(),
   toggleCart: () => toggleCart(),
@@ -2423,8 +2573,7 @@ function init() {
   initEventListeners();
   initEventDelegation(); // Centralized event handling
   initKeyboardNavigation(); // Accessibility
-  initNavbarScroll();
-  initFloatingButtons(); // Floating button visibility
+  initCombinedScrollHandler(); // Single optimized scroll handler
   updateCartUI();
 
   // Initialize interactive features
@@ -2436,9 +2585,6 @@ function init() {
 
   // Security: Populate CSRF tokens
   populateCSRFTokens();
-
-  console.log('WeightGain - Built for Warriors initialized');
-  console.log(`${testCatalog.length} tests available`);
 }
 
 // Run on DOM ready

@@ -79,23 +79,23 @@
       </div>
 
       <!-- Performance Summary -->
-      <div class="results-summary" role="list" aria-label="Results summary">
-        <div class="results-summary__card" role="listitem" data-filter="optimal" onclick="filterResults('optimal')">
-          <div class="results-summary__value results-summary__value--optimal">8</div>
-          <div class="results-summary__label">Optimal</div>
-        </div>
-        <div class="results-summary__card" role="listitem" data-filter="normal" onclick="filterResults('normal')">
-          <div class="results-summary__value results-summary__value--normal">4</div>
-          <div class="results-summary__label">Normal</div>
-        </div>
-        <div class="results-summary__card" role="listitem" data-filter="attention" onclick="filterResults('attention')">
-          <div class="results-summary__value results-summary__value--attention">2</div>
-          <div class="results-summary__label">Attention</div>
-        </div>
-        <div class="results-summary__card" role="listitem" data-filter="critical" onclick="filterResults('critical')">
-          <div class="results-summary__value results-summary__value--critical">1</div>
-          <div class="results-summary__label">Action Needed</div>
-        </div>
+      <div class="results-summary" role="group" aria-label="Filter results by status">
+        <button type="button" class="results-summary__card" data-filter="optimal" aria-pressed="false">
+          <span class="results-summary__value results-summary__value--optimal">8</span>
+          <span class="results-summary__label">Optimal</span>
+        </button>
+        <button type="button" class="results-summary__card" data-filter="normal" aria-pressed="false">
+          <span class="results-summary__value results-summary__value--normal">4</span>
+          <span class="results-summary__label">Normal</span>
+        </button>
+        <button type="button" class="results-summary__card" data-filter="attention" aria-pressed="false">
+          <span class="results-summary__value results-summary__value--attention">2</span>
+          <span class="results-summary__label">Attention</span>
+        </button>
+        <button type="button" class="results-summary__card" data-filter="critical" aria-pressed="false">
+          <span class="results-summary__value results-summary__value--critical">1</span>
+          <span class="results-summary__label">Action Needed</span>
+        </button>
       </div>
 
       <!-- AI Insights Card -->
@@ -436,10 +436,12 @@
       const results = document.querySelectorAll('.result-item');
       const cards = document.querySelectorAll('.results-summary__card');
 
-      // Update active state on summary cards
+      // Update active state and aria-pressed on summary cards
       cards.forEach(card => {
-        card.style.opacity = card.dataset.filter === status ? '1' : '0.5';
-        card.style.transform = card.dataset.filter === status ? 'scale(1.05)' : 'scale(1)';
+        const isActive = card.dataset.filter === status;
+        card.style.opacity = isActive ? '1' : '0.5';
+        card.style.transform = isActive ? 'scale(1.05)' : 'scale(1)';
+        card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
       });
 
       // Filter results
@@ -458,14 +460,22 @@
       document.getElementById('results-list').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Reset filter when clicking "All Results" button
-    document.querySelector('.test-filter.active')?.addEventListener('click', () => {
+    function resetFilters() {
       document.querySelectorAll('.result-item').forEach(r => r.style.display = 'block');
       document.querySelectorAll('.results-summary__card').forEach(c => {
         c.style.opacity = '1';
         c.style.transform = 'scale(1)';
+        c.setAttribute('aria-pressed', 'false');
       });
+    }
+
+    // Add click handlers for filter buttons (keyboard accessible)
+    document.querySelectorAll('.results-summary__card').forEach(card => {
+      card.addEventListener('click', () => filterResults(card.dataset.filter));
     });
+
+    // Reset filter when clicking "All Results" button
+    document.querySelector('.test-filter.active')?.addEventListener('click', resetFilters);
   </script>
 </body>
 </html>

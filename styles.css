@@ -130,7 +130,7 @@ button {
 
 input, select, textarea { font-family: inherit; }
 
-/* Focus styles */
+/* Focus styles - Enhanced for dark backgrounds */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -138,6 +138,24 @@ select:focus-visible,
 textarea:focus-visible {
   outline: 2px solid var(--spartan-gold);
   outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.25); /* Enhanced visibility on dark backgrounds */
+}
+
+/* Better focus-visible styling for keyboard navigation */
+:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+/* High contrast mode focus indicators */
+@media (forced-colors: active) {
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid CanvasText;
+  }
 }
 
 /* Skip Link */
@@ -232,8 +250,20 @@ textarea:focus-visible {
 }
 
 @keyframes logoPulse {
-  0%, 100% { filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.4)); transform: scale(1); }
-  50% { filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.8)); transform: scale(1.02); }
+  /* Using transform and opacity for GPU acceleration */
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.95;
+  }
+}
+
+/* Static glow effect applied to container instead of animating filter */
+.transition-logo-wrapper {
+  filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.6));
 }
 
 .transition-logo-img {
@@ -330,7 +360,7 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.87); /* WCAG AA contrast fix */
   transition: color 0.2s;
 }
 
@@ -347,7 +377,7 @@ textarea:focus-visible {
 }
 
 .top-bar-text {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.7); /* WCAG AA contrast fix */
 }
 
 .top-bar-right {
@@ -397,9 +427,8 @@ textarea:focus-visible {
   font-weight: 400;
   text-transform: none;
   letter-spacing: normal;
-  white-space: nowrap;
   max-width: 250px;
-  white-space: normal;
+  white-space: normal; /* Fixed: removed duplicate/conflicting white-space rule */
   opacity: 0;
   visibility: hidden;
   transition: all 0.2s;
@@ -448,6 +477,7 @@ textarea:focus-visible {
 .logo-img {
   height: 140px;
   width: auto;
+  aspect-ratio: 1 / 1; /* Prevent CLS */
   filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6));
   transition: transform 0.3s ease;
 }
@@ -528,7 +558,16 @@ textarea:focus-visible {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.nav-dropdown:hover .dropdown-menu {
+.nav-dropdown:hover .dropdown-menu,
+.nav-dropdown:focus-within .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Keyboard navigation support for dropdowns */
+.nav-dropdown .nav-link:focus + .dropdown-menu,
+.dropdown-menu:focus-within {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -677,27 +716,33 @@ textarea:focus-visible {
 
 .btn:active { transform: scale(0.97); }
 
-.btn-primary {
+/* Primary Button - consolidated .btn-primary and .btn--primary */
+.btn-primary,
+.btn--primary {
   background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
   color: #1a1a1a;
   box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
   font-weight: 700;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn--primary:hover {
   background: linear-gradient(135deg, var(--spartan-gold-light) 0%, var(--spartan-gold) 100%);
   box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
   transform: translateY(-3px);
 }
 
-.btn-secondary {
+/* Secondary Button - consolidated .btn-secondary and .btn--secondary */
+.btn-secondary,
+.btn--secondary {
   background: rgba(255, 255, 255, 0.1);
   color: var(--spartan-gold);
   border: 2px solid var(--spartan-gold);
   font-weight: 700;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover,
+.btn--secondary:hover {
   background: rgba(212, 175, 55, 0.2);
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
@@ -714,32 +759,10 @@ textarea:focus-visible {
   transform: translateY(-3px);
 }
 
+/* Button sizes - consolidated */
 .btn-small, .btn--sm { padding: 0.5rem 1rem; font-size: 0.8rem; }
 .btn-large, .btn--lg { padding: 1rem 2rem; font-size: 1rem; }
 .btn-block, .btn--full { width: 100%; }
-
-/* Button class aliases for compatibility */
-.btn--primary {
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
-  color: #1a1a1a;
-  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
-  font-weight: 700;
-}
-.btn--primary:hover {
-  background: linear-gradient(135deg, var(--spartan-gold-light) 0%, var(--spartan-gold) 100%);
-  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
-  transform: translateY(-3px);
-}
-.btn--secondary {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--spartan-gold);
-  border: 2px solid var(--spartan-gold);
-  font-weight: 700;
-}
-.btn--secondary:hover {
-  background: rgba(212, 175, 55, 0.2);
-  transform: translateY(-3px);
-}
 .btn--ghost {
   background: transparent;
   color: rgba(255, 255, 255, 0.8);
@@ -2533,7 +2556,7 @@ textarea:focus-visible {
   display: flex;
   justify-content: space-between;
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.7); /* WCAG AA contrast fix */
 }
 
 .result-item__trend {
@@ -2688,7 +2711,7 @@ textarea:focus-visible {
 
 .checkout .form-hint {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.7); /* WCAG AA contrast fix */
   margin-top: 0.375rem;
 }
 
@@ -2901,8 +2924,16 @@ textarea:focus-visible {
 .modal__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85); /* Solid fallback for browsers without backdrop-filter */
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(4px)) {
+  .modal__backdrop {
+    background: rgba(0, 0, 0, 0.92);
+  }
 }
 
 .modal__content {
@@ -2931,6 +2962,53 @@ textarea:focus-visible {
    Responsive Adjustments
    ============================================ */
 
+/* Large screens (> 1920px) */
+@media (min-width: 1921px) {
+  .container {
+    max-width: 1400px;
+  }
+
+  .hero-text h1 {
+    font-size: 4rem;
+  }
+
+  .section-header h2 {
+    font-size: 2.5rem;
+  }
+
+  .tests-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Tablet breakpoint (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .hero-content {
+    gap: 2rem;
+  }
+
+  .hero-text h1 {
+    font-size: 2.5rem;
+  }
+
+  .tests-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-ai-card {
+    padding: 1.25rem;
+  }
+
+  .ai-quick-buttons {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Standard mobile (max-width: 768px) */
 @media (max-width: 768px) {
   .hero-text h1 { font-size: 2rem; }
   .hero { padding: 1.5rem 0 2rem; }
@@ -2942,4 +3020,71 @@ textarea:focus-visible {
   .checkout h1 { font-size: 1.75rem; }
   .checkout__step { padding: 1.25rem; }
   .order-summary { position: static; }
+
+  .tests-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* Small mobile (< 480px) */
+@media (max-width: 480px) {
+  .hero-text h1 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .hero-badge {
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.7rem;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+  }
+
+  .hero-ctas .btn {
+    width: 100%;
+  }
+
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+
+  .btn-large, .btn--lg {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9375rem;
+  }
+
+  .category-tabs {
+    gap: 0.375rem;
+  }
+
+  .category-tab {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .hero-trust-signals {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .checkout h1 {
+    font-size: 1.5rem;
+  }
+
+  .modal__content {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
 }

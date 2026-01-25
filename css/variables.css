@@ -1,6 +1,32 @@
 /* ============================================
    WeightGain - CSS Variables / Design Tokens
    Dark Spartan/Warrior Theme
+   ============================================
+
+   DESIGN SYSTEM USAGE GUIDE:
+
+   SPACING:
+   - Use --spacing-* (xs, sm, md, lg, xl, 2xl, 3xl) for component spacing
+   - Use --space-* (1-12) for fine-grained spacing (Tailwind-style numbers)
+   - Both systems are equivalent: --spacing-sm = --space-2 = 0.5rem
+
+   COLORS:
+   - Primary brand: --spartan-gold (gold) and --spartan-crimson (deep red)
+   - Backgrounds: --bg-* (darkest, darker, dark, elevated, card)
+   - Text: --text-* (primary, secondary, tertiary, muted)
+   - Status: --result-* (optimal, normal, attention, critical)
+   - Legacy: --gray-*, --blue-*, --red-*, --green-* for compatibility
+
+   TYPOGRAPHY:
+   - Size: --font-size-* or --text-* (xs, sm, base, lg, xl, 2xl, 3xl, 4xl)
+   - Weight: --font-medium, --font-semibold, --font-bold
+
+   BORDERS:
+   - Radius: --border-radius-* or --radius-* (sm, md, lg, xl, 2xl, full)
+
+   Z-INDEX SCALE:
+   dropdown(100) < sticky(200) < fixed(300) < modal-backdrop(400) < modal(500) < popover(600) < tooltip(700) < toast(800)
+
    ============================================ */
 
 :root {
