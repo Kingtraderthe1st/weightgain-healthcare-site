@@ -667,7 +667,7 @@ const state = {
 
 const elements = {
   testGrid: document.getElementById('test-grid'),
-  cartCount: document.getElementById('cart-count'),
+  cartCount: document.getElementById('cartCount'),
   cartToggle: document.getElementById('cart-toggle'),
   mobileToggle: document.getElementById('mobile-toggle'),
   mobileNav: document.getElementById('mobile-nav'),
@@ -725,10 +725,19 @@ function getCartTotal() {
 
 function updateCartUI() {
   const count = state.cart.length;
+  const total = getCartTotal();
+
+  // Update header cart count
   if (elements.cartCount) {
     elements.cartCount.textContent = count;
     elements.cartCount.style.display = count > 0 ? 'flex' : 'none';
   }
+
+  // Update sticky cart bar
+  const stickyCount = document.getElementById('stickyCartCount');
+  const stickyTotal = document.getElementById('stickyCartTotal');
+  if (stickyCount) stickyCount.textContent = count;
+  if (stickyTotal) stickyTotal.textContent = total.toFixed(2);
 }
 
 // =============================================================================
