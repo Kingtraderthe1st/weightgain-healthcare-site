@@ -147,9 +147,9 @@
         <div class="hero-text">
           <div class="hero-badge">
             <span>💉 Prescription Therapy</span>
-            <span style="color: #FFE066; margin: 0 0.5rem;">|</span>
+            <span style="color: var(--spartan-gold); margin: 0 0.5rem;">|</span>
             <span>Monthly Delivery</span>
-            <span style="color: #FFE066; margin: 0 0.5rem;">|</span>
+            <span style="color: var(--spartan-gold); margin: 0 0.5rem;">|</span>
             <span>Built for Warriors</span>
           </div>
           <h1 id="hero-title">Get Jacked with <span>TRT & HGH Gains</span></h1>
@@ -186,6 +186,21 @@
               <span>Telehealth consultations</span>
             </div>
           </div>
+          <!-- Hero Stats Bar -->
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <span class="hero-stat-number">12,847</span>
+              <span class="hero-stat-label">Warriors Strong</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-number">287+</span>
+              <span class="hero-stat-label">Avg T Increase (ng/dL)</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-number">94%</span>
+              <span class="hero-stat-label">See Results in 6 Weeks</span>
+            </div>
+          </div>
         </div>
         <div class="hero-card hero-ai-card">
           <div class="ai-chat-header-mini">
@@ -211,17 +226,17 @@
               </div>
             </div>
             <div class="ai-quick-buttons">
-              <button class="ai-quick-btn" data-action="selectPlan" data-plan-id="trt">
-                <span class="btn-content">💉 Start TRT $149/mo</span>
+              <button class="ai-quick-btn" data-action="sendAiPreset" data-message="How fast will I see gains?">
+                <span class="btn-content">⚡ How Fast Will I See Gains?</span>
               </button>
-              <button class="ai-quick-btn" data-action="selectPlan" data-plan-id="hgh">
-                <span class="btn-content">🧬 Start HGH $199/mo</span>
+              <button class="ai-quick-btn" data-action="sendAiPreset" data-message="TRT vs HGH - which one?">
+                <span class="btn-content">🤔 TRT vs HGH - Which One?</span>
               </button>
-              <button class="ai-quick-btn" data-action="sendAiPreset" data-message="What's included?">
-                <span class="btn-content">📦 What's Included?</span>
+              <button class="ai-quick-btn" data-action="sendAiPreset" data-message="What's the timeline?">
+                <span class="btn-content">📅 What's the Timeline?</span>
               </button>
-              <button class="ai-quick-btn" data-action="sendAiPreset" data-message="How does it work?">
-                <span class="btn-content">❓ How It Works</span>
+              <button class="ai-quick-btn" data-action="sendAiPreset" data-message="Is it legit pharma grade?">
+                <span class="btn-content">💉 Is It Pharma Grade?</span>
               </button>
             </div>
           </div>
@@ -250,8 +265,9 @@
           <div class="step-icon">
             <span class="step-emoji">🎯</span>
           </div>
-          <h3>Choose Your Plan</h3>
-          <p>Select TRT or HGH therapy. Pick monthly or yearly billing.</p>
+          <h3>Choose Your Gains</h3>
+          <p>Select TRT or HGH therapy. Pick your plan.</p>
+          <span class="step-timeline">TODAY</span>
         </div>
         <div class="step-connector">
           <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
@@ -262,7 +278,8 @@
             <span class="step-emoji">🔬</span>
           </div>
           <h3>Get Your Labs</h3>
-          <p>Blood tests are included. Visit any of 4,500+ labs.</p>
+          <p>Blood tests at 4,500+ locations nationwide.</p>
+          <span class="step-timeline">Within 48 Hours</span>
         </div>
         <div class="step-connector">
           <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
@@ -273,7 +290,8 @@
             <span class="step-emoji">👨‍⚕️</span>
           </div>
           <h3>Provider Review</h3>
-          <p>A licensed provider reviews your results via telehealth.</p>
+          <p>Licensed provider reviews your results via telehealth.</p>
+          <span class="step-timeline">24-48 Hours After Labs</span>
         </div>
         <div class="step-connector">
           <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
@@ -283,8 +301,16 @@
           <div class="step-icon">
             <span class="step-emoji">📦</span>
           </div>
-          <h3>Start Therapy</h3>
-          <p>Medication delivered monthly to your door.</p>
+          <h3>Gains Delivered</h3>
+          <p>Ships same day, arrives in 2-3 days. Discreet packaging.</p>
+          <span class="step-timeline">Ships Same Day</span>
+        </div>
+      </div>
+      <!-- Total Timeline -->
+      <div class="timeline-total">
+        <div class="timeline-total-inner">
+          <span class="timeline-icon">⚡</span>
+          <span class="timeline-text">TOTAL TIME TO FIRST INJECTION: <strong>~7 DAYS</strong></span>
         </div>
       </div>
       <div style="text-align: center; margin-top: 2rem;">
@@ -293,6 +319,124 @@
           <button class="btn btn-secondary btn-large" data-action="selectPlan" data-plan-id="hgh">Get HGH Gains - $199/mo</button>
         </div>
         <p style="margin-top: 0.75rem; font-size: 0.9rem; color: rgba(255,255,255,0.7);">Everything included. No hidden fees.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transformations Section -->
+  <section class="section transformations-section" id="transformations">
+    <div class="container">
+      <div class="section-header">
+        <h2>Warriors Who Got Their Gains</h2>
+        <p>Real results from men who stopped waiting and started winning.</p>
+      </div>
+      <div class="transformation-grid">
+        <div class="transformation-card">
+          <div class="transformation-stats">
+            <div class="transformation-stat">
+              <span class="stat-label">Testosterone</span>
+              <span class="stat-value">289 <span class="stat-arrow">→</span> 847 ng/dL</span>
+            </div>
+            <div class="transformation-stat">
+              <span class="stat-label">Body Fat</span>
+              <span class="stat-value">24% <span class="stat-arrow">→</span> 15%</span>
+            </div>
+            <div class="transformation-stat">
+              <span class="stat-label">Lean Mass</span>
+              <span class="stat-value highlight">+12 lbs</span>
+            </div>
+          </div>
+          <blockquote class="transformation-quote">
+            "Went from barely hitting PRs to destroying them. Best decision I ever made."
+            <cite>- Mike T., 34, Texas</cite>
+          </blockquote>
+          <span class="transformation-weeks">12 Week Transformation</span>
+        </div>
+        <div class="transformation-card">
+          <div class="transformation-stats">
+            <div class="transformation-stat">
+              <span class="stat-label">Testosterone</span>
+              <span class="stat-value">312 <span class="stat-arrow">→</span> 912 ng/dL</span>
+            </div>
+            <div class="transformation-stat">
+              <span class="stat-label">Body Fat</span>
+              <span class="stat-value">28% <span class="stat-arrow">→</span> 18%</span>
+            </div>
+            <div class="transformation-stat">
+              <span class="stat-label">Lean Mass</span>
+              <span class="stat-value highlight">+15 lbs</span>
+            </div>
+          </div>
+          <blockquote class="transformation-quote">
+            "Energy through the roof. My wife noticed the difference before I did."
+            <cite>- James R., 41, Florida</cite>
+          </blockquote>
+          <span class="transformation-weeks">16 Week Transformation</span>
+        </div>
+        <div class="transformation-card">
+          <div class="transformation-stats">
+            <div class="transformation-stat">
+              <span class="stat-label">Testosterone</span>
+              <span class="stat-value">267 <span class="stat-arrow">→</span> 789 ng/dL</span>
+            </div>
+            <div class="transformation-stat">
+              <span class="stat-label">Body Fat</span>
+              <span class="stat-value">22% <span class="stat-arrow">→</span> 14%</span>
+            </div>
+            <div class="transformation-stat">
+              <span class="stat-label">Lean Mass</span>
+              <span class="stat-value highlight">+10 lbs</span>
+            </div>
+          </div>
+          <blockquote class="transformation-quote">
+            "Finally feel like myself again. Sleep better, lift heavier, think clearer."
+            <cite>- Carlos M., 38, Arizona</cite>
+          </blockquote>
+          <span class="transformation-weeks">10 Week Transformation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What to Expect Timeline -->
+  <section class="section expectations-section" id="expectations">
+    <div class="container">
+      <div class="section-header">
+        <h2>What to Expect</h2>
+        <p>Your week-by-week transformation roadmap.</p>
+      </div>
+      <div class="expectations-timeline">
+        <div class="expectation-item">
+          <div class="expectation-week">Week 1-2</div>
+          <div class="expectation-content">
+            <h4>Getting Started</h4>
+            <p>First injection. Energy starts improving. Better morning alertness.</p>
+          </div>
+        </div>
+        <div class="expectation-item">
+          <div class="expectation-week">Week 3-4</div>
+          <div class="expectation-content">
+            <h4>Building Momentum</h4>
+            <p>Better sleep quality. Mood lifting. Strength coming back in the gym.</p>
+          </div>
+        </div>
+        <div class="expectation-item">
+          <div class="expectation-week">Week 6-8</div>
+          <div class="expectation-content">
+            <h4>Visible Progress</h4>
+            <p>Noticeable gains. PRs returning. Confidence up. Others start noticing.</p>
+          </div>
+        </div>
+        <div class="expectation-item">
+          <div class="expectation-week">Week 12+</div>
+          <div class="expectation-content">
+            <h4>Full Optimization</h4>
+            <p>Full transformation. Look in mirror and see the difference. Peak performance.</p>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 2rem;">
+        <button class="btn btn-primary btn-large" data-action="selectPlan" data-plan-id="trt">Start Your Transformation - $149/mo</button>
       </div>
     </div>
   </section>
@@ -384,24 +528,43 @@
     <div class="container">
       <div class="trust-grid">
         <div class="trust-item">
-          <div class="trust-icon"><span class="trust-emoji">🛡️</span></div>
-          <h4>HIPAA Compliant</h4>
-          <p>Your data is protected by federal healthcare privacy laws</p>
+          <div class="trust-icon"><span class="trust-emoji">💉</span></div>
+          <h4>Pharma-Grade Compounds</h4>
+          <p>Same quality used by elite athletes. No underdosed garbage.</p>
         </div>
         <div class="trust-item">
-          <div class="trust-icon"><span class="trust-emoji">🔬</span></div>
-          <h4>CLIA Certified Labs</h4>
-          <p>All tests processed at federally licensed laboratories</p>
+          <div class="trust-icon"><span class="trust-emoji">🏭</span></div>
+          <h4>FDA-Registered Facilities</h4>
+          <p>All medication made in licensed US pharmacies</p>
         </div>
         <div class="trust-item">
-          <div class="trust-icon"><span class="trust-emoji">💰</span></div>
-          <h4>Price Guarantee</h4>
-          <p>All-inclusive pricing with no hidden fees or lab costs</p>
+          <div class="trust-icon"><span class="trust-emoji">📦</span></div>
+          <h4>Discreet Delivery</h4>
+          <p>Plain packaging. No one knows your business.</p>
         </div>
         <div class="trust-item">
           <div class="trust-icon"><span class="trust-emoji">🇺🇸</span></div>
           <h4>4,500+ US Labs</h4>
           <p>Quest & LabCorp locations in 46 states</p>
+        </div>
+      </div>
+      <!-- Quality Badges -->
+      <div class="quality-badges">
+        <div class="quality-badge">
+          <span class="badge-icon">🔬</span>
+          <span class="badge-text">CLIA Certified</span>
+        </div>
+        <div class="quality-badge">
+          <span class="badge-icon">🛡️</span>
+          <span class="badge-text">HIPAA Protected</span>
+        </div>
+        <div class="quality-badge">
+          <span class="badge-icon">✓</span>
+          <span class="badge-text">Licensed Providers</span>
+        </div>
+        <div class="quality-badge">
+          <span class="badge-icon">⚡</span>
+          <span class="badge-text">Ships Same Day</span>
         </div>
       </div>
     </div>
@@ -707,14 +870,17 @@
   <div class="welcome-popup" id="welcomePopup" role="dialog" aria-modal="true">
     <button class="welcome-close" data-action="closeWelcomePopup" aria-label="Close">×</button>
     <div class="welcome-content">
-      <div class="welcome-icon">💪</div>
-      <h2>Ready to Get Jacked?</h2>
-      <p>New here? Save <strong>10% OFF</strong> your first month with code <strong>WARRIOR</strong></p>
-      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin: 1.5rem 0;">
-        <button class="btn btn-primary" data-action="selectPlan" data-plan-id="trt">Get TRT Gains - $149/mo</button>
-        <button class="btn btn-secondary" data-action="selectPlan" data-plan-id="hgh">Get HGH Gains - $199/mo</button>
+      <div class="welcome-badge">FREE GUIDE</div>
+      <div class="welcome-icon">📘</div>
+      <h2>WARRIORS GET AN EDGE</h2>
+      <p class="welcome-subtitle">Download our free guide:</p>
+      <p class="welcome-guide-title">"How to 3X Your Results in the First 90 Days"</p>
+      <p class="welcome-bonus">+ Get <strong>10% OFF</strong> your first month</p>
+      <div class="welcome-email-form">
+        <input type="email" id="welcomeEmail" placeholder="Enter your email" class="welcome-email-input">
+        <button class="btn btn-primary" id="welcomeSubmitBtn" data-action="submitWelcomeEmail">Send Me the Guide</button>
       </div>
-      <p style="font-size: 0.8rem; color: rgba(255,255,255,0.7);">Everything included. Cancel anytime.</p>
+      <p style="font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 1rem;">No spam. Unsubscribe anytime.</p>
       <label class="welcome-checkbox">
         <input type="checkbox" id="dontShowAgain">
         <span>Don't show this again</span>
@@ -727,14 +893,28 @@
   <div class="exit-popup" id="exitPopup" role="dialog" aria-modal="true">
     <button class="exit-popup-close" data-action="closeExitPopup" aria-label="Close">×</button>
     <div class="exit-popup-content">
-      <div class="exit-popup-icon">💪</div>
-      <h2>Wait! Don't Skip Leg Day on Gains</h2>
-      <p>Use code <strong>WARRIOR</strong> for <strong>10% OFF</strong> your first month</p>
-      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin: 1.5rem 0;">
-        <button class="btn btn-primary" data-action="selectPlan" data-plan-id="trt">Get TRT Gains - $149/mo</button>
-        <button class="btn btn-primary" data-action="selectPlan" data-plan-id="hgh">Get HGH Gains - $199/mo</button>
+      <div class="exit-popup-icon">📊</div>
+      <h2>BEFORE YOU GO...</h2>
+      <p class="exit-popup-subtitle">See what warriors are achieving:</p>
+      <div class="exit-popup-stats">
+        <div class="exit-stat">
+          <span class="exit-stat-number">+287</span>
+          <span class="exit-stat-label">Avg T Increase (ng/dL)</span>
+        </div>
+        <div class="exit-stat">
+          <span class="exit-stat-number">94%</span>
+          <span class="exit-stat-label">See Results in 6 Weeks</span>
+        </div>
+        <div class="exit-stat">
+          <span class="exit-stat-number">12,847</span>
+          <span class="exit-stat-label">Warriors Strong</span>
+        </div>
       </div>
-      <p class="exit-popup-note">Everything included. Cancel anytime.</p>
+      <p class="exit-popup-cta-text">Join men who stopped waiting.</p>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin: 1rem 0;">
+        <button class="btn btn-primary btn-large" data-action="selectPlan" data-plan-id="trt">Get TRT Gains - $149/mo</button>
+      </div>
+      <p class="exit-popup-note">Ships in 7 days. Pharma-grade. Discreet.</p>
       <a href="#" class="exit-popup-skip" data-action="closeExitPopup">Maybe later</a>
     </div>
   </div>
@@ -821,6 +1001,39 @@
     </div>
   </div>
 
+  <!-- Cart Sidebar -->
+  <div class="cart-sidebar-overlay" id="cartSidebarOverlay" data-action="closeCartSidebar"></div>
+  <div class="cart-sidebar" id="cartSidebar" role="dialog" aria-labelledby="cartSidebarTitle" aria-modal="true">
+    <div class="cart-sidebar-header">
+      <h2 id="cartSidebarTitle">Your Cart</h2>
+      <button class="cart-sidebar-close" data-action="closeCartSidebar" type="button" aria-label="Close cart">×</button>
+    </div>
+
+    <!-- Empty State -->
+    <div class="cart-sidebar-empty" id="cartSidebarEmpty" style="display: none;">
+      <div class="cart-sidebar-empty-icon">🛒</div>
+      <h3>Your cart is empty</h3>
+      <p>Add TRT or HGH gains to get started.</p>
+      <button class="btn btn-primary" data-action="closeCartSidebar">Browse Plans</button>
+    </div>
+
+    <!-- Cart Content -->
+    <div class="cart-sidebar-content" id="cartSidebarContent">
+      <div class="cart-sidebar-items" id="cartSidebarItems">
+        <!-- Items rendered by JS -->
+      </div>
+
+      <div class="cart-sidebar-footer">
+        <div class="cart-sidebar-total-row">
+          <span>Total</span>
+          <span class="cart-sidebar-total" id="cartSidebarTotal">$0.00</span>
+        </div>
+        <button class="btn btn-primary btn-large btn-full" data-action="goToCheckout">Checkout</button>
+        <button class="btn btn-secondary btn-full" data-action="closeCartSidebar" style="margin-top: 0.5rem;">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Quick View Modal -->
   <div id="quickViewOverlay" data-action="closeQuickView" role="presentation" aria-hidden="true" style="
     display: none;
@@ -861,6 +1074,17 @@
   <!-- Floating Buttons -->
   <button id="helpButton" data-action="scrollToChat" aria-label="Open chat assistant">💬</button>
   <button id="backToTop" data-action="scrollToTop" aria-label="Back to top">↑</button>
+
+  <!-- Mobile Sticky CTA -->
+  <div class="mobile-sticky-cta" id="mobileStickyCta">
+    <div class="mobile-sticky-content">
+      <div class="mobile-sticky-info">
+        <span class="mobile-sticky-plan">TRT Gains</span>
+        <span class="mobile-sticky-price">$149/mo</span>
+      </div>
+      <button class="btn btn-primary mobile-sticky-btn" data-action="selectPlan" data-plan-id="trt">Get Started</button>
+    </div>
+  </div>
 
   <script src="app.js" defer></script>
 </body>

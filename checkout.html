@@ -7,7 +7,7 @@
   <title>Checkout - WeightGain | Built for Warriors</title>
 
   <!-- Security Headers -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://js.stripe.com; connect-src 'self' https://api.stripe.com;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://js.stripe.com; connect-src 'self' https://api.stripe.com;">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
@@ -47,6 +47,12 @@
   <main id="main-content" class="checkout">
     <div class="container">
       <h1>Checkout</h1>
+
+      <!-- Enrollment Status -->
+      <div class="enrollment-status">
+        <span class="enrollment-pulse"></span>
+        <span class="enrollment-text"><strong>147</strong> spots left for January enrollment</span>
+      </div>
 
       <div class="checkout__container">
         <!-- Main Form Area -->
@@ -92,17 +98,23 @@
             </div>
           </div>
 
-          <!-- Upsell Section -->
-          <div class="checkout__step" id="upsell-section" style="display: none; background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(139, 0, 0, 0.1)); border: 2px solid rgba(212, 175, 55, 0.3);">
-            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-              <span style="background: #D4AF37; color: #1a1a1a; padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700;">LIMITED TIME</span>
+          <!-- Stack Upsell Section -->
+          <div class="checkout__step stack-upsell" id="upsell-section" style="display: none;">
+            <div class="stack-header">
+              <span class="stack-badge">STACK YOUR GAINS</span>
+              <span class="stack-stat">2.3x faster results on average</span>
             </div>
-            <h3 id="upsell-title" style="font-size: 1.25rem; color: #D4AF37; margin-bottom: 0.5rem;">Want to Build Muscle Faster?</h3>
-            <p id="upsell-desc" style="color: rgba(255,255,255,0.8); margin-bottom: 1rem;">Add HGH Gains for maximum growth and recovery.</p>
-            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-              <span id="upsell-price" style="font-size: 1.5rem; font-weight: 800; color: #fff;">+$199/mo</span>
-              <button id="upsell-btn" class="btn btn-primary">Add HGH Gains</button>
+            <h3 id="upsell-title">Add HGH to Your Stack?</h3>
+            <p id="upsell-desc">Warriors who combine TRT + HGH see significantly faster results.</p>
+            <div class="stack-pricing">
+              <div class="stack-price-breakdown">
+                <span class="stack-original">$348/mo separately</span>
+                <span class="stack-stacked">$299/mo stacked</span>
+              </div>
+              <span class="stack-savings-badge">Save $49/mo</span>
             </div>
+            <button id="upsell-btn" class="btn btn-primary btn-large" style="width: 100%;">Add HGH to My Stack</button>
+            <p class="stack-note">Same discreet packaging. Ships together.</p>
           </div>
 
           <!-- Step 2: Your Information -->
@@ -231,9 +243,21 @@
             </div>
           </div>
 
+          <!-- Speed Reminder -->
+          <div class="shipping-reminder">
+            <div class="shipping-reminder-item">
+              <span class="shipping-icon">📦</span>
+              <span>Ships same day if ordered by 2pm EST</span>
+            </div>
+            <div class="shipping-reminder-item">
+              <span class="shipping-icon">🔒</span>
+              <span>Discreet packaging - no one knows your business</span>
+            </div>
+          </div>
+
           <!-- Submit Button -->
           <button type="submit" form="checkout-form" class="btn btn--primary btn--lg btn--full" id="submit-btn">
-            Start Getting Gains
+            Lock In My Gains
           </button>
 
           <p style="text-align: center; margin-top: var(--space-4); font-size: var(--text-sm); color: var(--text-tertiary);">
@@ -419,12 +443,15 @@
       const billingCycleEl = document.getElementById('billing-cycle');
       const planIncludesEl = document.getElementById('plan-includes');
 
+      // Debug: log cart contents
+      console.log('Cart contents:', cart);
+
       if (cart.length === 0) {
-        emptyCart.style.display = 'block';
-        stepCart.style.display = 'none';
-        stepInfo.style.display = 'none';
-        stepPayment.style.display = 'none';
-        submitBtn.style.display = 'none';
+        if (emptyCart) emptyCart.style.display = 'block';
+        if (stepCart) stepCart.style.display = 'none';
+        if (stepInfo) stepInfo.style.display = 'none';
+        if (stepPayment) stepPayment.style.display = 'none';
+        if (submitBtn) submitBtn.style.display = 'none';
         return;
       }
 
@@ -530,8 +557,8 @@
         summaryItems.appendChild(div);
       });
 
-      // Calculate total
-      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      // Calculate total (ensure prices are valid numbers and multiply by quantity)
+      const total = cart.reduce((sum, item) => sum + (Number(item.price) || 0) * (item.quantity || 1), 0);
       const hasMonthly = cart.some(item => item.billingCycle === 'monthly');
       document.getElementById('total').textContent = `$${total.toFixed(2)}${hasMonthly ? '/mo' : ''}`;
 
@@ -636,8 +663,8 @@
       submitBtn.textContent = 'Processing...';
 
       try {
-        // Create Stripe token
-        if (stripe && cardElement) {
+        // Create Stripe token (skip in demo mode with placeholder key)
+        if (stripe && cardElement && stripePublishableKey !== 'pk_test_placeholder') {
           const { token, error } = await stripe.createToken(cardElement);
 
           if (error) {
@@ -688,6 +715,7 @@
     });
 
     // Initialize
+    console.log('About to call loadCart, localStorage wg_cart:', localStorage.getItem('wg_cart'));
     loadCart();
   </script>
 </body>

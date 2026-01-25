@@ -65,6 +65,11 @@ const subscriptionPlans = {
 };
 
 // =============================================================================
+// Legacy Test Catalog (empty - app now uses subscription plans)
+// =============================================================================
+const testCatalog = [];
+
+// =============================================================================
 // Restricted States (where direct-to-consumer testing is not available)
 // =============================================================================
 
@@ -103,13 +108,26 @@ function validateCartItem(item) {
   if (typeof item.price !== 'number' || item.price < 0 || item.price > 10000) return null;
   if (item.quantity !== undefined && (typeof item.quantity !== 'number' || item.quantity < 1 || item.quantity > 100)) return null;
 
-  // Return sanitized item
-  return {
+  // Return sanitized item (preserve subscription fields)
+  const sanitized = {
     id: item.id,
     name: item.name.substring(0, 200),
     price: Math.round(item.price * 100) / 100,
     quantity: item.quantity || 1
   };
+
+  // Preserve subscription-specific fields if present
+  if (item.billingCycle && ['monthly', 'yearly', 'one-time'].includes(item.billingCycle)) {
+    sanitized.billingCycle = item.billingCycle;
+  }
+  if (item.billingLabel && typeof item.billingLabel === 'string') {
+    sanitized.billingLabel = item.billingLabel.substring(0, 50);
+  }
+  if (Array.isArray(item.includes)) {
+    sanitized.includes = item.includes.filter(i => typeof i === 'string').slice(0, 20).map(i => i.substring(0, 200));
+  }
+
+  return sanitized;
 }
 
 function validateCartData(data) {
@@ -194,10 +212,32 @@ function addToCart(testId) {
     return;
   }
 
+  // Use the selected billing cycle from state
+  const cycle = state.billingCycle || 'monthly';
+  let price = test.price;
+  let billingLabel = 'One-Time';
+  let billingCycleValue = 'one-time';
+
+  // If test has subscription pricing, use it
+  if (test.pricing) {
+    if (cycle === 'yearly' && test.pricing.yearly) {
+      price = test.pricing.yearly;
+      billingLabel = 'Yearly';
+      billingCycleValue = 'yearly';
+    } else if (cycle === 'monthly' && test.pricing.monthly) {
+      price = test.pricing.monthly;
+      billingLabel = 'Monthly';
+      billingCycleValue = 'monthly';
+    }
+  }
+
   state.cart.push({
     id: test.id,
     name: test.name,
-    price: test.price,
+    price: price,
+    billingCycle: billingCycleValue,
+    billingLabel: billingLabel,
+    includes: test.includes || [],
     quantity: 1
   });
 
@@ -213,7 +253,9 @@ function removeFromCart(testId) {
 }
 
 function saveCart() {
+  console.log('Saving cart:', state.cart);
   localStorage.setItem('wg_cart', JSON.stringify(state.cart));
+  console.log('Saved to localStorage:', localStorage.getItem('wg_cart'));
 }
 
 function getCartTotal() {
@@ -293,19 +335,37 @@ function updatePricingDisplay() {
 }
 
 function selectPlan(planId) {
+  console.log('selectPlan called with:', planId);
   const plan = subscriptionPlans[planId];
-  if (!plan) return;
+  if (!plan) {
+    console.log('Plan not found!');
+    return;
+  }
 
   state.selectedPlan = planId;
 
-  // Default to monthly billing
-  const price = plan.pricing.monthly;
-  const billingLabel = 'Monthly';
+  // Use the selected billing cycle from state
+  const cycle = state.billingCycle || 'monthly';
+  let price, billingLabel, billingCycleValue;
 
-  // Check if already in cart
+  if (cycle === 'yearly') {
+    price = plan.pricing.yearly;
+    billingLabel = 'Yearly';
+    billingCycleValue = 'yearly';
+  } else if (cycle === 'oneTime') {
+    price = plan.pricing.oneTime;
+    billingLabel = 'One-Time';
+    billingCycleValue = 'one-time';
+  } else {
+    price = plan.pricing.monthly;
+    billingLabel = 'Monthly';
+    billingCycleValue = 'monthly';
+  }
+
+  // If already in cart, go straight to checkout
   const existingItem = state.cart.find(item => item.id === plan.id);
   if (existingItem) {
-    showNotification(`${plan.name} is already in your cart!`, 'info');
+    window.location.href = 'checkout.html';
     return;
   }
 
@@ -314,7 +374,7 @@ function selectPlan(planId) {
     id: plan.id,
     name: plan.name,
     price: price,
-    billingCycle: 'monthly',
+    billingCycle: billingCycleValue,
     billingLabel: billingLabel,
     includes: plan.includes,
     quantity: 1
@@ -323,8 +383,8 @@ function selectPlan(planId) {
   saveCart();
   updateCartUI();
 
-  // Show confirmation message
-  showPlanAddedModal(plan);
+  // Show pairing modal instead of simple confirmation
+  showPairingModal(planId);
 }
 
 function showPlanAddedModal(plan) {
@@ -366,6 +426,221 @@ function showPlanAddedModal(plan) {
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) overlay.remove();
   });
+}
+
+// =============================================================================
+// TRT/HGH Pairing Modal
+// =============================================================================
+
+function showPairingModal(addedPlanId) {
+  const plan = subscriptionPlans[addedPlanId];
+  if (!plan) return;
+
+  // Determine which product to suggest
+  const suggestHGH = addedPlanId === 'trt';
+  const suggestedPlan = suggestHGH ? subscriptionPlans.hgh : subscriptionPlans.trt;
+
+  // Check if user already has the suggested item in cart
+  const alreadyHas = state.cart.some(item => item.id === suggestedPlan.id);
+  if (alreadyHas) return;
+
+  // Create modal overlay
+  const overlay = document.createElement('div');
+  overlay.id = 'pairingModalOverlay';
+  overlay.className = 'pairing-modal-overlay';
+  overlay.dataset.action = 'closePairingModal';
+
+  // Create modal content
+  const modal = document.createElement('div');
+  modal.className = 'pairing-modal';
+
+  modal.innerHTML = `
+    <button class="pairing-modal-close" data-action="closePairingModal" aria-label="Close">&times;</button>
+
+    <div class="pairing-modal-header">
+      <span class="pairing-badge">MAXIMIZE YOUR GAINS</span>
+      <h2>Stack for 2.3x Faster Results</h2>
+    </div>
+
+    <div class="pairing-toggle">
+      <button class="pairing-toggle-btn active" data-gender="men">For Men</button>
+      <button class="pairing-toggle-btn" data-gender="women">For Women</button>
+    </div>
+
+    <div class="pairing-content" id="pairingContentMen">
+      ${suggestHGH ? `
+        <div class="pairing-suggestion">
+          <div class="pairing-icon">🧬</div>
+          <h3>Add HGH Gains</h3>
+          <p class="pairing-desc">Growth hormone supercharges recovery and accelerates lean muscle gains. Men who stack TRT + HGH see dramatically faster body recomposition.</p>
+          <ul class="pairing-benefits">
+            <li>Faster workout recovery</li>
+            <li>Enhanced fat loss</li>
+            <li>Better sleep quality</li>
+            <li>Improved skin & anti-aging</li>
+          </ul>
+          <div class="pairing-price">
+            <span class="pairing-price-label">Add for just</span>
+            <span class="pairing-price-value">+$199/mo</span>
+          </div>
+          <div class="pairing-stack-price">
+            <span>Stack price: $299/mo</span>
+            <span class="pairing-savings">Save $49/mo</span>
+          </div>
+        </div>
+      ` : `
+        <div class="pairing-suggestion">
+          <div class="pairing-icon">💉</div>
+          <h3>Add TRT Gains</h3>
+          <p class="pairing-desc">Testosterone optimization is the foundation of male hormone health. Combined with HGH, you'll maximize strength, energy, and recovery.</p>
+          <ul class="pairing-benefits">
+            <li>Increased strength & energy</li>
+            <li>Improved libido & mood</li>
+            <li>Enhanced muscle building</li>
+            <li>Mental clarity & focus</li>
+          </ul>
+          <div class="pairing-price">
+            <span class="pairing-price-label">Add for just</span>
+            <span class="pairing-price-value">+$149/mo</span>
+          </div>
+          <div class="pairing-stack-price">
+            <span>Stack price: $299/mo</span>
+            <span class="pairing-savings">Save $49/mo</span>
+          </div>
+        </div>
+      `}
+    </div>
+
+    <div class="pairing-content" id="pairingContentWomen" style="display: none;">
+      ${suggestHGH ? `
+        <div class="pairing-suggestion">
+          <div class="pairing-icon">🧬</div>
+          <h3>Add HGH Gains</h3>
+          <p class="pairing-desc">HGH works beautifully for women, enhancing body composition, skin quality, and recovery without virilizing effects.</p>
+          <ul class="pairing-benefits">
+            <li>Enhanced body composition</li>
+            <li>Better skin elasticity</li>
+            <li>Improved sleep & recovery</li>
+            <li>Anti-aging benefits</li>
+          </ul>
+          <p class="pairing-women-note">Women typically use similar HGH doses (1-2 IU/day) with excellent results.</p>
+          <div class="pairing-price">
+            <span class="pairing-price-label">Add for just</span>
+            <span class="pairing-price-value">+$199/mo</span>
+          </div>
+        </div>
+      ` : `
+        <div class="pairing-suggestion">
+          <div class="pairing-icon">💊</div>
+          <h3>Consider Low-Dose TRT</h3>
+          <p class="pairing-desc">Women benefit from much lower testosterone doses (5-15mg/week). Combined with HGH, it creates a powerful synergy for energy and body composition.</p>
+          <ul class="pairing-benefits">
+            <li>Increased energy & vitality</li>
+            <li>Improved libido</li>
+            <li>Better muscle tone</li>
+            <li>Enhanced mood stability</li>
+          </ul>
+          <p class="pairing-women-note">Women's protocols use micro-doses - completely different from male TRT. Often paired with progesterone for hormonal balance.</p>
+          <div class="pairing-price">
+            <span class="pairing-price-label">Add for just</span>
+            <span class="pairing-price-value">+$149/mo</span>
+          </div>
+        </div>
+      `}
+    </div>
+
+    <div class="pairing-actions">
+      <button class="btn btn-primary btn-large" id="addPairingBtn">Add to My Stack</button>
+      <button class="btn btn-secondary" data-action="closePairingModal">No Thanks, Continue</button>
+    </div>
+  `;
+
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  // Activate overlay
+  requestAnimationFrame(() => {
+    overlay.classList.add('active');
+    modal.classList.add('active');
+  });
+
+  // Handle toggle between men/women
+  modal.querySelectorAll('.pairing-toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      modal.querySelectorAll('.pairing-toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const menContent = document.getElementById('pairingContentMen');
+      const womenContent = document.getElementById('pairingContentWomen');
+
+      if (btn.dataset.gender === 'men') {
+        menContent.style.display = 'block';
+        womenContent.style.display = 'none';
+      } else {
+        menContent.style.display = 'none';
+        womenContent.style.display = 'block';
+      }
+    });
+  });
+
+  // Handle add to stack
+  document.getElementById('addPairingBtn').addEventListener('click', () => {
+    addPairingToCart(suggestHGH ? 'hgh' : 'trt');
+    closePairingModal();
+  });
+}
+
+function addPairingToCart(planId) {
+  const plan = subscriptionPlans[planId];
+  if (!plan) return;
+
+  // Check if already in cart
+  if (state.cart.some(item => item.id === plan.id)) {
+    showToast('Already in your cart!');
+    return;
+  }
+
+  // Use the selected billing cycle from state
+  const cycle = state.billingCycle || 'monthly';
+  let price, billingLabel, billingCycleValue;
+
+  if (cycle === 'yearly') {
+    price = plan.pricing.yearly;
+    billingLabel = 'Yearly';
+    billingCycleValue = 'yearly';
+  } else if (cycle === 'oneTime') {
+    price = plan.pricing.oneTime;
+    billingLabel = 'One-Time';
+    billingCycleValue = 'one-time';
+  } else {
+    price = plan.pricing.monthly;
+    billingLabel = 'Monthly';
+    billingCycleValue = 'monthly';
+  }
+
+  state.cart.push({
+    id: plan.id,
+    name: plan.name,
+    price: price,
+    billingCycle: billingCycleValue,
+    billingLabel: billingLabel,
+    includes: plan.includes,
+    quantity: 1
+  });
+
+  saveCart();
+  updateCartUI();
+  showToast(`${plan.name} added to your stack!`);
+}
+
+function closePairingModal() {
+  const overlay = document.getElementById('pairingModalOverlay');
+  if (overlay) {
+    overlay.classList.remove('active');
+    const modal = overlay.querySelector('.pairing-modal');
+    if (modal) modal.classList.remove('active');
+    setTimeout(() => overlay.remove(), 300);
+  }
 }
 
 // =============================================================================
@@ -493,30 +768,6 @@ function getCategoryLabel(category) {
     'panels': 'Complete Panel'
   };
   return labels[category] || category;
-}
-
-// =============================================================================
-// Category Filter Functions
-// =============================================================================
-
-function initCategoryFilters() {
-  const filters = document.querySelectorAll('.test-filter');
-  filters.forEach(filter => {
-    filter.addEventListener('click', () => {
-      // Update active state
-      filters.forEach(f => {
-        f.classList.remove('active');
-        f.setAttribute('aria-selected', 'false');
-      });
-      filter.classList.add('active');
-      filter.setAttribute('aria-selected', 'true');
-
-      // Update state and render
-      state.currentCategory = filter.dataset.category;
-      state.testsDisplayed = 6;
-      renderTests(state.currentCategory, state.testsDisplayed);
-    });
-  });
 }
 
 // =============================================================================
@@ -1034,12 +1285,62 @@ const aiResponses = {
     plan: null
   },
 
+  // Fitness-specific responses
+  timeline: {
+    message: "⚡ Here's your timeline: Choose plan TODAY → Labs within 48hrs at 4,500+ locations → Doctor review in 24-48hrs → Ships same day. TOTAL TIME TO FIRST INJECTION: ~7 DAYS. Week 1-2: Energy improves. Week 3-4: Better sleep, mood lifting. Week 6-8: Visible gains, PRs returning. Week 12+: Full transformation!",
+    plan: 'trt'
+  },
+  fast: {
+    message: "🚀 How fast? Most warriors see: Week 1-2: Energy boost, better sleep. Week 3-4: Mood improvement, strength returning. Week 6-8: VISIBLE gains, hitting PRs again. Week 12+: Full optimization. 94% of our guys see results by week 6!",
+    plan: 'trt'
+  },
+  results: {
+    message: "📊 Real results: Our warriors average +287 ng/dL testosterone increase. 94% see results within 6 weeks. Week 6-8 is when most guys start destroying PRs again. Ready to start your transformation?",
+    plan: 'trt'
+  },
+  stack: {
+    message: "💪 STACKING TRT + HGH = 2.3x faster results on average! TRT handles testosterone ($149/mo), HGH accelerates recovery and lean mass ($199/mo). Together: $299/mo (save $49/mo vs. separate). Same discreet packaging, ships together!",
+    plan: null
+  },
+  both: {
+    message: "🔥 Smart choice asking about both! TRT + HGH stack = maximum gains. TRT for testosterone optimization, HGH for recovery and muscle. Stack price: $299/mo (save $49 vs buying separately). 2.3x faster results on average!",
+    plan: null
+  },
+  sides: {
+    message: "⚕️ Real talk: Side effects are minimal when properly monitored. That's why we include monthly blood work - your doctor watches your levels and adjusts as needed. Common early sides (if any): slight water retention, increased appetite. Most guys feel BETTER, not worse. Questions? Your doc is always available via telehealth.",
+    plan: null
+  },
+  safe: {
+    message: "🛡️ Safety first, always. Your plan includes: Monthly blood panels to monitor levels, licensed physician oversight, unlimited telehealth access, and FDA-registered pharmacy compounds. We catch any issues early. 12,847 warriors strong - safety is how we got here.",
+    plan: null
+  },
+  legit: {
+    message: "✅ 100% legit pharma-grade compounds from FDA-registered US pharmacies. Same quality used by elite athletes. No underdosed garbage, no sketchy overseas stuff. Every batch tested. Your doc monitors your bloods monthly to verify it's working. This is the real deal.",
+    plan: 'trt'
+  },
+  quality: {
+    message: "💉 Pharma-grade quality: Made in FDA-registered US facilities, same compounds used by elite athletes, every batch tested for purity and potency. No underdosed garbage. Monthly blood panels prove it's working. 12,847 warriors trust us with their gains.",
+    plan: 'trt'
+  },
+  discreet: {
+    message: "📦 Total discretion: Plain brown packaging, no logos or labels indicating contents. Shipped from a generic medical supply address. Your bank statement shows a generic medical billing name. No one knows your business but you and your doctor.",
+    plan: null
+  },
+  private: {
+    message: "🔒 Your privacy is locked down: HIPAA-protected medical records, discreet plain packaging, generic billing name on statements. We treat your info like it's ours. No one knows your business.",
+    plan: null
+  },
+  which: {
+    message: "🤔 TRT vs HGH? Here's the breakdown: TRT ($149/mo) = testosterone optimization. Best for: energy, strength, libido, mood. HGH ($199/mo) = growth hormone. Best for: recovery, body comp, anti-aging. Want MAXIMUM gains? Stack both for $299/mo and see 2.3x faster results!",
+    plan: null
+  },
+
   default: {
-    message: "💉 Ready to transform? We offer TRT Gains ($149/mo) and HGH Gains ($199/mo) subscriptions. Both include monthly medication delivery, blood monitoring, and unlimited telehealth visits. Which interests you?",
+    message: "💉 Ready to transform? We offer TRT Gains ($149/mo) and HGH Gains ($199/mo) subscriptions. Both include monthly medication delivery, blood monitoring, and unlimited telehealth visits. ~7 days to first injection. Which interests you?",
     plan: null
   },
   offTopic: {
-    message: "💉 I help warriors start TRT and HGH therapy! Our subscriptions include medication delivery, blood tests, and telehealth - all in one plan. Ask me about TRT ($149/mo) or HGH ($199/mo)!",
+    message: "💉 I help warriors start TRT and HGH therapy! Our subscriptions include medication delivery, blood tests, and telehealth - all in one plan. Ships in ~7 days. Ask me about TRT ($149/mo) or HGH ($199/mo)!",
     plan: null
   }
 };
@@ -1062,7 +1363,15 @@ const priorityKeywords = {
   'thyroid': 'thyroid', 'metabolism': 'metabolism',
   'weight': 'weight', 'lose weight': 'weight',
   'checkup': 'checkup', 'baseline': 'checkup', 'full panel': 'complete',
-  'injection': 'trt', 'injections': 'trt'
+  'injection': 'trt', 'injections': 'trt',
+  // Fitness-specific keywords
+  'how fast': 'fast', 'how quickly': 'fast', 'see gains': 'fast', 'see results': 'results',
+  'timeline': 'timeline', 'how long': 'timeline', 'when will': 'timeline',
+  'stack': 'stack', 'stacking': 'stack', 'combine': 'stack', 'trt and hgh': 'both', 'both': 'both',
+  'side effect': 'sides', 'sides': 'sides', 'safe': 'safe', 'safety': 'safe',
+  'legit': 'legit', 'real': 'legit', 'pharma grade': 'quality', 'pharma-grade': 'quality', 'quality': 'quality',
+  'discreet': 'discreet', 'discrete': 'discreet', 'packaging': 'discreet', 'private': 'private', 'privacy': 'private',
+  'which one': 'which', 'trt or hgh': 'which', 'difference': 'which'
 };
 
 function handleAiKeypress(event) {
@@ -1074,7 +1383,7 @@ function handleAiKeypress(event) {
 function createAiTestCard(test) {
   const card = document.createElement('div');
   card.className = 'ai-test-card';
-  card.style.cssText = 'display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: rgba(0, 245, 255, 0.05); border: 1px solid rgba(0, 245, 255, 0.3); border-radius: 12px; margin-top: 0.5rem; transition: all 0.2s;';
+  card.style.cssText = 'display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; margin-top: 0.5rem; transition: all 0.2s;';
 
   const emoji = document.createElement('span');
   emoji.style.fontSize = '1.25rem';
@@ -1086,18 +1395,18 @@ function createAiTestCard(test) {
   name.style.cssText = 'font-weight: 600; color: #fff; font-size: 0.85rem;';
   name.textContent = test.name;
   const priceText = document.createElement('div');
-  priceText.style.cssText = 'color: #00f5ff; font-weight: 700; font-size: 0.9rem;';
+  priceText.style.cssText = 'color: #D4AF37; font-weight: 700; font-size: 0.9rem;';
   priceText.textContent = `$${test.price}`;
   info.appendChild(name);
   info.appendChild(priceText);
 
   const addBtn = document.createElement('button');
-  addBtn.style.cssText = 'padding: 0.5rem 1rem; background: linear-gradient(135deg, #00f5ff 0%, #bf00ff 100%); border: none; border-radius: 50px; color: #000; font-weight: 700; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 10px rgba(0, 245, 255, 0.4);';
+  addBtn.style.cssText = 'padding: 0.5rem 1rem; background: linear-gradient(135deg, #D4AF37 0%, #8B0000 100%); border: none; border-radius: 50px; color: #fff; font-weight: 700; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);';
   addBtn.textContent = '+ Add';
   addBtn.dataset.action = 'addToCartFromAI';
   addBtn.dataset.testId = test.id;
-  addBtn.onmouseover = () => { addBtn.style.transform = 'scale(1.05)'; addBtn.style.boxShadow = '0 0 20px rgba(0, 245, 255, 0.6)'; };
-  addBtn.onmouseout = () => { addBtn.style.transform = 'scale(1)'; addBtn.style.boxShadow = '0 0 10px rgba(0, 245, 255, 0.4)'; };
+  addBtn.onmouseover = () => { addBtn.style.transform = 'scale(1.05)'; addBtn.style.boxShadow = '0 0 20px rgba(212, 175, 55, 0.6)'; };
+  addBtn.onmouseout = () => { addBtn.style.transform = 'scale(1)'; addBtn.style.boxShadow = '0 0 10px rgba(212, 175, 55, 0.4)'; };
 
   card.appendChild(emoji);
   card.appendChild(info);
@@ -1158,8 +1467,10 @@ function sendAiMessage(presetMessage = null) {
     document.getElementById('typingIndicator')?.remove();
     const response = getAiResponse(message);
 
-    // Get recommended tests
-    const recommendedTests = testCatalog.filter(test => response.tests.includes(test.id)).slice(0, 4);
+    // Get recommended tests (if response has tests array)
+    const recommendedTests = response.tests
+      ? testCatalog.filter(test => response.tests.includes(test.id)).slice(0, 4)
+      : [];
 
     // Build AI response using DOM methods
     const aiMsg = document.createElement('div');
@@ -1187,29 +1498,123 @@ function sendAiMessage(presetMessage = null) {
 }
 
 function getAiResponse(message) {
-  const lowerMessage = message.toLowerCase();
+  const msg = message.toLowerCase().trim();
 
-  // Check priority keywords first
-  for (const [phrase, category] of Object.entries(priorityKeywords)) {
-    if (lowerMessage.includes(phrase) && aiResponses[category]) {
-      return aiResponses[category];
+  // Smart intent detection with contextual responses
+
+  // WOMEN / FEMALE questions - check FIRST before other patterns (includes common typos)
+  if (msg.match(/wom[ae]n|wom[ae]m|womon|fem[ae]le?|feml|girl|wif[ew]?|girlfr[ie]+nd|grilfriend|her\b|she\b/i)) {
+    if (msg.match(/trt|testos?t[eo]r+one?|testorone/i)) {
+      return { message: "Yes, women can absolutely benefit from testosterone therapy! Here's what you need to know:\n\n💉 DOSING FOR WOMEN:\n• Women use MUCH lower doses: 5-15mg/week (vs 100-200mg for men)\n• Typically delivered via cream, pellets, or micro-dose injections\n• Goal: Restore to optimal female range (15-70 ng/dL)\n\n✨ BENEFITS FOR WOMEN:\n• Increased energy and motivation\n• Improved libido and sexual function\n• Better muscle tone and reduced body fat\n• Mental clarity and mood stability\n• Stronger bones\n\n🔬 BEST PAIRED WITH:\n• Progesterone (balances hormones, improves sleep)\n• DHEA (precursor hormone, supports adrenals)\n• Thyroid optimization if needed\n\n⚠️ IMPORTANT: Women should NOT use male-dosed TRT. Always work with a provider experienced in female hormone optimization.\n\nWant to learn more? Our team can discuss women's protocols - reach out at support@weightgain.com" };
     }
-  }
-
-  // Check direct category matches
-  for (const [keyword, response] of Object.entries(aiResponses)) {
-    if (keyword !== 'default' && keyword !== 'offTopic' && lowerMessage.includes(keyword)) {
-      return response;
+    if (msg.match(/hgh|gr[ow]+th\s*h[oa]rm[oa]ne?/i)) {
+      return { message: "HGH is actually excellent for women - here's the full breakdown:\n\n💉 DOSING FOR WOMEN:\n• Typical dose: 1-2 IU per day (similar to men, sometimes slightly lower)\n• Usually taken before bed to mimic natural release\n• Start low (0.5-1 IU) and titrate up based on IGF-1 levels\n\n✨ BENEFITS FOR WOMEN:\n• Improved body composition (less fat, more lean mass)\n• Better skin elasticity and reduced wrinkles\n• Deeper, more restorative sleep\n• Faster recovery from workouts\n• Stronger hair and nails\n• Enhanced collagen production\n\n🔬 BEST PAIRED WITH:\n• Low-dose testosterone (5-10mg/week) for synergistic fat loss\n• Progesterone for sleep and hormone balance\n• Peptides like Ipamorelin for natural GH stimulation\n\n📊 WHAT TO MONITOR:\n• IGF-1 levels (target 200-250 ng/mL)\n• Fasting glucose (HGH can affect insulin sensitivity)\n• Thyroid function\n\nWomen often see dramatic anti-aging and body composition results with HGH. Contact support@weightgain.com to discuss women's HGH protocols." };
     }
+    return { message: "Great question about women's hormone optimization! Here's what you should know:\n\n🔬 WOMEN'S HORMONE THERAPY OPTIONS:\n\n1️⃣ TESTOSTERONE (Low-Dose)\n• 5-15mg/week via cream or pellets\n• Boosts energy, libido, muscle tone, mental clarity\n• Must be female-appropriate dosing\n\n2️⃣ HGH (Growth Hormone)\n• 1-2 IU daily\n• Anti-aging, fat loss, better sleep, skin quality\n• Works great for women\n\n3️⃣ PROGESTERONE\n• Often the missing piece for women\n• Improves sleep, reduces anxiety, balances estrogen\n• Usually 100-200mg at bedtime\n\n4️⃣ DHEA\n• Precursor to testosterone and estrogen\n• 10-25mg daily for women\n• Supports adrenal function\n\n💡 BEST STACK FOR WOMEN:\nMost women see best results combining low-dose testosterone + progesterone, adding HGH if anti-aging/body comp is the goal.\n\n⚠️ KEY DIFFERENCE FROM MEN:\nWomen need MUCH lower testosterone doses and should always include progesterone for balance.\n\nOur team can create a women-specific protocol. Email support@weightgain.com with your goals!" };
   }
 
-  // Health-related keywords
-  const healthKeywords = ['test', 'blood', 'health', 'symptom', 'level', 'panel', 'lab', 'fitness', 'optimize', 'improve'];
-  if (healthKeywords.some(kw => lowerMessage.includes(kw))) {
-    return aiResponses.default;
+  // AGE questions
+  if (msg.match(/how old|minimum age|too young|too old|year.?old|\bage\b/i) || msg.match(/\b(18|21|25|30)\b.*(old|age|qualify|eligible)/i)) {
+    return { message: "Age requirements:\n\n✅ Must be 18+ to qualify\n✅ Optimal candidates are typically 25-65\n✅ Men under 25 may have naturally fluctuating T levels\n✅ Men over 65 can absolutely benefit - we have many warriors in that range\n\nYour labs will tell the real story. Low T doesn't discriminate by age. If you're experiencing symptoms, it's worth getting tested." };
   }
 
-  return aiResponses.offTopic;
+  // MEDICAL CONDITIONS / CONTRAINDICATIONS
+  if (msg.match(/cancer|heart (disease|condition|problem)|liver|kidney|disease|condition|health issue|prostate|blood clot|diabetes/i)) {
+    return { message: "Great question - we take safety seriously.\n\nOur doctors will review your complete medical history before approving any treatment. Some conditions require additional evaluation:\n\n⚠️ Conditions that need careful review:\n• Prostate issues\n• Heart conditions\n• Blood clotting disorders\n• Liver or kidney problems\n• History of certain cancers\n\n✅ Many men WITH these conditions still qualify - it depends on specifics.\n\nYour safety comes first. The doctor will discuss your individual situation during the consultation and may request additional tests if needed." };
+  }
+
+  // ELIGIBILITY / QUALIFICATION questions
+  if (msg.match(/qualify|eligible|can i (get|take|use|start)|am i a candidate|do i qualify|will i qualify/i)) {
+    return { message: "Here's how qualification works:\n\n1️⃣ You sign up and get labs done (4,500+ locations)\n2️⃣ Our doctors review your hormone levels\n3️⃣ If your levels are suboptimal, you qualify\n\n📊 Who typically qualifies:\n• Men with T levels below optimal range\n• Men experiencing low T symptoms (fatigue, low libido, brain fog, muscle loss)\n• Men 18+ in reasonable health\n\n✅ 87% of men who complete labs qualify for treatment.\n\nThe only way to know for sure is to get tested. Labs are included in your plan - no extra cost." };
+  }
+
+  // TIMELINE / SPEED questions
+  if (msg.match(/how (fast|quick|long|soon)|when (will|can|do)|timeline|time to|days|weeks/i)) {
+    if (msg.includes('result') || msg.includes('gain') || msg.includes('see') || msg.includes('notice')) {
+      return { message: "Great question! Here's what most warriors experience:\n\n📅 Week 1-2: Energy boost kicks in, better sleep\n📅 Week 3-4: Mood improves, strength returning\n📅 Week 6-8: VISIBLE gains, PRs coming back\n📅 Week 12+: Full transformation mode\n\n94% of our guys notice real changes by week 6. The first injection? That's only ~7 days away from right now." };
+    }
+    if (msg.includes('start') || msg.includes('ship') || msg.includes('deliver') || msg.includes('get')) {
+      return { message: "Speed is our thing 💨\n\n• Sign up: TODAY\n• Labs: Within 48 hours (4,500+ locations)\n• Doctor review: 24-48 hours after labs\n• Ships: SAME DAY after approval\n• At your door: 2-3 days\n\nTotal time to first injection: ~7 days. We don't make you wait." };
+    }
+    return { message: "Here's the full timeline:\n\n⚡ TODAY: Choose your plan\n⚡ 48 HRS: Complete labs\n⚡ 24-48 HRS: Doctor reviews\n⚡ SAME DAY: Ships after approval\n\nFirst injection in ~7 days. Results start showing week 2-3, and by week 6-8 you'll be seeing real gains in the mirror." };
+  }
+
+  // TRT vs HGH / WHICH ONE questions
+  if (msg.match(/which (one|should)|trt (or|vs|versus) hgh|difference|compare|better for/i) || (msg.includes('trt') && msg.includes('hgh'))) {
+    return { message: "Let me break it down for you:\n\n💉 TRT ($149/mo) - Testosterone optimization\n• Best for: Energy, strength, libido, mood, focus\n• You'll feel: More drive, better recovery, mental clarity\n\n🧬 HGH ($199/mo) - Growth hormone therapy\n• Best for: Recovery, body recomp, anti-aging, sleep\n• You'll feel: Faster recovery, leaner body, better skin\n\n🔥 STACK BOTH ($299/mo) - Maximum gains\n• 2.3x faster results on average\n• Save $49/mo vs buying separately\n\nWhat's your main goal? I can give you a specific recommendation." };
+  }
+
+  // STACKING questions
+  if (msg.match(/stack|combine|both|together/i)) {
+    return { message: "Smart thinking! Stacking TRT + HGH is how serious warriors maximize results.\n\n📊 The data: Guys who stack see 2.3x faster results on average\n\n💪 TRT handles: Testosterone, strength, energy, drive\n🧬 HGH handles: Recovery, body comp, sleep, anti-aging\n\n💰 Stack pricing: $299/mo (vs $348 separately)\nYou save $49 EVERY month.\n\nSame discreet packaging, ships together. Want me to set you up with the stack?" };
+  }
+
+  // SIDE EFFECTS / SAFETY questions
+  if (msg.match(/side effect|safe|risk|danger|worried|concern|scared/i)) {
+    return { message: "Real talk - I respect you asking.\n\n✅ When properly monitored, side effects are minimal. That's exactly why we include:\n• Monthly blood panels (we watch your levels)\n• Licensed physician oversight\n• Unlimited telehealth (ask anything, anytime)\n\n📋 What some guys experience early on:\n• Slight water retention (temporary)\n• Increased appetite (your body wants to grow)\n• Better mood, more energy (the good stuff)\n\nWe've helped 12,847 warriors. Safety through monitoring is how we got here. Your doc adjusts your protocol based on YOUR labs." };
+  }
+
+  // QUALITY / LEGITIMACY questions
+  if (msg.match(/legit|real|quality|pharma|genuine|fake|trust|scam/i)) {
+    return { message: "100% legit, and I'll prove it:\n\n✅ Pharma-grade compounds from FDA-registered US pharmacies\n✅ Same quality used by elite athletes and clinics\n✅ Every batch tested for purity and potency\n✅ Monthly blood work PROVES it's working\n\n🚫 No underdosed garbage\n🚫 No sketchy overseas sources\n🚫 No grey market stuff\n\n12,847 warriors trust us with their gains. Your labs will show the results. That's the proof that matters." };
+  }
+
+  // PRIVACY / DISCRETION questions
+  if (msg.match(/discreet|private|secret|packaging|plain|know|wife|family|work/i)) {
+    return { message: "Your privacy is locked down tight 🔒\n\n📦 Packaging: Plain brown box, NO logos, NO indication of contents\n🏷️ Return address: Generic medical supply company\n💳 Bank statement: Shows generic medical billing name\n📋 Medical records: HIPAA protected, always\n\nNo one knows your business but you and your doctor. Not your mailman, not your roommate, not anyone. We get it - discretion matters." };
+  }
+
+  // PRICE / COST questions
+  if (msg.match(/price|cost|how much|afford|expensive|pay|money|insurance/i)) {
+    return { message: "Here's exactly what you pay:\n\n💉 TRT Gains: $149/mo\n• Or $1,490/year (save $298)\n\n🧬 HGH Gains: $199/mo  \n• Or $1,990/year (save $398)\n\n🔥 TRT + HGH Stack: $299/mo\n• Save $49/mo vs separate\n\n✅ ALL plans include:\n• Monthly medication delivery\n• Blood work & monitoring\n• Unlimited telehealth visits\n• No hidden fees, ever\n\nThat's less than most guys spend on supplements that don't work." };
+  }
+
+  // TRT specific questions
+  if (msg.match(/trt|testosterone replacement|low t|test level/i) && !msg.includes('hgh')) {
+    if (msg.includes('work') || msg.includes('how')) {
+      return { message: "Here's how TRT works:\n\n1️⃣ You sign up and get labs at 4,500+ locations\n2️⃣ Our doctors review your testosterone levels\n3️⃣ If you qualify, we create YOUR protocol\n4️⃣ Testosterone ships to your door monthly\n5️⃣ We monitor your levels with regular blood work\n\n📈 Most guys go from 200-400 ng/dL → 700-900+ ng/dL\n\nThat's the difference between dragging and DOMINATING. $149/mo, everything included." };
+    }
+    return { message: "TRT Gains - $149/mo 💉\n\nWhat you get:\n• Monthly testosterone delivery\n• All required blood panels\n• Unlimited doctor consultations\n• Ongoing protocol optimization\n\nWhat you'll feel:\n⚡ Energy through the roof\n💪 Strength and muscle gains\n🔥 Libido back online\n🧠 Mental clarity and focus\n\nAverage T increase: +287 ng/dL. First injection in ~7 days. Ready to start?" };
+  }
+
+  // HGH specific questions
+  if (msg.match(/hgh|growth hormone|igf|peptide/i) && !msg.includes('trt')) {
+    return { message: "HGH Gains - $199/mo 🧬\n\nWhat you get:\n• Monthly HGH delivery\n• Blood panels & IGF-1 monitoring\n• Body composition tracking\n• Unlimited telehealth access\n\nWhat you'll feel:\n😴 Deep, restorative sleep\n💪 Faster workout recovery\n📉 Easier fat loss\n✨ Better skin, anti-aging benefits\n\nHGH is the recovery and body recomp accelerator. Stack it with TRT ($299/mo) for 2.3x faster results." };
+  }
+
+  // SYMPTOMS / PROBLEMS
+  if (msg.match(/tired|fatigue|exhausted|no energy|can't sleep|low libido|no sex|can't build|not gaining|weak|brain fog/i)) {
+    return { message: "Those symptoms? Classic signs your hormones need optimization.\n\n😴 Fatigue, low energy → Low testosterone tanks your mitochondria\n🏋️ Can't build muscle → Your body lacks the hormonal signal to grow\n😑 Low libido, mood issues → T directly affects both\n🧠 Brain fog → Testosterone is crucial for cognitive function\n\nThe good news: These are FIXABLE. Most warriors feel the energy shift in week 1-2, and by week 6-8 they're wondering why they waited so long.\n\nTRT Gains: $149/mo. Let's fix this." };
+  }
+
+  // MUSCLE / GAINS / GYM
+  if (msg.match(/muscle|gain|bulk|lift|gym|workout|pr|strength|jacked|swole/i)) {
+    return { message: "Can't build muscle no matter how hard you train? 🏋️\n\nHere's the truth: If your hormones aren't optimized, you're fighting uphill. Your body literally lacks the chemical signal to grow.\n\n📊 What happens on TRT:\n• Protein synthesis increases\n• Recovery time drops\n• Strength goes up week over week\n• PRs start falling again\n\nMost guys see gym performance improve by week 3-4, and visible gains by week 6-8.\n\nTRT: $149/mo | HGH: $199/mo | Stack both: $299/mo\n\nWhich fits your goals?" };
+  }
+
+  // GREETINGS
+  if (msg.match(/^(hi|hey|hello|sup|yo|what's up)/i)) {
+    return { message: "Hey! 👊 Welcome to WeightGain.\n\nI'm here to help you understand TRT and HGH therapy. What's on your mind?\n\nQuick options:\n• How fast will I see results?\n• TRT vs HGH - what's the difference?\n• What does it cost?\n• Is it safe?\n\nOr just ask me anything about hormone optimization." };
+  }
+
+  // GETTING STARTED
+  if (msg.match(/get started|sign up|begin|ready|let's go|start now|how do i start/i)) {
+    return { message: "Let's get you started! 💪\n\nHere's what happens next:\n\n1️⃣ Choose your plan:\n   • TRT Gains: $149/mo\n   • HGH Gains: $199/mo\n   • Stack both: $299/mo\n\n2️⃣ Complete quick checkout\n3️⃣ Get labs at 4,500+ locations (within 48hrs)\n4️⃣ Doctor reviews results (24-48hrs)\n5️⃣ Medication ships SAME DAY\n\n~7 days to your first injection. Click 'Get TRT Gains' or 'Get HGH Gains' above to start!" };
+  }
+
+  // WHAT'S INCLUDED
+  if (msg.match(/what('s| is) included|what do (i|you) get|include/i)) {
+    return { message: "Everything's included - no hidden fees:\n\n📦 Monthly medication delivery\n🔬 All required blood panels\n👨‍⚕️ Unlimited telehealth consultations\n📊 Ongoing monitoring & optimization\n📱 Direct doctor messaging\n\nTRT: $149/mo | HGH: $199/mo | Stack: $299/mo\n\nNo surprise charges. No lab fees. No consultation fees. One price, everything included." };
+  }
+
+  // DEFAULT - make it helpful
+  const defaultResponses = [
+    { message: "I'm here to help you understand TRT and HGH therapy! 💪\n\nPopular questions:\n• How fast will I see results?\n• TRT vs HGH - which one?\n• What does it cost?\n• Is it safe and legit?\n\nWhat would you like to know? Or tell me what symptoms/goals you have and I'll point you in the right direction." },
+    { message: "Hey! I can help you figure out if TRT or HGH is right for you.\n\n💉 TRT ($149/mo) - Testosterone optimization\n🧬 HGH ($199/mo) - Growth hormone therapy\n🔥 Stack both ($299/mo) - Maximum results\n\nWhat's your main goal? More energy? Building muscle? Better recovery? Tell me what you're dealing with." },
+    { message: "Let me help you out! I specialize in TRT and HGH therapy questions.\n\nTell me:\n• What symptoms are you experiencing?\n• What are your fitness goals?\n• Any specific concerns?\n\nOr ask me about timelines, pricing, safety, or how it all works. I've got answers." }
+  ];
+
+  return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
 }
 
 function addToCartFromAI(testId) {
@@ -1233,8 +1638,17 @@ function initWelcomePopup() {
     return;
   }
 
-  // Show after 3 seconds
-  setTimeout(() => {
+  // Don't show on checkout page
+  if (window.location.pathname.includes('checkout')) {
+    return;
+  }
+
+  let welcomeShown = false;
+
+  function showWelcomePopup() {
+    if (welcomeShown) return;
+    welcomeShown = true;
+
     const overlay = document.getElementById('welcomeOverlay');
     const popup = document.getElementById('welcomePopup');
     if (overlay && popup) {
@@ -1242,7 +1656,22 @@ function initWelcomePopup() {
       popup.classList.add('active');
       sessionStorage.setItem('welcomeShown', 'true');
     }
-  }, 3000);
+  }
+
+  // Show after 10 seconds
+  const timeoutId = setTimeout(showWelcomePopup, 10000);
+
+  // OR show at 50% scroll
+  function handleScroll() {
+    const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    if (scrollPercent >= 50 && !welcomeShown) {
+      clearTimeout(timeoutId);
+      showWelcomePopup();
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
 }
 
 function closeWelcomePopup() {
@@ -1272,6 +1701,11 @@ let exitIntentShown = false;
 
 function initExitIntent() {
   if (sessionStorage.getItem('exitIntentShown')) return;
+
+  // Don't show on checkout page - let them focus
+  if (window.location.pathname.includes('checkout')) {
+    return;
+  }
 
   document.addEventListener('mouseout', (e) => {
     if (e.clientY <= 0 && !exitIntentShown) {
@@ -1813,7 +2247,124 @@ function findLabs() {
 // =============================================================================
 
 function toggleCart() {
-  window.location.href = 'checkout.html';
+  const sidebar = document.getElementById('cartSidebar');
+  const overlay = document.getElementById('cartSidebarOverlay');
+
+  if (!sidebar || !overlay) {
+    // Fallback to checkout if sidebar doesn't exist
+    window.location.href = 'checkout.html';
+    return;
+  }
+
+  const isOpen = sidebar.classList.contains('active');
+
+  if (isOpen) {
+    closeCartSidebar();
+  } else {
+    openCartSidebar();
+  }
+}
+
+function openCartSidebar() {
+  const sidebar = document.getElementById('cartSidebar');
+  const overlay = document.getElementById('cartSidebarOverlay');
+
+  if (sidebar && overlay) {
+    sidebar.classList.add('active');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    renderCartSidebar();
+  }
+}
+
+function closeCartSidebar() {
+  const sidebar = document.getElementById('cartSidebar');
+  const overlay = document.getElementById('cartSidebarOverlay');
+
+  if (sidebar) sidebar.classList.remove('active');
+  if (overlay) overlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function renderCartSidebar() {
+  const itemsContainer = document.getElementById('cartSidebarItems');
+  const totalEl = document.getElementById('cartSidebarTotal');
+  const emptyState = document.getElementById('cartSidebarEmpty');
+  const cartContent = document.getElementById('cartSidebarContent');
+
+  if (!itemsContainer) return;
+
+  // Clear existing items
+  itemsContainer.textContent = '';
+
+  if (state.cart.length === 0) {
+    if (emptyState) emptyState.style.display = 'block';
+    if (cartContent) cartContent.style.display = 'none';
+    return;
+  }
+
+  if (emptyState) emptyState.style.display = 'none';
+  if (cartContent) cartContent.style.display = 'block';
+
+  state.cart.forEach(item => {
+    const isSubscription = item.billingCycle;
+    const suffix = item.billingCycle === 'monthly' ? '/mo' : (item.billingCycle === 'yearly' ? '/yr' : '');
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'cart-sidebar-item';
+
+    const itemInfo = document.createElement('div');
+    itemInfo.className = 'cart-sidebar-item-info';
+
+    const nameDiv = document.createElement('div');
+    nameDiv.className = 'cart-sidebar-item-name';
+    nameDiv.textContent = item.name;
+
+    const priceDiv = document.createElement('div');
+    priceDiv.className = 'cart-sidebar-item-price';
+    priceDiv.textContent = `$${item.price}${suffix}`;
+
+    if (isSubscription && item.billingLabel) {
+      const badge = document.createElement('span');
+      badge.className = 'cart-sidebar-item-badge';
+      badge.textContent = item.billingLabel;
+      nameDiv.appendChild(badge);
+    }
+
+    itemInfo.appendChild(nameDiv);
+    itemInfo.appendChild(priceDiv);
+
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'cart-sidebar-item-remove';
+    removeBtn.textContent = '×';
+    removeBtn.setAttribute('aria-label', `Remove ${item.name}`);
+    removeBtn.addEventListener('click', () => {
+      removeFromCartSidebar(item.id);
+    });
+
+    itemDiv.appendChild(itemInfo);
+    itemDiv.appendChild(removeBtn);
+    itemsContainer.appendChild(itemDiv);
+  });
+
+  // Update total
+  const total = getCartTotal();
+  const hasMonthly = state.cart.some(item => item.billingCycle === 'monthly');
+  if (totalEl) {
+    totalEl.textContent = `$${total.toFixed(2)}${hasMonthly ? '/mo' : ''}`;
+  }
+}
+
+function removeFromCartSidebar(itemId) {
+  state.cart = state.cart.filter(item => item.id !== itemId);
+  saveCart();
+  updateCartUI();
+  renderCartSidebar();
+
+  if (state.cart.length === 0) {
+    // Optionally close sidebar if cart is empty
+    // closeCartSidebar();
+  }
 }
 
 // =============================================================================
@@ -1868,25 +2419,6 @@ function renderFilteredTests(tests) {
   grid.appendChild(fragment);
 }
 
-function createTestCardHTML(test) {
-  const badgeHtml = test.popular ? '<span class="test-badge">Popular</span>' : (test.featured ? '<span class="test-badge">Best Value</span>' : '');
-
-  return `
-    <div class="test-card" data-category="${test.category}">
-      <div class="test-card-header">
-        <h3>${test.name}</h3>
-        ${badgeHtml}
-      </div>
-      <div class="test-card-body">
-        <p>${test.description}</p>
-      </div>
-      <div class="test-card-footer">
-        <span class="test-price">$${test.price}</span>
-        <button class="btn btn-primary btn-small" onclick="addToCart('${test.id}')">Add to Cart</button>
-      </div>
-    </div>
-  `;
-}
 
 // =============================================================================
 // Animations CSS (injected)
@@ -2005,6 +2537,7 @@ const actions = {
   },
   closeWelcomePopup: () => closeWelcomePopup(),
   copyWelcomeCode: () => copyWelcomeCode(),
+  submitWelcomeEmail: () => submitWelcomeEmail(),
   closeExitPopup: () => closeExitPopup(),
   submitExitEmail: () => submitExitEmail(),
   closeSocialProof: () => closeSocialProof(),
@@ -2025,6 +2558,12 @@ const actions = {
   closeLabModal: () => closeLabModal(),
   searchLabsInModal: () => searchLabsInModal(),
   closeQuickView: () => closeQuickView(),
+  closeCartSidebar: () => closeCartSidebar(),
+  closePairingModal: () => closePairingModal(),
+  goToCheckout: () => {
+    closeCartSidebar();
+    window.location.href = 'checkout.html';
+  },
   openQuickView: (e) => {
     const testId = e.target.closest('[data-test-id]')?.dataset.testId;
     if (testId) openQuickView(testId);
@@ -2121,6 +2660,59 @@ function initKeyboardNavigation() {
 }
 
 // =============================================================================
+// Mobile Sticky CTA
+// =============================================================================
+
+function initMobileStickyCTA() {
+  const mobileCTA = document.getElementById('mobileStickyCta') || document.querySelector('.mobile-sticky-cta');
+  if (!mobileCTA) return;
+
+  // Don't show on checkout page
+  if (window.location.pathname.includes('checkout')) {
+    mobileCTA.style.display = 'none';
+    return;
+  }
+
+  let lastScrollY = 0;
+  const showAfterScroll = 400; // Show after scrolling 400px
+
+  function handleMobileCTAScroll() {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > showAfterScroll) {
+      mobileCTA.classList.add('active');
+    } else {
+      mobileCTA.classList.remove('active');
+    }
+
+    lastScrollY = currentScrollY;
+  }
+
+  window.addEventListener('scroll', handleMobileCTAScroll, { passive: true });
+}
+
+// =============================================================================
+// Welcome Email Submission
+// =============================================================================
+
+function submitWelcomeEmail() {
+  const emailInput = document.getElementById('welcomeEmail');
+  const email = emailInput?.value?.trim();
+
+  if (!email || !email.includes('@')) {
+    showToast('Please enter a valid email address');
+    return;
+  }
+
+  // Simulate email submission
+  showToast('Guide sent! Check your inbox.');
+  closeWelcomePopup();
+
+  // Store that user provided email
+  localStorage.setItem('welcomeEmailProvided', 'true');
+}
+
+// =============================================================================
 // Initialize Application
 // =============================================================================
 
@@ -2150,6 +2742,7 @@ function init() {
   // Initialize interactive features
   initWelcomePopup();
   initExitIntent();
+  initMobileStickyCTA(); // Mobile sticky CTA bar
   // initPageTransitions(); // Disabled - research shows users prefer instant navigation
   initStickyCartBar();
   initCookieBanner();
@@ -2214,3 +2807,9 @@ window.searchLabsInModal = searchLabsInModal;
 window.selectLab = selectLab;
 window.openQuickView = openQuickView;
 window.closeQuickView = closeQuickView;
+window.openCartSidebar = openCartSidebar;
+window.closeCartSidebar = closeCartSidebar;
+window.renderCartSidebar = renderCartSidebar;
+window.showPairingModal = showPairingModal;
+window.closePairingModal = closePairingModal;
+window.addPairingToCart = addPairingToCart;
