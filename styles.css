@@ -6637,3 +6637,10 @@ a .logo-text,
   margin-bottom: var(--space-4);
 }
 
+
+
+/* Footer padding override */
+.footer {
+  padding: 2rem 0 1rem;
+}
+
