@@ -6656,3 +6656,42 @@ a .logo-text,
   background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-light) 100%);
 }
 
+
+
+/* Hero Trust Badges */
+.hero-trust-badges {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+}
+
+.hero-trust-badge svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.hero-trust-badge--green {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: var(--wellness-green);
+}
+
+.hero-trust-badge--gold {
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: var(--spartan-gold);
+}
+
