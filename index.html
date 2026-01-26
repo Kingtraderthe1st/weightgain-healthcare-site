@@ -87,7 +87,7 @@
         <div class="top-bar-content">
           <div class="top-bar-left">
             <a href="mailto:support@weightgain.com" class="top-bar-link">
-              <svg viewBox="0 0 24 24" aria-hidden="true" role="img">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
                 />
@@ -180,7 +180,7 @@
           </a>
 
           <ul class="nav-links">
-            <li><a href="#pricing" class="nav-link">Get Gains</a></li>
+            <li><a href="#pricing" class="nav-link" aria-current="page">Get Gains</a></li>
             <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
             <li><a href="#locations" class="nav-link">Find a Lab</a></li>
             <li><a href="results.html" class="nav-link">My Results</a></li>
@@ -1117,196 +1117,70 @@
           </div>
 
           <!-- Comparison Table -->
-          <div style="overflow-x: auto; margin-bottom: 3rem">
-            <table style="width: 100%; border-collapse: collapse; min-width: 600px">
+          <div class="comparison-wrapper u-mb-xl">
+            <table class="comparison-table">
               <thead>
-                <tr style="border-bottom: 2px solid var(--spartan-gold)">
-                  <th style="padding: 1rem; text-align: left; color: rgba(255, 255, 255, 0.7)">
-                    Feature
-                  </th>
-                  <th
-                    style="
-                      padding: 1rem;
-                      text-align: center;
-                      background: rgba(212, 175, 55, 0.1);
-                      color: var(--spartan-gold);
-                      font-weight: 700;
-                    "
-                  >
-                    WeightGain
-                  </th>
-                  <th style="padding: 1rem; text-align: center; color: rgba(255, 255, 255, 0.6)">
-                    Hone Health
-                  </th>
-                  <th style="padding: 1rem; text-align: center; color: rgba(255, 255, 255, 0.6)">
-                    PeterMD
-                  </th>
-                  <th style="padding: 1rem; text-align: center; color: rgba(255, 255, 255, 0.6)">
-                    TRT Nation
-                  </th>
+                <tr>
+                  <th>Feature</th>
+                  <th class="highlight-col">WeightGain</th>
+                  <th>Hone Health</th>
+                  <th>PeterMD</th>
+                  <th>TRT Nation</th>
                 </tr>
               </thead>
               <tbody>
-                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1)">
-                  <td style="padding: 1rem; color: rgba(255, 255, 255, 0.8)">Monthly Cost</td>
-                  <td
-                    style="
-                      padding: 1rem;
-                      text-align: center;
-                      background: rgba(212, 175, 55, 0.05);
-                      color: var(--spartan-gold);
-                      font-weight: 700;
-                    "
-                  >
-                    $249
-                  </td>
-                  <td style="padding: 1rem; text-align: center; color: rgba(255, 255, 255, 0.6)">
-                    $157-189*
-                  </td>
-                  <td style="padding: 1rem; text-align: center; color: rgba(255, 255, 255, 0.6)">
-                    $99*
-                  </td>
-                  <td style="padding: 1rem; text-align: center; color: rgba(255, 255, 255, 0.6)">
-                    $99*
-                  </td>
-                </tr>
-                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1)">
-                  <td style="padding: 1rem; color: rgba(255, 255, 255, 0.8)">
-                    All-Inclusive (No Hidden Fees)
-                  </td>
-                  <td
-                    style="padding: 1rem; text-align: center; background: rgba(212, 175, 55, 0.05)"
-                  >
-                    <span style="color: #22c55e; font-size: 1.2rem">✓</span>
-                  </td>
-                  <td style="padding: 1rem; text-align: center">
-                    <span style="color: #ef4444">✗</span>
-                    <span style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.5)"
-                      >+$28-60 meds</span
-                    >
-                  </td>
-                  <td style="padding: 1rem; text-align: center">
-                    <span style="color: #ef4444">✗</span>
-                    <span style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.5)"
-                      >+$95 labs</span
-                    >
-                  </td>
-                  <td style="padding: 1rem; text-align: center">
-                    <span style="color: #ef4444">✗</span>
-                    <span style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.5)"
-                      >+$129 labs</span
-                    >
-                  </td>
-                </tr>
-                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1)">
-                  <td style="padding: 1rem; color: rgba(255, 255, 255, 0.8)">HGH Available</td>
-                  <td
-                    style="padding: 1rem; text-align: center; background: rgba(212, 175, 55, 0.05)"
-                  >
-                    <span style="color: #22c55e; font-size: 1.2rem">✓</span>
-                  </td>
-                  <td style="padding: 1rem; text-align: center">
-                    <span style="color: #ef4444">✗</span>
-                  </td>
-                  <td style="padding: 1rem; text-align: center">
-                    <span style="color: #ef4444">✗</span>
-                  </td>
-                  <td style="padding: 1rem; text-align: center">
-                    <span style="color: #ef4444">✗</span>
-                  </td>
-                </tr>
-                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1)">
-                  <td style="padding: 1rem; color: rgba(255, 255, 255, 0.8)">Time to Start</td>
-                  <td
-                    style="
-                      padding: 1rem;
-                      text-align: center;
-                      background: rgba(212, 175, 55, 0.05);
-                      color: var(--spartan-gold);
-                      font-weight: 600;
-                    "
-                  >
-                    ~7 days
-                  </td>
-                  <td style="padding: 1rem; text-align: center; color: rgba(255, 255, 255, 0.6)">
-                    2+ weeks
-                  </td>
-                  <td style="padding: 1rem; text-align: center; color: rgba(255, 255, 255, 0.6)">
-                    Unknown
-                  </td>
-                  <td style="padding: 1rem; text-align: center; color: rgba(255, 255, 255, 0.6)">
-                    Unknown
-                  </td>
-                </tr>
-                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1)">
-                  <td style="padding: 1rem; color: rgba(255, 255, 255, 0.8)">Lab Locations</td>
-                  <td
-                    style="
-                      padding: 1rem;
-                      text-align: center;
-                      background: rgba(212, 175, 55, 0.05);
-                      color: var(--spartan-gold);
-                      font-weight: 600;
-                    "
-                  >
-                    4,500+
-                  </td>
-                  <td style="padding: 1rem; text-align: center; color: rgba(255, 255, 255, 0.6)">
-                    LabCorp only
-                  </td>
-                  <td style="padding: 1rem; text-align: center; color: rgba(255, 255, 255, 0.6)">
-                    Unknown
-                  </td>
-                  <td style="padding: 1rem; text-align: center; color: rgba(255, 255, 255, 0.6)">
-                    Unknown
-                  </td>
-                </tr>
-                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1)">
-                  <td style="padding: 1rem; color: rgba(255, 255, 255, 0.8)">Cancel Anytime</td>
-                  <td
-                    style="padding: 1rem; text-align: center; background: rgba(212, 175, 55, 0.05)"
-                  >
-                    <span style="color: #22c55e; font-size: 1.2rem">✓</span>
-                  </td>
-                  <td style="padding: 1rem; text-align: center">
-                    <span style="color: #f59e0b">?</span>
-                  </td>
-                  <td style="padding: 1rem; text-align: center">
-                    <span style="color: #f59e0b">?</span>
-                  </td>
-                  <td style="padding: 1rem; text-align: center">
-                    <span style="color: #f59e0b">?</span>
-                  </td>
+                <tr>
+                  <td>Monthly Cost</td>
+                  <td class="highlight-col"><span class="highlight-value">$249</span></td>
+                  <td>$157-189*</td>
+                  <td>$99*</td>
+                  <td>$99*</td>
                 </tr>
                 <tr>
-                  <td style="padding: 1rem; color: rgba(255, 255, 255, 0.8)">
-                    Money-Back Guarantee
-                  </td>
-                  <td
-                    style="padding: 1rem; text-align: center; background: rgba(212, 175, 55, 0.05)"
-                  >
-                    <span style="color: #22c55e; font-weight: 600">90 Days</span>
-                  </td>
-                  <td style="padding: 1rem; text-align: center; color: rgba(255, 255, 255, 0.6)">
-                    Unknown
-                  </td>
-                  <td style="padding: 1rem; text-align: center; color: rgba(255, 255, 255, 0.6)">
-                    Unknown
-                  </td>
-                  <td style="padding: 1rem; text-align: center; color: rgba(255, 255, 255, 0.6)">
-                    Unknown
-                  </td>
+                  <td>All-Inclusive (No Hidden Fees)</td>
+                  <td class="highlight-col"><span class="check-yes">&#10003;</span></td>
+                  <td><span class="check-no">&#10007;</span> <span class="small-note">+$28-60 meds</span></td>
+                  <td><span class="check-no">&#10007;</span> <span class="small-note">+$95 labs</span></td>
+                  <td><span class="check-no">&#10007;</span> <span class="small-note">+$129 labs</span></td>
+                </tr>
+                <tr>
+                  <td>HGH Available</td>
+                  <td class="highlight-col"><span class="check-yes">&#10003;</span></td>
+                  <td><span class="check-no">&#10007;</span></td>
+                  <td><span class="check-no">&#10007;</span></td>
+                  <td><span class="check-no">&#10007;</span></td>
+                </tr>
+                <tr>
+                  <td>Time to Start</td>
+                  <td class="highlight-col"><span class="highlight-value">~7 days</span></td>
+                  <td>2+ weeks</td>
+                  <td>Unknown</td>
+                  <td>Unknown</td>
+                </tr>
+                <tr>
+                  <td>Lab Locations</td>
+                  <td class="highlight-col"><span class="highlight-value">4,500+</span></td>
+                  <td>LabCorp only</td>
+                  <td>Unknown</td>
+                  <td>Unknown</td>
+                </tr>
+                <tr>
+                  <td>Cancel Anytime</td>
+                  <td class="highlight-col"><span class="check-yes">&#10003;</span></td>
+                  <td><span class="check-maybe">?</span></td>
+                  <td><span class="check-maybe">?</span></td>
+                  <td><span class="check-maybe">?</span></td>
+                </tr>
+                <tr>
+                  <td>Money-Back Guarantee</td>
+                  <td class="highlight-col"><span class="check-yes" style="font-size: 1rem;">90 Days</span></td>
+                  <td>Unknown</td>
+                  <td>Unknown</td>
+                  <td>Unknown</td>
                 </tr>
               </tbody>
             </table>
-            <p
-              style="
-                text-align: center;
-                font-size: 0.75rem;
-                color: rgba(255, 255, 255, 0.5);
-                margin-top: 1rem;
-              "
-            >
+            <p class="comparison-disclaimer">
               *Advertised price. Actual cost higher after adding required labs and medication fees.
             </p>
           </div>
