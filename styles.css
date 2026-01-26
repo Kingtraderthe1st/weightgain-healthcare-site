@@ -2264,13 +2264,13 @@ a .logo-text,
 .auth-error {
   background: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.3);
-  color: #ef4444;
+  color: var(--error-red);
 }
 
 .auth-success {
   background: rgba(34, 197, 94, 0.1);
   border: 1px solid rgba(34, 197, 94, 0.3);
-  color: #22c55e;
+  color: var(--success-green);
 }
 
 .checkbox-group {
@@ -2417,7 +2417,7 @@ a .logo-text,
 .upsell-savings {
   padding: 0.25rem 0.5rem;
   background: rgba(34, 197, 94, 0.2);
-  color: #22c55e;
+  color: var(--success-green);
   border-radius: 4px;
   font-size: 0.75rem;
   font-weight: 600;
@@ -2772,22 +2772,22 @@ a .logo-text,
 }
 
 .results-summary__card[data-filter="optimal"]:hover {
-  border-color: #22c55e;
+  border-color: var(--result-optimal);
   box-shadow: 0 8px 25px rgba(34, 197, 94, 0.2);
 }
 
 .results-summary__card[data-filter="normal"]:hover {
-  border-color: #3b82f6;
+  border-color: var(--result-normal);
   box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
 }
 
 .results-summary__card[data-filter="attention"]:hover {
-  border-color: #f97316;
+  border-color: var(--result-attention);
   box-shadow: 0 8px 25px rgba(249, 115, 22, 0.2);
 }
 
 .results-summary__card[data-filter="critical"]:hover {
-  border-color: #ef4444;
+  border-color: var(--error-red);
   box-shadow: 0 8px 25px rgba(239, 68, 68, 0.2);
 }
 
@@ -2798,16 +2798,16 @@ a .logo-text,
 }
 
 .results-summary__value--optimal {
-  color: #22c55e;
+  color: var(--result-optimal);
 }
 .results-summary__value--normal {
-  color: #3b82f6;
+  color: var(--result-normal);
 }
 .results-summary__value--attention {
-  color: #f97316;
+  color: var(--result-attention);
 }
 .results-summary__value--critical {
-  color: #ef4444;
+  color: var(--error-red);
 }
 
 .results-summary__label {
@@ -2852,19 +2852,19 @@ a .logo-text,
 
 .result-item__status--optimal {
   background: rgba(34, 197, 94, 0.15);
-  color: #22c55e;
+  color: var(--result-optimal);
 }
 .result-item__status--normal {
   background: rgba(59, 130, 246, 0.15);
-  color: #3b82f6;
+  color: var(--result-normal);
 }
 .result-item__status--attention {
   background: rgba(249, 115, 22, 0.15);
-  color: #f97316;
+  color: var(--result-attention);
 }
 .result-item__status--critical {
   background: rgba(239, 68, 68, 0.15);
-  color: #ef4444;
+  color: var(--error-red);
 }
 
 .result-item__value {
@@ -2916,10 +2916,10 @@ a .logo-text,
 }
 
 .result-item__trend--up {
-  color: #22c55e;
+  color: var(--result-optimal);
 }
 .result-item__trend--down {
-  color: #f97316;
+  color: var(--result-attention);
 }
 
 .result-item__trend-icon {
@@ -3276,7 +3276,7 @@ a .logo-text,
 }
 
 .checkout .form-input.is-invalid {
-  border-color: #ef4444;
+  border-color: var(--error-red);
 }
 
 .checkout .form-input.is-invalid:focus {
@@ -3285,7 +3285,7 @@ a .logo-text,
 
 .form-error {
   font-size: 0.8rem;
-  color: #ef4444;
+  color: var(--error-red);
   margin-top: 0.375rem;
   min-height: 1.2em;
 }
@@ -3951,7 +3951,7 @@ a .logo-text,
 .subscription-savings {
   display: inline-block;
   background: rgba(34, 197, 94, 0.2);
-  color: #22c55e;
+  color: var(--success-green);
   padding: 0.25rem 0.75rem;
   border-radius: 50px;
   font-size: 0.8rem;
@@ -4217,7 +4217,7 @@ a .logo-text,
 }
 
 .stat-value.highlight {
-  color: #22c55e;
+  color: var(--success-green);
 }
 
 .transformation-quote {
@@ -4250,7 +4250,7 @@ a .logo-text,
   border-radius: 50px;
   font-size: 0.75rem;
   font-weight: 700;
-  color: #22c55e;
+  color: var(--success-green);
 }
 
 /* ============================================
@@ -4530,7 +4530,7 @@ a .logo-text,
 .enrollment-pulse {
   width: 10px;
   height: 10px;
-  background: #22c55e;
+  background: var(--success-green);
   border-radius: 50%;
   animation: enrollmentPulse 2s ease-in-out infinite;
 }
@@ -4590,7 +4590,7 @@ a .logo-text,
 
 .stack-stat {
   font-size: 0.85rem;
-  color: #22c55e;
+  color: var(--success-green);
   font-weight: 600;
 }
 
@@ -4637,7 +4637,7 @@ a .logo-text,
 
 .stack-savings-badge {
   padding: 0.5rem 1rem;
-  background: #22c55e;
+  background: var(--success-green);
   color: #fff;
   border-radius: 50px;
   font-size: 0.85rem;
@@ -4871,7 +4871,7 @@ a .logo-text,
   background: rgba(239, 68, 68, 0.1);
   border: none;
   border-radius: 8px;
-  color: #ef4444;
+  color: var(--error-red);
   font-size: 1.25rem;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -5084,7 +5084,7 @@ a .logo-text,
 
 .pairing-benefits li::before {
   content: "✓";
-  color: #22c55e;
+  color: var(--success-green);
   font-weight: 700;
 }
 
@@ -5130,7 +5130,7 @@ a .logo-text,
 .pairing-savings {
   padding: 0.25rem 0.75rem;
   background: rgba(34, 197, 94, 0.15);
-  color: #22c55e;
+  color: var(--success-green);
   border-radius: 50px;
   font-weight: 600;
   font-size: 0.8rem;
@@ -5463,7 +5463,7 @@ a .logo-text,
 .response-badge {
   display: inline-block;
   background: rgba(34, 197, 94, 0.15);
-  color: #22c55e;
+  color: var(--success-green);
   font-size: 0.7rem;
   font-weight: 600;
   padding: 0.15rem 0.5rem;
@@ -5510,7 +5510,7 @@ a .logo-text,
 }
 
 .next-step.active .step-marker {
-  background: #22c55e;
+  background: var(--success-green);
 }
 
 .next-step.pending .step-marker {
@@ -5546,7 +5546,7 @@ a .logo-text,
 }
 
 .next-step.active .step-time {
-  color: #22c55e;
+  color: var(--success-green);
 }
 
 /* Mobile Responsive */
@@ -5614,6 +5614,478 @@ a .logo-text,
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+}
+
+/* ============================================
+   Utility Classes for Common Inline Patterns
+   ============================================ */
+
+/* Flex utilities */
+.flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+/* Gap utilities */
+.gap-1 {
+  gap: 0.25rem;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-3 {
+  gap: 0.75rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+/* Text utilities */
+.text-center {
+  text-align: center;
+}
+
+.text-sm {
+  font-size: var(--text-sm);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+/* Margin utilities */
+.mt-2 {
+  margin-top: var(--space-2);
+}
+
+.mt-3 {
+  margin-top: var(--space-3);
+}
+
+.mt-4 {
+  margin-top: var(--space-4);
+}
+
+.mb-4 {
+  margin-bottom: var(--space-4);
+}
+
+.mb-8 {
+  margin-bottom: var(--space-8);
+}
+
+/* ============================================
+   Checkout Form Responsive Grids
+   ============================================ */
+
+/* Two-column form grid */
+.checkout-form-row {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 600px) {
+  .checkout-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Three-column address grid */
+.checkout-address-row {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
+@media (max-width: 700px) {
+  .checkout-address-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   Quick View Modal Styles
+   ============================================ */
+
+.quick-view-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 10000;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.quick-view-overlay.active {
+  display: block;
+}
+
+.quick-view-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+  border: 2px solid var(--spartan-gold);
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  z-index: 10001;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+.quick-view-modal.active {
+  display: block;
+}
+
+.quick-view-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--spartan-gold);
+  font-size: 24px;
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* ============================================
+   Exit Popup CTA Grid
+   ============================================ */
+
+.exit-popup-cta-wrapper {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+/* ============================================
+   Exit Popup Stats Grid
+   ============================================ */
+
+.exit-popup-stats {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.exit-stat {
+  text-align: center;
+}
+
+.exit-stat-number {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--spartan-gold);
+}
+
+.exit-stat-label {
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ============================================
+   Comparison Table Responsive
+   ============================================ */
+
+.comparison-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+
+.comparison-table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .comparison-wrapper {
+    margin: 0 -0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .comparison-table {
+    font-size: 0.75rem;
+  }
+}
+
+/* ============================================
+   Competitor Comparison Disclaimer
+   ============================================ */
+
+.comparison-disclaimer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 1rem;
+}
+
+/* ============================================
+   Differentiator Cards Grid
+   ============================================ */
+
+.differentiator-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (max-width: 700px) {
+  .differentiator-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.differentiator-card {
+  text-align: center;
+  padding: 2rem;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.differentiator-card h4 {
+  color: var(--spartan-gold);
+  margin-bottom: 0.5rem;
+}
+
+.differentiator-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* ============================================
+   Footer Styles Expansion
+   ============================================ */
+
+.footer-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-brand .logo-img {
+  height: 60px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  line-height: 1.8;
+}
+
+/* ============================================
+   Card Border Accent
+   ============================================ */
+
+.card--accent-blue {
+  border-left: 4px solid var(--performance-blue);
+}
+
+.card--accent-gold {
+  border-left: 4px solid var(--spartan-gold);
+}
+
+.card--accent-green {
+  border-left: 4px solid var(--wellness-green);
+}
+
+/* ============================================
+   AI Insights Card Layout
+   ============================================ */
+
+.ai-insights-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.ai-insights-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--performance-blue) 0%, var(--performance-blue-dark) 100%);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   Address Description Text
+   ============================================ */
+
+.address-description {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+/* ============================================
+   Checkout Divider
+   ============================================ */
+
+.checkout-divider {
+  border: none;
+  border-top: 1px solid var(--border-light);
+  margin: var(--space-6) 0;
+}
+
+/* ============================================
+   Section Subtitle
+   ============================================ */
+
+.checkout-section-title {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-4);
+}
+
+/* ============================================
+   Change Plan Link
+   ============================================ */
+
+.change-plan-link {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-light);
+}
+
+.change-plan-link a {
+  font-size: var(--text-sm);
+  color: var(--text-link);
+}
+
+/* ============================================
+   Card Error Display
+   ============================================ */
+
+.card-error-message {
+  color: var(--error-red);
+  font-size: var(--text-sm);
+  margin-top: var(--space-2);
+}
+
+/* ============================================
+   Stripe Element Container
+   ============================================ */
+
+.stripe-element-container {
+  padding: var(--space-4);
+  min-height: 44px;
+}
+
+/* ============================================
+   Form Hint with Icon
+   ============================================ */
+
+.form-hint--icon svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: var(--space-1);
+}
+
+/* ============================================
+   Payment Security Note
+   ============================================ */
+
+.payment-security-note {
+  text-align: center;
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+}
+
+.payment-security-note svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: var(--space-1);
+}
+
+/* ============================================
+   Alert Margin
+   ============================================ */
+
+.alert--mb-4 {
+  margin-bottom: var(--space-4);
+}
+
+/* ============================================
+   Form Group Margin Top
+   ============================================ */
+
+.form-group--mt-4 {
+  margin-top: var(--space-4);
 }
 
 /* ============================================
