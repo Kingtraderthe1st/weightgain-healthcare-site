@@ -147,15 +147,15 @@ function handleScrollEffects(scrollY) {
     }
   }
 
-  // Floating buttons visibility
+  // Floating buttons visibility (using CSS classes instead of inline styles)
   const floatingVisible = scrollY > 500;
   if (scrollState.backBtn) {
-    scrollState.backBtn.style.opacity = floatingVisible ? "1" : "0";
-    scrollState.backBtn.style.visibility = floatingVisible ? "visible" : "hidden";
+    scrollState.backBtn.classList.toggle("js-float-visible", floatingVisible);
+    scrollState.backBtn.classList.toggle("js-float-hidden", !floatingVisible);
   }
   if (scrollState.helpBtn) {
-    scrollState.helpBtn.style.opacity = floatingVisible ? "1" : "0";
-    scrollState.helpBtn.style.visibility = floatingVisible ? "visible" : "hidden";
+    scrollState.helpBtn.classList.toggle("js-float-visible", floatingVisible);
+    scrollState.helpBtn.classList.toggle("js-float-hidden", !floatingVisible);
   }
 
   // Sticky cart bar
@@ -228,8 +228,7 @@ function createTestCard(test) {
   }
 
   const info = document.createElement("div");
-  info.style.cssText =
-    "display: flex; gap: var(--space-4); font-size: var(--text-xs); color: var(--text-tertiary);";
+  info.className = "js-test-card-info";
   const turnaround = document.createElement("span");
   turnaround.textContent = test.turnaround;
   const fasting = document.createElement("span");
@@ -319,8 +318,7 @@ function _renderFilteredTests(tests) {
 
   if (tests.length === 0) {
     const noResultsP = document.createElement("p");
-    noResultsP.style.cssText =
-      "text-align: center; color: rgba(255,255,255,0.6); grid-column: 1/-1;";
+    noResultsP.className = "js-no-results";
     noResultsP.textContent = "No tests found matching your search.";
     grid.appendChild(noResultsP);
     return;

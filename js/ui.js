@@ -85,15 +85,7 @@ function releaseFocusTrap(modal) {
 
 function showNotification(message, type = "info") {
   const notification = document.createElement("div");
-  notification.className = `alert alert--${type}`;
-  notification.style.cssText = `
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    z-index: 9999;
-    max-width: 300px;
-    animation: slideIn 0.3s ease;
-  `;
+  notification.className = `alert alert--${type} js-notification`;
 
   // Create SVG icon
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -127,7 +119,7 @@ function showNotification(message, type = "info") {
   document.body.appendChild(notification);
 
   setTimeout(() => {
-    notification.style.animation = "slideOut 0.3s ease";
+    notification.classList.add("js-notification--exit");
     setTimeout(() => notification.remove(), 300);
   }, 3000);
 }
@@ -510,22 +502,21 @@ function showUpsellModal(tests) {
     total += test.price;
 
     const product = document.createElement("div");
-    product.style.cssText =
-      "display: flex; align-items: center; gap: 1rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 0.75rem;";
+    product.className = "js-upsell-product";
 
     const emoji = document.createElement("span");
-    emoji.style.fontSize = "1.5rem";
+    emoji.className = "js-upsell-emoji";
     emoji.textContent = "💪";
 
     const info = document.createElement("div");
-    info.style.flex = "1";
+    info.className = "js-upsell-info";
 
     const name = document.createElement("div");
-    name.style.cssText = "font-weight: 600; color: #fff;";
+    name.className = "js-upsell-name";
     name.textContent = test.name;
 
     const price = document.createElement("div");
-    price.style.cssText = "font-size: 0.85rem; color: rgba(255,255,255,0.6);";
+    price.className = "js-upsell-price";
     price.textContent = `$${test.price}`;
 
     info.appendChild(name);
@@ -534,7 +525,7 @@ function showUpsellModal(tests) {
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = true;
-    checkbox.style.cssText = "width: 20px; height: 20px; accent-color: var(--spartan-gold);";
+    checkbox.className = "js-upsell-checkbox";
 
     product.appendChild(emoji);
     product.appendChild(info);
@@ -625,7 +616,7 @@ function searchLabsInModal() {
   if (restrictedZips.some((prefix) => zip.startsWith(prefix))) {
     resultsDiv.textContent = "";
     const errorP = document.createElement("p");
-    errorP.style.cssText = "color: #f59e0b; text-align: center; padding: 2rem;";
+    errorP.className = "js-error-message";
     errorP.textContent =
       "Sorry, services are not available in NY, NJ, RI, or HI due to state regulations.";
     resultsDiv.appendChild(errorP);
@@ -637,20 +628,19 @@ function searchLabsInModal() {
 
   const createLabCard = (name, address, hours) => {
     const card = document.createElement("div");
-    card.style.cssText =
-      "padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 0.75rem; cursor: pointer;";
+    card.className = "js-lab-card";
     card.dataset.action = "selectLab";
 
     const nameEl = document.createElement("strong");
-    nameEl.style.color = "#D4AF37";
+    nameEl.className = "js-lab-name";
     nameEl.textContent = name;
 
     const addressP = document.createElement("p");
-    addressP.style.cssText = "font-size: 0.85rem; color: rgba(255,255,255,0.7); margin: 0.25rem 0;";
+    addressP.className = "js-lab-address";
     addressP.textContent = address;
 
     const hoursP = document.createElement("p");
-    hoursP.style.cssText = "font-size: 0.8rem; color: rgba(255,255,255,0.5);";
+    hoursP.className = "js-lab-hours";
     hoursP.textContent = hours;
 
     card.appendChild(nameEl);
@@ -702,7 +692,7 @@ function findLabs() {
   if (restrictedZips.some((prefix) => zip.startsWith(prefix))) {
     listDiv.textContent = "";
     const errorP = document.createElement("p");
-    errorP.style.color = "#f59e0b";
+    errorP.className = "js-error-message";
     errorP.textContent =
       "Sorry, services are not available in NY, NJ, RI, or HI due to state regulations.";
     listDiv.appendChild(errorP);
@@ -715,40 +705,26 @@ function findLabs() {
 
   const createLabCard = (name, address, hours) => {
     const card = document.createElement("div");
-    card.className = "lab-card";
-    card.style.cssText =
-      "padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 0.75rem; cursor: pointer; border: 2px solid transparent; transition: all 0.2s;";
+    card.className = "lab-card js-lab-card";
 
     const nameEl = document.createElement("strong");
-    nameEl.style.color = "#D4AF37";
+    nameEl.className = "js-lab-name";
     nameEl.textContent = name;
 
     const addressP = document.createElement("p");
-    addressP.style.cssText = "font-size: 0.85rem; color: rgba(255,255,255,0.7); margin: 0.25rem 0;";
+    addressP.className = "js-lab-address";
     addressP.textContent = address;
 
     const hoursP = document.createElement("p");
-    hoursP.style.cssText = "font-size: 0.8rem; color: rgba(255,255,255,0.5);";
+    hoursP.className = "js-lab-hours";
     hoursP.textContent = hours;
 
     card.appendChild(nameEl);
     card.appendChild(addressP);
     card.appendChild(hoursP);
 
-    // Make lab card selectable
+    // Make lab card selectable (hover handled by CSS)
     card.addEventListener("click", () => selectLabFromFinder(card, name));
-    card.addEventListener("mouseenter", () => {
-      if (!card.classList.contains("selected")) {
-        card.style.borderColor = "rgba(212, 175, 55, 0.3)";
-        card.style.background = "rgba(212, 175, 55, 0.1)";
-      }
-    });
-    card.addEventListener("mouseleave", () => {
-      if (!card.classList.contains("selected")) {
-        card.style.borderColor = "transparent";
-        card.style.background = "rgba(255,255,255,0.05)";
-      }
-    });
 
     return card;
   };
@@ -767,13 +743,11 @@ function findLabs() {
   // Add "Continue to Checkout" button container (hidden until lab selected)
   const ctaContainer = document.createElement("div");
   ctaContainer.id = "lab-cta-container";
-  ctaContainer.style.cssText =
-    "margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(212, 175, 55, 0.2); display: none;";
+  ctaContainer.className = "js-lab-cta-container";
 
   const selectedText = document.createElement("p");
   selectedText.id = "selected-lab-text";
-  selectedText.style.cssText =
-    "font-size: 0.9rem; color: #22c55e; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;";
+  selectedText.className = "js-selected-lab-text";
 
   const checkSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   checkSvg.setAttribute("viewBox", "0 0 24 24");
@@ -790,8 +764,7 @@ function findLabs() {
 
   const ctaBtn = document.createElement("a");
   ctaBtn.href = "checkout.html";
-  ctaBtn.className = "btn btn-primary";
-  ctaBtn.style.cssText = "width: 100%; text-align: center; display: block;";
+  ctaBtn.className = "btn btn-primary js-qv-button";
   ctaBtn.textContent = "Continue to Checkout";
 
   ctaContainer.appendChild(selectedText);
@@ -802,24 +775,20 @@ function findLabs() {
 }
 
 function selectLabFromFinder(card, labName) {
-  // Deselect all other cards
+  // Deselect all other cards (CSS handles styles via .selected class)
   const allCards = document.querySelectorAll(".lab-card");
   allCards.forEach((c) => {
     c.classList.remove("selected");
-    c.style.borderColor = "transparent";
-    c.style.background = "rgba(255,255,255,0.05)";
   });
 
-  // Select this card
+  // Select this card (CSS handles styles via .selected class)
   card.classList.add("selected");
-  card.style.borderColor = "#D4AF37";
-  card.style.background = "rgba(212, 175, 55, 0.15)";
 
   // Show the CTA container
   const ctaContainer = document.getElementById("lab-cta-container");
   const selectedText = document.getElementById("selected-lab-text");
   if (ctaContainer && selectedText) {
-    ctaContainer.style.display = "block";
+    ctaContainer.classList.add("active");
     const labNameSpan = selectedText.querySelector("span");
     if (labNameSpan) {
       labNameSpan.textContent = `${labName} selected`;
@@ -862,65 +831,55 @@ function openQuickView(testId) {
 
   // Emoji header
   const emojiDiv = document.createElement("div");
-  emojiDiv.style.cssText = "text-align: center; margin-bottom: 1.5rem;";
+  emojiDiv.className = "js-qv-emoji-header";
   const emoji = document.createElement("span");
-  emoji.style.fontSize = "3rem";
+  emoji.className = "js-qv-emoji";
   emoji.textContent = "💪";
   emojiDiv.appendChild(emoji);
 
   // Title
   const title = document.createElement("h2");
   title.id = "quickViewTitle";
-  title.style.cssText =
-    "color: white; font-size: 1.5rem; margin-bottom: 0.5rem; text-align: center;";
+  title.className = "js-qv-title";
   title.textContent = test.name;
 
   // Description
   const desc = document.createElement("p");
-  desc.style.cssText =
-    "color: rgba(255,255,255,0.7); text-align: center; margin-bottom: 1.5rem; line-height: 1.6;";
+  desc.className = "js-qv-description";
   desc.textContent = test.description;
 
   // Info box
   const infoBox = document.createElement("div");
-  infoBox.style.cssText =
-    "background: rgba(255,255,255,0.05); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem;";
+  infoBox.className = "js-qv-info-box";
 
-  const createInfoRow = (label, value, valueStyle = "color: white;") => {
+  const createInfoRow = (label, value, isPrice = false) => {
     const row = document.createElement("div");
-    row.style.cssText =
-      "display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;";
+    row.className = "js-qv-info-row";
     const labelSpan = document.createElement("span");
-    labelSpan.style.color = "rgba(255,255,255,0.6)";
+    labelSpan.className = "js-qv-label";
     labelSpan.textContent = label;
     const valueSpan = document.createElement("span");
-    valueSpan.style.cssText = valueStyle;
+    valueSpan.className = isPrice ? "js-qv-value js-qv-value--price" : "js-qv-value";
     valueSpan.textContent = value;
     row.appendChild(labelSpan);
     row.appendChild(valueSpan);
     return row;
   };
 
-  infoBox.appendChild(
-    createInfoRow("Price", `$${test.price}`, "color: #D4AF37; font-size: 1.5rem; font-weight: 700;")
-  );
+  infoBox.appendChild(createInfoRow("Price", `$${test.price}`, true));
   infoBox.appendChild(createInfoRow("Results", test.turnaround || "24-72 hours"));
-  const labRow = createInfoRow("Lab Visit", "No appointment needed");
-  labRow.style.marginBottom = "0";
-  infoBox.appendChild(labRow);
+  infoBox.appendChild(createInfoRow("Lab Visit", "No appointment needed"));
 
   // Button
   const button = document.createElement("button");
-  button.className = "btn btn-primary";
-  button.style.cssText = "width: 100%; padding: 1rem; font-size: 1rem;";
+  button.className = "btn btn-primary js-qv-button";
   button.textContent = isInCart ? "✓ Already in Cart" : `Add to Cart - $${test.price}`;
   button.dataset.action = "addToCartAndClose";
   button.dataset.testId = test.id;
 
   // Disclaimer
   const disclaimer = document.createElement("p");
-  disclaimer.style.cssText =
-    "text-align: center; margin-top: 1rem; font-size: 0.75rem; color: rgba(255,255,255,0.5);";
+  disclaimer.className = "js-qv-disclaimer";
   disclaimer.textContent = "Consult your healthcare provider for medical advice.";
 
   contentEl.appendChild(emojiDiv);

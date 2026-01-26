@@ -13,39 +13,29 @@ function handleAiKeypress(event) {
 
 function createAiTestCard(test) {
   const card = document.createElement("div");
-  card.className = "ai-test-card";
-  card.style.cssText =
-    "display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; margin-top: 0.5rem; transition: all 0.2s;";
+  card.className = "ai-test-card js-ai-test-card";
 
   const emoji = document.createElement("span");
-  emoji.style.fontSize = "1.25rem";
+  emoji.className = "js-ai-emoji";
   emoji.textContent = "🧪";
 
   const info = document.createElement("div");
-  info.style.flex = "1";
+  info.className = "js-ai-info";
   const name = document.createElement("div");
-  name.style.cssText = "font-weight: 600; color: #fff; font-size: 0.85rem;";
+  name.className = "js-ai-name";
   name.textContent = test.name;
   const priceText = document.createElement("div");
-  priceText.style.cssText = "color: #D4AF37; font-weight: 700; font-size: 0.9rem;";
+  priceText.className = "js-ai-price";
   priceText.textContent = `$${test.price}`;
   info.appendChild(name);
   info.appendChild(priceText);
 
   const addBtn = document.createElement("button");
-  addBtn.style.cssText =
-    "padding: 0.5rem 1rem; background: linear-gradient(135deg, #D4AF37 0%, #8B0000 100%); border: none; border-radius: 50px; color: #fff; font-weight: 700; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);";
+  addBtn.className = "js-ai-add-btn";
   addBtn.textContent = "+ Add";
   addBtn.dataset.action = "addToCartFromAI";
   addBtn.dataset.testId = test.id;
-  addBtn.onmouseover = () => {
-    addBtn.style.transform = "scale(1.05)";
-    addBtn.style.boxShadow = "0 0 20px rgba(212, 175, 55, 0.6)";
-  };
-  addBtn.onmouseout = () => {
-    addBtn.style.transform = "scale(1)";
-    addBtn.style.boxShadow = "0 0 10px rgba(212, 175, 55, 0.4)";
-  };
+  // Hover effects handled by CSS :hover
 
   card.appendChild(emoji);
   card.appendChild(info);
