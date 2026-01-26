@@ -104,6 +104,7 @@ const scrollState = {
   helpBtn: null,
   testsSection: null,
   stickyBar: null,
+  mobileCTA: null,
   lastScrollY: 0,
   ticking: false,
 };
@@ -111,6 +112,8 @@ const scrollState = {
 function initCombinedScrollHandler() {
   // Cache DOM references
   scrollState.navbar = document.querySelector(".navbar");
+  scrollState.mobileCTA =
+    document.getElementById("mobileStickyCta") || document.querySelector(".mobile-sticky-cta");
   scrollState.backBtn = document.getElementById("backToTop");
   scrollState.helpBtn = document.getElementById("helpButton");
   scrollState.testsSection = document.getElementById("tests");
@@ -166,6 +169,11 @@ function handleScrollEffects(scrollY) {
     } else {
       scrollState.stickyBar.classList.remove("active");
     }
+  }
+
+  // Mobile sticky CTA (consolidated from ui.js)
+  if (scrollState.mobileCTA && !window.location.pathname.includes("checkout")) {
+    scrollState.mobileCTA.classList.toggle("active", scrollY > 400);
   }
 }
 

@@ -981,31 +981,9 @@ function searchTests(query) {
 // =============================================================================
 
 function initMobileStickyCTA() {
-  const mobileCTA =
-    document.getElementById("mobileStickyCta") || document.querySelector(".mobile-sticky-cta");
-  if (!mobileCTA) {
-    return;
-  }
-
-  // Don't show on checkout page
-  if (window.location.pathname.includes("checkout")) {
-    mobileCTA.style.display = "none";
-    return;
-  }
-
-  const showAfterScroll = 400; // Show after scrolling 400px
-
-  function handleMobileCTAScroll() {
-    const currentScrollY = window.scrollY;
-
-    if (currentScrollY > showAfterScroll) {
-      mobileCTA.classList.add("active");
-    } else {
-      mobileCTA.classList.remove("active");
-    }
-  }
-
-  window.addEventListener("scroll", handleMobileCTAScroll, { passive: true });
+  // Scroll handling is now consolidated in app.js initCombinedScrollHandler
+  // This function is kept for backward compatibility but does nothing
+  // The combined handler handles mobile CTA visibility
 }
 
 // =============================================================================
