@@ -11,12 +11,17 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  "keywords": ["trt", "hgh", "healthcare", "subscription"],
+  "keywords": [
+    "trt",
+    "hgh",
+    "healthcare",
+    "subscription"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
-    "vite": "^5.1.6"
+    "vite": "^7.3.1"
   }
 }

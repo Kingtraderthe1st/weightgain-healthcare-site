@@ -473,7 +473,7 @@ function initCookieBanner() {
     return;
   }
 
-  const banner = document.getElementById("cookieBanner");
+  const banner = uiElements.get("cookieBanner");
   if (banner) {
     setTimeout(() => {
       banner.classList.add("active");
@@ -483,7 +483,7 @@ function initCookieBanner() {
 
 function acceptCookies() {
   localStorage.setItem("cookiesAccepted", "true");
-  const banner = document.getElementById("cookieBanner");
+  const banner = uiElements.get("cookieBanner");
   if (banner) {
     banner.classList.remove("active");
   }
@@ -491,7 +491,7 @@ function acceptCookies() {
 
 function declineCookies() {
   localStorage.setItem("cookiesDeclined", "true");
-  const banner = document.getElementById("cookieBanner");
+  const banner = uiElements.get("cookieBanner");
   if (banner) {
     banner.classList.remove("active");
   }
@@ -505,11 +505,11 @@ let pendingUpsellTests = [];
 
 function showUpsellModal(tests) {
   pendingUpsellTests = tests || [];
-  const overlay = document.getElementById("upsellOverlay");
-  const modal = document.getElementById("upsellModal");
-  const productsEl = document.getElementById("upsellProducts");
-  const totalEl = document.getElementById("upsellTotal");
-  const savingsEl = document.getElementById("upsellSavings");
+  const overlay = uiElements.get("upsellOverlay");
+  const modal = uiElements.get("upsellModal");
+  const productsEl = uiElements.get("upsellProducts");
+  const totalEl = uiElements.get("upsellTotal");
+  const savingsEl = uiElements.get("upsellSavings");
 
   if (!overlay || !modal || !productsEl) {
     return;
@@ -566,8 +566,8 @@ function showUpsellModal(tests) {
 }
 
 function closeUpsellModal() {
-  const overlay = document.getElementById("upsellOverlay");
-  const modal = document.getElementById("upsellModal");
+  const overlay = uiElements.get("upsellOverlay");
+  const modal = uiElements.get("upsellModal");
 
   if (overlay) {
     overlay.classList.remove("active");
