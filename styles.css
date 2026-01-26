@@ -783,7 +783,7 @@ a .logo-text,
   fill: var(--spartan-gold);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .nav-links {
     display: none;
   }
@@ -5572,5 +5572,60 @@ a .logo-text,
 
   .lab-info-box {
     padding: 1rem;
+  }
+}
+
+/* ============================================
+   Small Mobile (480px) - Additional Fixes
+   ============================================ */
+
+@media (max-width: 480px) {
+  /* Modals - reduce padding */
+  .auth-modal,
+  .upsell-modal,
+  .lab-modal {
+    padding: 1rem;
+    max-width: 95%;
+  }
+
+  /* Hero text - readable on small screens */
+  .hero-text h1 {
+    font-size: 1.75rem;
+  }
+
+  /* Container - tighter padding */
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  /* Step cards - full width */
+  .step-card {
+    min-width: unset;
+    width: 100%;
+  }
+
+  /* Checkout forms */
+  .checkout__step {
+    padding: 1rem;
+  }
+
+  /* Trust grid - single column */
+  .trust-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* ============================================
+   Reduced Motion - Accessibility
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
