@@ -850,13 +850,14 @@ function initScrollReveal() {
   const sections = document.querySelectorAll('.section');
   const sectionHeaders = document.querySelectorAll('.section-header');
   const cards = document.querySelectorAll('.test-card, .plan-card, .feature-card, .benefit-item');
-  const heroContent = document.querySelector('.hero-content');
 
   // Add reveal class to sections
   sections.forEach((section, index) => {
     section.classList.add('reveal');
     // Alternate between different reveal styles
-    if (index % 3 === 1) section.classList.add('reveal-pop');
+    if (index % 3 === 1) {
+      section.classList.add('reveal-pop');
+    }
   });
 
   // Section headers get stagger effect
