@@ -6,6 +6,27 @@
 // Dependencies: WeightGainState, WeightGainCart, WeightGainPlans
 
 // =============================================================================
+// Cached DOM Elements (Performance Optimization)
+// =============================================================================
+
+const uiElements = {
+  _cache: {},
+  get(id) {
+    if (!this._cache[id]) {
+      this._cache[id] = document.getElementById(id);
+    }
+    return this._cache[id];
+  },
+  invalidate(id) {
+    if (id) {
+      delete this._cache[id];
+    } else {
+      this._cache = {};
+    }
+  },
+};
+
+// =============================================================================
 // Modal Focus Trapping (Accessibility)
 // =============================================================================
 
@@ -129,8 +150,8 @@ function showNotification(message, type = "info") {
 // =============================================================================
 
 function showToast(message) {
-  const toast = document.getElementById("toast");
-  const messageEl = document.getElementById("toastMessage");
+  const toast = uiElements.get("toast");
+  const messageEl = uiElements.get("toastMessage");
 
   if (toast && messageEl) {
     messageEl.textContent = message;
@@ -154,7 +175,7 @@ function toggleMobileMenu(open) {
 
   state.mobileMenuOpen = open !== undefined ? open : !state.mobileMenuOpen;
 
-  const mobileNav = document.getElementById("mobileMenu");
+  const mobileNav = uiElements.get("mobileMenu");
   if (mobileNav) {
     mobileNav.classList.toggle("active", state.mobileMenuOpen);
     mobileNav.setAttribute("aria-hidden", !state.mobileMenuOpen);
@@ -356,8 +377,8 @@ function closeSocialProof() {
 // =============================================================================
 
 function openAuthModal(type = "signin") {
-  const overlay = document.getElementById("authOverlay");
-  const modal = document.getElementById("authModal");
+  const overlay = uiElements.get("authOverlay");
+  const modal = uiElements.get("authModal");
 
   if (overlay && modal) {
     overlay.classList.add("active");
@@ -369,8 +390,8 @@ function openAuthModal(type = "signin") {
 }
 
 function closeAuthModal() {
-  const overlay = document.getElementById("authOverlay");
-  const modal = document.getElementById("authModal");
+  const overlay = uiElements.get("authOverlay");
+  const modal = uiElements.get("authModal");
 
   if (overlay) {
     overlay.classList.remove("active");
@@ -383,8 +404,8 @@ function closeAuthModal() {
 }
 
 function switchAuthForm(type) {
-  const signinForm = document.getElementById("signinForm");
-  const signupForm = document.getElementById("signupForm");
+  const signinForm = uiElements.get("signinForm");
+  const signupForm = uiElements.get("signupForm");
 
   if (type === "signup") {
     if (signinForm) {
@@ -419,9 +440,9 @@ function showForgotPassword(event) {
   if (event) {
     event.preventDefault();
   }
-  const signinForm = document.getElementById("signinForm");
-  const signupForm = document.getElementById("signupForm");
-  const forgotForm = document.getElementById("forgotPasswordForm");
+  const signinForm = uiElements.get("signinForm");
+  const signupForm = uiElements.get("signupForm");
+  const forgotForm = uiElements.get("forgotPasswordForm");
 
   if (signinForm) {
     signinForm.style.display = "none";
@@ -436,7 +457,7 @@ function showForgotPassword(event) {
 
 function handleForgotPassword(event) {
   event.preventDefault();
-  const successEl = document.getElementById("resetSuccess");
+  const successEl = uiElements.get("resetSuccess");
   if (successEl) {
     successEl.style.display = "flex";
   }
