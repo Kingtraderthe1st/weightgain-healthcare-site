@@ -591,8 +591,8 @@ function addUpsellToCart() {
 // =============================================================================
 
 function openLabModal() {
-  const overlay = document.getElementById("labModalOverlay");
-  const modal = document.getElementById("labModal");
+  const overlay = uiElements.get("labModalOverlay");
+  const modal = uiElements.get("labModal");
 
   if (overlay && modal) {
     overlay.classList.add("active");
@@ -603,8 +603,8 @@ function openLabModal() {
 }
 
 function closeLabModal() {
-  const overlay = document.getElementById("labModalOverlay");
-  const modal = document.getElementById("labModal");
+  const overlay = uiElements.get("labModalOverlay");
+  const modal = uiElements.get("labModal");
 
   if (overlay) {
     overlay.classList.remove("active");
@@ -617,8 +617,8 @@ function closeLabModal() {
 }
 
 function searchLabsInModal() {
-  const input = document.getElementById("labModalZipInput");
-  const resultsDiv = document.getElementById("labModalResults");
+  const input = uiElements.get("labModalZipInput");
+  const resultsDiv = uiElements.get("labModalResults");
 
   if (!input || !resultsDiv) {
     return;
@@ -692,9 +692,9 @@ function selectLab(_element) {
 // =============================================================================
 
 function findLabs() {
-  const input = document.getElementById("zipInput");
-  const resultsDiv = document.getElementById("labResults");
-  const listDiv = document.getElementById("labList");
+  const input = uiElements.get("zipInput");
+  const resultsDiv = uiElements.get("labResults");
+  const listDiv = uiElements.get("labList");
 
   if (!input || !resultsDiv || !listDiv) {
     return;
@@ -839,9 +839,9 @@ function openQuickView(testId) {
 
   const isInCart = state.cart.some((item) => item.id === testId);
 
-  const contentEl = document.getElementById("quickViewContent");
-  const overlayEl = document.getElementById("quickViewOverlay");
-  const modalEl = document.getElementById("quickViewModal");
+  const contentEl = uiElements.get("quickViewContent");
+  const overlayEl = uiElements.get("quickViewOverlay");
+  const modalEl = uiElements.get("quickViewModal");
 
   if (!contentEl) {
     return;
@@ -920,8 +920,8 @@ function openQuickView(testId) {
 }
 
 function closeQuickView() {
-  const overlayEl = document.getElementById("quickViewOverlay");
-  const modalEl = document.getElementById("quickViewModal");
+  const overlayEl = uiElements.get("quickViewOverlay");
+  const modalEl = uiElements.get("quickViewModal");
 
   if (overlayEl) {
     overlayEl.style.display = "none";
@@ -1052,8 +1052,8 @@ function updateStickyCart() {
     return;
   }
 
-  const countEl = document.getElementById("stickyCartCount");
-  const totalEl = document.getElementById("stickyCartTotal");
+  const countEl = uiElements.get("stickyCartCount");
+  const totalEl = uiElements.get("stickyCartTotal");
 
   if (countEl) {
     countEl.textContent = state.cart.length;

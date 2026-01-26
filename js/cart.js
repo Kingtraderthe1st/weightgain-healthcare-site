@@ -6,6 +6,27 @@
 // Dependencies: WeightGainUtils, WeightGainUI
 
 // =============================================================================
+// Cached DOM Elements (Performance Optimization)
+// =============================================================================
+
+const cartElements = {
+  _cache: {},
+  get(id) {
+    if (!this._cache[id]) {
+      this._cache[id] = document.getElementById(id);
+    }
+    return this._cache[id];
+  },
+  invalidate(id) {
+    if (id) {
+      delete this._cache[id];
+    } else {
+      this._cache = {};
+    }
+  },
+};
+
+// =============================================================================
 // Cart Data Validation
 // =============================================================================
 
@@ -151,15 +172,15 @@ function updateCartUI() {
   const total = getCartTotal();
 
   // Update header cart count
-  const cartCount = document.getElementById("cartCount");
+  const cartCount = cartElements.get("cartCount");
   if (cartCount) {
     cartCount.textContent = count;
     cartCount.style.display = count > 0 ? "flex" : "none";
   }
 
   // Update sticky cart bar
-  const stickyCount = document.getElementById("stickyCartCount");
-  const stickyTotal = document.getElementById("stickyCartTotal");
+  const stickyCount = cartElements.get("stickyCartCount");
+  const stickyTotal = cartElements.get("stickyCartTotal");
   if (stickyCount) {
     stickyCount.textContent = count;
   }
@@ -173,8 +194,8 @@ function updateCartUI() {
 // =============================================================================
 
 function toggleCart() {
-  const sidebar = document.getElementById("cartSidebar");
-  const overlay = document.getElementById("cartSidebarOverlay");
+  const sidebar = cartElements.get("cartSidebar");
+  const overlay = cartElements.get("cartSidebarOverlay");
 
   if (!sidebar || !overlay) {
     // Fallback to checkout if sidebar doesn't exist
