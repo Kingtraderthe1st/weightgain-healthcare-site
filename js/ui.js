@@ -1009,35 +1009,6 @@ function initMobileStickyCTA() {
 }
 
 // =============================================================================
-// Page Transitions
-// =============================================================================
-
-function initPageTransitions() {
-  // Add click handlers to internal links
-  document.querySelectorAll("a[href]").forEach((link) => {
-    const href = link.getAttribute("href");
-    if (href && href.endsWith(".html") && !href.startsWith("http")) {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        navigateWithTransition(href);
-      });
-    }
-  });
-}
-
-function navigateWithTransition(url) {
-  const overlay = document.getElementById("pageTransition");
-  if (overlay) {
-    overlay.classList.add("active");
-    setTimeout(() => {
-      window.location.href = url;
-    }, 600);
-  } else {
-    window.location.href = url;
-  }
-}
-
-// =============================================================================
 // Sticky Cart Bar
 // =============================================================================
 
@@ -1103,8 +1074,6 @@ window.WeightGainUI = {
   filterTests,
   searchTests,
   initMobileStickyCTA,
-  initPageTransitions,
-  navigateWithTransition,
   initStickyCartBar,
   updateStickyCart,
   trapFocusInModal,

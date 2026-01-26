@@ -308,30 +308,6 @@ function getCategoryLabel(category) {
   return labels[category] || category;
 }
 
-function _renderFilteredTests(tests) {
-  const grid = document.getElementById("testsGrid");
-  if (!grid) {
-    return;
-  }
-
-  grid.textContent = "";
-
-  if (tests.length === 0) {
-    const noResultsP = document.createElement("p");
-    noResultsP.className = "js-no-results";
-    noResultsP.textContent = "No tests found matching your search.";
-    grid.appendChild(noResultsP);
-    return;
-  }
-
-  // Use safe DOM methods via createTestCard (existing safe function)
-  const fragment = document.createDocumentFragment();
-  tests.forEach((test) => {
-    fragment.appendChild(createTestCard(test));
-  });
-  grid.appendChild(fragment);
-}
-
 // =============================================================================
 // Legacy Chatbot Functions (kept for compatibility)
 // =============================================================================
