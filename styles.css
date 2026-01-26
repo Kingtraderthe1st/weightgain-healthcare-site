@@ -2894,7 +2894,7 @@ a .logo-text,
 }
 
 .result-item__range-fill--optimal {
-  background: linear-gradient(90deg, #22c55e, #4ade80);
+  background: linear-gradient(90deg, var(--wellness-green), var(--wellness-green-light));
 }
 .result-item__range-fill--attention {
   background: linear-gradient(90deg, #f97316, #fb923c);
@@ -6148,11 +6148,11 @@ a .logo-text,
 .js-ai-emoji { font-size: 1.25rem; }
 .js-ai-info { flex: 1; }
 .js-ai-name { font-weight: 600; color: #fff; font-size: 0.85rem; }
-.js-ai-price { color: #D4AF37; font-weight: 700; font-size: 0.9rem; }
+.js-ai-price { color: var(--spartan-gold); font-weight: 700; font-size: 0.9rem; }
 
 .js-ai-add-btn {
   padding: 0.5rem 1rem;
-  background: linear-gradient(135deg, #D4AF37 0%, #8B0000 100%);
+  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-crimson-darker) 100%);
   border: none;
   border-radius: 50px;
   color: #fff;
@@ -6200,11 +6200,11 @@ a .logo-text,
 }
 
 .js-lab-card.selected {
-  border-color: #D4AF37;
+  border-color: var(--spartan-gold);
   background: rgba(212, 175, 55, 0.15);
 }
 
-.js-lab-name { color: #D4AF37; }
+.js-lab-name { color: var(--spartan-gold); }
 .js-lab-address { font-size: 0.85rem; color: rgba(255, 255, 255, 0.7); margin: 0.25rem 0; }
 .js-lab-hours { font-size: 0.8rem; color: rgba(255, 255, 255, 0.5); }
 
@@ -6217,13 +6217,13 @@ a .logo-text,
 .js-qv-info-row:last-child { margin-bottom: 0; }
 .js-qv-label { color: rgba(255, 255, 255, 0.6); }
 .js-qv-value { color: white; }
-.js-qv-value--price { color: #D4AF37; font-size: 1.5rem; font-weight: 700; }
+.js-qv-value--price { color: var(--spartan-gold); font-size: 1.5rem; font-weight: 700; }
 .js-qv-button { width: 100%; padding: 1rem; font-size: 1rem; }
 .js-qv-disclaimer { text-align: center; margin-top: 1rem; font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); }
 
 .js-lab-cta-container { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(212, 175, 55, 0.2); display: none; }
 .js-lab-cta-container.active { display: block; }
-.js-selected-lab-text { font-size: 0.9rem; color: #22c55e; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+.js-selected-lab-text { font-size: 0.9rem; color: var(--success-green); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
 .js-error-message { color: #f59e0b; text-align: center; padding: 2rem; }
 .js-float-hidden { opacity: 0; visibility: hidden; }
 .js-float-visible { opacity: 1; visibility: visible; }
