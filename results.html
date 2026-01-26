@@ -35,18 +35,18 @@
         <nav class="nav" role="navigation" aria-label="Main navigation">
           <a href="index.html" class="logo">
             <img src="logo.png" alt="WeightGain" class="logo-img" />
-            <span class="logo-text">Weight Gain</span>
+            <span class="logo-text">WeightGain</span>
           </a>
 
           <ul class="nav-links">
-            <li><a href="index.html#tests" class="nav-link">Lab Tests</a></li>
+            <li><a href="index.html#pricing" class="nav-link">Get Gains</a></li>
             <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
             <li><a href="results.html" class="nav-link" aria-current="page">My Results</a></li>
             <li><a href="account.html" class="nav-link">My Account</a></li>
           </ul>
 
           <div class="nav-actions">
-            <a href="index.html#tests" class="btn btn-primary btn-small">Order Tests</a>
+            <a href="index.html#pricing" class="btn btn-primary btn-small">Get Started</a>
           </div>
         </nav>
       </div>
@@ -679,7 +679,7 @@
                 Schedule your next test to monitor optimization and see trends over time.
               </p>
             </div>
-            <a href="index.html#tests" class="btn btn--accent">
+            <a href="index.html#pricing" class="btn btn--accent">
               Schedule Next Test
               <svg
                 width="16"
@@ -695,6 +695,93 @@
             </a>
           </div>
         </div>
+
+        <!-- Testosterone Trend Chart -->
+        <div class="card" style="margin-top: var(--space-8)">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4)">
+            <h2 style="font-size: var(--text-lg)">Testosterone Trend</h2>
+            <div style="display: flex; gap: var(--space-2)">
+              <button class="btn btn--ghost btn--sm" style="font-size: var(--text-xs)">6M</button>
+              <button class="btn btn--secondary btn--sm" style="font-size: var(--text-xs)">1Y</button>
+              <button class="btn btn--ghost btn--sm" style="font-size: var(--text-xs)">All</button>
+            </div>
+          </div>
+
+          <div class="biomarker-chart">
+            <div class="chart-bars">
+              <div class="chart-bar" style="height: 45%">
+                <span class="chart-bar__value">520</span>
+                <span class="chart-bar__label">Jan</span>
+              </div>
+              <div class="chart-bar" style="height: 52%">
+                <span class="chart-bar__value">580</span>
+                <span class="chart-bar__label">Mar</span>
+              </div>
+              <div class="chart-bar" style="height: 55%">
+                <span class="chart-bar__value">605</span>
+                <span class="chart-bar__label">May</span>
+              </div>
+              <div class="chart-bar" style="height: 58%">
+                <span class="chart-bar__value">620</span>
+                <span class="chart-bar__label">Jul</span>
+              </div>
+              <div class="chart-bar" style="height: 60%">
+                <span class="chart-bar__value">640</span>
+                <span class="chart-bar__label">Sep</span>
+              </div>
+              <div class="chart-bar" style="height: 62%">
+                <span class="chart-bar__value">660</span>
+                <span class="chart-bar__label">Nov</span>
+              </div>
+              <div class="chart-bar" style="height: 68%">
+                <span class="chart-bar__value">685</span>
+                <span class="chart-bar__label">Jan</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--border-light)">
+            <div>
+              <span class="trend-indicator trend-indicator--up">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 15l-6-6-6 6"/>
+                </svg>
+                +31.7%
+              </span>
+              <span style="font-size: var(--text-sm); color: var(--text-tertiary); margin-left: var(--space-2)">vs. 12 months ago</span>
+            </div>
+            <div style="font-size: var(--text-sm); color: var(--text-secondary)">
+              Average: <strong>616 ng/dL</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Doctor Notes Section -->
+        <div class="doctor-notes" style="margin-top: var(--space-6); margin-bottom: var(--space-8)">
+          <div class="doctor-notes__header">
+            <div class="doctor-notes__avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <div class="doctor-notes__info">
+              <div class="doctor-notes__name">Dr. Michael Williams, MD</div>
+              <div class="doctor-notes__title">Board Certified Endocrinologist</div>
+            </div>
+          </div>
+          <div class="doctor-notes__content">
+            <p>Great progress, John! Your testosterone levels have shown consistent improvement over the past year, moving from the low-normal range to optimal levels. This correlates well with the protocol adjustments we made in March.</p>
+            <p style="margin-top: var(--space-3)">Main areas to focus on:</p>
+            <ul style="margin: var(--space-2) 0; padding-left: var(--space-6); list-style: disc;">
+              <li style="margin-bottom: var(--space-1)"><strong>Vitamin D:</strong> Start supplementing with 5,000 IU D3 daily with a fatty meal</li>
+              <li style="margin-bottom: var(--space-1)"><strong>Hematocrit:</strong> Slightly elevated - consider donating blood and staying well hydrated</li>
+              <li><strong>Follow-up:</strong> Schedule your next labs in 8-10 weeks to monitor changes</li>
+            </ul>
+            <p style="margin-top: var(--space-3)">Overall, you're making excellent progress. Keep up the good work with your training and nutrition!</p>
+          </div>
+          <div class="doctor-notes__date">Reviewed: January 17, 2026</div>
+        </div>
       </div>
     </main>
 
@@ -706,9 +793,9 @@
             &copy; 2026 WeightGain Performance Labs. All rights reserved.
           </p>
           <div class="footer__legal">
-            <a href="#" class="footer__legal-link">Privacy Policy</a>
-            <a href="#" class="footer__legal-link">Terms of Service</a>
-            <a href="#" class="footer__legal-link">HIPAA Notice</a>
+            <a href="index.html" class="footer__legal-link">Privacy Policy</a>
+            <a href="index.html" class="footer__legal-link">Terms of Service</a>
+            <a href="index.html" class="footer__legal-link">HIPAA Notice</a>
           </div>
         </div>
       </div>

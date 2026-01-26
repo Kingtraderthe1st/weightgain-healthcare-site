@@ -842,6 +842,65 @@ function initEventListeners() {
 }
 
 // =============================================================================
+// Scroll Reveal Animations (IntersectionObserver)
+// =============================================================================
+
+function initScrollReveal() {
+  // Add reveal classes to sections and key elements
+  const sections = document.querySelectorAll('.section');
+  const sectionHeaders = document.querySelectorAll('.section-header');
+  const cards = document.querySelectorAll('.test-card, .plan-card, .feature-card, .benefit-item');
+  const heroContent = document.querySelector('.hero-content');
+
+  // Add reveal class to sections
+  sections.forEach((section, index) => {
+    section.classList.add('reveal');
+    // Alternate between different reveal styles
+    if (index % 3 === 1) section.classList.add('reveal-pop');
+  });
+
+  // Section headers get stagger effect
+  sectionHeaders.forEach(header => {
+    header.classList.add('reveal', 'reveal-stagger');
+  });
+
+  // Cards get pop effect
+  cards.forEach(card => {
+    card.classList.add('reveal', 'reveal-pop');
+  });
+
+  // Hero already visible, but add glow to AI card
+  const aiCard = document.querySelector('.hero-ai-card');
+  if (aiCard) {
+    aiCard.classList.add('reveal', 'reveal-glow');
+    // Trigger immediately since hero is visible on load
+    setTimeout(() => aiCard.classList.add('revealed'), 300);
+  }
+
+  // Create the observer
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -100px 0px',
+    threshold: 0.1
+  };
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        // Optional: unobserve after revealing for performance
+        // revealObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all reveal elements
+  document.querySelectorAll('.reveal').forEach(el => {
+    revealObserver.observe(el);
+  });
+}
+
+// =============================================================================
 // Animations CSS (injected)
 // =============================================================================
 
@@ -908,6 +967,7 @@ function init() {
   initEventDelegation(); // Centralized event handling
   initKeyboardNavigation(); // Accessibility
   initCombinedScrollHandler(); // Single optimized scroll handler
+  initScrollReveal(); // Scroll reveal animations
 
   if (window.WeightGainCart?.updateCartUI) {
     window.WeightGainCart.updateCartUI();
@@ -1026,3 +1086,44 @@ function toggleLabPrep() {
 }
 
 window.toggleLabPrep = toggleLabPrep;
+
+// =============================================================================
+// FAQ Accordion
+// =============================================================================
+
+function initFaqAccordion() {
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+
+    if (question) {
+      question.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        const expanded = question.getAttribute('aria-expanded') === 'true';
+
+        // Close all other items
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('active');
+            const otherQuestion = otherItem.querySelector('.faq-question');
+            if (otherQuestion) {
+              otherQuestion.setAttribute('aria-expanded', 'false');
+            }
+          }
+        });
+
+        // Toggle current item
+        item.classList.toggle('active', !isActive);
+        question.setAttribute('aria-expanded', !expanded);
+      });
+    }
+  });
+}
+
+// Initialize FAQ on DOM ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initFaqAccordion);
+} else {
+  initFaqAccordion();
+}

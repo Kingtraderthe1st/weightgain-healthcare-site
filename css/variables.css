@@ -197,6 +197,8 @@
   --performance-blue-dark: #1d4ed8;
   --energy-orange: #f97316;
   --nav-height: 80px;
+  --header-height-desktop: 172px; /* Logo 140px + nav padding 32px */
+  --header-height-mobile: 102px; /* Logo 70px + nav padding 32px */
 
   /* === RESULT STATUS COLORS === */
   --result-optimal: #22c55e;

@@ -30,7 +30,15 @@
       .dashboard {
         min-height: 100vh;
         background: var(--bg-secondary);
-        padding-top: calc(var(--nav-height) + var(--space-8));
+        padding-top: 14rem; /* Account for top-bar + header */
+        padding-bottom: 8rem; /* Space for sticky bottom elements */
+      }
+
+      @media (max-width: 768px) {
+        .dashboard {
+          padding-top: 10rem; /* Mobile: header only */
+          padding-bottom: 10rem; /* Extra space for mobile sticky elements */
+        }
       }
 
       .dashboard__grid {
@@ -162,11 +170,11 @@
         <nav class="nav" role="navigation" aria-label="Main navigation">
           <a href="index.html" class="logo">
             <img src="logo.png" alt="WeightGain" class="logo-img" />
-            <span class="logo-text">Weight Gain</span>
+            <span class="logo-text">WeightGain</span>
           </a>
 
           <ul class="nav-links">
-            <li><a href="index.html#tests" class="nav-link">Lab Tests</a></li>
+            <li><a href="index.html#pricing" class="nav-link">Get Gains</a></li>
             <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
             <li><a href="results.html" class="nav-link">My Results</a></li>
             <li><a href="account.html" class="nav-link" aria-current="page">My Account</a></li>
@@ -176,7 +184,7 @@
             <button class="btn btn-secondary btn-small" id="logout-btn" style="display: none">
               Sign Out
             </button>
-            <a href="index.html#tests" class="btn btn-primary btn-small">Order Tests</a>
+            <a href="index.html#pricing" class="btn btn-primary btn-small">Get Started</a>
           </div>
         </nav>
       </div>
@@ -619,6 +627,71 @@
                   </div>
                 </div>
 
+                <!-- Subscription Status Card -->
+                <div class="card" style="margin-bottom: var(--space-6)">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-4)">
+                    <h2 style="font-size: var(--text-lg)">Subscription Status</h2>
+                    <a href="#" style="font-size: var(--text-sm)">Manage</a>
+                  </div>
+
+                  <div class="subscription-status">
+                    <div class="subscription-status__icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 6L9 17l-5-5"/>
+                      </svg>
+                    </div>
+                    <div class="subscription-status__info">
+                      <div class="subscription-status__label">Current Plan</div>
+                      <div class="subscription-status__value">Total Optimization - Active</div>
+                    </div>
+                  </div>
+
+                  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); margin-top: var(--space-4)">
+                    <div style="padding: var(--space-3); background: var(--bg-secondary); border-radius: var(--radius-lg)">
+                      <div style="font-size: var(--text-sm); color: var(--text-tertiary); margin-bottom: var(--space-1)">Next Billing</div>
+                      <div style="font-weight: var(--font-semibold)">Feb 15, 2026</div>
+                      <div style="font-size: var(--text-sm); color: var(--spartan-gold)">$249/mo</div>
+                    </div>
+                    <div style="padding: var(--space-3); background: var(--bg-secondary); border-radius: var(--radius-lg)">
+                      <div style="font-size: var(--text-sm); color: var(--text-tertiary); margin-bottom: var(--space-1)">Member Since</div>
+                      <div style="font-weight: var(--font-semibold)">Oct 15, 2024</div>
+                      <div style="font-size: var(--text-sm); color: var(--text-tertiary)">15 months</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Upcoming Appointments Card -->
+                <div class="card" style="margin-bottom: var(--space-6)">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-4)">
+                    <h2 style="font-size: var(--text-lg)">Upcoming Appointments</h2>
+                    <a href="#" style="font-size: var(--text-sm)">Schedule New</a>
+                  </div>
+
+                  <div class="appointment-item">
+                    <div class="appointment-date">
+                      <div class="appointment-date__day">28</div>
+                      <div class="appointment-date__month">Jan</div>
+                    </div>
+                    <div class="appointment-info">
+                      <div class="appointment-title">Quarterly Blood Draw</div>
+                      <div class="appointment-details">Quest Diagnostics - 123 Medical Center Dr</div>
+                      <div class="appointment-details">9:00 AM - 9:30 AM</div>
+                    </div>
+                  </div>
+
+                  <div class="appointment-item">
+                    <div class="appointment-date">
+                      <div class="appointment-date__day">05</div>
+                      <div class="appointment-date__month">Feb</div>
+                    </div>
+                    <div class="appointment-info">
+                      <div class="appointment-title">Telehealth Follow-up</div>
+                      <div class="appointment-details">Video consultation with Dr. Williams</div>
+                      <div class="appointment-details">2:30 PM - 3:00 PM</div>
+                    </div>
+                  </div>
+                </div>
+
                 <!-- Recent Results Card -->
                 <div class="card" style="margin-bottom: var(--space-6)">
                   <div
@@ -720,7 +793,7 @@
                     Quick Actions
                   </h2>
                   <div style="display: flex; flex-wrap: wrap; gap: var(--space-3)">
-                    <a href="index.html#tests" class="btn btn--primary">
+                    <a href="index.html#pricing" class="btn btn--primary">
                       <svg
                         width="16"
                         height="16"
@@ -732,7 +805,7 @@
                         <line x1="12" y1="5" x2="12" y2="19" />
                         <line x1="5" y1="12" x2="19" y2="12" />
                       </svg>
-                      Order New Test
+                      Get Started
                     </a>
                     <a href="results.html" class="btn btn--secondary">
                       <svg
@@ -955,9 +1028,9 @@
             &copy; 2026 WeightGain Performance Labs. All rights reserved.
           </p>
           <div class="footer__legal">
-            <a href="#" class="footer__legal-link">Privacy Policy</a>
-            <a href="#" class="footer__legal-link">Terms of Service</a>
-            <a href="#" class="footer__legal-link">HIPAA Notice</a>
+            <a href="index.html" class="footer__legal-link">Privacy Policy</a>
+            <a href="index.html" class="footer__legal-link">Terms of Service</a>
+            <a href="index.html" class="footer__legal-link">HIPAA Notice</a>
           </div>
         </div>
       </div>

@@ -84,13 +84,6 @@
           </div>
         </div>
 
-        <!-- Enrollment Status -->
-        <div class="enrollment-status">
-          <span class="enrollment-pulse"></span>
-          <span class="enrollment-text"
-            ><strong>147</strong> spots left for January enrollment</span
-          >
-        </div>
 
         <div class="checkout__container">
           <!-- Main Form Area -->
@@ -123,19 +116,58 @@
               <a href="index.html#pricing" class="btn btn-primary">View Membership</a>
             </div>
 
-            <!-- Step 1: Review Plan -->
+            <!-- Step 1: Choose Your Plan -->
             <div class="checkout__step" id="step-cart">
               <div class="checkout__step-header">
                 <span class="checkout__step-number">1</span>
-                <h2 class="checkout__step-title">Review Your Plan</h2>
+                <h2 class="checkout__step-title">Choose Your Plan</h2>
               </div>
 
-              <div id="cart-items">
-                <!-- Plan details will be loaded dynamically -->
+              <!-- Gender Selection -->
+              <div class="plan-option-group">
+                <label class="plan-option-label">I am:</label>
+                <div class="plan-option-buttons">
+                  <button type="button" class="plan-option-btn active" data-gender="male">
+                    <span class="plan-option-icon">👨</span>
+                    <span>Male</span>
+                  </button>
+                  <button type="button" class="plan-option-btn" data-gender="female">
+                    <span class="plan-option-icon">👩</span>
+                    <span>Female</span>
+                  </button>
+                </div>
               </div>
 
-              <div class="change-plan-link">
-                <a href="index.html#pricing">Change plan</a>
+              <!-- Billing Cycle Selection -->
+              <div class="plan-option-group">
+                <label class="plan-option-label">Billing:</label>
+                <div class="plan-option-buttons">
+                  <button type="button" class="plan-option-btn billing-btn active" data-billing="monthly">
+                    <span class="plan-option-price">$249</span>
+                    <span>/month</span>
+                  </button>
+                  <button type="button" class="plan-option-btn billing-btn" data-billing="yearly">
+                    <span class="plan-option-price">$207</span>
+                    <span>/month</span>
+                    <span class="plan-option-badge">Save $498</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Plan Summary -->
+              <div class="plan-summary-card">
+                <div class="plan-summary-header">
+                  <h3>Total Optimization</h3>
+                  <span class="plan-summary-price" id="selectedPlanPrice">$249/mo</span>
+                </div>
+                <ul class="plan-summary-features">
+                  <li>✓ Comprehensive blood panel</li>
+                  <li>✓ Personalized hormone protocol</li>
+                  <li>✓ Monthly medication delivery</li>
+                  <li>✓ Quarterly monitoring labs</li>
+                  <li>✓ Unlimited telehealth visits</li>
+                  <li>✓ 90-day money-back guarantee</li>
+                </ul>
               </div>
             </div>
 
@@ -212,14 +244,14 @@
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
                     </svg>
                     <strong>Lab Visit Preparation</strong>
-                    <button type="button" class="lab-info-toggle" onclick="toggleLabPrep()" aria-expanded="true" aria-controls="lab-info-content">
+                    <button type="button" class="lab-info-toggle" onclick="toggleLabPrep()" aria-expanded="false" aria-controls="lab-info-content">
                       <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="toggle-icon">
                         <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
                       </svg>
                     </button>
                   </div>
-                  <ul class="lab-info-list" id="lab-info-content">
-                    <li><span class="info-bullet">1</span> Fast 8-12 hours before blood draw (water OK)</li>
+                  <ul class="lab-info-list collapsed" id="lab-info-content">
+                    <li><span class="info-bullet">1</span> Fast 8-12 hours before blood draw (water is OK)</li>
                     <li><span class="info-bullet">2</span> Bring valid photo ID to your lab appointment</li>
                     <li><span class="info-bullet">3</span> Lab requisition emailed within 1 hour of order</li>
                     <li><span class="info-bullet">4</span> Schedule your lab visit within 7 days</li>
@@ -283,10 +315,7 @@
 
                 <hr class="checkout-divider" />
 
-                <h3 class="checkout-section-title">Address</h3>
-                <p class="address-description">
-                  Used to verify eligibility and find lab locations near you.
-                </p>
+                <h3 class="checkout-section-title">Shipping Address</h3>
 
                 <div class="form-group">
                   <label for="address" class="form-label form-label--required"
@@ -421,8 +450,8 @@
                 <label class="form-check">
                   <input type="checkbox" class="form-check__input" id="terms" required />
                   <span class="form-check__label">
-                    I agree to the <a href="index.html#terms" target="_blank" rel="noopener">Terms of Service</a> and
-                    <a href="index.html#privacy" target="_blank" rel="noopener">Privacy Policy</a>. I understand that lab tests are non-refundable
+                    I agree to the <a href="#" target="_blank" rel="noopener">Terms of Service</a> and
+                    <a href="#" target="_blank" rel="noopener">Privacy Policy</a>. I understand that lab tests are non-refundable
                     once the requisition is generated.
                   </span>
                 </label>
@@ -459,7 +488,7 @@
                   <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                   <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                 </svg>
-                <span>256-bit SSL Encryption</span>
+                <span>Secure Payment</span>
               </div>
               <div class="checkout-trust-badge">
                 <svg
@@ -474,30 +503,6 @@
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
                 <span>HIPAA Protected</span>
-              </div>
-            </div>
-
-            <!-- Enhanced Shipping Reminder -->
-            <div class="shipping-reminder">
-              <div class="shipping-reminder-item">
-                <span class="shipping-icon">📦</span>
-                <span>Ships same day if ordered by 2pm EST</span>
-              </div>
-              <div class="shipping-reminder-item">
-                <span class="shipping-icon">❄️</span>
-                <span>Thermal-protected packaging for medication safety</span>
-              </div>
-              <div class="shipping-reminder-item">
-                <span class="shipping-icon">📍</span>
-                <span>Real-time tracking via SMS &amp; email</span>
-              </div>
-              <div class="shipping-reminder-item">
-                <span class="shipping-icon">🔒</span>
-                <span>Discreet packaging, adult signature required</span>
-              </div>
-              <div class="shipping-reminder-item">
-                <span class="shipping-icon">🔄</span>
-                <span>Free replacement guarantee if damaged in transit</span>
               </div>
             </div>
 
@@ -526,13 +531,6 @@
               </span>
             </button>
 
-            <p class="payment-security-note">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-              </svg>
-              Your payment is secured with 256-bit SSL encryption
-            </p>
           </div>
 
           <!-- Order Summary Sidebar -->
@@ -597,9 +595,9 @@
             &copy; 2026 WeightGain Performance Labs. All rights reserved.
           </p>
           <div class="footer__legal">
-            <a href="index.html#privacy" class="footer__legal-link">Privacy Policy</a>
-            <a href="index.html#terms" class="footer__legal-link">Terms of Service</a>
-            <a href="index.html#hipaa" class="footer__legal-link">HIPAA Notice</a>
+            <a href="#" class="footer__legal-link">Privacy Policy</a>
+            <a href="#" class="footer__legal-link">Terms of Service</a>
+            <a href="#" class="footer__legal-link">HIPAA Notice</a>
           </div>
         </div>
       </div>
@@ -1412,6 +1410,100 @@
       const successModal = document.getElementById("success-modal");
       if (successModal) {
         trapFocus(successModal);
+      }
+
+      // =============================================================================
+      // Plan Selection Handlers
+      // =============================================================================
+
+      // Gender selection with localStorage persistence
+      document.querySelectorAll('.plan-option-btn[data-gender]').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.plan-option-btn[data-gender]').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+
+          const gender = this.dataset.gender;
+
+          // Save to localStorage
+          localStorage.setItem('wg_selected_gender', gender);
+
+          // Update plan description based on gender
+          const planHeader = document.querySelector('.plan-summary-header h3');
+          const planFeatures = document.querySelector('.plan-summary-features');
+
+          if (planHeader) {
+            planHeader.textContent = gender === 'female' ? 'Total Optimization - Female Protocol' : 'Total Optimization - Male Protocol';
+          }
+
+          // Update specific features based on gender
+          if (planFeatures) {
+            const panelItem = planFeatures.querySelector('li:first-child');
+            if (panelItem) {
+              panelItem.textContent = gender === 'female'
+                ? '✓ Comprehensive female hormone panel'
+                : '✓ Comprehensive male hormone panel';
+            }
+
+            // Update second item for gender-specific protocol
+            const protocolItem = planFeatures.querySelector('li:nth-child(2)');
+            if (protocolItem) {
+              protocolItem.textContent = gender === 'female'
+                ? '✓ Personalized female hormone protocol'
+                : '✓ Personalized male hormone protocol';
+            }
+          }
+
+          // Update cart with gender selection
+          let cart = JSON.parse(localStorage.getItem('wg_cart')) || [];
+          if (cart.length > 0) {
+            cart[0].gender = gender;
+            cart[0].name = gender === 'female' ? 'Total Optimization - Female' : 'Total Optimization - Male';
+            localStorage.setItem('wg_cart', JSON.stringify(cart));
+          }
+        });
+      });
+
+      // Restore gender selection from localStorage on page load
+      const savedGender = localStorage.getItem('wg_selected_gender');
+      if (savedGender) {
+        const genderBtn = document.querySelector(`.plan-option-btn[data-gender="${savedGender}"]`);
+        if (genderBtn) {
+          document.querySelectorAll('.plan-option-btn[data-gender]').forEach(b => b.classList.remove('active'));
+          genderBtn.classList.add('active');
+          genderBtn.click(); // Trigger the update
+        }
+      }
+
+      // Billing selection
+      document.querySelectorAll('.billing-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.billing-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+
+          const billing = this.dataset.billing;
+          const priceEl = document.getElementById('selectedPlanPrice');
+          const totalEl = document.getElementById('total');
+
+          if (billing === 'monthly') {
+            if (priceEl) priceEl.textContent = '$249/mo';
+            if (totalEl) totalEl.textContent = '$249.00/mo';
+            updateCartBilling('monthly', 249);
+          } else {
+            if (priceEl) priceEl.textContent = '$207/mo (billed yearly)';
+            if (totalEl) totalEl.textContent = '$2,490.00/yr';
+            updateCartBilling('yearly', 2490);
+          }
+        });
+      });
+
+      function updateCartBilling(cycle, price) {
+        let cart = JSON.parse(localStorage.getItem('wg_cart')) || [];
+        if (cart.length > 0) {
+          cart[0].billingCycle = cycle;
+          cart[0].price = price;
+          cart[0].billingLabel = cycle === 'monthly' ? 'Monthly' : 'Yearly (Save $498)';
+          localStorage.setItem('wg_cart', JSON.stringify(cart));
+        }
       }
 
       // Initialize
