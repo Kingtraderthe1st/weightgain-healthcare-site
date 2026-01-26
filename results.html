@@ -41,7 +41,7 @@
           <ul class="nav-links">
             <li><a href="index.html#tests" class="nav-link">Lab Tests</a></li>
             <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
-            <li><a href="results.html" class="nav-link">My Results</a></li>
+            <li><a href="results.html" class="nav-link" aria-current="page">My Results</a></li>
             <li><a href="account.html" class="nav-link">My Account</a></li>
           </ul>
 
@@ -57,22 +57,14 @@
       <div class="container">
         <!-- Results Header -->
         <div class="results-header">
-          <div
-            style="
-              display: flex;
-              justify-content: space-between;
-              align-items: flex-start;
-              flex-wrap: wrap;
-              gap: var(--space-4);
-            "
-          >
+          <div class="results-header-layout">
             <div>
               <h1>Your Performance Dashboard</h1>
-              <p style="color: var(--text-secondary); margin-top: var(--space-2)">
+              <p class="results-date">
                 Complete Performance Panel - Results from January 15, 2026
               </p>
             </div>
-            <div style="display: flex; gap: var(--space-3)">
+            <div class="results-header-actions">
               <button class="btn btn--secondary btn--sm">
                 <svg
                   width="16"
@@ -81,6 +73,7 @@
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2"
+                  aria-hidden="true"
                 >
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                   <polyline points="7 10 12 15 17 10" />
@@ -96,6 +89,7 @@
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2"
+                  aria-hidden="true"
                 >
                   <circle cx="18" cy="5" r="3" />
                   <circle cx="6" cy="12" r="3" />
@@ -150,50 +144,25 @@
         </div>
 
         <!-- AI Insights Card -->
-        <div
-          class="card"
-          style="margin-bottom: var(--space-8); border-left: 4px solid var(--performance-blue)"
-        >
-          <div style="display: flex; align-items: flex-start; gap: var(--space-4)">
-            <div
-              style="
-                width: 48px;
-                height: 48px;
-                background: linear-gradient(
-                  135deg,
-                  var(--performance-blue) 0%,
-                  var(--performance-blue-dark) 100%
-                );
-                border-radius: var(--radius-lg);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-shrink: 0;
-              "
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="white"
-                stroke-width="2"
-              >
+        <div class="card ai-insights-card">
+          <div class="ai-insights-inner">
+            <div class="ai-insights-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" aria-hidden="true">
                 <path d="M12 2a10 10 0 1 0 10 10H12V2z" />
                 <path d="M12 2a10 10 0 0 1 10 10" />
                 <circle cx="12" cy="12" r="6" />
               </svg>
             </div>
             <div>
-              <h3 style="margin-bottom: var(--space-2)">AI Performance Insights</h3>
-              <p style="color: var(--text-secondary); line-height: var(--leading-relaxed)">
+              <h3 class="ai-insights-title">AI Performance Insights</h3>
+              <p class="ai-insights-text">
                 Your testosterone levels are in the <strong>optimal range</strong> for athletic
                 performance. However, your <strong>Vitamin D is low</strong> at 28 ng/mL - optimal
                 range for performance is 50-80 ng/mL. Consider supplementing with 5,000 IU daily.
                 Your thyroid markers suggest good metabolic function, and your inflammatory marker
                 (hs-CRP) is excellent at 0.4 mg/L.
               </p>
-              <button class="btn btn--performance btn--sm" style="margin-top: var(--space-3)">
+              <button class="btn btn--performance btn--sm mt-3">
                 Get Personalized Recommendations
               </button>
             </div>
@@ -677,6 +646,7 @@
               fill="none"
               stroke="currentColor"
               stroke-width="2"
+              aria-hidden="true"
             >
               <path d="M6 9l6 6 6-6" />
             </svg>
@@ -718,6 +688,7 @@
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
+                aria-hidden="true"
               >
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
