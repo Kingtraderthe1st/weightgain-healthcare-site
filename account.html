@@ -169,7 +169,7 @@
             <li><a href="index.html#tests" class="nav-link">Lab Tests</a></li>
             <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
             <li><a href="results.html" class="nav-link">My Results</a></li>
-            <li><a href="account.html" class="nav-link">My Account</a></li>
+            <li><a href="account.html" class="nav-link" aria-current="page">My Account</a></li>
           </ul>
 
           <div class="nav-actions">
@@ -205,7 +205,9 @@
                   class="form-input"
                   required
                   autocomplete="email"
+                  aria-describedby="login-email-error"
                 />
+                <p class="form-error" id="login-email-error" role="alert" aria-live="polite"></p>
               </div>
 
               <div class="form-group">
@@ -217,7 +219,9 @@
                   class="form-input"
                   required
                   autocomplete="current-password"
+                  aria-describedby="login-password-error"
                 />
+                <p class="form-error" id="login-password-error" role="alert" aria-live="polite"></p>
               </div>
 
               <div
@@ -292,7 +296,9 @@
                     class="form-input"
                     required
                     autocomplete="given-name"
+                    aria-describedby="signup-firstName-error"
                   />
+                  <p class="form-error" id="signup-firstName-error" role="alert" aria-live="polite"></p>
                 </div>
 
                 <div class="form-group">
@@ -304,7 +310,9 @@
                     class="form-input"
                     required
                     autocomplete="family-name"
+                    aria-describedby="signup-lastName-error"
                   />
+                  <p class="form-error" id="signup-lastName-error" role="alert" aria-live="polite"></p>
                 </div>
               </div>
 
@@ -317,7 +325,9 @@
                   class="form-input"
                   required
                   autocomplete="email"
+                  aria-describedby="signup-email-error"
                 />
+                <p class="form-error" id="signup-email-error" role="alert" aria-live="polite"></p>
               </div>
 
               <div class="form-group">
@@ -330,7 +340,10 @@
                   required
                   autocomplete="new-password"
                   minlength="8"
+                  aria-describedby="signup-password-hint signup-password-error"
                 />
+                <p class="form-hint" id="signup-password-hint">Must be at least 8 characters.</p>
+                <p class="form-error" id="signup-password-error" role="alert" aria-live="polite"></p>
               </div>
 
               <div class="form-group">
@@ -342,7 +355,9 @@
                   class="form-input"
                   required
                   autocomplete="new-password"
+                  aria-describedby="signup-confirmPassword-error"
                 />
+                <p class="form-error" id="signup-confirmPassword-error" role="alert" aria-live="polite"></p>
               </div>
 
               <div
@@ -350,20 +365,37 @@
               >
                 <div class="form-group">
                   <label for="signup-dob" class="form-label">Date of Birth</label>
-                  <input type="date" id="signup-dob" name="dob" class="form-input" required />
+                  <input
+                    type="date"
+                    id="signup-dob"
+                    name="dob"
+                    class="form-input"
+                    required
+                    aria-describedby="signup-dob-error"
+                  />
+                  <p class="form-error" id="signup-dob-error" role="alert" aria-live="polite"></p>
                 </div>
 
                 <div class="form-group">
                   <label for="signup-sex" class="form-label">Biological Sex</label>
-                  <select id="signup-sex" name="sex" class="form-input" required>
+                  <select
+                    id="signup-sex"
+                    name="sex"
+                    class="form-input"
+                    required
+                    aria-describedby="signup-sex-hint signup-sex-error"
+                  >
                     <option value="">Select...</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                   </select>
+                  <p class="form-error" id="signup-sex-error" role="alert" aria-live="polite"></p>
                 </div>
               </div>
 
               <p
+                id="signup-sex-hint"
+                class="form-hint"
                 style="
                   font-size: var(--text-xs);
                   color: var(--text-tertiary);
