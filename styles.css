@@ -6644,3 +6644,15 @@ a .logo-text,
   padding: 2rem 0 1rem;
 }
 
+
+
+/* Subscription feature checkmark colors */
+.subscription-features li svg {
+  fill: var(--wellness-green);
+}
+
+/* Best Value badge gradient */
+.subscription-popular--gold {
+  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-light) 100%);
+}
+
