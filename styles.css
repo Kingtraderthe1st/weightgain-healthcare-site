@@ -1240,6 +1240,8 @@ a .logo-text,
 .ai-header-info-mini {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  min-height: 52px; /* Match avatar height for vertical alignment */
 }
 
 .ai-title {
