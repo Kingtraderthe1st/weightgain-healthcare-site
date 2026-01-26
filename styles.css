@@ -196,7 +196,7 @@ textarea:focus-visible {
   background: var(--spartan-gold);
   color: #1a1a1a;
   padding: 0.75rem 1rem;
-  z-index: 10000;
+  z-index: 600;
   transition: top 0.3s;
 }
 
@@ -5273,4 +5273,304 @@ a .logo-text,
   width: 200px;
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--spartan-gold), transparent);
+}
+
+/* ============================================
+   Competitive Differentiation Components
+   ============================================ */
+
+/* Support Promise Badge */
+.support-promise {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.support-promise svg {
+  flex-shrink: 0;
+}
+
+/* Lab Info Box */
+.lab-info-box {
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.lab-info-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--spartan-gold);
+}
+
+.lab-info-header strong {
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.lab-info-toggle {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.lab-info-toggle[aria-expanded="false"] .toggle-icon {
+  transform: rotate(-90deg);
+}
+
+.lab-info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.lab-info-list.collapsed {
+  display: none;
+}
+
+.lab-info-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.info-bullet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: var(--spartan-gold);
+  color: #1a1a1a;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Shipping Guarantee Banner */
+.shipping-guarantee-banner {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, rgba(212, 175, 55, 0.05) 100%);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  margin-top: 2rem;
+}
+
+.guarantee-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.guarantee-header h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.guarantee-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.guarantee-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.guarantee-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.guarantee-item strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #fff;
+  margin-bottom: 0.15rem;
+}
+
+.guarantee-item p {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Footer Support Section */
+.footer-support-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 1rem;
+}
+
+.support-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.support-item svg {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.support-item div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.support-item strong {
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.support-item a,
+.support-item span {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.support-item a:hover {
+  color: var(--spartan-gold);
+}
+
+.response-badge {
+  display: inline-block;
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+  margin-top: 0.25rem;
+}
+
+/* Next Steps Tracker (Success Modal) */
+.next-steps-tracker {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-align: left;
+}
+
+.next-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.next-step {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.next-step.active {
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.step-marker {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.next-step.active .step-marker {
+  background: #22c55e;
+}
+
+.next-step.pending .step-marker {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.next-step.pending .step-marker span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.step-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.step-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.next-step.pending .step-title {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.step-time {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.next-step.active .step-time {
+  color: #22c55e;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .shipping-guarantee-banner {
+    padding: 1.25rem;
+  }
+
+  .guarantee-items {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-support-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .support-item {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .lab-info-box {
+    padding: 1rem;
+  }
 }

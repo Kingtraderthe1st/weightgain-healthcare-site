@@ -211,6 +211,27 @@
                   <p class="form-error" id="email-error" role="alert"></p>
                 </div>
 
+                <!-- Lab Prep Info Box -->
+                <div class="lab-info-box">
+                  <div class="lab-info-header">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--spartan-gold)" aria-hidden="true">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    <strong>Lab Visit Preparation</strong>
+                    <button type="button" class="lab-info-toggle" onclick="toggleLabPrep()" aria-expanded="true" aria-controls="lab-info-content">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="toggle-icon">
+                        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <ul class="lab-info-list" id="lab-info-content">
+                    <li><span class="info-bullet">1</span> Fast 8-12 hours before blood draw (water OK)</li>
+                    <li><span class="info-bullet">2</span> Bring valid photo ID to your lab appointment</li>
+                    <li><span class="info-bullet">3</span> Lab requisition emailed within 1 hour of order</li>
+                    <li><span class="info-bullet">4</span> Schedule your lab visit within 7 days</li>
+                  </ul>
+                </div>
+
                 <div class="form-group">
                   <label for="phone" class="form-label form-label--required">Phone</label>
                   <div class="input-wrapper">
@@ -435,8 +456,8 @@
                 <label class="form-check">
                   <input type="checkbox" class="form-check__input" id="terms" required />
                   <span class="form-check__label">
-                    I agree to the <a href="#">Terms of Service</a> and
-                    <a href="#">Privacy Policy</a>. I understand that lab tests are non-refundable
+                    I agree to the <a href="index.html#terms" target="_blank" rel="noopener">Terms of Service</a> and
+                    <a href="index.html#privacy" target="_blank" rel="noopener">Privacy Policy</a>. I understand that lab tests are non-refundable
                     once the requisition is generated.
                   </span>
                 </label>
@@ -488,15 +509,27 @@
               </div>
             </div>
 
-            <!-- Speed Reminder -->
+            <!-- Enhanced Shipping Reminder -->
             <div class="shipping-reminder">
               <div class="shipping-reminder-item">
                 <span class="shipping-icon">📦</span>
                 <span>Ships same day if ordered by 2pm EST</span>
               </div>
               <div class="shipping-reminder-item">
+                <span class="shipping-icon">❄️</span>
+                <span>Thermal-protected packaging for medication safety</span>
+              </div>
+              <div class="shipping-reminder-item">
+                <span class="shipping-icon">📍</span>
+                <span>Real-time tracking via SMS &amp; email</span>
+              </div>
+              <div class="shipping-reminder-item">
                 <span class="shipping-icon">🔒</span>
-                <span>Discreet packaging - no one knows your business</span>
+                <span>Discreet packaging, adult signature required</span>
+              </div>
+              <div class="shipping-reminder-item">
+                <span class="shipping-icon">🔄</span>
+                <span>Free replacement guarantee if damaged in transit</span>
               </div>
             </div>
 
@@ -611,9 +644,9 @@
             &copy; 2026 WeightGain Performance Labs. All rights reserved.
           </p>
           <div class="footer__legal">
-            <a href="#" class="footer__legal-link">Privacy Policy</a>
-            <a href="#" class="footer__legal-link">Terms of Service</a>
-            <a href="#" class="footer__legal-link">HIPAA Notice</a>
+            <a href="index.html#privacy" class="footer__legal-link">Privacy Policy</a>
+            <a href="index.html#terms" class="footer__legal-link">Terms of Service</a>
+            <a href="index.html#hipaa" class="footer__legal-link">HIPAA Notice</a>
           </div>
         </div>
       </div>
@@ -663,7 +696,52 @@
             WG-123456
           </p>
         </div>
-        <a href="account.html" class="btn btn-primary btn-large" style="width: 100%"
+
+        <!-- What Happens Next Tracker -->
+        <div class="next-steps-tracker">
+          <h4 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 1rem; color: #fff;">What Happens Next</h4>
+          <div class="next-steps-list">
+            <div class="next-step active">
+              <div class="step-marker">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="#22c55e"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              </div>
+              <div class="step-content">
+                <span class="step-title">Order Confirmed</span>
+                <span class="step-time">Just now</span>
+              </div>
+            </div>
+            <div class="next-step pending">
+              <div class="step-marker"><span>2</span></div>
+              <div class="step-content">
+                <span class="step-title">Lab Requisition Sent</span>
+                <span class="step-time">Within 1 hour</span>
+              </div>
+            </div>
+            <div class="next-step pending">
+              <div class="step-marker"><span>3</span></div>
+              <div class="step-content">
+                <span class="step-title">Complete Blood Draw</span>
+                <span class="step-time">Within 7 days</span>
+              </div>
+            </div>
+            <div class="next-step pending">
+              <div class="step-marker"><span>4</span></div>
+              <div class="step-content">
+                <span class="step-title">Doctor Reviews Results</span>
+                <span class="step-time">2-3 business days after lab</span>
+              </div>
+            </div>
+            <div class="next-step pending">
+              <div class="step-marker"><span>5</span></div>
+              <div class="step-content">
+                <span class="step-title">Protocol Ships</span>
+                <span class="step-time">Same day after approval</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="account.html" class="btn btn-primary btn-large" style="width: 100%; margin-top: 1.5rem;"
           >View Your Dashboard</a
         >
       </div>
@@ -679,8 +757,8 @@
     <script src="js/ui.js"></script>
     <script src="app.js"></script>
     <script>
-      // Initialize Stripe (replace with your publishable key)
-      const stripePublishableKey = "pk_test_placeholder"; // TODO: Replace with actual key
+      // Initialize Stripe (use environment config or fallback to placeholder)
+      const stripePublishableKey = window.STRIPE_PUBLISHABLE_KEY || "pk_test_placeholder";
       let stripe, cardElement;
 
       if (typeof Stripe !== "undefined") {

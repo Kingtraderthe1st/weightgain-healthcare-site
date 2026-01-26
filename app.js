@@ -387,12 +387,28 @@ function addChatMessage(content, isUser = false) {
   if (isUser) {
     messageDiv.textContent = content;
   } else {
-    const sanitized = window.WeightGainUtils?.escapeHtml(content)
-      ? window.WeightGainUtils.escapeHtml(content)
-      : content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    messageDiv.innerHTML = sanitized
-      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
-      .replace(/\n/g, "<br>");
+    // Parse markdown safely using DOM methods to prevent XSS
+    const lines = content.split('\n');
+    lines.forEach((line, i) => {
+      const span = document.createElement('span');
+      // Handle **bold** safely by splitting on the pattern
+      const parts = line.split(/\*\*([^*]+)\*\*/g);
+      parts.forEach((part, j) => {
+        if (j % 2 === 1) {
+          // Odd indices are the captured bold text
+          const strong = document.createElement('strong');
+          strong.textContent = part;
+          span.appendChild(strong);
+        } else {
+          // Even indices are regular text
+          span.appendChild(document.createTextNode(part));
+        }
+      });
+      messageDiv.appendChild(span);
+      if (i < lines.length - 1) {
+        messageDiv.appendChild(document.createElement('br'));
+      }
+    });
   }
 
   chatbotMessages.appendChild(messageDiv);
@@ -1008,3 +1024,23 @@ window.renderCartSidebar = window.WeightGainCart?.renderCartSidebar;
 window.showPairingModal = window.WeightGainUI?.showPairingModal;
 window.closePairingModal = window.WeightGainUI?.closePairingModal;
 window.addPairingToCart = window.WeightGainPlans?.addPairingToCart;
+
+// =============================================================================
+// Lab Prep Toggle Function
+// =============================================================================
+
+/**
+ * Toggle lab preparation info visibility
+ */
+function toggleLabPrep() {
+  const content = document.getElementById("lab-info-content");
+  const toggleBtn = document.querySelector(".lab-info-toggle");
+
+  if (content && toggleBtn) {
+    const isExpanded = toggleBtn.getAttribute("aria-expanded") === "true";
+    toggleBtn.setAttribute("aria-expanded", !isExpanded);
+    content.classList.toggle("collapsed", isExpanded);
+  }
+}
+
+window.toggleLabPrep = toggleLabPrep;
