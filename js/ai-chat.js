@@ -5,6 +5,27 @@
 
 // Dependencies: WeightGainAIResponses, WeightGainPlans, WeightGainCart
 
+// =============================================================================
+// Cached DOM Elements (Performance Optimization)
+// =============================================================================
+
+const aiChatElements = {
+  _cache: {},
+  get(id) {
+    if (!this._cache[id]) {
+      this._cache[id] = document.getElementById(id);
+    }
+    return this._cache[id];
+  },
+  invalidate(id) {
+    if (id) {
+      delete this._cache[id];
+    } else {
+      this._cache = {};
+    }
+  },
+};
+
 function handleAiKeypress(event) {
   if (event.key === "Enter") {
     sendAiMessage();
@@ -64,8 +85,8 @@ function createTypingIndicator() {
 }
 
 function sendAiMessage(presetMessage = null) {
-  const input = document.getElementById("aiChatInput");
-  const messagesContainer = document.getElementById("aiChatMessages");
+  const input = aiChatElements.get("aiChatInput");
+  const messagesContainer = aiChatElements.get("aiChatMessages");
   const message = presetMessage || (input ? input.value.trim() : "");
 
   if (!message || !messagesContainer) {

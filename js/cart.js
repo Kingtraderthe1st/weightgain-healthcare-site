@@ -213,8 +213,8 @@ function toggleCart() {
 }
 
 function openCartSidebar() {
-  const sidebar = document.getElementById("cartSidebar");
-  const overlay = document.getElementById("cartSidebarOverlay");
+  const sidebar = cartElements.get("cartSidebar");
+  const overlay = cartElements.get("cartSidebarOverlay");
 
   if (sidebar && overlay) {
     sidebar.classList.add("active");
@@ -225,8 +225,8 @@ function openCartSidebar() {
 }
 
 function closeCartSidebar() {
-  const sidebar = document.getElementById("cartSidebar");
-  const overlay = document.getElementById("cartSidebarOverlay");
+  const sidebar = cartElements.get("cartSidebar");
+  const overlay = cartElements.get("cartSidebarOverlay");
 
   if (sidebar) {
     sidebar.classList.remove("active");
@@ -243,10 +243,10 @@ function renderCartSidebar() {
     return;
   }
 
-  const itemsContainer = document.getElementById("cartSidebarItems");
-  const totalEl = document.getElementById("cartSidebarTotal");
-  const emptyState = document.getElementById("cartSidebarEmpty");
-  const cartContent = document.getElementById("cartSidebarContent");
+  const itemsContainer = cartElements.get("cartSidebarItems");
+  const totalEl = cartElements.get("cartSidebarTotal");
+  const emptyState = cartElements.get("cartSidebarEmpty");
+  const cartContent = cartElements.get("cartSidebarContent");
 
   if (!itemsContainer) {
     return;
