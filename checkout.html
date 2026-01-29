@@ -1386,11 +1386,17 @@
       if (resendCodeBtn) {
         resendCodeBtn.addEventListener('click', function() {
           const phone = document.getElementById('phone')?.value;
+          const statusEl = document.getElementById('phone-verify-status');
           if (!phone || !window.WeightGainTwilio) return;
+
+          this.disabled = true;
+          if (statusEl) {
+            statusEl.textContent = 'Resending...';
+            statusEl.className = 'phone-verify-status phone-verify-status--pending';
+          }
 
           window.WeightGainTwilio.sendVerificationCode(phone)
             .then(function() {
-              const statusEl = document.getElementById('phone-verify-status');
               if (statusEl) {
                 statusEl.textContent = 'New code sent!';
                 statusEl.className = 'phone-verify-status phone-verify-status--pending';
@@ -1398,11 +1404,11 @@
               startResendCountdown();
             })
             .catch(function(err) {
-              const statusEl = document.getElementById('phone-verify-status');
               if (statusEl) {
                 statusEl.textContent = err.message || 'Failed to resend';
                 statusEl.className = 'phone-verify-status phone-verify-status--error';
               }
+              resendCodeBtn.disabled = false;
             });
         });
       }

@@ -641,10 +641,10 @@ const actions = {
     window.scrollTo({ top: 0, behavior: "smooth" });
   },
   scrollToChat: () => {
-    const input = document.getElementById("aiChatInput");
-    if (input) {
-      input.scrollIntoView({ behavior: "smooth", block: "center" });
-      setTimeout(() => input.focus(), 500);
+    var toggle = document.getElementById("chatToggle");
+    var panel = document.getElementById("chatPanel");
+    if (panel && !panel.classList.contains("active") && toggle) {
+      toggle.click();
     }
   },
 };

@@ -195,7 +195,7 @@ function getAiResponse(message) {
   ) {
     return {
       message:
-        "Age requirements:\n\n✅ Must be 18+ to qualify\n✅ Optimal candidates are typically 25-65\n✅ Men under 25 may have naturally fluctuating T levels\n✅ Men over 65 can absolutely benefit - we have many warriors in that range\n\nYour labs will tell the real story. Low T doesn't discriminate by age. If you're experiencing symptoms, it's worth getting tested.",
+        "Age requirements:\n\n✅ Must be 18+ to qualify\n✅ Optimal candidates are typically 25-65\n✅ Men under 25 may have naturally fluctuating T levels\n✅ Men over 65 can absolutely benefit - we have many members in that range\n\nYour labs will tell the real story. Low T doesn't discriminate by age. If you're experiencing symptoms, it's worth getting tested.",
     };
   }
 
@@ -218,8 +218,8 @@ function getAiResponse(message) {
     )
   ) {
     return {
-        message:
-          "Here's how qualification works:\n\n1️⃣ You sign up and get labs done (4,500+ locations)\n2️⃣ Our doctors review your hormone levels\n3️⃣ If your levels are suboptimal, you may qualify\n\n📊 Who typically qualifies:\n• Men with T levels below optimal range\n• Men experiencing low T symptoms (fatigue, low libido, brain fog, muscle loss)\n• Men 18+ in reasonable health\n\n✅ Based on member data, many men who complete labs may qualify for treatment. Individual results vary.\n\nThe only way to know for sure is to get tested. Labs are included in your plan - no extra cost. Our services are not intended to replace your primary care physician's advice.",
+      message:
+        "Here's how qualification works:\n\n1️⃣ You sign up and get labs done (4,500+ locations)\n2️⃣ Our doctors review your hormone levels\n3️⃣ If your levels are suboptimal, you may qualify\n\n📊 Who typically qualifies:\n• Men with T levels below optimal range\n• Men experiencing low T symptoms (fatigue, low libido, brain fog, muscle loss)\n• Men 18+ in reasonable health\n\n✅ Based on member data, many men who complete labs may qualify for treatment. Individual results vary.\n\nThe only way to know for sure is to get tested. Labs are included in your plan - no extra cost. Our services are not intended to replace your primary care physician's advice.",
     };
   }
 
@@ -233,7 +233,7 @@ function getAiResponse(message) {
     ) {
       return {
         message:
-          "Great question! Here's what many warriors experience:\n\n📅 Week 1-2: Energy boost may kick in, better sleep possible\n📅 Week 3-4: Mood may improve, strength returning\n📅 Week 6-8: Visible gains possible, PRs coming back\n📅 Week 12+: Full transformation mode\n\nMany members report noticing real changes by week 6 (individual results vary). The first injection? Typically ~7 days away from signup.",
+          "Great question! Here's what many members experience:\n\n📅 Week 1-2: Energy boost may kick in, better sleep possible\n📅 Week 3-4: Mood may improve, strength returning\n📅 Week 6-8: Visible gains possible, PRs coming back\n📅 Week 12+: Full transformation mode\n\nMany members report noticing real changes by week 6 (individual results vary). The first injection? Typically ~7 days away from signup.",
       };
     }
     if (
@@ -248,8 +248,8 @@ function getAiResponse(message) {
       };
     }
     return {
-        message:
-          "Here's the typical timeline:\n\n⚡ TODAY: Choose your plan\n⚡ 48 HRS: Complete labs\n⚡ 24-48 HRS: Doctor reviews\n⚡ SAME DAY: Ships after approval (when in stock)\n\nFirst injection typically in ~7 days. Results may start showing week 2-3, and by week 6-8 you may see real gains. Individual results vary.",
+      message:
+        "Here's the typical timeline:\n\n⚡ TODAY: Choose your plan\n⚡ 48 HRS: Complete labs\n⚡ 24-48 HRS: Doctor reviews\n⚡ SAME DAY: Ships after approval (when in stock)\n\nFirst injection typically in ~7 days. Results may start showing week 2-3, and by week 6-8 you may see real gains. Individual results vary.",
     };
   }
 
@@ -259,24 +259,24 @@ function getAiResponse(message) {
     (msg.includes("trt") && msg.includes("hgh"))
   ) {
     return {
-        message:
-          "Let me break it down for you:\n\n💉 TRT - Testosterone optimization\n• Best for: Energy, strength, libido, mood, focus\n• You may feel: More drive, better recovery, mental clarity\n\n🧬 HGH - Growth hormone therapy\n• Best for: Recovery, body recomp, anti-aging, sleep\n• You may feel: Faster recovery, leaner body, better skin\n\n🔥 Total Optimization ($249/mo) - Personalized protocol\n• Includes TRT, HGH, or both based on YOUR labs\n• We analyze your results and give you what you need\n\nIndividual results vary. What's your main goal? I can help you understand what might work best.",
+      message:
+        "Let me break it down for you:\n\n💉 TRT - Testosterone optimization\n• Best for: Energy, strength, libido, mood, focus\n• You may feel: More drive, better recovery, mental clarity\n\n🧬 HGH - Growth hormone therapy\n• Best for: Recovery, body recomp, anti-aging, sleep\n• You may feel: Faster recovery, leaner body, better skin\n\n🔥 Total Optimization ($249/mo) - Personalized protocol\n• Includes TRT, HGH, or both based on YOUR labs\n• We analyze your results and give you what you need\n\nIndividual results vary. What's your main goal? I can help you understand what might work best.",
     };
   }
 
   // STACKING questions
   if (msg.match(/stack|combine|both|together/i)) {
     return {
-        message:
-          "Smart thinking! Our Total Optimization membership ($249/mo) includes comprehensive labs - if both TRT and HGH would benefit you, they're both included in your personalized protocol.\n\n📊 Individual results vary. Many members may see faster results when both are optimized.\n\n💪 TRT handles: Testosterone, strength, energy, drive\n🧬 HGH handles: Recovery, body comp, sleep, anti-aging\n\n💰 Total Optimization: $249/mo - includes TRT, HGH, or both based on YOUR labs\n\nSame discreet packaging, ships together. Individual results may vary.",
+      message:
+        "Smart thinking! Our Total Optimization membership ($249/mo) includes comprehensive labs - if both TRT and HGH would benefit you, they're both included in your personalized protocol.\n\n📊 Individual results vary. Many members may see faster results when both are optimized.\n\n💪 TRT handles: Testosterone, strength, energy, drive\n🧬 HGH handles: Recovery, body comp, sleep, anti-aging\n\n💰 Total Optimization: $249/mo - includes TRT, HGH, or both based on YOUR labs\n\nSame discreet packaging, ships together. Individual results may vary.",
     };
   }
 
   // SIDE EFFECTS / SAFETY questions
   if (msg.match(/side effect|safe|risk|danger|worried|concern|scared/i)) {
     return {
-        message:
-          "Real talk - I respect you asking.\n\n✅ When properly monitored, side effects may be minimal. That's exactly why we include:\n• Quarterly blood panels (we watch your levels)\n• Licensed physician oversight\n• Unlimited telehealth (ask anything, anytime)\n\n📋 What some guys may experience early on:\n• Slight water retention (temporary)\n• Increased appetite (your body may want to grow)\n• Better mood, more energy possible (the good stuff)\n\nIndividual experiences vary. Safety through monitoring is how we operate. Your doc adjusts your protocol based on YOUR labs. Always consult with your healthcare provider about potential side effects.",
+      message:
+        "Real talk - I respect you asking.\n\n✅ When properly monitored, side effects may be minimal. That's exactly why we include:\n• Quarterly blood panels (we watch your levels)\n• Licensed physician oversight\n• Unlimited telehealth (ask anything, anytime)\n\n📋 What some guys may experience early on:\n• Slight water retention (temporary)\n• Increased appetite (your body may want to grow)\n• Better mood, more energy possible (the good stuff)\n\nIndividual experiences vary. Safety through monitoring is how we operate. Your doc adjusts your protocol based on YOUR labs. Always consult with your healthcare provider about potential side effects.",
     };
   }
 
@@ -299,8 +299,8 @@ function getAiResponse(message) {
   // PRICE / COST questions
   if (msg.match(/price|cost|how much|afford|expensive|pay|money|insurance/i)) {
     return {
-        message:
-          "Here's exactly what you pay:\n\n🔥 Total Optimization: $249/mo\n• Or $2,490/year (save $498)\n\n✅ Includes:\n• Comprehensive blood panel\n• Personalized protocol (TRT, HGH, or both based on YOUR labs)\n• Monthly medication delivery\n• Quarterly monitoring labs\n• Unlimited telehealth visits\n• No hidden fees, ever\n\nThat's less than most guys spend on supplements that don't work. Individual results may vary.",
+      message:
+        "Here's exactly what you pay:\n\n🔥 Total Optimization: $249/mo\n• Or $2,490/year (save $498)\n\n✅ Includes:\n• Comprehensive blood panel\n• Personalized protocol (TRT, HGH, or both based on YOUR labs)\n• Monthly medication delivery\n• Quarterly monitoring labs\n• Unlimited telehealth visits\n• No hidden fees, ever\n\nThat's less than most guys spend on supplements that don't work. Individual results may vary.",
     };
   }
 
@@ -313,16 +313,16 @@ function getAiResponse(message) {
       };
     }
     return {
-        message:
-          "Total Optimization - $249/mo 💉\n\nWhat you get:\n• Monthly medication delivery (TRT, HGH, or both based on your labs)\n• All required blood panels\n• Unlimited doctor consultations\n• Ongoing protocol optimization\n\nWhat you may feel (individual results vary):\n⚡ Energy may improve\n💪 Strength and muscle gains possible\n🔥 Libido may improve\n🧠 Mental clarity and focus possible\n\nIndividual results vary. First injection typically in ~7 days. Ready to start?",
+      message:
+        "Total Optimization - $249/mo 💉\n\nWhat you get:\n• Monthly medication delivery (TRT, HGH, or both based on your labs)\n• All required blood panels\n• Unlimited doctor consultations\n• Ongoing protocol optimization\n\nWhat you may feel (individual results vary):\n⚡ Energy may improve\n💪 Strength and muscle gains possible\n🔥 Libido may improve\n🧠 Mental clarity and focus possible\n\nIndividual results vary. First injection typically in ~7 days. Ready to start?",
     };
   }
 
   // HGH specific questions
   if (msg.match(/hgh|growth hormone|igf|peptide/i) && !msg.includes("trt")) {
     return {
-        message:
-          "Total Optimization - $249/mo 🧬\n\nWhat you get:\n• Comprehensive labs (including IGF-1 if HGH is recommended)\n• Personalized protocol (may include HGH if your labs indicate it would help)\n• Monthly medication delivery\n• Quarterly monitoring labs\n• Unlimited telehealth access\n\nWhat you may feel (individual results vary):\n😴 Deep, restorative sleep possible\n💪 Faster workout recovery possible\n📉 Easier fat loss possible\n✨ Better skin, anti-aging benefits possible\n\nHGH may be part of your personalized protocol if your labs indicate it would benefit you. Individual results vary.",
+      message:
+        "Total Optimization - $249/mo 🧬\n\nWhat you get:\n• Comprehensive labs (including IGF-1 if HGH is recommended)\n• Personalized protocol (may include HGH if your labs indicate it would help)\n• Monthly medication delivery\n• Quarterly monitoring labs\n• Unlimited telehealth access\n\nWhat you may feel (individual results vary):\n😴 Deep, restorative sleep possible\n💪 Faster workout recovery possible\n📉 Easier fat loss possible\n✨ Better skin, anti-aging benefits possible\n\nHGH may be part of your personalized protocol if your labs indicate it would benefit you. Individual results vary.",
     };
   }
 
@@ -333,16 +333,16 @@ function getAiResponse(message) {
     )
   ) {
     return {
-        message:
-          "Those symptoms? May be signs your hormones need optimization.\n\n😴 Fatigue, low energy → Low testosterone may affect energy\n🏋️ Can't build muscle → Your body may lack the hormonal signal to grow\n😑 Low libido, mood issues → T may affect both\n🧠 Brain fog → Testosterone is important for cognitive function\n\nIndividual results vary. Many warriors may feel the energy shift in week 1-2, and by week 6-8 they may see improvements. Our services are not intended to replace your primary care physician's advice.\n\nTotal Optimization: $249/mo. Let's get you tested.",
+      message:
+        "Those symptoms? May be signs your hormones need optimization.\n\n😴 Fatigue, low energy → Low testosterone may affect energy\n🏋️ Can't build muscle → Your body may lack the hormonal signal to grow\n😑 Low libido, mood issues → T may affect both\n🧠 Brain fog → Testosterone is important for cognitive function\n\nIndividual results vary. Many members may feel the energy shift in week 1-2, and by week 6-8 they may see improvements. Our services are not intended to replace your primary care physician's advice.\n\nTotal Optimization: $249/mo. Let's get you tested.",
     };
   }
 
   // MUSCLE / GAINS / GYM
   if (msg.match(/muscle|gain|bulk|lift|gym|workout|pr|strength|jacked|swole/i)) {
     return {
-        message:
-          "Can't build muscle no matter how hard you train? 🏋️\n\nHere's the truth: If your hormones aren't optimized, you may be fighting uphill. Your body may lack the chemical signal to grow.\n\n📊 What may happen on TRT (individual results vary):\n• Protein synthesis may increase\n• Recovery time may drop\n• Strength may go up week over week\n• PRs may start falling again\n\nMany guys may see gym performance improve by week 3-4, and visible gains possible by week 6-8. Individual results vary.\n\nTotal Optimization: $249/mo (includes TRT, HGH, or both based on your labs)\n\nWhich fits your goals?",
+      message:
+        "Can't build muscle no matter how hard you train? 🏋️\n\nHere's the truth: If your hormones aren't optimized, you may be fighting uphill. Your body may lack the chemical signal to grow.\n\n📊 What may happen on TRT (individual results vary):\n• Protein synthesis may increase\n• Recovery time may drop\n• Strength may go up week over week\n• PRs may start falling again\n\nMany guys may see gym performance improve by week 3-4, and visible gains possible by week 6-8. Individual results vary.\n\nTotal Optimization: $249/mo (includes TRT, HGH, or both based on your labs)\n\nWhich fits your goals?",
     };
   }
 
@@ -365,8 +365,8 @@ function getAiResponse(message) {
   // WHAT'S INCLUDED
   if (msg.match(/what('s| is) included|what do (i|you) get|include/i)) {
     return {
-        message:
-          "Everything's included - no hidden fees:\n\n📦 Monthly medication delivery\n🔬 All required blood panels\n👨‍⚕️ Unlimited telehealth consultations\n📊 Ongoing monitoring & optimization\n📱 Direct doctor messaging\n\nTotal Optimization: $249/mo\n\nNo surprise charges. No lab fees. No consultation fees. One price, everything included. Individual results may vary.",
+      message:
+        "Everything's included - no hidden fees:\n\n📦 Monthly medication delivery\n🔬 All required blood panels\n👨‍⚕️ Unlimited telehealth consultations\n📊 Ongoing monitoring & optimization\n📱 Direct doctor messaging\n\nTotal Optimization: $249/mo\n\nNo surprise charges. No lab fees. No consultation fees. One price, everything included. Individual results may vary.",
     };
   }
 
@@ -387,8 +387,8 @@ function getAiResponse(message) {
         "I'm here to help you understand TRT and HGH therapy! 💪\n\nPopular questions:\n• How fast will I see results?\n• TRT vs HGH - which one?\n• What does it cost?\n• Is it safe and legit?\n\nWhat would you like to know? Or tell me what symptoms/goals you have and I'll point you in the right direction.",
     },
     {
-        message:
-          "Hey! I can help you figure out what might work best for you.\n\n🔥 Total Optimization ($249/mo) - Personalized protocol\n• Includes comprehensive labs\n• TRT, HGH, or both based on YOUR results\n• Everything included in one price\n\nWhat's your main goal? More energy? Building muscle? Better recovery? Tell me what you're dealing with. Individual results may vary.",
+      message:
+        "Hey! I can help you figure out what might work best for you.\n\n🔥 Total Optimization ($249/mo) - Personalized protocol\n• Includes comprehensive labs\n• TRT, HGH, or both based on YOUR results\n• Everything included in one price\n\nWhat's your main goal? More energy? Building muscle? Better recovery? Tell me what you're dealing with. Individual results may vary.",
     },
     {
       message:

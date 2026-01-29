@@ -129,7 +129,9 @@ function sendVerificationCode(phone) {
   }
 
   if (_verificationState.attempts >= TWILIO_CONFIG.maxVerificationAttempts) {
-    return Promise.reject(new Error("Maximum verification attempts reached. Please try again later."));
+    return Promise.reject(
+      new Error("Maximum verification attempts reached. Please try again later.")
+    );
   }
 
   _verificationState.phone = normalized;
@@ -141,8 +143,15 @@ function sendVerificationCode(phone) {
     to: normalized,
     channel: "sms",
   }).then((response) => {
+    if (!response.ok) {
+      return Promise.reject(
+        new Error(response.data?.message || "Failed to send verification code")
+      );
+    }
     if (window.WeightGainLogger) {
-      window.WeightGainLogger.log("Twilio: verification code sent to " + formatPhoneForDisplay(normalized));
+      window.WeightGainLogger.log(
+        "Twilio: verification code sent to " + formatPhoneForDisplay(normalized)
+      );
     }
     return response;
   });
@@ -159,7 +168,9 @@ function checkVerificationCode(phone, code) {
   }
 
   if (code.length !== TWILIO_CONFIG.verificationCodeLength) {
-    return Promise.reject(new Error("Please enter a " + TWILIO_CONFIG.verificationCodeLength + "-digit code"));
+    return Promise.reject(
+      new Error("Please enter a " + TWILIO_CONFIG.verificationCodeLength + "-digit code")
+    );
   }
 
   // TODO: Replace with real Twilio Verify check endpoint
