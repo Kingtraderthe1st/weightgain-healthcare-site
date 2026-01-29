@@ -290,6 +290,11 @@ function submitWelcomeEmail() {
     return;
   }
 
+  // Track email capture in Klaviyo
+  if (window.WeightGainKlaviyo?.trackEmailCapture) {
+    window.WeightGainKlaviyo.trackEmailCapture(email, 'Welcome Popup');
+  }
+
   // Simulate email submission
   showToast("Guide sent! Check your inbox.");
   closeWelcomePopup();
@@ -358,6 +363,11 @@ function submitExitEmail() {
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
   if (email && emailRegex.test(email)) {
+    // Track email capture in Klaviyo
+    if (window.WeightGainKlaviyo?.trackEmailCapture) {
+      window.WeightGainKlaviyo.trackEmailCapture(email, 'Exit Intent Popup');
+    }
+
     showToast("Check your email for 25% OFF code!");
     closeExitPopup();
   } else if (input) {

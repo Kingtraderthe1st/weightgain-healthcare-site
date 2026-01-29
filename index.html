@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com;"
+      content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://static.klaviyo.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://a.klaviyo.com https://static.klaviyo.com;"
     />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
@@ -56,6 +56,9 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/png" href="logo.png" />
     <link rel="manifest" href="/manifest.json" />
+
+    <!-- Klaviyo SDK -->
+    <script async src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=YOUR_PUBLIC_API_KEY"></script>
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -1110,6 +1113,7 @@
     <script src="js/ai-chat.js" defer></script>
     <script src="js/cart.js" defer></script>
     <script src="js/ui.js" defer></script>
+    <script src="js/klaviyo.js" defer></script>
     <script src="app.js" defer></script>
   </body>
 </html>

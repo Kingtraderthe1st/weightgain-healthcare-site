@@ -9,7 +9,7 @@
     <!-- Security Headers -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.klaviyo.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://a.klaviyo.com https://static.klaviyo.com;"
     />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
@@ -26,6 +26,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="styles.css" />
+
+    <!-- Klaviyo SDK -->
+    <script async src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=YOUR_PUBLIC_API_KEY"></script>
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -278,6 +281,7 @@
       </div>
     </footer>
 
+    <script src="js/klaviyo.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

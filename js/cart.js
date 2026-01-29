@@ -119,6 +119,11 @@ function addToCart(testId) {
     quantity: 1,
   });
 
+  // Track "Added to Cart" in Klaviyo
+  if (window.WeightGainKlaviyo?.trackAddedToCart) {
+    window.WeightGainKlaviyo.trackAddedToCart({ id: test.id, name: test.name, price: test.price, quantity: 1 });
+  }
+
   saveCart();
   updateCartUI();
   if (window.WeightGainUI?.showNotification) {

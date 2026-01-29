@@ -9,7 +9,7 @@
     <!-- Security Headers -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://js.stripe.com; connect-src 'self' https://api.stripe.com;"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com https://static.klaviyo.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://js.stripe.com; connect-src 'self' https://api.stripe.com https://a.klaviyo.com https://static.klaviyo.com;"
     />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
@@ -26,6 +26,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="styles.css" />
+
+    <!-- Klaviyo SDK -->
+    <script async src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=YOUR_PUBLIC_API_KEY"></script>
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -300,6 +303,31 @@
                     <span class="input-status" aria-hidden="true"></span>
                   </div>
                   <p class="form-error" id="phone-error" role="alert"></p>
+
+                  <!-- Phone Verification -->
+                  <div class="phone-verification" id="phone-verification" style="display: none;">
+                    <div class="phone-verify-row">
+                      <button type="button" class="btn btn-secondary btn-small" id="verify-phone-btn">Verify Phone</button>
+                      <span class="phone-verify-status" id="phone-verify-status"></span>
+                    </div>
+                    <div class="verify-code-input-row" id="verify-code-row" style="display: none;">
+                      <input
+                        type="text"
+                        class="verify-code-input"
+                        id="verify-code"
+                        placeholder="000000"
+                        maxlength="6"
+                        inputmode="numeric"
+                        autocomplete="one-time-code"
+                        aria-label="Verification code"
+                      />
+                      <button type="button" class="btn btn-primary btn-small" id="confirm-code-btn">Confirm</button>
+                    </div>
+                    <div id="resend-timer" style="display: none;">
+                      <button type="button" class="link-btn" id="resend-code-btn" disabled>Resend code</button>
+                      <span id="resend-countdown"></span>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="form-group">
@@ -478,6 +506,19 @@
                     I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms of Service</a> and
                     <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>. I understand that lab tests are non-refundable
                     once the requisition is generated.
+                  </span>
+                </label>
+              </div>
+
+              <div class="form-group form-group--mt-4">
+                <label class="form-check">
+                  <input type="checkbox" class="form-check__input" id="sms-optin" />
+                  <span class="form-check__label" style="font-size: 0.85rem;">
+                    I agree to receive SMS updates from WeightGain including order confirmations, health tips, and promotions.
+                    Consent is not a condition of purchase. Msg &amp; data rates may apply. Msg frequency varies.
+                    Reply STOP to cancel, HELP for help.
+                    <a href="terms.html" target="_blank" rel="noopener">Terms</a> &amp;
+                    <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.
                   </span>
                 </label>
               </div>
@@ -741,6 +782,14 @@
           </div>
         </div>
 
+        <!-- SMS Confirmation Banner (shown dynamically after SMS is sent) -->
+        <div class="sms-confirmation-status" id="sms-confirmation-status" style="display: none;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="#22c55e" aria-hidden="true">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+          </svg>
+          <span>Order confirmation SMS sent to your phone.</span>
+        </div>
+
         <a href="account.html" class="btn btn-primary btn-large" style="width: 100%; margin-top: 1.5rem;"
           >View Your Dashboard</a
         >
@@ -755,6 +804,8 @@
     <script src="js/cart.js"></script>
     <script src="js/plans.js"></script>
     <script src="js/ui.js"></script>
+    <script src="js/twilio.js"></script>
+    <script src="js/klaviyo.js"></script>
     <script src="app.js"></script>
     <script>
       // Initialize Stripe (use environment config or fallback to placeholder)
@@ -1186,6 +1237,174 @@
 
           e.target.value = value;
         });
+
+        // Reset verification when phone number changes
+        phoneInput.addEventListener('input', function() {
+          if (window.WeightGainTwilio?.resetVerification) {
+            window.WeightGainTwilio.resetVerification();
+          }
+          const verifySection = document.getElementById('phone-verification');
+          const codeRow = document.getElementById('verify-code-row');
+          const statusEl = document.getElementById('phone-verify-status');
+          if (verifySection) verifySection.style.display = 'none';
+          if (codeRow) codeRow.style.display = 'none';
+          if (statusEl) { statusEl.textContent = ''; statusEl.className = 'phone-verify-status'; }
+        });
+
+        // Show verification UI on phone blur when valid
+        phoneInput.addEventListener('blur', function() {
+          const phonePattern = /^\(\d{3}\) \d{3}-\d{4}$/;
+          const verifySection = document.getElementById('phone-verification');
+          if (phonePattern.test(this.value.trim()) && verifySection) {
+            const status = window.WeightGainTwilio?.getVerificationStatus?.();
+            if (status && status.isVerified && window.WeightGainTwilio.normalizePhone(this.value) === status.phone) {
+              verifySection.style.display = 'block';
+              const statusEl = document.getElementById('phone-verify-status');
+              if (statusEl) {
+                statusEl.textContent = 'Verified';
+                statusEl.className = 'phone-verify-status phone-verify-status--verified';
+              }
+            } else {
+              verifySection.style.display = 'block';
+            }
+          }
+        });
+      }
+
+      // =============================================================================
+      // Phone Verification Handlers
+      // =============================================================================
+
+      // Send verification code
+      const verifyPhoneBtn = document.getElementById('verify-phone-btn');
+      if (verifyPhoneBtn) {
+        verifyPhoneBtn.addEventListener('click', function() {
+          const phone = document.getElementById('phone')?.value;
+          const statusEl = document.getElementById('phone-verify-status');
+          const codeRow = document.getElementById('verify-code-row');
+          const resendTimer = document.getElementById('resend-timer');
+
+          if (!phone || !window.WeightGainTwilio) return;
+
+          this.disabled = true;
+          if (statusEl) {
+            statusEl.textContent = 'Sending...';
+            statusEl.className = 'phone-verify-status phone-verify-status--pending';
+          }
+
+          window.WeightGainTwilio.sendVerificationCode(phone)
+            .then(function() {
+              if (statusEl) {
+                statusEl.textContent = 'Code sent! Check your phone.';
+                statusEl.className = 'phone-verify-status phone-verify-status--pending';
+              }
+              if (codeRow) codeRow.style.display = 'flex';
+              if (resendTimer) resendTimer.style.display = 'block';
+              startResendCountdown();
+            })
+            .catch(function(err) {
+              if (statusEl) {
+                statusEl.textContent = err.message || 'Failed to send code';
+                statusEl.className = 'phone-verify-status phone-verify-status--error';
+              }
+              verifyPhoneBtn.disabled = false;
+            });
+        });
+      }
+
+      // Confirm verification code
+      const confirmCodeBtn = document.getElementById('confirm-code-btn');
+      if (confirmCodeBtn) {
+        confirmCodeBtn.addEventListener('click', function() {
+          const phone = document.getElementById('phone')?.value;
+          const code = document.getElementById('verify-code')?.value;
+          const statusEl = document.getElementById('phone-verify-status');
+
+          if (!phone || !code || !window.WeightGainTwilio) return;
+
+          this.disabled = true;
+          if (statusEl) {
+            statusEl.textContent = 'Verifying...';
+            statusEl.className = 'phone-verify-status phone-verify-status--pending';
+          }
+
+          window.WeightGainTwilio.checkVerificationCode(phone, code)
+            .then(function() {
+              if (statusEl) {
+                statusEl.textContent = 'Verified';
+                statusEl.className = 'phone-verify-status phone-verify-status--verified';
+              }
+              const codeRow = document.getElementById('verify-code-row');
+              const resendTimer = document.getElementById('resend-timer');
+              const verifyBtn = document.getElementById('verify-phone-btn');
+              if (codeRow) codeRow.style.display = 'none';
+              if (resendTimer) resendTimer.style.display = 'none';
+              if (verifyBtn) verifyBtn.style.display = 'none';
+            })
+            .catch(function(err) {
+              if (statusEl) {
+                statusEl.textContent = err.message || 'Invalid code';
+                statusEl.className = 'phone-verify-status phone-verify-status--error';
+              }
+              confirmCodeBtn.disabled = false;
+            });
+        });
+      }
+
+      // Verification code input: digits only, max 6
+      const verifyCodeInput = document.getElementById('verify-code');
+      if (verifyCodeInput) {
+        verifyCodeInput.addEventListener('input', function() {
+          this.value = this.value.replace(/\D/g, '').slice(0, 6);
+        });
+      }
+
+      // Resend countdown timer (30s)
+      let resendCountdownInterval = null;
+      function startResendCountdown() {
+        let seconds = 30;
+        const countdownEl = document.getElementById('resend-countdown');
+        const resendBtn = document.getElementById('resend-code-btn');
+
+        if (resendBtn) resendBtn.disabled = true;
+        if (countdownEl) countdownEl.textContent = ' (' + seconds + 's)';
+
+        if (resendCountdownInterval) clearInterval(resendCountdownInterval);
+        resendCountdownInterval = setInterval(function() {
+          seconds--;
+          if (countdownEl) countdownEl.textContent = ' (' + seconds + 's)';
+          if (seconds <= 0) {
+            clearInterval(resendCountdownInterval);
+            if (resendBtn) resendBtn.disabled = false;
+            if (countdownEl) countdownEl.textContent = '';
+          }
+        }, 1000);
+      }
+
+      // Resend code button
+      const resendCodeBtn = document.getElementById('resend-code-btn');
+      if (resendCodeBtn) {
+        resendCodeBtn.addEventListener('click', function() {
+          const phone = document.getElementById('phone')?.value;
+          if (!phone || !window.WeightGainTwilio) return;
+
+          window.WeightGainTwilio.sendVerificationCode(phone)
+            .then(function() {
+              const statusEl = document.getElementById('phone-verify-status');
+              if (statusEl) {
+                statusEl.textContent = 'New code sent!';
+                statusEl.className = 'phone-verify-status phone-verify-status--pending';
+              }
+              startResendCountdown();
+            })
+            .catch(function(err) {
+              const statusEl = document.getElementById('phone-verify-status');
+              if (statusEl) {
+                statusEl.textContent = err.message || 'Failed to resend';
+                statusEl.className = 'phone-verify-status phone-verify-status--error';
+              }
+            });
+        });
       }
 
       // =============================================================================
@@ -1393,6 +1612,57 @@
           // Generate order number
           const orderNumber = "WG-" + Math.random().toString(36).substr(2, 6).toUpperCase();
           document.getElementById("order-number").textContent = orderNumber;
+
+          // =============================================================
+          // Klaviyo + Twilio Tracking (before cart is cleared)
+          // =============================================================
+          const checkoutCart = JSON.parse(localStorage.getItem("wg_cart")) || [];
+          const checkoutEmail = document.getElementById("email")?.value?.trim();
+          const checkoutFirstName = document.getElementById("firstName")?.value?.trim();
+          const checkoutLastName = document.getElementById("lastName")?.value?.trim();
+          const checkoutPhone = document.getElementById("phone")?.value?.trim();
+          const checkoutTotal = checkoutCart.reduce((sum, item) => sum + (Number(item.price) || 0) * (item.quantity || 1), 0);
+
+          // Identify customer in Klaviyo with full profile
+          if (window.WeightGainKlaviyo?.identifyUser && checkoutEmail) {
+            window.WeightGainKlaviyo.identifyUser(checkoutEmail, {
+              firstName: checkoutFirstName,
+              lastName: checkoutLastName,
+              phone: checkoutPhone,
+            });
+          }
+
+          // Fire "Placed Order" event
+          if (window.WeightGainKlaviyo?.trackPlacedOrder) {
+            window.WeightGainKlaviyo.trackPlacedOrder({
+              orderNumber: orderNumber,
+              total: checkoutTotal,
+              itemNames: checkoutCart.map(function(item) { return item.name; }),
+              itemCount: checkoutCart.length,
+              billingCycle: checkoutCart[0]?.billingCycle || "monthly",
+            });
+          }
+
+          // Send order confirmation SMS (non-blocking)
+          if (window.WeightGainTwilio?.sendOrderConfirmation && checkoutPhone) {
+            window.WeightGainTwilio.sendOrderConfirmation(checkoutPhone, orderNumber)
+              .then(function() {
+                const smsBanner = document.getElementById("sms-confirmation-status");
+                if (smsBanner) smsBanner.style.display = "flex";
+              })
+              .catch(function(err) {
+                if (window.WeightGainLogger) window.WeightGainLogger.warn("SMS confirmation failed:", err);
+              });
+          }
+
+          // If SMS marketing opt-in checked, subscribe to marketing list
+          const smsOptIn = document.getElementById("sms-optin");
+          if (smsOptIn?.checked && window.WeightGainTwilio?.addToMarketingList && checkoutPhone) {
+            window.WeightGainTwilio.addToMarketingList(checkoutPhone, checkoutFirstName)
+              .catch(function(err) {
+                if (window.WeightGainLogger) window.WeightGainLogger.warn("SMS marketing subscribe failed:", err);
+              });
+          }
 
           // Clear cart
           localStorage.removeItem("wg_cart");
@@ -1616,6 +1886,34 @@
           updatePlanDisplay();
         });
       });
+
+      // =============================================================================
+      // Klaviyo: Started Checkout + Email Blur Identify
+      // =============================================================================
+
+      // Fire "Started Checkout" if cart is non-empty
+      (function() {
+        const cart = JSON.parse(localStorage.getItem("wg_cart")) || [];
+        if (cart.length > 0 && window.WeightGainKlaviyo?.trackStartedCheckout) {
+          window.WeightGainKlaviyo.trackStartedCheckout(cart);
+        }
+      })();
+
+      // On email blur: identify user in Klaviyo for abandoned checkout recovery
+      const checkoutEmailInput = document.getElementById("email");
+      if (checkoutEmailInput) {
+        checkoutEmailInput.addEventListener("blur", function() {
+          const email = this.value.trim();
+          if (email && email.includes("@") && window.WeightGainKlaviyo?.identifyUser) {
+            const firstName = document.getElementById("firstName")?.value?.trim();
+            const lastName = document.getElementById("lastName")?.value?.trim();
+            window.WeightGainKlaviyo.identifyUser(email, {
+              firstName: firstName || undefined,
+              lastName: lastName || undefined,
+            });
+          }
+        });
+      }
     </script>
   </body>
 </html>
