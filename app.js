@@ -647,6 +647,16 @@ const actions = {
       toggle.click();
     }
   },
+  toggleLabPrep: () => {
+    toggleLabPrep();
+  },
+  resetContactForm: () => {
+    const contactForm = document.getElementById("contactForm");
+    const contactSuccess = document.getElementById("contactSuccess");
+    if (contactForm) contactForm.reset();
+    if (contactForm) contactForm.style.display = "block";
+    if (contactSuccess) contactSuccess.style.display = "none";
+  },
 };
 
 function initEventDelegation() {
@@ -657,6 +667,20 @@ function initEventDelegation() {
       if (actions[action]) {
         e.preventDefault();
         actions[action](e);
+      }
+    }
+  });
+
+  // Handle Enter/Space for data-action elements with role="button"
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      const actionEl = e.target.closest('[data-action][role="button"]');
+      if (actionEl) {
+        const action = actionEl.dataset.action;
+        if (actions[action]) {
+          e.preventDefault();
+          actions[action](e);
+        }
       }
     }
   });
@@ -924,7 +948,7 @@ function injectAnimationStyles() {
     .typing-indicator span {
       width: 8px;
       height: 8px;
-      background: var(--spartan-gold, #D4AF37);
+      background: var(--brand-primary, #D4AF37);
       border-radius: 50%;
       animation: typingBounce 1.4s infinite ease-in-out;
     }
@@ -1086,7 +1110,7 @@ function toggleLabPrep() {
   }
 }
 
-window.toggleLabPrep = toggleLabPrep;
+// toggleLabPrep is now handled via data-action delegation
 
 // =============================================================================
 // FAQ Accordion

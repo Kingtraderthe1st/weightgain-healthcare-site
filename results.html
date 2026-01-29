@@ -9,7 +9,7 @@
     <!-- Security Headers -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' https://static.klaviyo.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://a.klaviyo.com https://static.klaviyo.com;"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';"
     />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
@@ -27,8 +27,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="styles.css" />
 
-    <!-- Klaviyo SDK -->
-    <script async src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=YOUR_PUBLIC_API_KEY"></script>
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -152,7 +150,7 @@
         <div class="card ai-insights-card">
           <div class="ai-insights-inner">
             <div class="ai-insights-icon-box">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--spartan-gold)" stroke-width="2" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand-primary)" stroke-width="2" aria-hidden="true">
                 <path d="M12 2a10 10 0 1 0 10 10H12V2z" />
                 <path d="M12 2a10 10 0 0 1 10 10" />
                 <circle cx="12" cy="12" r="6" />
@@ -811,7 +809,6 @@
     <script src="js/cart.js"></script>
     <script src="js/plans.js"></script>
     <script src="js/ui.js"></script>
-    <script src="js/klaviyo.js"></script>
     <script src="app.js"></script>
     <script>
       function filterResults(status) {

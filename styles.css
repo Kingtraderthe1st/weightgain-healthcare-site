@@ -56,7 +56,7 @@ a {
 }
 
 a:hover {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 ul,
@@ -83,7 +83,7 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid var(--spartan-gold);
+  outline: 2px solid var(--brand-primary);
   outline-offset: 2px;
   box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25); /* Enhanced visibility on dark backgrounds */
 }
@@ -110,7 +110,7 @@ textarea:focus-visible {
   position: absolute;
   top: -100%;
   left: 0;
-  background: var(--spartan-gold);
+  background: var(--brand-primary);
   color: #ffffff;
   padding: 0.75rem 1rem;
   z-index: var(--z-popover);
@@ -160,21 +160,7 @@ textarea:focus-visible {
   opacity: 1;
 }
 
-.page-transition-overlay .transition-bg {
-  display: none;
-}
-
-.transition-logo {
-  display: none;
-}
-
-.transition-logo-wrapper,
-.transition-logo-img,
-.transition-brand-text,
-.transition-tagline,
-.logo-glare {
-  display: none;
-}
+/* Transition elements hidden - not used in HTML */
 
 /* ============================================
    Utilities
@@ -273,7 +259,7 @@ textarea:focus-visible {
 }
 
 .top-bar-link:hover {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .top-bar-link svg {
@@ -307,12 +293,12 @@ textarea:focus-visible {
 }
 
 .top-bar-badge svg {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   flex-shrink: 0;
 }
 
 .top-bar-badge:hover {
-  border-color: var(--spartan-gold);
+  border-color: var(--brand-primary);
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(212, 175, 55, 0.03));
 }
 
@@ -333,7 +319,7 @@ textarea:focus-visible {
   border-radius: 4px;
   font-size: 0.7rem;
   font-weight: 600;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -341,7 +327,7 @@ textarea:focus-visible {
 .trust-badge svg {
   width: 12px;
   height: 12px;
-  fill: var(--spartan-gold);
+  fill: var(--brand-primary);
 }
 
 /* Trust Badge as Button - Keyboard Accessible */
@@ -360,7 +346,7 @@ button.trust-badge:focus {
 }
 
 button.trust-badge:focus {
-  outline: 2px solid var(--spartan-gold);
+  outline: 2px solid var(--brand-primary);
   outline-offset: 2px;
 }
 
@@ -539,7 +525,7 @@ a .logo-text,
 }
 
 .nav-link:hover {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   background: rgba(37, 99, 235, 0.1);
 }
 
@@ -597,7 +583,7 @@ a .logo-text,
 
 .dropdown-menu a:hover {
   background: rgba(37, 99, 235, 0.15);
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .nav-actions {
@@ -609,8 +595,6 @@ a .logo-text,
 
 .cart-btn {
   position: relative;
-  display: flex;
-  flex-direction: column;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -624,13 +608,13 @@ a .logo-text,
 
 .cart-btn:hover {
   background: rgba(37, 99, 235, 0.2);
-  border-color: var(--spartan-gold);
+  border-color: var(--brand-primary);
 }
 
 .cart-btn svg {
   width: 20px;
   height: 20px;
-  fill: var(--spartan-gold);
+  fill: var(--brand-primary);
 }
 
 .cart-count {
@@ -640,7 +624,7 @@ a .logo-text,
   min-width: 18px;
   height: 18px;
   padding: 0 4px;
-  background: var(--spartan-crimson);
+  background: var(--brand-primary);
   color: #ffffff;
   font-size: 0.7rem;
   font-weight: 700;
@@ -663,7 +647,7 @@ a .logo-text,
 .mobile-menu-btn svg {
   width: 24px;
   height: 24px;
-  fill: var(--spartan-gold);
+  fill: var(--brand-primary);
 }
 
 @media (max-width: 768px) {
@@ -703,20 +687,19 @@ a .logo-text,
 }
 
 .mobile-menu a {
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 1rem;
   color: #1e293b;
   font-size: 1rem;
   border-radius: 8px;
   margin-bottom: 0.25rem;
   min-height: 48px;
-  display: flex;
-  align-items: center;
 }
 
 .mobile-menu a:hover {
   background: rgba(37, 99, 235, 0.1);
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 /* ============================================
@@ -737,8 +720,6 @@ a .logo-text,
   border: none;
   text-decoration: none;
   position: relative;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
 }
 
@@ -762,7 +743,7 @@ a .logo-text,
 /* Primary Button - consolidated .btn-primary and .btn--primary */
 .btn-primary,
 .btn--primary {
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   color: #ffffff;
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
   font-weight: 700;
@@ -770,7 +751,7 @@ a .logo-text,
 
 .btn-primary:hover,
 .btn--primary:hover {
-  background: linear-gradient(135deg, var(--spartan-gold-light) 0%, var(--spartan-gold) 100%);
+  background: linear-gradient(135deg, var(--brand-primary-light) 0%, var(--brand-primary) 100%);
   box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
   transform: translateY(-1px);
 }
@@ -779,8 +760,8 @@ a .logo-text,
 .btn-secondary,
 .btn--secondary {
   background: transparent;
-  color: var(--spartan-gold);
-  border: 2px solid var(--spartan-gold);
+  color: var(--brand-primary);
+  border: 2px solid var(--brand-primary);
   font-weight: 700;
 }
 
@@ -793,7 +774,7 @@ a .logo-text,
 
 .btn-white {
   background: #fff;
-  color: var(--spartan-crimson);
+  color: var(--brand-primary);
   font-weight: 700;
 }
 
@@ -838,7 +819,7 @@ a .logo-text,
   transform: translateY(-2px);
 }
 .btn--accent {
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   color: #ffffff;
   font-weight: 700;
 }
@@ -849,8 +830,6 @@ a .logo-text,
 
 .hero {
   position: relative;
-  display: flex;
-  flex-direction: column;
   display: flex;
   align-items: center;
   padding: 2rem 0 3rem;
@@ -952,8 +931,8 @@ a .logo-text,
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: linear-gradient(135deg, var(--spartan-crimson) 0%, var(--spartan-crimson-dark) 100%);
-  border: 2px solid var(--spartan-gold);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
+  border: 2px solid var(--brand-primary);
   border-radius: 50px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -1028,25 +1007,6 @@ a .logo-text,
     0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* Neon border glow */
-.hero-ai-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 2px;
-  background: linear-gradient(135deg, #00d4ff, #aa00ff, #ff00aa, #00d4ff);
-  border-radius: 20px;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  /* animation removed for performance */
-}
-
-/* Removed animation for better performance */
-
 /* Clean card border - no neon glow */
 .hero-ai-card::before {
   display: none;
@@ -1065,14 +1025,13 @@ a .logo-text,
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 48px;
   height: 48px;
   background: linear-gradient(135deg, #00d4ff 0%, #aa00ff 100%);
   border: none;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-shadow:
     0 0 15px rgba(170, 0, 255, 0.5),
     0 0 30px rgba(0, 212, 255, 0.3);
@@ -1376,7 +1335,7 @@ a .logo-text,
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
 }
 
@@ -1395,14 +1354,14 @@ a .logo-text,
 
 .step-card:hover {
   transform: translateY(-2px);
-  border-color: var(--spartan-gold);
+  border-color: var(--brand-primary);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .step-number {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   color: #ffffff;
   font-size: 1.25rem;
   font-weight: 800;
@@ -1441,7 +1400,7 @@ a .logo-text,
 .step-connector svg {
   width: 24px;
   height: 24px;
-  fill: var(--spartan-gold);
+  fill: var(--brand-primary);
   opacity: 0.5;
 }
 
@@ -1497,8 +1456,8 @@ a .logo-text,
 }
 
 .category-tab.active {
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
-  border-color: var(--spartan-gold);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
+  border-color: var(--brand-primary);
   color: #ffffff;
 }
 
@@ -1510,7 +1469,7 @@ a .logo-text,
 .category-header h2 {
   font-size: 1.75rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-light) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1539,13 +1498,13 @@ a .logo-text,
 
 .test-card:hover {
   transform: translateY(-2px);
-  border-color: var(--spartan-gold);
+  border-color: var(--brand-primary);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .test-card-header {
   padding: 1rem 1.25rem;
-  background: linear-gradient(135deg, var(--spartan-crimson) 0%, var(--spartan-crimson-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -1559,7 +1518,7 @@ a .logo-text,
 
 .test-badge {
   padding: 0.25rem 0.5rem;
-  background: var(--spartan-gold);
+  background: var(--brand-primary);
   color: #ffffff;
   font-size: 0.65rem;
   font-weight: 700;
@@ -1589,7 +1548,7 @@ a .logo-text,
 .test-price {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .test-price-original {
@@ -1637,7 +1596,7 @@ a .logo-text,
 .trust-item h4 {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   margin-bottom: 0.5rem;
 }
 
@@ -1674,7 +1633,7 @@ a .logo-text,
 }
 
 .testimonial-card:hover {
-  border-color: var(--spartan-gold);
+  border-color: var(--brand-primary);
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
@@ -1754,7 +1713,7 @@ a .logo-text,
   display: block;
   font-size: 2rem;
   font-weight: 800;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .stat-label {
@@ -1817,7 +1776,7 @@ a .logo-text,
 
 .locator-form input:focus {
   outline: none;
-  border-color: var(--spartan-gold);
+  border-color: var(--brand-primary);
 }
 
 .locator-note {
@@ -1831,7 +1790,7 @@ a .logo-text,
 .locator-note svg {
   width: 16px;
   height: 16px;
-  fill: var(--spartan-gold);
+  fill: var(--brand-primary);
 }
 
 .state-restriction-notice {
@@ -1862,7 +1821,7 @@ a .logo-text,
 .lab-results h4 {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   margin-bottom: 0.75rem;
 }
 
@@ -1940,7 +1899,7 @@ a .logo-text,
 .cta-guarantee svg {
   width: 18px;
   height: 18px;
-  fill: var(--spartan-gold);
+  fill: var(--brand-primary);
 }
 
 /* ============================================
@@ -1976,7 +1935,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 }
 
 .footer a:hover {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .footer-badges {
@@ -1991,7 +1950,7 @@ body:has(.mobile-sticky-cta.active) .footer {
   border-radius: 4px;
   font-size: 0.7rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 /* ============================================
@@ -2032,7 +1991,7 @@ body:has(.mobile-sticky-cta.active) .footer {
   left: 50%;
   transform: translate(-50%, -50%) scale(0.9);
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border: 2px solid var(--spartan-gold);
+  border: 2px solid var(--brand-primary);
   border-radius: 16px;
   padding: 2rem;
   z-index: var(--z-modal);
@@ -2132,7 +2091,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: var(--spartan-gold);
+  border-color: var(--brand-primary);
   background: #ffffff;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
@@ -2151,7 +2110,7 @@ body:has(.mobile-sticky-cta.active) .footer {
   display: block;
   text-align: right;
   font-size: 0.8rem;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   margin-top: 0.5rem;
 }
 
@@ -2163,7 +2122,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 }
 
 .auth-switch a {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   font-weight: 600;
 }
 
@@ -2208,7 +2167,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 }
 
 .checkbox-group a {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 /* Lab Modal */
@@ -2254,7 +2213,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 
 .lab-modal-search input:focus {
   outline: none;
-  border-color: var(--spartan-gold);
+  border-color: var(--brand-primary);
 }
 
 .lab-modal-results {
@@ -2273,7 +2232,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 .lab-modal-empty svg {
   width: 48px;
   height: 48px;
-  fill: var(--spartan-gold);
+  fill: var(--brand-primary);
   opacity: 0.5;
   margin-bottom: 1rem;
 }
@@ -2292,7 +2251,7 @@ body:has(.mobile-sticky-cta.active) .footer {
   display: inline-block;
   padding: 0.25rem 0.75rem;
   background: rgba(37, 99, 235, 0.2);
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 600;
@@ -2328,7 +2287,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 .upsell-price {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .upsell-savings {
@@ -2376,7 +2335,7 @@ body:has(.mobile-sticky-cta.active) .footer {
   gap: 0.75rem;
   padding: 1rem;
   background: rgba(37, 99, 235, 0.1);
-  border: 2px dashed var(--spartan-gold);
+  border: 2px dashed var(--brand-primary);
   border-radius: 8px;
   margin-bottom: 1rem;
 }
@@ -2384,13 +2343,13 @@ body:has(.mobile-sticky-cta.active) .footer {
 .welcome-code .code {
   font-size: 1.25rem;
   font-weight: 800;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   letter-spacing: 2px;
 }
 
 .copy-btn {
   padding: 0.5rem 0.75rem;
-  background: var(--spartan-gold);
+  background: var(--brand-primary);
   color: #ffffff;
   font-size: 0.8rem;
   font-weight: 700;
@@ -2467,7 +2426,7 @@ body:has(.mobile-sticky-cta.active) .footer {
   left: 50%;
   transform: translateX(-50%) translateY(100px);
   background: var(--bg-dark);
-  border: 1px solid var(--spartan-gold);
+  border: 1px solid var(--brand-primary);
   border-radius: 8px;
   padding: 1rem 1.5rem;
   display: flex;
@@ -2510,7 +2469,7 @@ body:has(.mobile-sticky-cta.active) .toast {
   left: 0;
   right: 0;
   background: var(--bg-dark);
-  border-top: 2px solid var(--spartan-gold);
+  border-top: 2px solid var(--brand-primary);
   padding: 0.75rem 0;
   z-index: var(--z-sticky);
   transform: translateY(100%);
@@ -2554,7 +2513,7 @@ body:has(.sticky-cart-bar.active) {
 .sticky-cart-total {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .sticky-cart-actions {
@@ -2600,7 +2559,7 @@ body:has(.sticky-cart-bar.active) {
 }
 
 .cookie-content a {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .cookie-actions {
@@ -2618,7 +2577,7 @@ body:has(.sticky-cart-bar.active) {
   bottom: 6rem;
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   color: #ffffff;
   border-radius: 50%;
   display: flex;
@@ -2875,7 +2834,7 @@ body:has(.sticky-cart-bar.active) {
 .results-header h1 {
   font-size: 2rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-light) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -3071,7 +3030,7 @@ body:has(.sticky-cart-bar.active) {
 .checkout h1 {
   font-size: 2.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-light) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -3126,7 +3085,7 @@ body:has(.sticky-cart-bar.active) {
 .checkout__step-number {
   width: 36px;
   height: 36px;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   color: #ffffff;
   border-radius: 50%;
   display: flex;
@@ -3163,7 +3122,7 @@ body:has(.sticky-cart-bar.active) {
 
 .checkout .form-label--required::after {
   content: " *";
-  color: var(--spartan-crimson-light);
+  color: var(--brand-primary-light);
 }
 
 .checkout .form-input {
@@ -3179,7 +3138,7 @@ body:has(.sticky-cart-bar.active) {
 
 .checkout .form-input:focus {
   outline: none;
-  border-color: var(--spartan-gold);
+  border-color: var(--brand-primary);
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
@@ -3217,7 +3176,7 @@ body:has(.sticky-cart-bar.active) {
   width: 20px;
   height: 20px;
   margin-top: 2px;
-  accent-color: var(--spartan-gold);
+  accent-color: var(--brand-primary);
   cursor: pointer;
 }
 
@@ -3228,7 +3187,7 @@ body:has(.sticky-cart-bar.active) {
 }
 
 .checkout .form-check__label a {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   text-decoration: underline;
 }
 
@@ -3278,7 +3237,7 @@ body:has(.sticky-cart-bar.active) {
 
 .plan-option-btn.active {
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(37, 99, 235, 0.08) 100%);
-  border-color: var(--spartan-gold);
+  border-color: var(--brand-primary);
   color: #1e293b;
 }
 
@@ -3294,11 +3253,11 @@ body:has(.sticky-cart-bar.active) {
 .plan-option-price {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .plan-option-btn.active .plan-option-price {
-  color: var(--spartan-gold-light);
+  color: var(--brand-primary-light);
 }
 
 .plan-option-badge {
@@ -3338,7 +3297,7 @@ body:has(.sticky-cart-bar.active) {
 .plan-summary-price {
   font-size: 1.25rem;
   font-weight: 800;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .plan-summary-features {
@@ -3358,7 +3317,7 @@ body:has(.sticky-cart-bar.active) {
 }
 
 .plan-summary-features li svg {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   flex-shrink: 0;
 }
 
@@ -3418,11 +3377,11 @@ body:has(.sticky-cart-bar.active) {
 }
 
 .breadcrumbs a:hover {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .breadcrumbs li[aria-current="page"] {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   font-weight: 600;
 }
 
@@ -3448,8 +3407,6 @@ body:has(.sticky-cart-bar.active) {
   align-items: center;
   gap: 0.5rem;
   position: relative;
-  display: flex;
-  flex-direction: column;
   padding: 0 1.5rem;
 }
 
@@ -3478,14 +3435,14 @@ body:has(.sticky-cart-bar.active) {
 }
 
 .progress-step.active .progress-number {
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
-  border-color: var(--spartan-gold);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
+  border-color: var(--brand-primary);
   color: #ffffff;
   box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
 }
 
 .progress-step.active .progress-label {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .progress-step.completed .progress-number {
@@ -3521,7 +3478,7 @@ body:has(.sticky-cart-bar.active) {
 }
 
 .progress-connector.active {
-  background: linear-gradient(90deg, var(--spartan-gold), var(--wellness-green));
+  background: linear-gradient(90deg, var(--brand-primary), var(--wellness-green));
 }
 
 @media (max-width: 480px) {
@@ -3542,8 +3499,6 @@ body:has(.sticky-cart-bar.active) {
 
 .input-wrapper {
   position: relative;
-  display: flex;
-  flex-direction: column;
   display: flex;
   align-items: center;
 }
@@ -3726,7 +3681,7 @@ body:has(.sticky-cart-bar.active) {
 .order-summary__title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid rgba(37, 99, 235, 0.2);
@@ -3777,7 +3732,7 @@ body:has(.sticky-cart-bar.active) {
 }
 
 .order-summary__total span:last-child {
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-light) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -3807,7 +3762,7 @@ body:has(.sticky-cart-bar.active) {
   display: block;
   font-size: 2rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-light) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -3827,7 +3782,7 @@ body:has(.sticky-cart-bar.active) {
 .order-summary__includes h4 {
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   margin-bottom: 1rem;
 }
 
@@ -3927,7 +3882,7 @@ body:has(.sticky-cart-bar.active) {
 .checkout .alert--info {
   background: rgba(37, 99, 235, 0.1);
   border: 1px solid rgba(37, 99, 235, 0.3);
-  color: var(--spartan-gold-light);
+  color: var(--brand-primary-light);
 }
 
 .checkout .alert__icon {
@@ -3942,7 +3897,7 @@ body:has(.sticky-cart-bar.active) {
   padding: 1.25rem 2rem;
   font-size: 1.125rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   color: #ffffff;
   border: none;
   border-radius: var(--border-radius-lg);
@@ -3952,7 +3907,7 @@ body:has(.sticky-cart-bar.active) {
 }
 
 #submit-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, var(--spartan-gold-light) 0%, var(--spartan-gold) 100%);
+  background: linear-gradient(135deg, var(--brand-primary-light) 0%, var(--brand-primary) 100%);
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
 }
@@ -3993,7 +3948,7 @@ body:has(.sticky-cart-bar.active) {
   flex-direction: column;
   z-index: 1;
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border: 2px solid var(--spartan-gold);
+  border: 2px solid var(--brand-primary);
   border-radius: var(--border-radius-2xl);
   padding: 2.5rem;
   max-width: 500px;
@@ -4007,7 +3962,7 @@ body:has(.sticky-cart-bar.active) {
 .modal__content h2 {
   font-size: 1.75rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-light) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -4225,7 +4180,7 @@ body:has(.sticky-cart-bar.active) {
 }
 
 .billing-option.active {
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   color: #ffffff;
   box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
 }
@@ -4234,7 +4189,7 @@ body:has(.sticky-cart-bar.active) {
   display: block;
   font-size: 0.7rem;
   font-weight: 500;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   margin-top: 0.125rem;
 }
 
@@ -4288,7 +4243,7 @@ body:has(.sticky-cart-bar.active) {
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   color: #ffffff;
   padding: 0.375rem 1.25rem;
   border-radius: 50px;
@@ -4310,7 +4265,7 @@ body:has(.sticky-cart-bar.active) {
 .subscription-name {
   font-size: 1.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-light) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -4456,7 +4411,7 @@ body:has(.sticky-cart-bar.active) {
   display: block;
   font-size: 1.1rem;
   font-weight: 800;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   line-height: 1.2;
 }
 
@@ -4488,14 +4443,14 @@ body:has(.sticky-cart-bar.active) {
   gap: 0.5rem;
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   margin: 0 0 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .feature-group-title svg {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   opacity: 0.8;
 }
 
@@ -4525,7 +4480,7 @@ body:has(.sticky-cart-bar.active) {
   top: 0.5em;
   width: 6px;
   height: 6px;
-  background: var(--spartan-gold);
+  background: var(--brand-primary);
   border-radius: 50%;
   opacity: 0.7;
 }
@@ -4708,7 +4663,7 @@ body:has(.sticky-cart-bar.active) {
 .pricing-detail-card h4 {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   margin-bottom: 0.5rem;
 }
 
@@ -4716,15 +4671,6 @@ body:has(.sticky-cart-bar.active) {
   font-size: 0.85rem;
   color: rgba(100, 116, 139, 1);
   line-height: 1.5;
-}
-
-/* Steps grid with 4 items */
-.steps-grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
 @media (max-width: 900px) {
@@ -4763,7 +4709,7 @@ body:has(.sticky-cart-bar.active) {
 .hero-stat-number {
   font-size: 2rem;
   font-weight: 800;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   line-height: 1.1;
 }
 
@@ -4814,7 +4760,7 @@ body:has(.sticky-cart-bar.active) {
   border-radius: 50px;
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -4830,7 +4776,7 @@ body:has(.sticky-cart-bar.active) {
   gap: 0.75rem;
   padding: 1rem 2rem;
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(37, 99, 235, 0.08) 100%);
-  border: 2px solid var(--spartan-gold);
+  border: 2px solid var(--brand-primary);
   border-radius: 50px;
 }
 
@@ -4845,7 +4791,7 @@ body:has(.sticky-cart-bar.active) {
 }
 
 .timeline-text strong {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 /* ============================================
@@ -4917,7 +4863,7 @@ body:has(.sticky-cart-bar.active) {
 }
 
 .stat-value .stat-arrow {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   margin: 0 0.25rem;
 }
 
@@ -4933,7 +4879,7 @@ body:has(.sticky-cart-bar.active) {
   margin: 0;
   padding: 1rem;
   background: rgba(37, 99, 235, 0.05);
-  border-left: 3px solid var(--spartan-gold);
+  border-left: 3px solid var(--brand-primary);
   border-radius: 0 8px 8px 0;
 }
 
@@ -4942,7 +4888,7 @@ body:has(.sticky-cart-bar.active) {
   margin-top: 0.75rem;
   font-style: normal;
   font-weight: 600;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   font-size: 0.85rem;
 }
 
@@ -4971,8 +4917,6 @@ body:has(.sticky-cart-bar.active) {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
   position: relative;
-  display: flex;
-  flex-direction: column;
 }
 
 .expectation-item {
@@ -4995,7 +4939,7 @@ body:has(.sticky-cart-bar.active) {
 .expectation-week {
   display: inline-block;
   padding: 0.35rem 0.75rem;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   border-radius: 50px;
   font-size: 0.8rem;
   font-weight: 700;
@@ -5048,7 +4992,7 @@ body:has(.sticky-cart-bar.active) {
 .badge-text {
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -5060,7 +5004,7 @@ body:has(.sticky-cart-bar.active) {
 .welcome-badge {
   display: inline-block;
   padding: 0.35rem 0.75rem;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   border-radius: 50px;
   font-size: 0.7rem;
   font-weight: 700;
@@ -5078,7 +5022,7 @@ body:has(.sticky-cart-bar.active) {
 .welcome-guide-title {
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   margin-bottom: 0.75rem !important;
 }
 
@@ -5109,7 +5053,7 @@ body:has(.sticky-cart-bar.active) {
 
 .welcome-email-input:focus {
   outline: none;
-  border-color: var(--spartan-gold);
+  border-color: var(--brand-primary);
   background: rgba(37, 99, 235, 0.1);
 }
 
@@ -5144,7 +5088,7 @@ body:has(.sticky-cart-bar.active) {
 .exit-stat-number {
   font-size: 1.5rem;
   font-weight: 800;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   line-height: 1.1;
 }
 
@@ -5194,24 +5138,6 @@ body:has(.mobile-sticky-cta.active) {
   padding-bottom: 70px;
 }
 
-/* Ensure footer has margin when sticky elements are active */
-.footer {
-  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-  border-top: 1px solid rgba(37, 99, 235, 0.2);
-  color: #475569;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  margin-bottom: 0;
-  padding-bottom: 2rem;
-}
-
-body:has(.sticky-cart-bar.active) .footer,
-body:has(.mobile-sticky-cta.active) .footer {
-  margin-bottom: 80px;
-}
-
 .mobile-sticky-cta.active {
   transform: translateY(0);
 }
@@ -5237,7 +5163,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 .mobile-sticky-price {
   font-size: 1.25rem;
   font-weight: 800;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .mobile-sticky-btn {
@@ -5294,7 +5220,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 }
 
 .enrollment-text strong {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 /* ============================================
@@ -5321,7 +5247,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 
 .stack-badge {
   padding: 0.35rem 0.75rem;
-  background: var(--spartan-gold);
+  background: var(--brand-primary);
   color: #ffffff;
   border-radius: 50px;
   font-size: 0.7rem;
@@ -5470,7 +5396,7 @@ body:has(.mobile-sticky-cta.active) .footer {
   max-width: 400px;
   height: 100%;
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border-left: 2px solid var(--spartan-gold);
+  border-left: 2px solid var(--brand-primary);
   z-index: var(--z-modal);
   display: flex;
   flex-direction: column;
@@ -5493,7 +5419,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 .cart-sidebar-header h2 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   margin: 0;
 }
 
@@ -5514,8 +5440,8 @@ body:has(.mobile-sticky-cta.active) .footer {
 
 .cart-sidebar-close:hover {
   background: rgba(37, 99, 235, 0.1);
-  border-color: var(--spartan-gold);
-  color: var(--spartan-gold);
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
 }
 
 .cart-sidebar-empty {
@@ -5592,7 +5518,7 @@ body:has(.mobile-sticky-cta.active) .footer {
   font-size: 0.7rem;
   padding: 0.15rem 0.5rem;
   background: rgba(37, 99, 235, 0.15);
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   border-radius: 50px;
   font-weight: 500;
 }
@@ -5600,7 +5526,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 .cart-sidebar-item-price {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .cart-sidebar-item-remove {
@@ -5643,7 +5569,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 .cart-sidebar-total {
   font-size: 1.5rem;
   font-weight: 800;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 @media (max-width: 480px) {
@@ -5679,7 +5605,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 
 .pairing-modal {
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border: 2px solid var(--spartan-gold);
+  border: 2px solid var(--brand-primary);
   border-radius: 20px;
   max-width: 500px;
   width: 100%;
@@ -5720,8 +5646,8 @@ body:has(.mobile-sticky-cta.active) .footer {
 
 .pairing-modal-close:hover {
   background: rgba(37, 99, 235, 0.1);
-  border-color: var(--spartan-gold);
-  color: var(--spartan-gold);
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
 }
 
 .pairing-modal-header {
@@ -5733,11 +5659,11 @@ body:has(.mobile-sticky-cta.active) .footer {
   display: inline-block;
   padding: 0.35rem 1rem;
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(37, 99, 235, 0.08) 100%);
-  border: 1px solid var(--spartan-gold);
+  border: 1px solid var(--brand-primary);
   border-radius: 50px;
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   letter-spacing: 1px;
   margin-bottom: 1rem;
 }
@@ -5776,8 +5702,8 @@ body:has(.mobile-sticky-cta.active) .footer {
 
 .pairing-toggle-btn.active {
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(37, 99, 235, 0.08) 100%);
-  border-color: var(--spartan-gold);
-  color: var(--spartan-gold);
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
 }
 
 .pairing-content {
@@ -5796,7 +5722,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 .pairing-suggestion h3 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   margin-bottom: 0.75rem;
 }
 
@@ -5857,7 +5783,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 .pairing-price-value {
   font-size: 1.5rem;
   font-weight: 800;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .pairing-stack-price {
@@ -5915,28 +5841,6 @@ body:has(.mobile-sticky-cta.active) .footer {
   }
 }
 
-/* ============================================
-   Floating Gold Particles Animation
-   ============================================ */
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100vh) rotate(720deg);
-    opacity: 0;
-  }
-}
-
 /* Simplified - removed particle and glow effects */
 .hero::after {
   display: none;
@@ -5959,7 +5863,7 @@ body:has(.mobile-sticky-cta.active) .footer {
   transform: translateX(-50%);
   width: 200px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--spartan-gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--brand-primary), transparent);
 }
 
 /* ============================================
@@ -5991,7 +5895,7 @@ body:has(.mobile-sticky-cta.active) .footer {
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .lab-info-header strong {
@@ -6042,7 +5946,7 @@ body:has(.mobile-sticky-cta.active) .footer {
   justify-content: center;
   width: 22px;
   height: 22px;
-  background: var(--spartan-gold);
+  background: var(--brand-primary);
   color: #ffffff;
   border-radius: 50%;
   font-size: 0.75rem;
@@ -6144,7 +6048,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 }
 
 .support-item a:hover {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .response-badge {
@@ -6451,7 +6355,7 @@ body:has(.mobile-sticky-cta.active) .footer {
   left: 50%;
   transform: translate(-50%, -50%);
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border: 2px solid var(--spartan-gold);
+  border: 2px solid var(--brand-primary);
   border-radius: 16px;
   padding: 2rem;
   max-width: 500px;
@@ -6470,7 +6374,7 @@ body:has(.mobile-sticky-cta.active) .footer {
   right: 1rem;
   background: none;
   border: none;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   font-size: 24px;
   cursor: pointer;
   min-height: 44px;
@@ -6487,35 +6391,6 @@ body:has(.mobile-sticky-cta.active) .footer {
   flex-wrap: wrap;
   justify-content: center;
   margin: 1rem 0;
-}
-
-/* ============================================
-   Exit Popup Stats Grid
-   ============================================ */
-
-.exit-popup-stats {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin: 1.5rem 0;
-  flex-wrap: wrap;
-}
-
-.exit-stat {
-  text-align: center;
-}
-
-.exit-stat-number {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--spartan-gold);
-}
-
-.exit-stat-label {
-  display: block;
-  font-size: 0.75rem;
-  color: rgba(100, 116, 139, 1);
 }
 
 /* ============================================
@@ -6586,7 +6461,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 }
 
 .differentiator-card h4 {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   margin-bottom: 0.5rem;
 }
 
@@ -6643,7 +6518,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 }
 
 .card--accent-gold {
-  border-left: 4px solid var(--spartan-gold);
+  border-left: 4px solid var(--brand-primary);
 }
 
 .card--accent-green {
@@ -6850,14 +6725,14 @@ body:has(.mobile-sticky-cta.active) .footer {
   font-size: 0.85rem;
 }
 .js-ai-price {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   font-weight: 700;
   font-size: 0.9rem;
 }
 
 .js-ai-add-btn {
   padding: 0.5rem 1rem;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-crimson-darker) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-darker) 100%);
   border: none;
   border-radius: 50px;
   color: #1e293b;
@@ -6900,7 +6775,7 @@ body:has(.mobile-sticky-cta.active) .footer {
 .js-upsell-checkbox {
   width: 20px;
   height: 20px;
-  accent-color: var(--spartan-gold);
+  accent-color: var(--brand-primary);
 }
 
 .js-lab-card {
@@ -6919,12 +6794,12 @@ body:has(.mobile-sticky-cta.active) .footer {
 }
 
 .js-lab-card.selected {
-  border-color: var(--spartan-gold);
+  border-color: var(--brand-primary);
   background: rgba(37, 99, 235, 0.15);
 }
 
 .js-lab-name {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 .js-lab-address {
   font-size: 0.85rem;
@@ -6977,7 +6852,7 @@ body:has(.mobile-sticky-cta.active) .footer {
   color: var(--text-primary);
 }
 .js-qv-value--price {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   font-size: 1.5rem;
   font-weight: 700;
 }
@@ -7087,17 +6962,7 @@ body:has(.mobile-sticky-cta.active) .footer {
    ============================================ */
 
 .text-gold-contrast {
-  color: var(--spartan-gold);
-}
-
-.logo-text,
-a .logo-text,
-.logo .logo-text,
-.trust-item h4,
-.subscription-name,
-.stat-value,
-.ai-title {
-  /* Text shadows removed for light theme - not needed */
+  color: var(--brand-primary);
 }
 
 /* ============================================
@@ -7167,7 +7032,7 @@ a .logo-text,
   color: var(--error-red);
 }
 .u-text-gold {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 .u-text-muted {
   color: rgba(71, 85, 105, 1);
@@ -7207,7 +7072,7 @@ a .logo-text,
   color: var(--success-green);
 }
 .competitive-check--gold {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .competitive-separator {
@@ -7286,7 +7151,7 @@ a .logo-text,
 
 /* Comparison Table Cell Styles */
 .comparison-table thead tr {
-  border-bottom: 2px solid var(--spartan-gold);
+  border-bottom: 2px solid var(--brand-primary);
 }
 
 .comparison-table th {
@@ -7297,7 +7162,7 @@ a .logo-text,
 
 .comparison-table th.highlight-col {
   background: rgba(37, 99, 235, 0.1);
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   font-weight: 700;
 }
 
@@ -7325,7 +7190,7 @@ a .logo-text,
 }
 
 .comparison-table .highlight-col .highlight-value {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   font-weight: 700;
 }
 
@@ -7412,17 +7277,7 @@ a .logo-text,
   background: linear-gradient(90deg, var(--result-critical), #f87171);
 }
 
-/* ============================================
-   Utility Classes (for replacing inline styles)
-   ============================================ */
-
-/* Spacing utilities */
-.mt-2 {
-  margin-top: var(--space-2);
-}
-.mt-4 {
-  margin-top: var(--space-4);
-}
+/* Additional Spacing Utilities */
 .mt-6 {
   margin-top: var(--space-6);
 }
@@ -7432,9 +7287,6 @@ a .logo-text,
 .mb-2 {
   margin-bottom: var(--space-2);
 }
-.mb-4 {
-  margin-bottom: var(--space-4);
-}
 .mb-6 {
   margin-bottom: var(--space-6);
 }
@@ -7442,28 +7294,11 @@ a .logo-text,
   padding-top: var(--space-4);
 }
 
-/* Text utilities */
-.text-center {
-  text-align: center;
-}
-
-/* Display utilities */
-.flex {
-  display: flex;
-}
+/* Additional Display Utilities */
 .flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.gap-2 {
-  gap: var(--space-2);
-}
-.gap-3 {
-  gap: var(--space-3);
-}
-.gap-4 {
-  gap: var(--space-4);
 }
 
 /* Border utilities */
@@ -7525,7 +7360,7 @@ a .logo-text,
 
 /* Best Value badge gradient */
 .subscription-popular--gold {
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-light) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
 }
 
 /* Hero Trust Badges */
@@ -7562,7 +7397,7 @@ a .logo-text,
 .hero-trust-badge--gold {
   background: rgba(37, 99, 235, 0.15);
   border: 1px solid rgba(37, 99, 235, 0.3);
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 /* ============================================
@@ -7652,7 +7487,7 @@ a .logo-text,
 }
 
 .faq-item.active {
-  border-color: var(--spartan-gold);
+  border-color: var(--brand-primary);
   background: rgba(37, 99, 235, 0.05);
 }
 
@@ -7673,13 +7508,13 @@ a .logo-text,
 }
 
 .faq-question:hover {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .faq-icon {
   width: 24px;
   height: 24px;
-  fill: var(--spartan-gold);
+  fill: var(--brand-primary);
   transition: transform 0.3s ease;
   flex-shrink: 0;
 }
@@ -7747,7 +7582,7 @@ a .logo-text,
 
 .spinner--gold {
   border-color: rgba(37, 99, 235, 0.3);
-  border-top-color: var(--spartan-gold);
+  border-top-color: var(--brand-primary);
 }
 
 .spinner--lg {
@@ -7994,7 +7829,7 @@ a .logo-text,
 
 .dashboard-card__action {
   font-size: 0.85rem;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   cursor: pointer;
   transition: opacity 0.2s;
 }
@@ -8008,7 +7843,7 @@ a .logo-text,
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8050,7 +7885,7 @@ a .logo-text,
 .profile-stat__value {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .profile-stat__label {
@@ -8205,7 +8040,7 @@ a .logo-text,
 .appointment-date__day {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   line-height: 1;
 }
 
@@ -8254,7 +8089,7 @@ a .logo-text,
 
 .chart-bar {
   flex: 1;
-  background: linear-gradient(180deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
+  background: linear-gradient(180deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   border-radius: 4px 4px 0 0;
   min-width: 30px;
   position: relative;
@@ -8280,7 +8115,7 @@ a .logo-text,
   transform: translateX(-50%);
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 /* Trend Indicators */
@@ -8349,7 +8184,7 @@ a .logo-text,
   top: -4px;
   width: 4px;
   height: 16px;
-  background: var(--spartan-gold);
+  background: var(--brand-primary);
   border-radius: 2px;
   transform: translateX(-50%);
 }
@@ -8452,7 +8287,7 @@ a .logo-text,
 .results-summary-card__icon svg {
   width: 24px;
   height: 24px;
-  fill: var(--spartan-gold);
+  fill: var(--brand-primary);
 }
 
 .results-summary-card__value {
@@ -8508,7 +8343,7 @@ a .logo-text,
 }
 
 .gender-toggle__option.active {
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   color: #ffffff;
 }
 
@@ -8541,41 +8376,6 @@ a .logo-text,
 }
 
 /* ============================================
-   Empty State Styles
-   ============================================ */
-
-.empty-state {
-  text-align: center;
-  padding: 3rem 1.5rem;
-  color: rgba(100, 116, 139, 1);
-}
-
-.empty-state__icon {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 1rem;
-  opacity: 0.5;
-}
-
-.empty-state__icon svg {
-  width: 100%;
-  height: 100%;
-  fill: var(--spartan-gold);
-}
-
-.empty-state__title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #1e293b;
-  margin-bottom: 0.5rem;
-}
-
-.empty-state__text {
-  font-size: 0.9rem;
-  margin-bottom: 1.5rem;
-}
-
-/* ============================================
    Brand Inline Element
    ============================================ */
 
@@ -8586,9 +8386,9 @@ a .logo-text,
   font-weight: 700;
   background: linear-gradient(
     135deg,
-    var(--spartan-gold) 0%,
-    var(--spartan-gold-light) 50%,
-    var(--spartan-gold) 100%
+    var(--brand-primary) 0%,
+    var(--brand-primary-light) 50%,
+    var(--brand-primary) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -8620,7 +8420,7 @@ a .logo-text,
 .about-hero h1 {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 800;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-light) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -8657,7 +8457,7 @@ a .logo-text,
   left: 0;
   width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, var(--spartan-gold), transparent);
+  background: linear-gradient(90deg, var(--brand-primary), transparent);
   border-radius: 2px;
 }
 
@@ -8702,7 +8502,7 @@ a .logo-text,
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .about-value h3 {
@@ -8774,7 +8574,7 @@ a .logo-text,
 }
 
 .about-comparison__item--highlight h3 {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -8787,7 +8587,7 @@ a .logo-text,
 
 .about-comparison__item--highlight li::before {
   content: "✓";
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 /* About CTA */
@@ -8846,7 +8646,7 @@ a .logo-text,
 .legal-section h2 {
   font-size: 1.35rem;
   font-weight: 600;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   margin-bottom: 1rem;
 }
 
@@ -8898,7 +8698,7 @@ a .logo-text,
 }
 
 .faq-intro a {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .faq-section {
@@ -8909,7 +8709,7 @@ a .logo-text,
 .faq-section h2 {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   margin-bottom: 1.25rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -8946,7 +8746,7 @@ a .logo-text,
 .faq-question::after {
   content: "+";
   font-size: 1.5rem;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   transition: transform 0.3s ease;
 }
 
@@ -9069,7 +8869,7 @@ a .logo-text,
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .contact-card h2 {
@@ -9086,7 +8886,7 @@ a .logo-text,
 }
 
 .contact-card__link {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   font-weight: 600;
   text-decoration: none;
   display: block;
@@ -9165,7 +8965,7 @@ a .logo-text,
 .contact-info-item h3 {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   margin-bottom: 0.5rem;
 }
 
@@ -9181,7 +8981,7 @@ a .logo-text,
 }
 
 .contact-info-item a:hover {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 /* ============================================
@@ -9192,9 +8992,16 @@ a .logo-text,
   padding: var(--section-padding) 0;
 }
 
-.pricing-teaser-card {
-  max-width: 480px;
+.pricing-teaser-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 900px;
   margin: 0 auto;
+  align-items: start;
+}
+
+.pricing-teaser-card {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 1) 100%);
   border: 2px solid rgba(37, 99, 235, 0.3);
   border-radius: var(--border-radius-xl);
@@ -9208,9 +9015,28 @@ a .logo-text,
     0 0 40px rgba(37, 99, 235, 0.1);
 }
 
+.pricing-teaser-card--premium {
+  border-color: var(--spartan-gold);
+  box-shadow:
+    0 20px 60px rgba(241, 245, 249, 0.9),
+    0 0 40px rgba(37, 99, 235, 0.15),
+    0 0 0 1px rgba(37, 99, 235, 0.1);
+}
+
+.pricing-teaser-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-teaser-badge--premium {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
 .pricing-teaser-badge {
   display: inline-block;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   color: #ffffff;
   font-size: 0.75rem;
   font-weight: 700;
@@ -9224,7 +9050,7 @@ a .logo-text,
 .pricing-teaser-price {
   font-size: 4rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-light) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -9264,7 +9090,7 @@ a .logo-text,
 }
 
 .pricing-teaser-highlights svg {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
   flex-shrink: 0;
 }
 
@@ -9294,6 +9120,13 @@ a .logo-text,
 
 .locations-cta .btn {
   min-width: 200px;
+}
+
+@media (max-width: 768px) {
+  .pricing-teaser-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -9333,7 +9166,7 @@ a .logo-text,
 .pricing-hero h1 {
   font-size: 3rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-light) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -9363,7 +9196,7 @@ a .logo-text,
   border-radius: 50px;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .pricing-hero-badge svg {
@@ -9395,6 +9228,50 @@ a .logo-text,
   margin: 0 auto;
 }
 
+.pricing-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.pricing-main-card--premium {
+  border-color: var(--spartan-gold);
+}
+
+.pricing-card-popular--premium {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.pricing-card-includes {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.pricing-card-includes li {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  font-size: 0.95rem;
+  color: rgba(30, 41, 59, 0.85);
+  border-bottom: 1px solid rgba(37, 99, 235, 0.08);
+}
+
+.pricing-card-includes li:last-child {
+  border-bottom: none;
+}
+
+.pricing-card-includes li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  color: var(--brand-primary);
+  font-weight: 700;
+}
+
 .pricing-main-card {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 1) 100%);
   border: 2px solid rgba(37, 99, 235, 0.4);
@@ -9413,7 +9290,7 @@ a .logo-text,
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   color: #ffffff;
   font-size: 0.75rem;
   font-weight: 700;
@@ -9487,7 +9364,7 @@ a .logo-text,
 .price-amount {
   font-size: 4.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-light) 100%);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -9498,52 +9375,6 @@ a .logo-text,
   font-size: 1.25rem;
   font-weight: 500;
   color: rgba(100, 116, 139, 1);
-}
-
-/* Billing Toggle */
-.billing-toggle {
-  display: flex;
-  background: rgba(241, 245, 249, 0.8);
-  border-radius: 50px;
-  padding: 4px;
-  margin-bottom: 0.5rem;
-}
-
-.billing-option {
-  flex: 1;
-  padding: 0.75rem 1rem;
-  border: none;
-  background: transparent;
-  color: rgba(100, 116, 139, 1);
-  font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.billing-option:hover {
-  color: rgba(30, 41, 59, 0.8);
-}
-
-.billing-option.active {
-  background: linear-gradient(135deg, var(--spartan-gold) 0%, var(--spartan-gold-dark) 100%);
-  color: #ffffff;
-}
-
-.billing-save {
-  display: inline-block;
-  background: rgba(34, 197, 94, 0.2);
-  color: #22c55e;
-  font-size: 0.7rem;
-  padding: 0.125rem 0.5rem;
-  border-radius: 50px;
-  margin-left: 0.5rem;
-}
-
-.billing-option.active .billing-save {
-  background: rgba(37, 99, 235, 0.15);
-  color: #1e293b;
 }
 
 .billing-note {
@@ -9572,7 +9403,7 @@ a .logo-text,
   display: block;
   font-size: 1.25rem;
   font-weight: 800;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .proof-label {
@@ -9642,7 +9473,7 @@ a .logo-text,
   margin: 0 auto 1.25rem;
   background: rgba(37, 99, 235, 0.1);
   border-radius: 50%;
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 .included-card h3 {
@@ -9722,7 +9553,7 @@ a .logo-text,
 }
 
 .guarantee-feature svg {
-  color: var(--spartan-gold);
+  color: var(--brand-primary);
 }
 
 @media (max-width: 768px) {
@@ -9748,6 +9579,13 @@ a .logo-text,
 /* Comparison Section */
 .comparison-section {
   background: linear-gradient(180deg, rgba(37, 99, 235, 0.03) 0%, transparent 100%);
+}
+
+@media (max-width: 768px) {
+  .pricing-card-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
 }
 
 @media (max-width: 500px) {
@@ -9800,7 +9638,7 @@ a .logo-text,
 }
 
 .phone-verify-status--pending {
-  color: var(--spartan-gold, #d4af37);
+  color: var(--brand-primary, #d4af37);
 }
 
 .phone-verify-status--verified {
@@ -9833,14 +9671,14 @@ a .logo-text,
 
 .verify-code-input:focus {
   outline: none;
-  border-color: var(--spartan-gold, #d4af37);
+  border-color: var(--brand-primary, #d4af37);
   box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
 }
 
 .link-btn {
   background: none;
   border: none;
-  color: var(--spartan-gold, #d4af37);
+  color: var(--brand-primary, #d4af37);
   cursor: pointer;
   font-size: 0.85rem;
   padding: 0;

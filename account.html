@@ -9,7 +9,7 @@
     <!-- Security Headers -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' https://static.klaviyo.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://a.klaviyo.com https://static.klaviyo.com;"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';"
     />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
@@ -26,9 +26,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="styles.css" />
-
-    <!-- Klaviyo SDK -->
-    <script async src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=YOUR_PUBLIC_API_KEY"></script>
 
     <style>
       .dashboard {
@@ -654,7 +651,7 @@
                     <div style="padding: var(--space-3); background: var(--bg-secondary); border-radius: var(--radius-lg)">
                       <div style="font-size: var(--text-sm); color: var(--text-tertiary); margin-bottom: var(--space-1)">Next Billing</div>
                       <div style="font-weight: var(--font-semibold)">Feb 15, 2026</div>
-                      <div style="font-size: var(--text-sm); color: var(--spartan-gold)">$249/mo</div>
+                      <div style="font-size: var(--text-sm); color: var(--brand-primary)">$249/mo</div>
                     </div>
                     <div style="padding: var(--space-3); background: var(--bg-secondary); border-radius: var(--radius-lg)">
                       <div style="font-size: var(--text-sm); color: var(--text-tertiary); margin-bottom: var(--space-1)">Member Since</div>
@@ -1045,7 +1042,6 @@
     <script src="js/cart.js"></script>
     <script src="js/plans.js"></script>
     <script src="js/ui.js"></script>
-    <script src="js/klaviyo.js"></script>
     <script src="app.js"></script>
     <script>
       // Check login state

@@ -11,7 +11,7 @@
    - Both systems are equivalent: --spacing-sm = --space-2 = 0.5rem
 
    COLORS:
-   - Primary brand: --spartan-gold and --spartan-crimson (both map to professional blue)
+   - Primary brand: --brand-primary (professional blue #2563eb)
    - Backgrounds: --bg-* (darkest, darker, dark, elevated, card)
    - Text: --text-* (primary, secondary, tertiary, muted)
    - Status: --result-* (optimal, normal, attention, critical)
@@ -52,18 +52,12 @@
 
   /* === PRIMARY BLUE - Professional Healthcare === */
   /* Using blue tones for trust and professionalism */
-  --spartan-crimson: #2563eb;
-  --spartan-crimson-dark: #1d4ed8;
-  --spartan-crimson-darker: #1e40af;
-  --spartan-crimson-light: #3b82f6;
-  --spartan-crimson-lighter: #60a5fa;
-  --spartan-crimson-bg: rgba(37, 99, 235, 0.1);
-
-  --spartan-gold: #2563eb;
-  --spartan-gold-light: #3b82f6;
-  --spartan-gold-dark: #1d4ed8;
-  --spartan-gold-darker: #1e40af;
-  --spartan-gold-bg: rgba(37, 99, 235, 0.1);
+  --brand-primary: #2563eb;
+  --brand-primary-dark: #1d4ed8;
+  --brand-primary-darker: #1e40af;
+  --brand-primary-light: #3b82f6;
+  --brand-primary-lighter: #60a5fa;
+  --brand-primary-bg: rgba(37, 99, 235, 0.1);
 
   /* === NEON ACCENT COLORS === */
   --neon-cyan: #00d4ff;
@@ -151,8 +145,7 @@
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-gold: 0 4px 20px rgba(37, 99, 235, 0.2);
-  --shadow-crimson: 0 4px 20px rgba(37, 99, 235, 0.2);
+  --shadow-brand: 0 4px 20px rgba(37, 99, 235, 0.2);
 
   /* === BORDERS === */
   --border-radius-sm: 4px;
@@ -187,9 +180,9 @@
   --text-tertiary: #64748b;
   --text-inverse: #ffffff;
   --text-muted: #94a3b8;
-  --text-link: var(--spartan-gold);
+  --text-link: var(--brand-primary);
   --border-light: rgba(37, 99, 235, 0.2);
-  --brand-primary: var(--spartan-crimson);
+  /* --brand-primary already defined above */
   --success-green: #22c55e;
   --error-red: #ef4444;
   --warning-yellow-dark: #ca8a04;

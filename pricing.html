@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://static.klaviyo.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://a.klaviyo.com https://static.klaviyo.com;"
+      content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com;"
     />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
@@ -52,9 +52,6 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/png" href="logo.png" />
     <link rel="manifest" href="/manifest.json" />
-
-    <!-- Klaviyo SDK -->
-    <script async src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=YOUR_PUBLIC_API_KEY"></script>
 
     <script type="application/ld+json">
       {
@@ -157,12 +154,13 @@
       <!-- Main Pricing Card Section -->
       <section class="section pricing-main-section" id="pricing-card">
         <div class="container">
-          <div class="pricing-card-wrapper">
-            <article class="pricing-main-card" data-plan="optimization">
-              <div class="pricing-card-popular">All-Inclusive</div>
+          <div class="pricing-card-grid">
+            <!-- TRT Essentials -->
+            <article class="pricing-main-card" data-plan="essentials">
+              <div class="pricing-card-popular">Most Popular</div>
               <div class="pricing-card-header">
-                <h2 class="pricing-card-name">TRT & HGH Therapy</h2>
-                <p class="pricing-card-tagline">Personalized to your labs</p>
+                <h2 class="pricing-card-name">TRT Essentials</h2>
+                <p class="pricing-card-tagline">Testosterone optimization, all-inclusive</p>
               </div>
 
               <!-- Price Anchoring -->
@@ -176,8 +174,8 @@
 
               <!-- Main Price -->
               <div class="pricing-card-price">
-                <span class="price-amount">$249</span>
-                <span class="price-period">/month</span>
+                <span class="price-amount subscription-price">$249</span>
+                <span class="price-period subscription-period">/month</span>
               </div>
 
               <!-- Billing Toggle -->
@@ -189,8 +187,17 @@
                   Yearly <span class="billing-save">Save $498</span>
                 </button>
               </div>
-              <p class="billing-note yearly-note" style="display: none;">$2,490/year billed annually</p>
               <p class="billing-note monthly-note">All-inclusive. No hidden fees. Ever.</p>
+
+              <!-- What's Included -->
+              <ul class="pricing-card-includes">
+                <li>Comprehensive blood panel (initial + quarterly)</li>
+                <li>Personalized TRT protocol</li>
+                <li>Testosterone delivered monthly</li>
+                <li>Unlimited telehealth with licensed providers</li>
+                <li>AI-powered progress dashboard</li>
+                <li>90-day money-back guarantee</li>
+              </ul>
 
               <!-- Social Proof Stats -->
               <div class="pricing-card-proof">
@@ -209,11 +216,82 @@
               </div>
 
               <!-- CTA -->
-              <button
-                class="btn btn-primary btn-large btn-full"
-                data-action="selectPlan"
-                data-plan-id="optimization"
-              >
+              <button class="btn btn-primary btn-large btn-full" data-action="selectPlan" data-plan-id="essentials">
+                Get Started
+              </button>
+              <p class="pricing-card-cta-note">Cancel anytime. Ships same day. HSA/FSA accepted.</p>
+
+              <!-- Trust Footer -->
+              <div class="pricing-card-trust">
+                <span>HIPAA</span>
+                <span class="trust-sep">|</span>
+                <span>FDA Registered</span>
+                <span class="trust-sep">|</span>
+                <span>Discreet Shipping</span>
+              </div>
+            </article>
+
+            <!-- Total Optimization -->
+            <article class="pricing-main-card pricing-main-card--premium" data-plan="optimization">
+              <div class="pricing-card-popular pricing-card-popular--premium">Peak Performance</div>
+              <div class="pricing-card-header">
+                <h2 class="pricing-card-name">Total Optimization</h2>
+                <p class="pricing-card-tagline">TRT + HGH for maximum results</p>
+              </div>
+
+              <!-- Price Anchoring -->
+              <div class="pricing-card-anchor">
+                <div class="price-comparison">
+                  <span class="price-label">Traditional Clinic:</span>
+                  <span class="price-old">$800-1200/mo</span>
+                </div>
+                <div class="price-savings">Save $350+/mo</div>
+              </div>
+
+              <!-- Main Price -->
+              <div class="pricing-card-price">
+                <span class="price-amount subscription-price">$449</span>
+                <span class="price-period subscription-period">/month</span>
+              </div>
+
+              <!-- Billing Toggle -->
+              <div class="billing-toggle">
+                <button class="billing-option active" data-billing="monthly">
+                  Monthly
+                </button>
+                <button class="billing-option" data-billing="yearly">
+                  Yearly <span class="billing-save">Save $898</span>
+                </button>
+              </div>
+              <p class="billing-note monthly-note">All-inclusive. No hidden fees. Ever.</p>
+
+              <!-- What's Included -->
+              <ul class="pricing-card-includes">
+                <li>Everything in TRT Essentials</li>
+                <li>Growth hormone (HGH) therapy</li>
+                <li>Monthly body composition tracking</li>
+                <li>Priority provider access</li>
+                <li>Quarterly protocol optimization</li>
+              </ul>
+
+              <!-- Social Proof Stats -->
+              <div class="pricing-card-proof">
+                <div class="proof-item">
+                  <span class="proof-value">2,500+</span>
+                  <span class="proof-label">Active Members</span>
+                </div>
+                <div class="proof-item">
+                  <span class="proof-value">4.9/5</span>
+                  <span class="proof-label">Satisfaction</span>
+                </div>
+                <div class="proof-item">
+                  <span class="proof-value">~7 days</span>
+                  <span class="proof-label">To Start</span>
+                </div>
+              </div>
+
+              <!-- CTA -->
+              <button class="btn btn-primary btn-large btn-full" data-action="selectPlan" data-plan-id="optimization">
                 Get Started
               </button>
               <p class="pricing-card-cta-note">Cancel anytime. Ships same day. HSA/FSA accepted.</p>
@@ -625,7 +703,6 @@
     <script src="js/plans.js" defer></script>
     <script src="js/cart.js" defer></script>
     <script src="js/ui.js" defer></script>
-    <script src="js/klaviyo.js" defer></script>
     <script src="app.js" defer></script>
     <script>
       // Billing toggle functionality

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://static.klaviyo.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://a.klaviyo.com https://static.klaviyo.com;"
+      content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com;"
     />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
@@ -65,12 +65,6 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/png" href="logo.png" />
     <link rel="manifest" href="/manifest.json" />
-
-    <!-- Klaviyo SDK -->
-    <script
-      async
-      src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=YOUR_PUBLIC_API_KEY"
-    ></script>
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -200,14 +194,14 @@
           <div class="hero-content">
             <div class="hero-text">
               <h1 id="hero-title">
-                Feel Your Best. <span class="hero-gradient-text">Science-Backed.</span>
+                Every Goal You Have <span class="hero-gradient-text">Starts With Your Hormones.</span>
               </h1>
               <p>
-                We analyze your labs and create a hormone protocol tailored to your body. $249/mo
-                all-inclusive - no surprise fees like other providers.
+                We analyze your labs and create a hormone protocol tailored to your body. Starting
+                at $249/mo all-inclusive &mdash; no surprise fees like other providers.
               </p>
               <div class="hero-ctas">
-                <a href="pricing.html" class="btn btn-primary btn-large"> Get Started - $249/mo </a>
+                <a href="pricing.html" class="btn btn-primary btn-large"> Get Started &mdash; From $249/mo </a>
               </div>
               <div class="hero-trust-signals">
                 <span class="hero-trust-item">
@@ -388,9 +382,9 @@
             </div>
           </div>
           <div class="u-text-center u-mt-xl">
-            <a href="pricing.html" class="btn btn-primary btn-large">Get Started - $249/mo</a>
+            <a href="pricing.html" class="btn btn-primary btn-large">Get Started &mdash; From $249/mo</a>
             <p class="u-mt-md u-text-muted" style="font-size: 0.9rem">
-              Everything included. No hidden fees.
+              TRT from $249/mo. TRT + HGH from $449/mo. Everything included.
             </p>
           </div>
         </div>
@@ -399,50 +393,100 @@
       <!-- Pricing Teaser Section -->
       <section class="section pricing-teaser" id="pricing">
         <div class="container">
-          <div class="pricing-teaser-card">
-            <div class="pricing-teaser-badge">All-Inclusive</div>
-            <h2 class="pricing-teaser-price">$249<span>/month</span></h2>
-            <p class="pricing-teaser-tagline">Everything included. No hidden fees. Ever.</p>
-            <ul class="pricing-teaser-highlights">
-              <li>
-                <svg
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                </svg>
-                Personalized TRT & HGH protocol
-              </li>
-              <li>
-                <svg
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                </svg>
-                Labs & telehealth included
-              </li>
-              <li>
-                <svg
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                </svg>
-                90-day money-back guarantee
-              </li>
-            </ul>
-            <a href="pricing.html" class="btn btn-primary btn-large">See Full Pricing</a>
-            <p class="pricing-teaser-note">HSA/FSA accepted. Cancel anytime.</p>
+          <div class="section-header">
+            <h2>Two Plans. Zero Hidden Fees.</h2>
+            <p>Pick what fits your goals. Everything is included.</p>
+          </div>
+          <div class="pricing-teaser-grid">
+            <!-- TRT Essentials -->
+            <div class="pricing-teaser-card" data-plan="essentials">
+              <div class="pricing-teaser-badge">Most Popular</div>
+              <h3 class="pricing-teaser-name">TRT Essentials</h3>
+              <h2 class="pricing-teaser-price">$249<span>/month</span></h2>
+              <p class="pricing-teaser-tagline">Testosterone optimization, all-inclusive</p>
+              <ul class="pricing-teaser-highlights">
+                <li>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  Comprehensive blood panel (initial + quarterly)
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  Personalized TRT protocol
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  Testosterone delivered monthly
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  Unlimited telehealth visits
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  AI-powered progress dashboard
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  90-day money-back guarantee
+                </li>
+              </ul>
+              <button class="btn btn-primary btn-large" data-action="selectPlan" data-plan-id="essentials">Get Started</button>
+              <p class="pricing-teaser-note">HSA/FSA accepted. Cancel anytime.</p>
+            </div>
+
+            <!-- Total Optimization -->
+            <div class="pricing-teaser-card pricing-teaser-card--premium" data-plan="optimization">
+              <div class="pricing-teaser-badge pricing-teaser-badge--premium">Peak Performance</div>
+              <h3 class="pricing-teaser-name">Total Optimization</h3>
+              <h2 class="pricing-teaser-price">$449<span>/month</span></h2>
+              <p class="pricing-teaser-tagline">TRT + HGH for maximum results</p>
+              <ul class="pricing-teaser-highlights">
+                <li>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  Everything in TRT Essentials
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  Growth hormone (HGH) therapy
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  Monthly body composition tracking
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  Priority provider access
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  Quarterly protocol optimization
+                </li>
+              </ul>
+              <button class="btn btn-primary btn-large" data-action="selectPlan" data-plan-id="optimization">Get Started</button>
+              <p class="pricing-teaser-note">HSA/FSA accepted. Cancel anytime.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -577,8 +621,8 @@
       <section class="section cta-section">
         <div class="container">
           <div class="cta-content">
-            <h2>Ready to Feel Your Best?</h2>
-            <p>$249/mo all-inclusive. Everything included.</p>
+            <h2>Your Hormones Won't Optimize Themselves.</h2>
+            <p>Starting at $249/mo. Labs, meds, doctor visits &mdash; everything included.</p>
             <a href="pricing.html" class="btn btn-white btn-large">Get Started Now</a>
             <p class="u-mt-md" style="font-size: 0.85rem; opacity: 0.9">
               Use code <strong class="u-text-gold">WELCOME10</strong> for 10% off your first month
@@ -640,7 +684,7 @@
               viewBox="0 0 24 24"
               width="20"
               height="20"
-              fill="var(--spartan-gold)"
+              fill="var(--brand-primary)"
               aria-hidden="true"
             >
               <path
@@ -658,7 +702,7 @@
               viewBox="0 0 24 24"
               width="20"
               height="20"
-              fill="var(--spartan-gold)"
+              fill="var(--brand-primary)"
               aria-hidden="true"
             >
               <path
@@ -675,7 +719,7 @@
               viewBox="0 0 24 24"
               width="20"
               height="20"
-              fill="var(--spartan-gold)"
+              fill="var(--brand-primary)"
               aria-hidden="true"
             >
               <path
@@ -1192,7 +1236,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
-        border: 2px solid var(--spartan-gold);
+        border: 2px solid var(--brand-primary);
         border-radius: 16px;
         padding: 2rem;
         max-width: 500px;
@@ -1211,7 +1255,7 @@
           right: 1rem;
           background: none;
           border: none;
-          color: var(--spartan-gold);
+          color: var(--brand-primary);
           font-size: 24px;
           cursor: pointer;
         "
@@ -1244,7 +1288,7 @@
           <div class="ai-chat-messages-mini" id="widgetChatMessages">
             <div class="ai-message bot">
               <div class="message-content">
-                <p>$249/mo all-inclusive. No hidden fees. 7 days to start. Ask me anything about TRT or HGH therapy.</p>
+                <p>TRT from $249/mo. TRT + HGH from $449/mo. All-inclusive. Ask me anything about hormone therapy.</p>
               </div>
             </div>
             <div class="ai-quick-buttons">
@@ -1320,133 +1364,7 @@
     <script src="js/ai-chat.js" defer></script>
     <script src="js/cart.js" defer></script>
     <script src="js/ui.js" defer></script>
-    <script src="js/klaviyo.js" defer></script>
     <script src="app.js" defer></script>
-    <script>
-      // Floating chat widget: independent from hero chat, uses its own DOM + message history
-      document.addEventListener('DOMContentLoaded', function() {
-        var toggle = document.getElementById('chatToggle');
-        var panel = document.getElementById('chatPanel');
-        var closeBtn = document.getElementById('chatClose');
-        var badge = toggle ? toggle.querySelector('.chat-widget__badge') : null;
-        var iconOpen = toggle ? toggle.querySelector('.chat-widget__icon-open') : null;
-        var iconClose = toggle ? toggle.querySelector('.chat-widget__icon-close') : null;
-        var widgetMessages = document.getElementById('widgetChatMessages');
-        var widgetInput = document.getElementById('widgetChatInput');
-        var widgetSendBtn = document.getElementById('widgetSendBtn');
-
-        function openPanel() {
-          if (panel) panel.classList.add('active');
-          if (badge) badge.style.display = 'none';
-          if (iconOpen) iconOpen.style.display = 'none';
-          if (iconClose) iconClose.style.display = 'block';
-        }
-
-        function closePanel() {
-          if (panel) panel.classList.remove('active');
-          if (iconOpen) iconOpen.style.display = 'block';
-          if (iconClose) iconClose.style.display = 'none';
-        }
-
-        if (toggle) {
-          toggle.addEventListener('click', function() {
-            if (panel && panel.classList.contains('active')) {
-              closePanel();
-            } else {
-              openPanel();
-            }
-          });
-        }
-
-        if (closeBtn) {
-          closeBtn.addEventListener('click', closePanel);
-        }
-
-        // Widget send: builds DOM messages and calls getAiResponse directly
-        function widgetSend(message) {
-          if (!message || !widgetMessages) return;
-
-          // Add user message
-          var userMsg = document.createElement('div');
-          userMsg.className = 'ai-message user';
-          var userContent = document.createElement('div');
-          userContent.className = 'message-content';
-          var userP = document.createElement('p');
-          userP.textContent = message;
-          userContent.appendChild(userP);
-          userMsg.appendChild(userContent);
-          widgetMessages.appendChild(userMsg);
-
-          if (widgetInput) widgetInput.value = '';
-
-          // Typing indicator
-          var typing = document.createElement('div');
-          typing.className = 'ai-message bot';
-          typing.id = 'widgetTypingIndicator';
-          var typingContent = document.createElement('div');
-          typingContent.className = 'message-content';
-          var dots = document.createElement('div');
-          dots.className = 'typing-indicator';
-          for (var i = 0; i < 3; i++) dots.appendChild(document.createElement('span'));
-          typingContent.appendChild(dots);
-          typing.appendChild(typingContent);
-          widgetMessages.appendChild(typing);
-
-          requestAnimationFrame(function() {
-            widgetMessages.scrollTop = widgetMessages.scrollHeight;
-          });
-
-          setTimeout(function() {
-            var indicator = document.getElementById('widgetTypingIndicator');
-            if (indicator) indicator.remove();
-
-            var getAiResponse = window.WeightGainAIChat && window.WeightGainAIChat.getAiResponse;
-            var response = getAiResponse ? getAiResponse(message) : { message: "I'm here to help! Ask me about TRT or HGH therapy." };
-
-            var aiMsg = document.createElement('div');
-            aiMsg.className = 'ai-message bot';
-            var aiContent = document.createElement('div');
-            aiContent.className = 'message-content';
-            var aiP = document.createElement('p');
-            aiP.textContent = response.message;
-            aiContent.appendChild(aiP);
-            aiMsg.appendChild(aiContent);
-            widgetMessages.appendChild(aiMsg);
-
-            requestAnimationFrame(function() {
-              widgetMessages.scrollTop = widgetMessages.scrollHeight;
-            });
-          }, 1200);
-        }
-
-        // Send button
-        if (widgetSendBtn) {
-          widgetSendBtn.addEventListener('click', function() {
-            var msg = widgetInput ? widgetInput.value.trim() : '';
-            if (msg) widgetSend(msg);
-          });
-        }
-
-        // Enter key on widget input
-        if (widgetInput) {
-          widgetInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-              var msg = widgetInput.value.trim();
-              if (msg) widgetSend(msg);
-            }
-          });
-        }
-
-        // Quick preset buttons in widget
-        document.addEventListener('click', function(e) {
-          var presetBtn = e.target.closest('[data-widget-preset]');
-          if (presetBtn) {
-            e.preventDefault();
-            var msg = presetBtn.getAttribute('data-widget-preset');
-            if (msg) widgetSend(msg);
-          }
-        });
-      });
-    </script>
+    <script src="js/chat-widget.js" defer></script>
   </body>
 </html>

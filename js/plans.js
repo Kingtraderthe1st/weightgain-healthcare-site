@@ -1,29 +1,28 @@
 /**
  * WeightGain - Subscription Plans Management
- * Single unified membership - personalized protocol based on your labs
+ * Two-tier membership: TRT Essentials and Total Optimization (TRT + HGH)
  */
 
 // Dependencies: WeightGainState, WeightGainCart, WeightGainUI
 
 // =============================================================================
-// Single Subscription Plan - Simple like Function Health
+// Subscription Plans
 // =============================================================================
 
 const subscriptionPlans = {
-  optimization: {
-    id: "total-optimization",
-    name: "Total Optimization",
-    tagline: "Your personalized hormone protocol",
+  essentials: {
+    id: "trt-essentials",
+    name: "TRT Essentials",
+    tagline: "Testosterone optimization, all-inclusive",
     description:
-      "We analyze your labs and create a protocol tailored to your body. You get exactly what you need - nothing more, nothing less.",
+      "Everything you need for testosterone replacement therapy. Labs, medication, and provider visits included.",
     includes: [
-      "Comprehensive blood panel",
-      "Personalized hormone protocol",
-      "Monthly medication delivery",
-      "Quarterly monitoring labs",
-      "Unlimited telehealth visits",
-      "AI-powered progress tracking",
-      "Priority support",
+      "Comprehensive blood panel (initial + quarterly)",
+      "Personalized TRT protocol",
+      "Testosterone delivered monthly",
+      "Unlimited telehealth with licensed providers",
+      "AI-powered progress dashboard",
+      "90-day money-back guarantee",
     ],
     pricing: {
       monthly: 249,
@@ -32,6 +31,27 @@ const subscriptionPlans = {
     yearlySavings: 498,
     monthlyEquivalent: 207,
     popular: true,
+  },
+  optimization: {
+    id: "total-optimization",
+    name: "Total Optimization",
+    tagline: "TRT + HGH for peak performance",
+    description:
+      "The complete protocol. Testosterone and growth hormone therapy combined for maximum results.",
+    includes: [
+      "Everything in TRT Essentials",
+      "Growth hormone (HGH) therapy",
+      "Monthly body composition tracking",
+      "Priority provider access",
+      "Quarterly protocol optimization",
+    ],
+    pricing: {
+      monthly: 449,
+      yearly: 4490,
+    },
+    yearlySavings: 898,
+    monthlyEquivalent: 374,
+    popular: false,
   },
 };
 
@@ -71,45 +91,47 @@ function updatePricingDisplay() {
   }
 
   const cycle = state.billingCycle;
-  const plan = subscriptionPlans.optimization;
 
-  const card = document.querySelector('[data-plan="optimization"]');
-  if (!card) {
-    return;
-  }
+  // Update all plan cards on the page
+  Object.keys(subscriptionPlans).forEach((key) => {
+    const plan = subscriptionPlans[key];
+    const card = document.querySelector(`[data-plan="${key}"]`);
+    if (!card) {
+      return;
+    }
 
-  const priceEl = card.querySelector(".subscription-price");
-  const periodEl = card.querySelector(".subscription-period");
-  const savingsEl = card.querySelector(".subscription-savings");
+    const priceEl = card.querySelector(".subscription-price");
+    const periodEl = card.querySelector(".subscription-period");
+    const savingsEl = card.querySelector(".subscription-savings");
 
-  if (priceEl) {
-    if (cycle === "monthly") {
-      priceEl.textContent = `$${plan.pricing.monthly}`;
-      if (periodEl) {
-        periodEl.textContent = "/month";
-      }
-      if (savingsEl) {
-        savingsEl.style.display = "none";
-      }
-    } else if (cycle === "yearly") {
-      priceEl.textContent = `$${plan.pricing.yearly}`;
-      if (periodEl) {
-        periodEl.textContent = "/year";
-      }
-      if (savingsEl) {
-        savingsEl.textContent = `Save $${plan.yearlySavings}`;
-        savingsEl.style.display = "inline-block";
+    if (priceEl) {
+      if (cycle === "monthly") {
+        priceEl.textContent = `$${plan.pricing.monthly}`;
+        if (periodEl) {
+          periodEl.textContent = "/month";
+        }
+        if (savingsEl) {
+          savingsEl.style.display = "none";
+        }
+      } else if (cycle === "yearly") {
+        priceEl.textContent = `$${plan.pricing.yearly}`;
+        if (periodEl) {
+          periodEl.textContent = "/year";
+        }
+        if (savingsEl) {
+          savingsEl.textContent = `Save $${plan.yearlySavings}`;
+          savingsEl.style.display = "inline-block";
+        }
       }
     }
-  }
+  });
 }
 
-function selectPlan(_planId) {
-  // All plan selections now go to the single optimization plan
-  const plan = subscriptionPlans.optimization;
+function selectPlan(planId) {
+  const plan = subscriptionPlans[planId] || subscriptionPlans.essentials;
 
   if (window.WeightGainLogger) {
-    window.WeightGainLogger.log("selectPlan called, using optimization plan");
+    window.WeightGainLogger.log("selectPlan called for: " + (planId || "essentials"));
   }
 
   const state = window.WeightGainState?.state;
@@ -118,7 +140,7 @@ function selectPlan(_planId) {
     return;
   }
 
-  state.selectedPlan = "optimization";
+  state.selectedPlan = planId || "essentials";
 
   // Default to monthly billing
   const price = plan.pricing.monthly;
