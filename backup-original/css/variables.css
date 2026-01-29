@@ -11,7 +11,7 @@
    - Both systems are equivalent: --spacing-sm = --space-2 = 0.5rem
 
    COLORS:
-   - Primary brand: --spartan-gold and --spartan-crimson (both map to professional blue)
+   - Primary brand: --spartan-gold (gold) and --spartan-crimson (deep red)
    - Backgrounds: --bg-* (darkest, darker, dark, elevated, card)
    - Text: --text-* (primary, secondary, tertiary, muted)
    - Status: --result-* (optimal, normal, attention, critical)

@@ -74,8 +74,19 @@
     <!-- Skip Link for Keyboard Navigation -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Page Transition Overlay - Simple Fade -->
-    <div class="page-transition-overlay" id="pageTransition"></div>
+    <!-- Page Transition Overlay -->
+    <div class="page-transition-overlay" id="pageTransition">
+      <div class="transition-bg">
+        <div class="transition-logo">
+          <div class="transition-logo-wrapper">
+            <img src="logo.png" alt="WeightGain" class="transition-logo-img" loading="lazy" />
+            <div class="logo-glare"></div>
+          </div>
+          <div class="transition-brand-text">WeightGain</div>
+          <div class="transition-tagline">Built for Warriors</div>
+        </div>
+      </div>
+    </div>
 
     <!-- Top Bar -->
     <div class="top-bar">
@@ -124,7 +135,7 @@
           <ul class="nav-links">
             <li><a href="pricing.html" class="nav-link">Pricing</a></li>
             <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
-            <li><a href="#" class="nav-link" data-action="openLabModal">Find a Lab</a></li>
+            <li><a href="#locations" class="nav-link">Find a Lab</a></li>
             <li><a href="results.html" class="nav-link">My Results</a></li>
             <li><a href="account.html" class="nav-link">My Account</a></li>
           </ul>
@@ -160,7 +171,7 @@
     <nav class="mobile-menu" id="mobileMenu">
       <a href="pricing.html">Pricing</a>
       <a href="#how-it-works">How It Works</a>
-      <a href="#" data-action="openLabModal">Find a Lab</a>
+      <a href="#locations">Find a Lab</a>
       <a href="results.html">My Results</a>
       <a href="account.html">My Account</a>
     </nav>
@@ -173,7 +184,7 @@
         <div class="container">
           <div class="hero-content">
             <div class="hero-text">
-              <h1 id="hero-title">Feel Your Best. <span>Physician-Powered.</span></h1>
+              <h1 id="hero-title">Get Jacked. <span>Physician-Powered.</span></h1>
               <p>
                 We analyze your labs and create a hormone protocol tailored to your body. $249/mo
                 all-inclusive - no surprise fees like other providers.
@@ -214,9 +225,16 @@
               <div class="ai-chat-header-mini">
                 <div class="ai-avatar-mini">
                   <span class="ai-avatar-emoji">💪</span>
+                  <div class="ai-ring"></div>
+                  <div class="ai-particle p1"></div>
+                  <div class="ai-particle p2"></div>
+                  <div class="ai-particle p3"></div>
+                  <div class="ai-particle p4"></div>
+                  <div class="ai-particle p5"></div>
+                  <div class="ai-particle p6"></div>
                 </div>
                 <div class="ai-header-info-mini">
-                  <span class="ai-title">Health Assistant</span>
+                  <span class="ai-title">Gains Assistant</span>
                   <span class="ai-status-mini"><span class="status-dot"></span> Online</span>
                 </div>
               </div>
@@ -233,16 +251,16 @@
                   <button
                     class="ai-quick-btn"
                     data-action="sendAiPreset"
-                    data-message="How fast will I see results?"
+                    data-message="How fast will I see gains?"
                   >
-                    <span class="btn-content">⚡ How Fast Will I See Results?</span>
+                    <span class="btn-content">⚡ How Fast Will I See Gains?</span>
                   </button>
                   <button
                     class="ai-quick-btn"
                     data-action="sendAiPreset"
                     data-message="TRT vs HGH - which one?"
                   >
-                    <span class="btn-content">💪 TRT vs HGH - Which One?</span>
+                    <span class="btn-content">🤔 TRT vs HGH - Which One?</span>
                   </button>
                   <button
                     class="ai-quick-btn"
@@ -254,9 +272,9 @@
                   <button
                     class="ai-quick-btn"
                     data-action="sendAiPreset"
-                    data-message="Is it pharma grade?"
+                    data-message="Is it legit pharma grade?"
                   >
-                    <span class="btn-content">💊 Is It FDA-Approved?</span>
+                    <span class="btn-content">💉 Is It Pharma Grade?</span>
                   </button>
                 </div>
               </div>
@@ -288,8 +306,8 @@
       <section class="section how-it-works" id="how-it-works">
         <div class="container">
           <div class="section-header">
-            <h2>How It Works</h2>
-            <p>From signup to optimized - everything included.</p>
+            <h2>How You Get Your Gains</h2>
+            <p>From signup to jacked - everything included.</p>
           </div>
           <div class="steps-grid">
             <div class="step-card">
@@ -297,8 +315,8 @@
               <div class="step-icon">
                 <span class="step-emoji">🎯</span>
               </div>
-              <h3>Choose Your Plan</h3>
-              <p>Select TRT or HGH therapy based on your goals.</p>
+              <h3>Choose Your Gains</h3>
+              <p>Select TRT or HGH therapy. Pick your plan.</p>
               <span class="step-timeline">TODAY</span>
             </div>
             <div class="step-connector" aria-hidden="true">
@@ -339,7 +357,7 @@
               <div class="step-icon">
                 <span class="step-emoji">📦</span>
               </div>
-              <h3>Treatment Delivered</h3>
+              <h3>Gains Delivered</h3>
               <p>Ships same day, arrives in 2-3 days. Discreet packaging.</p>
               <span class="step-timeline">Ships Same Day</span>
             </div>
@@ -356,6 +374,82 @@
           <div class="u-text-center u-mt-xl">
             <a href="pricing.html" class="btn btn-primary btn-large">Get Started - $249/mo</a>
             <p class="u-mt-md u-text-muted" style="font-size: 0.9rem">Everything included. No hidden fees.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Transformations Section -->
+      <section class="section transformations-section" id="transformations">
+        <div class="container">
+          <div class="section-header">
+            <h2>Warriors Who Got Their Gains</h2>
+            <p>Real results from men who stopped waiting and started winning.</p>
+            <p class="u-text-muted" style="font-size: 0.85rem; margin-top: 0.5rem;">Individual results may vary. Results shown are examples and not typical for all patients.</p>
+          </div>
+          <div class="transformation-grid">
+            <div class="transformation-card">
+              <div class="transformation-stats">
+                <div class="transformation-stat">
+                  <span class="stat-label">Testosterone</span>
+                  <span class="stat-value">289 <span class="stat-arrow">→</span> 847 ng/dL</span>
+                </div>
+                <div class="transformation-stat">
+                  <span class="stat-label">Body Fat</span>
+                  <span class="stat-value">24% <span class="stat-arrow">→</span> 15%</span>
+                </div>
+                <div class="transformation-stat">
+                  <span class="stat-label">Lean Mass</span>
+                  <span class="stat-value highlight">+12 lbs</span>
+                </div>
+              </div>
+              <blockquote class="transformation-quote">
+                "Went from barely hitting PRs to destroying them. Best decision I ever made."
+                <cite>- Mike T., 34, Texas</cite>
+              </blockquote>
+              <span class="transformation-weeks">12 Week Transformation</span>
+            </div>
+            <div class="transformation-card">
+              <div class="transformation-stats">
+                <div class="transformation-stat">
+                  <span class="stat-label">Testosterone</span>
+                  <span class="stat-value">312 <span class="stat-arrow">→</span> 912 ng/dL</span>
+                </div>
+                <div class="transformation-stat">
+                  <span class="stat-label">Body Fat</span>
+                  <span class="stat-value">28% <span class="stat-arrow">→</span> 18%</span>
+                </div>
+                <div class="transformation-stat">
+                  <span class="stat-label">Lean Mass</span>
+                  <span class="stat-value highlight">+15 lbs</span>
+                </div>
+              </div>
+              <blockquote class="transformation-quote">
+                "Energy through the roof. My wife noticed the difference before I did."
+                <cite>- James R., 41, Florida</cite>
+              </blockquote>
+              <span class="transformation-weeks">16 Week Transformation</span>
+            </div>
+            <div class="transformation-card">
+              <div class="transformation-stats">
+                <div class="transformation-stat">
+                  <span class="stat-label">Testosterone</span>
+                  <span class="stat-value">267 <span class="stat-arrow">→</span> 789 ng/dL</span>
+                </div>
+                <div class="transformation-stat">
+                  <span class="stat-label">Body Fat</span>
+                  <span class="stat-value">22% <span class="stat-arrow">→</span> 14%</span>
+                </div>
+                <div class="transformation-stat">
+                  <span class="stat-label">Lean Mass</span>
+                  <span class="stat-value highlight">+10 lbs</span>
+                </div>
+              </div>
+              <blockquote class="transformation-quote">
+                "Finally feel like myself again. Sleep better, lift heavier, think clearer."
+                <cite>- Carlos M., 38, Arizona</cite>
+              </blockquote>
+              <span class="transformation-weeks">10 Week Transformation</span>
+            </div>
           </div>
         </div>
       </section>
@@ -470,11 +564,11 @@
       <section class="section cta-section">
         <div class="container">
           <div class="cta-content">
-            <h2>Ready to Feel Your Best?</h2>
+            <h2>Ready to Get Jacked?</h2>
             <p>$249/mo all-inclusive. Everything included.</p>
             <a href="pricing.html" class="btn btn-white btn-large">Get Started Now</a>
             <p class="u-mt-md" style="font-size: 0.85rem; opacity: 0.9">
-              Use code <strong class="u-text-gold">WELCOME10</strong> for 10% off your first month
+              Use code <strong class="u-text-gold">WARRIOR</strong> for 10% off your first month
             </p>
             <div class="cta-guarantees">
               <span class="cta-guarantee">
@@ -797,15 +891,17 @@
       </div>
     </div>
 
-    <!-- Welcome Popup - Simplified -->
+    <!-- Welcome Popup -->
     <div class="welcome-popup-overlay" id="welcomeOverlay"></div>
     <div class="welcome-popup" id="welcomePopup" role="dialog" aria-modal="true">
       <button class="welcome-close" data-action="closeWelcomePopup" aria-label="Close">×</button>
       <div class="welcome-content">
         <div class="welcome-badge">FREE GUIDE</div>
-        <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Get Our Free Guide</h2>
-        <p class="welcome-subtitle">Learn how to optimize your results with science-backed protocols.</p>
-        <p class="welcome-bonus" style="margin: 1rem 0;">Plus get <strong>10% OFF</strong> your first month</p>
+        <div class="welcome-icon">📘</div>
+        <h2>WARRIORS GET AN EDGE</h2>
+        <p class="welcome-subtitle">Download our free guide:</p>
+        <p class="welcome-guide-title">"How to 3X Your Results in the First 90 Days"</p>
+        <p class="welcome-bonus">+ Get <strong>10% OFF</strong> your first month</p>
         <div class="welcome-email-form">
           <input
             type="email"
@@ -814,7 +910,7 @@
             class="welcome-email-input"
           />
           <button class="btn btn-primary" id="welcomeSubmitBtn" data-action="submitWelcomeEmail">
-            Get the Guide
+            Send Me the Guide
           </button>
         </div>
         <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 1rem">
@@ -827,7 +923,50 @@
       </div>
     </div>
 
-    <!-- Exit Intent Popup - Removed for cleaner UX -->
+    <!-- Exit Intent Popup -->
+    <div class="exit-popup-overlay" id="exitPopupOverlay"></div>
+    <div class="exit-popup" id="exitPopup" role="dialog" aria-modal="true">
+      <button class="exit-popup-close" data-action="closeExitPopup" aria-label="Close">×</button>
+      <div class="exit-popup-content">
+        <div class="exit-popup-icon">📊</div>
+        <h2>BEFORE YOU GO...</h2>
+        <p class="exit-popup-subtitle">See what warriors are achieving:</p>
+        <div class="exit-popup-stats">
+          <div class="exit-stat">
+            <span class="exit-stat-number">+287</span>
+            <span class="exit-stat-label">Avg T Increase (ng/dL)</span>
+          </div>
+          <div class="exit-stat">
+            <span class="exit-stat-number">94%</span>
+            <span class="exit-stat-label">See Results in 6 Weeks</span>
+          </div>
+          <div class="exit-stat">
+            <span class="exit-stat-number">12,847</span>
+            <span class="exit-stat-label">Warriors Strong</span>
+          </div>
+        </div>
+        <p class="exit-popup-cta-text">Join men who stopped waiting.</p>
+        <div
+          style="
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 1rem 0;
+          "
+        >
+          <button
+            class="btn btn-primary btn-large"
+            data-action="selectPlan"
+            data-plan-id="optimization"
+          >
+            Get Started - $249/mo
+          </button>
+        </div>
+        <p class="exit-popup-note">Ships in 7 days. Pharma-grade. Discreet.</p>
+        <a href="#" class="exit-popup-skip" data-action="closeExitPopup">Maybe later</a>
+      </div>
+    </div>
 
     <!-- Toast Notification -->
     <div class="toast" id="toast">
@@ -1086,12 +1225,13 @@
     <button id="helpButton" data-action="scrollToChat" aria-label="Open chat assistant">💬</button>
     <button id="backToTop" data-action="scrollToTop" aria-label="Back to top">↑</button>
 
-    <!-- Mobile Sticky CTA - Simplified -->
+    <!-- Mobile Sticky CTA -->
     <div class="mobile-sticky-cta" id="mobileStickyCta">
       <div class="mobile-sticky-content">
         <div class="mobile-sticky-info">
-          <span class="mobile-sticky-plan">All-Inclusive TRT</span>
+          <span class="mobile-sticky-plan">TRT Gains</span>
           <span class="mobile-sticky-price">$249/mo</span>
+          <span class="mobile-sticky-label" style="font-size: 0.75rem; opacity: 0.8;">All-Inclusive</span>
         </div>
         <button
           class="btn btn-primary mobile-sticky-btn"

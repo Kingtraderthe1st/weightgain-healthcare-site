@@ -144,7 +144,6 @@ function sendAiMessage(presetMessage = null) {
 
     aiMsg.appendChild(aiContent);
     messagesContainer.appendChild(aiMsg);
-
     // Scroll to bottom after DOM update
     requestAnimationFrame(() => {
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
