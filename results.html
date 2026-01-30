@@ -9,7 +9,7 @@
     <!-- Security Headers -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.anthropic.com;"
     />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
@@ -23,10 +23,24 @@
     <meta property="og:description" content="View your lab results and health insights" />
     <meta property="og:image" content="https://weightgain.com/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preload" href="styles.css" as="style" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      as="style"
+      onload="this.onload = null; this.rel = 'stylesheet';"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -43,16 +57,40 @@
           <ul class="nav-links">
             <li><a href="pricing.html" class="nav-link"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58s1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41s-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg> Pricing</a></li>
             <li><a href="index.html#how-it-works" class="nav-link"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg> How It Works</a></li>
+            <li><a href="index.html#locations" class="nav-link"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Find a Lab</a></li>
             <li><a href="results.html" class="nav-link" aria-current="page"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg> My Results</a></li>
             <li><a href="account.html" class="nav-link"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> My Account</a></li>
           </ul>
 
           <div class="nav-actions">
-            <a href="pricing.html" class="btn btn-primary btn-small">Get Started</a>
+            <a href="#" class="nav-link" data-action="openAuthModal" data-auth-type="signin">Sign In</a>
+            <button class="cart-btn" data-action="toggleCart" aria-label="Shopping cart">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"
+                />
+              </svg>
+              <span class="cart-count" id="cartCount">0</span>
+            </button>
           </div>
+
+          <button class="mobile-menu-btn" data-action="toggleMobileMenu" aria-label="Toggle mobile menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+            </svg>
+          </button>
         </nav>
       </div>
     </header>
+
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+      <a href="pricing.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58s1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41s-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg> Pricing</a>
+      <a href="index.html#how-it-works"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg> How It Works</a>
+      <a href="index.html#locations"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg> Find a Lab</a>
+      <a href="results.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg> My Results</a>
+      <a href="account.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> My Account</a>
+    </nav>
 
     <!-- Main Content -->
     <main id="main-content" class="results-dashboard">
@@ -63,12 +101,12 @@
             <div>
               <h1>Your Performance Dashboard</h1>
               <p class="results-date">
-                Complete Performance Panel - Results from January 15, 2026
+                Complete Hormone &amp; Metabolic Panel &mdash; January 15, 2026
               </p>
-              <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.5rem;"><strong>Note:</strong> Lab results are for informational purposes only and are not intended to diagnose, treat, cure, or prevent any disease. Individual results may vary. Consult your physician for medical advice.</p>
+              <p class="results-disclaimer"><strong>Note:</strong> Lab results are for informational purposes only and are not intended to diagnose, treat, cure, or prevent any disease. Individual results may vary. Consult your physician for medical advice.</p>
             </div>
             <div class="results-header-actions">
-              <button class="btn btn--secondary btn--sm">
+              <button class="btn btn-secondary btn-small">
                 <svg
                   width="16"
                   height="16"
@@ -84,7 +122,7 @@
                 </svg>
                 Download PDF
               </button>
-              <button class="btn btn--secondary btn--sm">
+              <button class="btn btn-secondary btn-small">
                 <svg
                   width="16"
                   height="16"
@@ -173,39 +211,28 @@
         </div>
 
         <!-- Results Categories -->
-        <div
-          style="display: flex; gap: var(--space-3); margin-bottom: var(--space-6); flex-wrap: wrap"
-        >
-          <button class="test-filter active" data-category="all">All Results</button>
-          <button class="test-filter" data-category="hormones">Hormones</button>
-          <button class="test-filter" data-category="thyroid">Thyroid</button>
-          <button class="test-filter" data-category="metabolic">Metabolic</button>
+        <div class="results-category-filters" role="tablist" aria-label="Filter results by category">
+          <button class="test-filter active" data-category="all" role="tab" aria-selected="true">All Results</button>
+          <button class="test-filter" data-category="hormones" role="tab" aria-selected="false">Hormones</button>
+          <button class="test-filter" data-category="thyroid" role="tab" aria-selected="false">Thyroid</button>
+          <button class="test-filter" data-category="metabolic" role="tab" aria-selected="false">Metabolic</button>
         </div>
 
         <!-- Results Grid -->
         <div id="results-list">
           <!-- Testosterone - Optimal -->
-          <article class="result-item" aria-label="Testosterone result">
+          <article class="result-item" data-result-category="hormones" aria-label="Testosterone result">
             <div class="result-item__header">
               <div>
                 <h3 class="result-item__name">Total Testosterone</h3>
-                <span style="font-size: var(--text-xs); color: var(--text-tertiary)"
-                  >Performance Hormone</span
-                >
+                <span class="result-item__category">Performance Hormone</span>
               </div>
               <span class="result-item__status result-item__status--optimal">Optimal</span>
             </div>
 
-            <div
-              style="
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: var(--space-6);
-                align-items: center;
-              "
-            >
+            <div class="result-item__grid">
               <div>
-                <div class="result-item__value" style="color: var(--result-optimal)">685</div>
+                <div class="result-item__value result-item__value--optimal">685</div>
                 <div class="result-item__unit">ng/dL</div>
 
                 <div class="result-item__range-bar">
@@ -234,23 +261,9 @@
                 </div>
               </div>
 
-              <div
-                style="
-                  background: var(--bg-secondary);
-                  padding: var(--space-4);
-                  border-radius: var(--radius-lg);
-                "
-              >
-                <h4
-                  style="
-                    font-size: var(--text-sm);
-                    font-weight: var(--font-semibold);
-                    margin-bottom: var(--space-2);
-                  "
-                >
-                  What This Means
-                </h4>
-                <p style="font-size: var(--text-sm); color: var(--text-secondary)">
+              <div class="result-item__explanation">
+                <h4 class="result-item__explanation-title">What This Means</h4>
+                <p class="result-item__explanation-text">
                   Your testosterone is in the optimal range for performance and muscle growth. This
                   level supports energy, recovery, and body composition goals.
                 </p>
@@ -259,27 +272,18 @@
           </article>
 
           <!-- Free Testosterone - Optimal -->
-          <article class="result-item" aria-label="Free Testosterone result">
+          <article class="result-item" data-result-category="hormones" aria-label="Free Testosterone result">
             <div class="result-item__header">
               <div>
                 <h3 class="result-item__name">Free Testosterone</h3>
-                <span style="font-size: var(--text-xs); color: var(--text-tertiary)"
-                  >Performance Hormone</span
-                >
+                <span class="result-item__category">Performance Hormone</span>
               </div>
               <span class="result-item__status result-item__status--optimal">Optimal</span>
             </div>
 
-            <div
-              style="
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: var(--space-6);
-                align-items: center;
-              "
-            >
+            <div class="result-item__grid">
               <div>
-                <div class="result-item__value" style="color: var(--result-optimal)">18.5</div>
+                <div class="result-item__value result-item__value--optimal">18.5</div>
                 <div class="result-item__unit">ng/dL</div>
 
                 <div class="result-item__range-bar">
@@ -295,23 +299,9 @@
                 </div>
               </div>
 
-              <div
-                style="
-                  background: var(--bg-secondary);
-                  padding: var(--space-4);
-                  border-radius: var(--radius-lg);
-                "
-              >
-                <h4
-                  style="
-                    font-size: var(--text-sm);
-                    font-weight: var(--font-semibold);
-                    margin-bottom: var(--space-2);
-                  "
-                >
-                  What This Means
-                </h4>
-                <p style="font-size: var(--text-sm); color: var(--text-secondary)">
+              <div class="result-item__explanation">
+                <h4 class="result-item__explanation-title">What This Means</h4>
+                <p class="result-item__explanation-text">
                   Free testosterone represents the biologically active portion. Your level indicates
                   good testosterone bioavailability.
                 </p>
@@ -320,33 +310,24 @@
           </article>
 
           <!-- Estradiol - Normal -->
-          <article class="result-item" aria-label="Estradiol result">
+          <article class="result-item" data-result-category="hormones" aria-label="Estradiol result">
             <div class="result-item__header">
               <div>
                 <h3 class="result-item__name">Estradiol (E2)</h3>
-                <span style="font-size: var(--text-xs); color: var(--text-tertiary)"
-                  >Performance Hormone</span
-                >
+                <span class="result-item__category">Performance Hormone</span>
               </div>
               <span class="result-item__status result-item__status--normal">Normal</span>
             </div>
 
-            <div
-              style="
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: var(--space-6);
-                align-items: center;
-              "
-            >
+            <div class="result-item__grid">
               <div>
-                <div class="result-item__value" style="color: var(--result-normal)">32</div>
+                <div class="result-item__value result-item__value--normal">32</div>
                 <div class="result-item__unit">pg/mL</div>
 
                 <div class="result-item__range-bar">
                   <div
-                    class="result-item__range-fill"
-                    style="width: 50%; background: var(--result-normal)"
+                    class="result-item__range-fill result-item__range-fill--normal"
+                    style="width: 50%"
                   ></div>
                 </div>
                 <div class="result-item__range-labels">
@@ -356,23 +337,9 @@
                 </div>
               </div>
 
-              <div
-                style="
-                  background: var(--bg-secondary);
-                  padding: var(--space-4);
-                  border-radius: var(--radius-lg);
-                "
-              >
-                <h4
-                  style="
-                    font-size: var(--text-sm);
-                    font-weight: var(--font-semibold);
-                    margin-bottom: var(--space-2);
-                  "
-                >
-                  What This Means
-                </h4>
-                <p style="font-size: var(--text-sm); color: var(--text-secondary)">
+              <div class="result-item__explanation">
+                <h4 class="result-item__explanation-title">What This Means</h4>
+                <p class="result-item__explanation-text">
                   Estradiol is well-balanced with your testosterone levels. This supports joint
                   health, mood, and cardiovascular protection.
                 </p>
@@ -381,27 +348,18 @@
           </article>
 
           <!-- Vitamin D - Attention -->
-          <article class="result-item" aria-label="Vitamin D result">
+          <article class="result-item" data-result-category="metabolic" aria-label="Vitamin D result">
             <div class="result-item__header">
               <div>
                 <h3 class="result-item__name">Vitamin D, 25-Hydroxy</h3>
-                <span style="font-size: var(--text-xs); color: var(--text-tertiary)"
-                  >Metabolic</span
-                >
+                <span class="result-item__category">Metabolic</span>
               </div>
               <span class="result-item__status result-item__status--attention">Attention</span>
             </div>
 
-            <div
-              style="
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: var(--space-6);
-                align-items: center;
-              "
-            >
+            <div class="result-item__grid">
               <div>
-                <div class="result-item__value" style="color: var(--result-attention)">28</div>
+                <div class="result-item__value result-item__value--attention">28</div>
                 <div class="result-item__unit">ng/mL</div>
 
                 <div class="result-item__range-bar">
@@ -430,25 +388,9 @@
                 </div>
               </div>
 
-              <div
-                style="
-                  background: rgba(249, 115, 22, 0.1);
-                  padding: var(--space-4);
-                  border-radius: var(--radius-lg);
-                  border: 1px solid rgba(249, 115, 22, 0.2);
-                "
-              >
-                <h4
-                  style="
-                    font-size: var(--text-sm);
-                    font-weight: var(--font-semibold);
-                    margin-bottom: var(--space-2);
-                    color: var(--energy-orange);
-                  "
-                >
-                  Action Recommended
-                </h4>
-                <p style="font-size: var(--text-sm); color: var(--text-secondary)">
+              <div class="result-item__explanation result-item__explanation--attention">
+                <h4 class="result-item__explanation-title">Action Recommended</h4>
+                <p class="result-item__explanation-text">
                   Your Vitamin D is below optimal for performance. Consider supplementing with 5,000
                   IU D3 daily with a fatty meal. Retest in 8-12 weeks.
                 </p>
@@ -457,25 +399,18 @@
           </article>
 
           <!-- TSH - Optimal -->
-          <article class="result-item" aria-label="TSH result">
+          <article class="result-item" data-result-category="thyroid" aria-label="TSH result">
             <div class="result-item__header">
               <div>
                 <h3 class="result-item__name">TSH</h3>
-                <span style="font-size: var(--text-xs); color: var(--text-tertiary)">Thyroid</span>
+                <span class="result-item__category">Thyroid</span>
               </div>
               <span class="result-item__status result-item__status--optimal">Optimal</span>
             </div>
 
-            <div
-              style="
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: var(--space-6);
-                align-items: center;
-              "
-            >
+            <div class="result-item__grid">
               <div>
-                <div class="result-item__value" style="color: var(--result-optimal)">1.8</div>
+                <div class="result-item__value result-item__value--optimal">1.8</div>
                 <div class="result-item__unit">mIU/L</div>
 
                 <div class="result-item__range-bar">
@@ -491,23 +426,9 @@
                 </div>
               </div>
 
-              <div
-                style="
-                  background: var(--bg-secondary);
-                  padding: var(--space-4);
-                  border-radius: var(--radius-lg);
-                "
-              >
-                <h4
-                  style="
-                    font-size: var(--text-sm);
-                    font-weight: var(--font-semibold);
-                    margin-bottom: var(--space-2);
-                  "
-                >
-                  What This Means
-                </h4>
-                <p style="font-size: var(--text-sm); color: var(--text-secondary)">
+              <div class="result-item__explanation">
+                <h4 class="result-item__explanation-title">What This Means</h4>
+                <p class="result-item__explanation-text">
                   Your TSH indicates healthy thyroid signaling. This supports optimal metabolism and
                   energy production.
                 </p>
@@ -516,27 +437,18 @@
           </article>
 
           <!-- hs-CRP - Optimal -->
-          <article class="result-item" aria-label="hs-CRP result">
+          <article class="result-item" data-result-category="metabolic" aria-label="hs-CRP result">
             <div class="result-item__header">
               <div>
                 <h3 class="result-item__name">hs-CRP (Inflammation)</h3>
-                <span style="font-size: var(--text-xs); color: var(--text-tertiary)"
-                  >Metabolic</span
-                >
+                <span class="result-item__category">Metabolic</span>
               </div>
               <span class="result-item__status result-item__status--optimal">Optimal</span>
             </div>
 
-            <div
-              style="
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: var(--space-6);
-                align-items: center;
-              "
-            >
+            <div class="result-item__grid">
               <div>
-                <div class="result-item__value" style="color: var(--result-optimal)">0.4</div>
+                <div class="result-item__value result-item__value--optimal">0.4</div>
                 <div class="result-item__unit">mg/L</div>
 
                 <div class="result-item__range-bar">
@@ -552,23 +464,9 @@
                 </div>
               </div>
 
-              <div
-                style="
-                  background: var(--bg-secondary);
-                  padding: var(--space-4);
-                  border-radius: var(--radius-lg);
-                "
-              >
-                <h4
-                  style="
-                    font-size: var(--text-sm);
-                    font-weight: var(--font-semibold);
-                    margin-bottom: var(--space-2);
-                  "
-                >
-                  What This Means
-                </h4>
-                <p style="font-size: var(--text-sm); color: var(--text-secondary)">
+              <div class="result-item__explanation">
+                <h4 class="result-item__explanation-title">What This Means</h4>
+                <p class="result-item__explanation-text">
                   Excellent! Low systemic inflammation supports recovery, cardiovascular health, and
                   overall performance.
                 </p>
@@ -577,33 +475,24 @@
           </article>
 
           <!-- Fasting Glucose - Normal -->
-          <article class="result-item" aria-label="Fasting Glucose result">
+          <article class="result-item" data-result-category="metabolic" aria-label="Fasting Glucose result">
             <div class="result-item__header">
               <div>
                 <h3 class="result-item__name">Fasting Glucose</h3>
-                <span style="font-size: var(--text-xs); color: var(--text-tertiary)"
-                  >Metabolic</span
-                >
+                <span class="result-item__category">Metabolic</span>
               </div>
               <span class="result-item__status result-item__status--normal">Normal</span>
             </div>
 
-            <div
-              style="
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: var(--space-6);
-                align-items: center;
-              "
-            >
+            <div class="result-item__grid">
               <div>
-                <div class="result-item__value" style="color: var(--result-normal)">92</div>
+                <div class="result-item__value result-item__value--normal">92</div>
                 <div class="result-item__unit">mg/dL</div>
 
                 <div class="result-item__range-bar">
                   <div
-                    class="result-item__range-fill"
-                    style="width: 55%; background: var(--result-normal)"
+                    class="result-item__range-fill result-item__range-fill--normal"
+                    style="width: 55%"
                   ></div>
                 </div>
                 <div class="result-item__range-labels">
@@ -613,25 +502,309 @@
                 </div>
               </div>
 
-              <div
-                style="
-                  background: var(--bg-secondary);
-                  padding: var(--space-4);
-                  border-radius: var(--radius-lg);
-                "
-              >
-                <h4
-                  style="
-                    font-size: var(--text-sm);
-                    font-weight: var(--font-semibold);
-                    margin-bottom: var(--space-2);
-                  "
-                >
-                  What This Means
-                </h4>
-                <p style="font-size: var(--text-sm); color: var(--text-secondary)">
+              <div class="result-item__explanation">
+                <h4 class="result-item__explanation-title">What This Means</h4>
+                <p class="result-item__explanation-text">
                   Your fasting glucose is within the normal range, indicating good blood sugar
                   regulation. For optimal metabolic health, aim for under 90 mg/dL.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- ===== HIDDEN BIOMARKERS (shown via View All toggle) ===== -->
+
+          <!-- Hematocrit - Attention -->
+          <article class="result-item result-item--hidden" data-result-category="metabolic" aria-label="Hematocrit result">
+            <div class="result-item__header">
+              <div>
+                <h3 class="result-item__name">Hematocrit</h3>
+                <span class="result-item__category">Metabolic</span>
+              </div>
+              <span class="result-item__status result-item__status--attention">Attention</span>
+            </div>
+
+            <div class="result-item__grid">
+              <div>
+                <div class="result-item__value result-item__value--attention">51.2</div>
+                <div class="result-item__unit">%</div>
+
+                <div class="result-item__range-bar">
+                  <div
+                    class="result-item__range-fill result-item__range-fill--attention"
+                    style="width: 82%"
+                  ></div>
+                </div>
+                <div class="result-item__range-labels">
+                  <span>38</span>
+                  <span>Optimal: 40-50</span>
+                  <span>54</span>
+                </div>
+              </div>
+
+              <div class="result-item__explanation result-item__explanation--attention">
+                <h4 class="result-item__explanation-title">Action Recommended</h4>
+                <p class="result-item__explanation-text">
+                  Slightly elevated hematocrit is common with TRT. Stay well hydrated and consider donating blood. Your physician will monitor this closely.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- PSA - Optimal -->
+          <article class="result-item result-item--hidden" data-result-category="hormones" aria-label="PSA result">
+            <div class="result-item__header">
+              <div>
+                <h3 class="result-item__name">PSA</h3>
+                <span class="result-item__category">Performance Hormone</span>
+              </div>
+              <span class="result-item__status result-item__status--optimal">Optimal</span>
+            </div>
+
+            <div class="result-item__grid">
+              <div>
+                <div class="result-item__value result-item__value--optimal">0.8</div>
+                <div class="result-item__unit">ng/mL</div>
+
+                <div class="result-item__range-bar">
+                  <div
+                    class="result-item__range-fill result-item__range-fill--optimal"
+                    style="width: 20%"
+                  ></div>
+                </div>
+                <div class="result-item__range-labels">
+                  <span>0</span>
+                  <span>Optimal: &lt;2.5</span>
+                  <span>4.0</span>
+                </div>
+              </div>
+
+              <div class="result-item__explanation">
+                <h4 class="result-item__explanation-title">What This Means</h4>
+                <p class="result-item__explanation-text">
+                  PSA is well within range, indicating healthy prostate function. This is routinely monitored during TRT.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- DHEA-S - Normal -->
+          <article class="result-item result-item--hidden" data-result-category="hormones" aria-label="DHEA-S result">
+            <div class="result-item__header">
+              <div>
+                <h3 class="result-item__name">DHEA-S</h3>
+                <span class="result-item__category">Performance Hormone</span>
+              </div>
+              <span class="result-item__status result-item__status--normal">Normal</span>
+            </div>
+
+            <div class="result-item__grid">
+              <div>
+                <div class="result-item__value result-item__value--normal">285</div>
+                <div class="result-item__unit">mcg/dL</div>
+
+                <div class="result-item__range-bar">
+                  <div
+                    class="result-item__range-fill result-item__range-fill--normal"
+                    style="width: 55%"
+                  ></div>
+                </div>
+                <div class="result-item__range-labels">
+                  <span>100</span>
+                  <span>Optimal: 250-450</span>
+                  <span>600</span>
+                </div>
+              </div>
+
+              <div class="result-item__explanation">
+                <h4 class="result-item__explanation-title">What This Means</h4>
+                <p class="result-item__explanation-text">
+                  DHEA-S is a precursor hormone that supports adrenal function, energy, and immune health. Your level is within a healthy range.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Free T3 - Optimal -->
+          <article class="result-item result-item--hidden" data-result-category="thyroid" aria-label="Free T3 result">
+            <div class="result-item__header">
+              <div>
+                <h3 class="result-item__name">Free T3</h3>
+                <span class="result-item__category">Thyroid</span>
+              </div>
+              <span class="result-item__status result-item__status--optimal">Optimal</span>
+            </div>
+
+            <div class="result-item__grid">
+              <div>
+                <div class="result-item__value result-item__value--optimal">3.2</div>
+                <div class="result-item__unit">pg/mL</div>
+
+                <div class="result-item__range-bar">
+                  <div
+                    class="result-item__range-fill result-item__range-fill--optimal"
+                    style="width: 60%"
+                  ></div>
+                </div>
+                <div class="result-item__range-labels">
+                  <span>2.0</span>
+                  <span>Optimal: 3.0-4.0</span>
+                  <span>4.4</span>
+                </div>
+              </div>
+
+              <div class="result-item__explanation">
+                <h4 class="result-item__explanation-title">What This Means</h4>
+                <p class="result-item__explanation-text">
+                  Free T3 is the active thyroid hormone. Your level supports healthy metabolism, energy levels, and body temperature regulation.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Free T4 - Optimal -->
+          <article class="result-item result-item--hidden" data-result-category="thyroid" aria-label="Free T4 result">
+            <div class="result-item__header">
+              <div>
+                <h3 class="result-item__name">Free T4</h3>
+                <span class="result-item__category">Thyroid</span>
+              </div>
+              <span class="result-item__status result-item__status--optimal">Optimal</span>
+            </div>
+
+            <div class="result-item__grid">
+              <div>
+                <div class="result-item__value result-item__value--optimal">1.3</div>
+                <div class="result-item__unit">ng/dL</div>
+
+                <div class="result-item__range-bar">
+                  <div
+                    class="result-item__range-fill result-item__range-fill--optimal"
+                    style="width: 55%"
+                  ></div>
+                </div>
+                <div class="result-item__range-labels">
+                  <span>0.8</span>
+                  <span>Optimal: 1.1-1.7</span>
+                  <span>1.8</span>
+                </div>
+              </div>
+
+              <div class="result-item__explanation">
+                <h4 class="result-item__explanation-title">What This Means</h4>
+                <p class="result-item__explanation-text">
+                  Free T4 is converted to T3 in the body. Optimal levels indicate your thyroid is producing hormones efficiently.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- IGF-1 - Normal -->
+          <article class="result-item result-item--hidden" data-result-category="hormones" aria-label="IGF-1 result">
+            <div class="result-item__header">
+              <div>
+                <h3 class="result-item__name">IGF-1</h3>
+                <span class="result-item__category">Performance Hormone</span>
+              </div>
+              <span class="result-item__status result-item__status--normal">Normal</span>
+            </div>
+
+            <div class="result-item__grid">
+              <div>
+                <div class="result-item__value result-item__value--normal">215</div>
+                <div class="result-item__unit">ng/mL</div>
+
+                <div class="result-item__range-bar">
+                  <div
+                    class="result-item__range-fill result-item__range-fill--normal"
+                    style="width: 50%"
+                  ></div>
+                </div>
+                <div class="result-item__range-labels">
+                  <span>100</span>
+                  <span>Optimal: 200-300</span>
+                  <span>400</span>
+                </div>
+              </div>
+
+              <div class="result-item__explanation">
+                <h4 class="result-item__explanation-title">What This Means</h4>
+                <p class="result-item__explanation-text">
+                  IGF-1 reflects growth hormone activity. Your level is within normal range, supporting muscle recovery and cell regeneration.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Hemoglobin A1c - Optimal -->
+          <article class="result-item result-item--hidden" data-result-category="metabolic" aria-label="Hemoglobin A1c result">
+            <div class="result-item__header">
+              <div>
+                <h3 class="result-item__name">Hemoglobin A1c</h3>
+                <span class="result-item__category">Metabolic</span>
+              </div>
+              <span class="result-item__status result-item__status--optimal">Optimal</span>
+            </div>
+
+            <div class="result-item__grid">
+              <div>
+                <div class="result-item__value result-item__value--optimal">5.1</div>
+                <div class="result-item__unit">%</div>
+
+                <div class="result-item__range-bar">
+                  <div
+                    class="result-item__range-fill result-item__range-fill--optimal"
+                    style="width: 50%"
+                  ></div>
+                </div>
+                <div class="result-item__range-labels">
+                  <span>4.0</span>
+                  <span>Optimal: &lt;5.7</span>
+                  <span>6.5</span>
+                </div>
+              </div>
+
+              <div class="result-item__explanation">
+                <h4 class="result-item__explanation-title">What This Means</h4>
+                <p class="result-item__explanation-text">
+                  Your A1c reflects excellent long-term blood sugar control over the past 2-3 months. This supports metabolic health and performance.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- LDL Cholesterol - Normal -->
+          <article class="result-item result-item--hidden" data-result-category="metabolic" aria-label="LDL Cholesterol result">
+            <div class="result-item__header">
+              <div>
+                <h3 class="result-item__name">LDL Cholesterol</h3>
+                <span class="result-item__category">Metabolic</span>
+              </div>
+              <span class="result-item__status result-item__status--normal">Normal</span>
+            </div>
+
+            <div class="result-item__grid">
+              <div>
+                <div class="result-item__value result-item__value--normal">112</div>
+                <div class="result-item__unit">mg/dL</div>
+
+                <div class="result-item__range-bar">
+                  <div
+                    class="result-item__range-fill result-item__range-fill--normal"
+                    style="width: 56%"
+                  ></div>
+                </div>
+                <div class="result-item__range-labels">
+                  <span>0</span>
+                  <span>Optimal: &lt;100</span>
+                  <span>200</span>
+                </div>
+              </div>
+
+              <div class="result-item__explanation">
+                <h4 class="result-item__explanation-title">What This Means</h4>
+                <p class="result-item__explanation-text">
+                  Your LDL is slightly above optimal but within normal range. Maintaining a healthy diet and exercise routine will support cardiovascular health.
                 </p>
               </div>
             </div>
@@ -639,9 +812,9 @@
         </div>
 
         <!-- View More Results -->
-        <div style="text-align: center; margin-top: var(--space-8)">
-          <button class="btn btn--secondary">
-            View All 15 Biomarkers
+        <div class="results-view-all">
+          <button class="btn btn-secondary" data-action="toggleViewAll" aria-expanded="false">
+            <span class="btn-text">View All 15 Biomarkers</span>
             <svg
               width="16"
               height="16"
@@ -657,28 +830,11 @@
         </div>
 
         <!-- Schedule Next Test -->
-        <div
-          class="card"
-          style="
-            margin-top: var(--space-12);
-            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-            color: var(--text-primary);
-          "
-        >
-          <div
-            style="
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              flex-wrap: wrap;
-              gap: var(--space-4);
-            "
-          >
+        <div class="card results-cta-card">
+          <div class="results-cta-card__inner">
             <div>
-              <h3 style="color: var(--text-primary); margin-bottom: var(--space-2)">
-                Track Your Progress
-              </h3>
-              <p style="color: var(--text-secondary)">
+              <h3>Track Your Progress</h3>
+              <p>
                 Schedule your next test to monitor optimization and see trends over time.
               </p>
             </div>
@@ -700,13 +856,13 @@
         </div>
 
         <!-- Testosterone Trend Chart -->
-        <div class="card" style="margin-top: var(--space-8)">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4)">
-            <h2 style="font-size: var(--text-lg)">Testosterone Trend</h2>
-            <div style="display: flex; gap: var(--space-2)">
-              <button class="btn btn--ghost btn--sm" style="font-size: var(--text-xs)">6M</button>
-              <button class="btn btn--secondary btn--sm" style="font-size: var(--text-xs)">1Y</button>
-              <button class="btn btn--ghost btn--sm" style="font-size: var(--text-xs)">All</button>
+        <div class="card results-chart-card">
+          <div class="results-chart-header">
+            <h2>Testosterone Trend</h2>
+            <div class="results-chart-actions">
+              <button class="btn btn--ghost btn--sm">6M</button>
+              <button class="btn btn-secondary btn-small">1Y</button>
+              <button class="btn btn--ghost btn--sm">All</button>
             </div>
           </div>
 
@@ -743,7 +899,7 @@
             </div>
           </div>
 
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--border-light)">
+          <div class="results-chart-footer">
             <div>
               <span class="trend-indicator trend-indicator--up">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -751,16 +907,16 @@
                 </svg>
                 +31.7%
               </span>
-              <span style="font-size: var(--text-sm); color: var(--text-tertiary); margin-left: var(--space-2)">vs. 12 months ago</span>
+              <span class="results-chart-vs">vs. 12 months ago</span>
             </div>
-            <div style="font-size: var(--text-sm); color: var(--text-secondary)">
+            <div class="results-chart-average">
               Average: <strong>616 ng/dL</strong>
             </div>
           </div>
         </div>
 
         <!-- Doctor Notes Section -->
-        <div class="doctor-notes" style="margin-top: var(--space-6); margin-bottom: var(--space-8)">
+        <div class="doctor-notes doctor-notes-section">
           <div class="doctor-notes__header">
             <div class="doctor-notes__avatar">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -775,13 +931,13 @@
           </div>
           <div class="doctor-notes__content">
             <p>Great progress, John! Your testosterone levels have shown consistent improvement over the past year, moving from the low-normal range to optimal levels. This correlates well with the protocol adjustments we made in March.</p>
-            <p style="margin-top: var(--space-3)">Main areas to focus on:</p>
-            <ul style="margin: var(--space-2) 0; padding-left: var(--space-6); list-style: disc;">
-              <li style="margin-bottom: var(--space-1)"><strong>Vitamin D:</strong> Start supplementing with 5,000 IU D3 daily with a fatty meal</li>
-              <li style="margin-bottom: var(--space-1)"><strong>Hematocrit:</strong> Slightly elevated - consider donating blood and staying well hydrated</li>
+            <p>Main areas to focus on:</p>
+            <ul>
+              <li><strong>Vitamin D:</strong> Start supplementing with 5,000 IU D3 daily with a fatty meal</li>
+              <li><strong>Hematocrit:</strong> Slightly elevated - consider donating blood and staying well hydrated</li>
               <li><strong>Follow-up:</strong> Schedule your next labs in 8-10 weeks to monitor changes</li>
             </ul>
-            <p style="margin-top: var(--space-3)">Overall, you're making excellent progress. Keep up the good work with your training and nutrition!</p>
+            <p>Overall, you're making excellent progress. Keep up the good work with your training and nutrition!</p>
           </div>
           <div class="doctor-notes__date">Reviewed: January 17, 2026</div>
         </div>
@@ -791,71 +947,30 @@
     <!-- Footer -->
     <footer class="footer" role="contentinfo">
       <div class="container">
-        <div class="footer__bottom" style="border-top: none; margin-top: 0; padding-top: 0">
-          <p class="footer__copyright">
-            &copy; 2026 WeightGain. All rights reserved.
-          </p>
-          <div class="footer__legal">
-            <a href="index.html" class="footer__legal-link">Privacy Policy</a>
-            <a href="index.html" class="footer__legal-link">Terms of Service</a>
-            <a href="index.html" class="footer__legal-link">HIPAA Notice</a>
+        <div class="footer-wrapper">
+          <div class="footer-brand">
+            <img src="logo.png" alt="WeightGain" class="logo-img" loading="lazy" />
+            <div class="footer-badges">
+              <span class="footer-badge">HIPAA</span>
+              <span class="footer-badge">CLIA</span>
+              <span class="footer-badge">CAP</span>
+            </div>
           </div>
+          <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>Lab tests are for informational purposes. Consult your doctor for medical advice.</p>
+          <p>WeightGain &copy; 2026</p>
         </div>
       </div>
     </footer>
-
-    <!-- Load modules in dependency order -->
-    <script src="js/utils.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/plans.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="app.js"></script>
-    <script>
-      function filterResults(status) {
-        const results = document.querySelectorAll(".result-item");
-        const cards = document.querySelectorAll(".results-summary__card");
-
-        // Update active state and aria-pressed on summary cards
-        cards.forEach((card) => {
-          const isActive = card.dataset.filter === status;
-          card.style.opacity = isActive ? "1" : "0.5";
-          card.style.transform = isActive ? "scale(1.05)" : "scale(1)";
-          card.setAttribute("aria-pressed", isActive ? "true" : "false");
-        });
-
-        // Filter results
-        results.forEach((result) => {
-          const resultStatus = result.querySelector(".result-item__status");
-          if (!resultStatus) return;
-
-          const statusText = resultStatus.textContent.toLowerCase();
-          const matches =
-            statusText.includes(status) || (status === "critical" && statusText.includes("action"));
-
-          result.style.display = matches ? "block" : "none";
-        });
-
-        // Scroll to results
-        document.getElementById("results-list").scrollIntoView({ behavior: "smooth" });
-      }
-
-      function resetFilters() {
-        document.querySelectorAll(".result-item").forEach((r) => (r.style.display = "block"));
-        document.querySelectorAll(".results-summary__card").forEach((c) => {
-          c.style.opacity = "1";
-          c.style.transform = "scale(1)";
-          c.setAttribute("aria-pressed", "false");
-        });
-      }
-
-      // Add click handlers for filter buttons (keyboard accessible)
-      document.querySelectorAll(".results-summary__card").forEach((card) => {
-        card.addEventListener("click", () => filterResults(card.dataset.filter));
-      });
-
-      // Reset filter when clicking "All Results" button
-      document.querySelector(".test-filter.active")?.addEventListener("click", resetFilters);
-    </script>
 
     <!-- Floating Chat Widget -->
     <div class="chat-widget" id="chatWidget">
@@ -863,7 +978,7 @@
         <div class="chat-widget__header">
           <div class="chat-widget__header-info">
             <div class="ai-avatar-mini">
-              <span class="ai-avatar-emoji">💪</span>
+              <span class="ai-avatar-emoji">&#128170;</span>
             </div>
             <div>
               <span class="chat-widget__title">Health Assistant</span>
@@ -880,21 +995,21 @@
           <div class="ai-chat-messages-mini" id="widgetChatMessages">
             <div class="ai-message bot">
               <div class="message-content">
-                <p>TRT from $249/mo. TRT + HGH from $449/mo. All-inclusive. Ask me anything about hormone therapy.</p>
+                <p>Hey &mdash; I can help you find the right plan. TRT starts at $249/mo, TRT + HGH at $449/mo. Everything included, no hidden fees.</p>
               </div>
             </div>
             <div class="ai-quick-buttons">
               <button class="ai-quick-btn" data-widget-preset="How much does it cost?">
-                <span class="btn-content">💰 How Much Does It Cost?</span>
+                <span class="btn-content">Pricing Breakdown</span>
               </button>
               <button class="ai-quick-btn" data-widget-preset="How does it work?">
-                <span class="btn-content">🔬 How Does It Work?</span>
+                <span class="btn-content">How It Works</span>
               </button>
               <button class="ai-quick-btn" data-widget-preset="How fast will I see results?">
-                <span class="btn-content">⚡ How Fast Will I See Results?</span>
+                <span class="btn-content">Expected Results</span>
               </button>
               <button class="ai-quick-btn" data-widget-preset="Is it safe?">
-                <span class="btn-content">🛡️ Is It Safe?</span>
+                <span class="btn-content">Safety &amp; Side Effects</span>
               </button>
             </div>
           </div>
@@ -929,8 +1044,16 @@
       </button>
     </div>
 
-    <script src="js/ai-responses.js"></script>
-    <script src="js/ai-chat.js"></script>
-    <script src="js/chat-widget.js"></script>
+    <script src="js/logger.js" defer></script>
+    <script src="js/utils.js" defer></script>
+    <script src="js/plans.js" defer></script>
+    <script src="js/cart.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/ai-responses.js" defer></script>
+    <script src="js/ai-proxy.js" defer></script>
+    <script src="js/ai-chat.js" defer></script>
+    <script src="js/chat-widget.js" defer></script>
+    <script src="app.js" defer></script>
+    <script src="js/results.js" defer></script>
   </body>
 </html>

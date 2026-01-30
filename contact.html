@@ -12,7 +12,7 @@
     <!-- Security Headers -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.anthropic.com;"
     />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
@@ -363,21 +363,21 @@
           <div class="ai-chat-messages-mini" id="widgetChatMessages">
             <div class="ai-message bot">
               <div class="message-content">
-                <p>TRT from $249/mo. TRT + HGH from $449/mo. All-inclusive. Ask me anything about hormone therapy.</p>
+                <p>Hey — I can help you find the right plan. TRT starts at $249/mo, TRT + HGH at $449/mo. Everything included, no hidden fees.</p>
               </div>
             </div>
             <div class="ai-quick-buttons">
               <button class="ai-quick-btn" data-widget-preset="How much does it cost?">
-                <span class="btn-content">💰 How Much Does It Cost?</span>
+                <span class="btn-content">Pricing Breakdown</span>
               </button>
               <button class="ai-quick-btn" data-widget-preset="How does it work?">
-                <span class="btn-content">🔬 How Does It Work?</span>
+                <span class="btn-content">How It Works</span>
               </button>
               <button class="ai-quick-btn" data-widget-preset="How fast will I see results?">
-                <span class="btn-content">⚡ How Fast Will I See Results?</span>
+                <span class="btn-content">Expected Results</span>
               </button>
               <button class="ai-quick-btn" data-widget-preset="Is it safe?">
-                <span class="btn-content">🛡️ Is It Safe?</span>
+                <span class="btn-content">Safety &amp; Side Effects</span>
               </button>
             </div>
           </div>
@@ -413,6 +413,7 @@
     </div>
 
     <script src="js/ai-responses.js"></script>
+    <script src="js/ai-proxy.js"></script>
     <script src="js/ai-chat.js"></script>
     <script src="js/chat-widget.js"></script>
   </body>

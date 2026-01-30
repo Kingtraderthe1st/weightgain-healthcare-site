@@ -916,13 +916,13 @@ a .logo-text,
 .hero-gradient-text {
   background: linear-gradient(
     90deg,
-    #b8860b 0%,
-    #d4af37 30%,
-    #f5d76e 50%,
-    #d4af37 70%,
-    #b8860b 100%
+    var(--brand-primary) 0%,
+    #60a5fa 35%,
+    #93c5fd 50%,
+    #60a5fa 65%,
+    var(--brand-primary) 100%
   );
-  background-size: 200% auto;
+  background-size: 250% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -3376,6 +3376,53 @@ body:has(.sticky-cart-bar.active) {
 
 .gender-buttons .plan-option-btn.active {
   box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+}
+
+/* Male active: blue theme */
+.gender-btn[data-gender="male"].active {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.18) 0%, rgba(37, 99, 235, 0.08) 100%);
+  border-color: #2563eb;
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.25);
+}
+
+.gender-btn[data-gender="male"].active .plan-option-icon {
+  color: #2563eb;
+}
+
+/* Female active: pink theme */
+.gender-btn[data-gender="female"].active {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.18) 0%, rgba(236, 72, 153, 0.08) 100%);
+  border-color: #ec4899;
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.25);
+}
+
+.gender-btn[data-gender="female"].active .plan-option-icon {
+  color: #ec4899;
+}
+
+/* Phone input group with prefix */
+.phone-input-group {
+  display: flex;
+  align-items: stretch;
+}
+
+.phone-prefix {
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+  background: var(--gray-100);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-right: none;
+  border-radius: var(--border-radius-md, 8px) 0 0 var(--border-radius-md, 8px);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  user-select: none;
+}
+
+.phone-input-group .form-input {
+  border-radius: 0 var(--border-radius-md, 8px) var(--border-radius-md, 8px) 0;
+  flex: 1;
 }
 
 .gender-buttons .plan-option-btn span:last-child {
@@ -6632,45 +6679,6 @@ body:has(.mobile-sticky-cta.active) {
   margin: 1rem 0;
 }
 
-/* ============================================
-   Comparison Table Responsive
-   ============================================ */
-
-.comparison-wrapper {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin: 0 -1rem;
-  padding: 0 1rem;
-}
-
-.comparison-table {
-  width: 100%;
-  min-width: 600px;
-  border-collapse: collapse;
-  font-size: 0.85rem;
-}
-
-@media (max-width: 768px) {
-  .comparison-wrapper {
-    margin: 0 -0.5rem;
-    padding: 0 0.5rem;
-  }
-
-  .comparison-table {
-    font-size: 0.75rem;
-  }
-}
-
-/* ============================================
-   Competitor Comparison Disclaimer
-   ============================================ */
-
-.comparison-disclaimer {
-  text-align: center;
-  font-size: 0.75rem;
-  color: rgba(148, 163, 184, 1);
-  margin-top: 1rem;
-}
 
 /* ============================================
    Differentiator Cards Grid
@@ -7366,90 +7374,7 @@ body:has(.mobile-sticky-cta.active) {
   color: rgba(71, 85, 105, 1);
 }
 
-/* Responsive Comparison Table - Override min-width on mobile */
-@media (max-width: 600px) {
-  .comparison-table,
-  table.comparison-table {
-    min-width: auto !important;
-    font-size: 0.7rem;
-  }
 
-  .comparison-table th,
-  .comparison-table td {
-    padding: 0.5rem 0.25rem;
-  }
-
-  .comparison-table th:first-child,
-  .comparison-table td:first-child {
-    position: sticky;
-    left: 0;
-    background: var(--bg-dark);
-    z-index: 1;
-  }
-}
-
-/* Comparison Table Cell Styles */
-.comparison-table thead tr {
-  border-bottom: 2px solid var(--brand-primary);
-}
-
-.comparison-table th {
-  padding: 1rem;
-  text-align: center;
-  color: rgba(71, 85, 105, 1);
-}
-
-.comparison-table th.highlight-col {
-  background: rgba(37, 99, 235, 0.1);
-  color: var(--brand-primary);
-  font-weight: 700;
-}
-
-.comparison-table th:first-child {
-  text-align: left;
-}
-
-.comparison-table td {
-  padding: 1rem;
-  text-align: center;
-  color: rgba(100, 116, 139, 1);
-}
-
-.comparison-table tbody tr {
-  border-bottom: 1px solid var(--gray-200);
-}
-
-.comparison-table td:first-child {
-  text-align: left;
-  color: rgba(30, 41, 59, 0.8);
-}
-
-.comparison-table td.highlight-col {
-  background: rgba(37, 99, 235, 0.05);
-}
-
-.comparison-table .highlight-col .highlight-value {
-  color: var(--brand-primary);
-  font-weight: 700;
-}
-
-.comparison-table .check-yes {
-  color: var(--success-green);
-  font-size: 1.2rem;
-}
-
-.comparison-table .check-no {
-  color: var(--error-red);
-}
-
-.comparison-table .check-maybe {
-  color: #f59e0b;
-}
-
-.comparison-table .small-note {
-  font-size: 0.75rem;
-  color: rgba(148, 163, 184, 1);
-}
 
 /* ============================================
    Result Item Additional Styles
@@ -9422,6 +9347,34 @@ body:has(.mobile-sticky-cta.active) {
   margin-bottom: 0.75rem;
 }
 
+.pricing-hero-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--brand-primary);
+  margin-bottom: 0.75rem;
+}
+
+.pricing-hero-trust-strip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(30, 41, 59, 0.5);
+}
+
+.trust-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(30, 41, 59, 0.3);
+}
+
 @media (max-width: 768px) {
   .pricing-hero {
     padding: 1.5rem 0 1rem;
@@ -9598,59 +9551,6 @@ body:has(.mobile-sticky-cta.active) {
   margin-bottom: 0.75rem;
 }
 
-/* Social Proof in Card */
-.pricing-card-proof {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  padding: 0.5rem 0;
-  border-top: 1px solid rgba(37, 99, 235, 0.15);
-  border-bottom: 1px solid rgba(37, 99, 235, 0.15);
-  margin-bottom: 0.75rem;
-}
-
-.proof-item {
-  text-align: center;
-}
-
-.proof-value {
-  display: block;
-  font-size: 1rem;
-  font-weight: 800;
-  color: var(--brand-primary);
-}
-
-.proof-label {
-  font-size: 0.75rem;
-  color: rgba(100, 116, 139, 1);
-}
-
-.pricing-card-cta-note {
-  text-align: center;
-  font-size: 0.85rem;
-  color: rgba(100, 116, 139, 1);
-  margin-top: 0.5rem;
-}
-
-/* Trust Footer in Card */
-.pricing-card-trust {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.75rem;
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid rgba(37, 99, 235, 0.15);
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: rgba(148, 163, 184, 1);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.trust-sep {
-  color: rgba(37, 99, 235, 0.3);
-}
 
 /* What's Included Section */
 .whats-included-section {
@@ -9790,10 +9690,6 @@ body:has(.mobile-sticky-cta.active) {
   }
 }
 
-/* Comparison Section */
-.comparison-section {
-  background: linear-gradient(180deg, rgba(37, 99, 235, 0.03) 0%, transparent 100%);
-}
 
 @media (max-width: 768px) {
   .pricing-card-grid {
@@ -9815,13 +9711,6 @@ body:has(.mobile-sticky-cta.active) {
     font-size: 1.5rem;
   }
 
-  .pricing-card-proof {
-    gap: 0.5rem;
-  }
-
-  .proof-value {
-    font-size: 1rem;
-  }
 }
 
 /* ============================================
@@ -9934,4 +9823,183 @@ body:has(.mobile-sticky-cta.active) {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ============================================
+   Results Page — Additional Classes
+   ============================================ */
+
+/* Medical disclaimer below results header */
+.results-disclaimer {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+/* Category filter bar */
+.results-category-filters {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+
+/* Category filter buttons */
+.test-filter {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full, 9999px);
+  border: 1px solid var(--border-light);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.test-filter:hover {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+
+.test-filter.active {
+  background: var(--brand-primary);
+  color: #fff;
+  border-color: var(--brand-primary);
+}
+
+.test-filter:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+/* Summary card interactive states (JS-driven) */
+.results-summary__card--active {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.results-summary__card--dimmed {
+  opacity: 0.5;
+  transform: scale(1);
+}
+
+.results-summary__card:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+/* Explanation box — attention variant (orange) */
+.result-item__explanation--attention {
+  background: rgba(249, 115, 22, 0.1);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+}
+
+.result-item__explanation--attention .result-item__explanation-title {
+  color: var(--energy-orange);
+}
+
+/* Hidden biomarker cards (shown via JS toggle) */
+.result-item--hidden {
+  display: none;
+}
+
+/* Schedule / CTA card */
+.results-cta-card {
+  margin-top: var(--space-12);
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  color: var(--text-primary);
+}
+
+.results-cta-card__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.results-cta-card h3 {
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.results-cta-card p {
+  color: var(--text-secondary);
+}
+
+/* Testosterone trend chart card */
+.results-chart-card {
+  margin-top: var(--space-8);
+}
+
+.results-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.results-chart-header h2 {
+  font-size: var(--text-lg);
+}
+
+.results-chart-actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.results-chart-actions .btn {
+  font-size: var(--text-xs);
+}
+
+.results-chart-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-light);
+}
+
+.results-chart-average {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.results-chart-vs {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  margin-left: var(--space-2);
+}
+
+/* Doctor notes section spacing */
+.doctor-notes-section {
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.doctor-notes__content p + p {
+  margin-top: var(--space-3);
+}
+
+.doctor-notes__content ul {
+  margin: var(--space-2) 0;
+  padding-left: var(--space-6);
+  list-style: disc;
+}
+
+.doctor-notes__content li {
+  margin-bottom: var(--space-1);
+}
+
+/* View all toggle text center */
+.results-view-all {
+  text-align: center;
+  margin-top: var(--space-8);
 }

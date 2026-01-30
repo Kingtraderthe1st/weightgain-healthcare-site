@@ -116,10 +116,9 @@ function sendAiMessage(presetMessage = null) {
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
   });
 
-  // Get response after delay
-  setTimeout(() => {
+  // Get response — try API first, then fall back to keywords
+  getAiResponse(message).then(function (response) {
     document.getElementById("typingIndicator")?.remove();
-    const response = getAiResponse(message);
 
     // Get recommended tests (if response has tests array)
     const testCatalog = window.WeightGainPlans?.testCatalog || [];
@@ -149,10 +148,32 @@ function sendAiMessage(presetMessage = null) {
     requestAnimationFrame(() => {
       aiMsg.scrollIntoView({ behavior: "smooth", block: "nearest" });
     });
-  }, 1200);
+  });
 }
 
 function getAiResponse(message) {
+  // Try real AI proxy first
+  var proxy = window.WeightGainAIProxy;
+  if (proxy && proxy.isAvailable()) {
+    return proxy
+      .chat(message)
+      .then(function (data) {
+        return { message: data.reply };
+      })
+      .catch(function () {
+        // API unavailable — fall back to keyword matching
+        return getKeywordResponse(message);
+      });
+  }
+  // No proxy available — use keyword matching with a minimum delay for UX
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve(getKeywordResponse(message));
+    }, 1200);
+  });
+}
+
+function getKeywordResponse(message) {
   const msg = message.toLowerCase().trim();
   const aiResponses = window.WeightGainAIResponses?.aiResponses;
   const priorityKeywords = window.WeightGainAIResponses?.priorityKeywords;
@@ -402,6 +423,7 @@ function getAiResponse(message) {
 window.WeightGainAIChat = {
   sendAiMessage,
   getAiResponse,
+  getKeywordResponse,
   handleAiKeypress,
   createAiTestCard,
   createTypingIndicator,

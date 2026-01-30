@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com;"
+      content="default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://api.anthropic.com;"
     />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
@@ -125,8 +125,16 @@
       <section class="pricing-hero" aria-labelledby="pricing-hero-title">
         <div class="container">
           <div class="pricing-hero-content">
-            <h1 id="pricing-hero-title">Simple, Transparent Pricing</h1>
-            <p class="pricing-hero-subtitle">One membership. Everything included. No hidden fees. Ever.</p>
+            <p class="pricing-hero-eyebrow">Physician-Led Hormone Optimization</p>
+            <h1 id="pricing-hero-title">One Price. Everything Included.</h1>
+            <p class="pricing-hero-subtitle">Labs. Medication. Telehealth. Monitoring. Delivered monthly — no hidden fees, no contracts, no surprises.</p>
+            <div class="pricing-hero-trust-strip">
+              <span>HIPAA Compliant</span>
+              <span class="trust-dot" aria-hidden="true"></span>
+              <span>FDA-Registered Pharmacy</span>
+              <span class="trust-dot" aria-hidden="true"></span>
+              <span>90-Day Money-Back Guarantee</span>
+            </div>
           </div>
         </div>
       </section>
@@ -140,7 +148,7 @@
               <div class="pricing-card-popular">Most Popular</div>
               <div class="pricing-card-header">
                 <h2 class="pricing-card-name">TRT Essentials</h2>
-                <p class="pricing-card-tagline">Testosterone optimization, all-inclusive</p>
+                <p class="pricing-card-tagline">Clinical-grade testosterone therapy — everything included</p>
               </div>
 
               <!-- Price Anchoring -->
@@ -175,44 +183,18 @@
 
               <!-- What's Included -->
               <ul class="pricing-card-includes">
-                <li>Comprehensive blood panel (initial + quarterly)</li>
-                <li>Personalized TRT protocol</li>
-                <li>Testosterone delivered monthly</li>
-                <li>Unlimited telehealth with licensed providers</li>
-                <li>AI-powered progress dashboard</li>
+                <li>Comprehensive bloodwork (initial + quarterly)</li>
+                <li>Physician-designed TRT protocol</li>
+                <li>Testosterone shipped to your door monthly</li>
+                <li>Unlimited physician consultations</li>
+                <li>Real-time progress tracking</li>
                 <li>90-day money-back guarantee</li>
               </ul>
 
-              <!-- Social Proof Stats -->
-              <div class="pricing-card-proof">
-                <div class="proof-item">
-                  <span class="proof-value">10,000+</span>
-                  <span class="proof-label">Active Members</span>
-                </div>
-                <div class="proof-item">
-                  <span class="proof-value">4.9/5</span>
-                  <span class="proof-label">Satisfaction</span>
-                </div>
-                <div class="proof-item">
-                  <span class="proof-value">~7 days</span>
-                  <span class="proof-label">To Start</span>
-                </div>
-              </div>
-
               <!-- CTA -->
               <button class="btn btn-primary btn-large btn-full" data-action="selectPlan" data-plan-id="essentials">
-                Get Started
+                Start TRT — $249/mo
               </button>
-              <p class="pricing-card-cta-note">Cancel anytime. Ships same day. HSA/FSA accepted.</p>
-
-              <!-- Trust Footer -->
-              <div class="pricing-card-trust">
-                <span>HIPAA</span>
-                <span class="trust-sep">|</span>
-                <span>FDA Registered</span>
-                <span class="trust-sep">|</span>
-                <span>Discreet Shipping</span>
-              </div>
             </article>
 
             <!-- Total Optimization -->
@@ -220,7 +202,7 @@
               <div class="pricing-card-popular pricing-card-popular--premium">Peak Performance</div>
               <div class="pricing-card-header">
                 <h2 class="pricing-card-name">Total Optimization</h2>
-                <p class="pricing-card-tagline">TRT + HGH for maximum results</p>
+                <p class="pricing-card-tagline">The complete protocol — TRT + HGH for peak performance</p>
               </div>
 
               <!-- Price Anchoring -->
@@ -255,43 +237,17 @@
 
               <!-- What's Included -->
               <ul class="pricing-card-includes">
-                <li>Everything in TRT Essentials</li>
-                <li>Growth hormone (HGH) therapy</li>
-                <li>Monthly body composition tracking</li>
-                <li>Priority provider access</li>
-                <li>Quarterly protocol optimization</li>
+                <li>Everything in TRT Essentials, plus:</li>
+                <li>Pharmaceutical-grade HGH therapy</li>
+                <li>Monthly body composition analysis</li>
+                <li>Priority access to your physician</li>
+                <li>Quarterly protocol refinement</li>
               </ul>
-
-              <!-- Social Proof Stats -->
-              <div class="pricing-card-proof">
-                <div class="proof-item">
-                  <span class="proof-value">2,500+</span>
-                  <span class="proof-label">Active Members</span>
-                </div>
-                <div class="proof-item">
-                  <span class="proof-value">4.9/5</span>
-                  <span class="proof-label">Satisfaction</span>
-                </div>
-                <div class="proof-item">
-                  <span class="proof-value">~7 days</span>
-                  <span class="proof-label">To Start</span>
-                </div>
-              </div>
 
               <!-- CTA -->
               <button class="btn btn-primary btn-large btn-full" data-action="selectPlan" data-plan-id="optimization">
-                Get Started
+                Start TRT + HGH — $449/mo
               </button>
-              <p class="pricing-card-cta-note">Cancel anytime. Ships same day. HSA/FSA accepted.</p>
-
-              <!-- Trust Footer -->
-              <div class="pricing-card-trust">
-                <span>HIPAA</span>
-                <span class="trust-sep">|</span>
-                <span>FDA Registered</span>
-                <span class="trust-sep">|</span>
-                <span>Discreet Shipping</span>
-              </div>
             </article>
           </div>
         </div>
@@ -301,8 +257,8 @@
       <section class="section whats-included-section" id="whats-included">
         <div class="container">
           <div class="section-header">
-            <h2>What's Included</h2>
-            <p>Everything you need for complete hormone optimization</p>
+            <h2>Your Membership, Unpacked</h2>
+            <p>Every dollar covers real clinical care — not add-on fees</p>
           </div>
           <div class="included-grid">
             <div class="included-card">
@@ -314,7 +270,7 @@
                 </svg>
               </div>
               <h3>Medication Delivery</h3>
-              <p>Prescription medication shipped to your door every month in discreet packaging.</p>
+              <p>FDA-regulated medication delivered monthly in discreet, temperature-safe packaging.</p>
             </div>
             <div class="included-card">
               <div class="included-icon">
@@ -325,7 +281,7 @@
                 </svg>
               </div>
               <h3>Blood Monitoring</h3>
-              <p>All required labs included. Access 4,500+ Quest & LabCorp locations nationwide.</p>
+              <p>Comprehensive panels at 4,500+ Quest & LabCorp locations. Initial, quarterly, and as-needed — all covered.</p>
             </div>
             <div class="included-card">
               <div class="included-icon">
@@ -337,7 +293,7 @@
                 </svg>
               </div>
               <h3>Telehealth Visits</h3>
-              <p>Unlimited video consultations with licensed physicians. No extra charge. No upselling.</p>
+              <p>Talk to your physician as often as you need. Video visits, messaging, and protocol adjustments — all included.</p>
             </div>
             <div class="included-card">
               <div class="included-icon">
@@ -349,7 +305,7 @@
                 </svg>
               </div>
               <h3>Progress Tracking</h3>
-              <p>AI-powered dashboard to track your results, trends, and optimization over time.</p>
+              <p>Lab trends, body composition data, and protocol history — all in one real-time dashboard.</p>
             </div>
           </div>
         </div>
@@ -392,104 +348,24 @@
         </div>
       </section>
 
-      <!-- Competitor Comparison Section -->
-      <section class="section comparison-section" id="compare">
-        <div class="container">
-          <div class="section-header">
-            <h2>How We Compare</h2>
-            <p>See why members choose WeightGain over the competition</p>
-          </div>
-
-          <div class="comparison-wrapper">
-            <table class="comparison-table">
-              <thead>
-                <tr>
-                  <th>Feature</th>
-                  <th class="highlight-col">WeightGain</th>
-                  <th>Hone Health</th>
-                  <th>PeterMD</th>
-                  <th>TRT Nation</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Monthly Cost</td>
-                  <td class="highlight-col"><span class="highlight-value">$249</span></td>
-                  <td>$157-189*</td>
-                  <td>$99*</td>
-                  <td>$99*</td>
-                </tr>
-                <tr>
-                  <td>All-Inclusive (No Hidden Fees)</td>
-                  <td class="highlight-col"><span class="check-yes">&#10003;</span></td>
-                  <td><span class="check-no">&#10007;</span> <span class="small-note">+$28-60 meds</span></td>
-                  <td><span class="check-no">&#10007;</span> <span class="small-note">+$95 labs</span></td>
-                  <td><span class="check-no">&#10007;</span> <span class="small-note">+$129 labs</span></td>
-                </tr>
-                <tr>
-                  <td>HGH Available</td>
-                  <td class="highlight-col"><span class="check-yes">&#10003;</span></td>
-                  <td><span class="check-no">&#10007;</span></td>
-                  <td><span class="check-no">&#10007;</span></td>
-                  <td><span class="check-no">&#10007;</span></td>
-                </tr>
-                <tr>
-                  <td>Time to Start</td>
-                  <td class="highlight-col"><span class="highlight-value">~7 days</span></td>
-                  <td>2+ weeks</td>
-                  <td>Unknown</td>
-                  <td>Unknown</td>
-                </tr>
-                <tr>
-                  <td>Lab Locations</td>
-                  <td class="highlight-col"><span class="highlight-value">4,500+</span></td>
-                  <td>LabCorp only</td>
-                  <td>Unknown</td>
-                  <td>Unknown</td>
-                </tr>
-                <tr>
-                  <td>Cancel Anytime</td>
-                  <td class="highlight-col"><span class="check-yes">&#10003;</span></td>
-                  <td><span class="check-maybe">?</span></td>
-                  <td><span class="check-maybe">?</span></td>
-                  <td><span class="check-maybe">?</span></td>
-                </tr>
-                <tr>
-                  <td>Money-Back Guarantee</td>
-                  <td class="highlight-col"><span class="check-yes" style="font-size: 1rem;">90 Days</span></td>
-                  <td>Unknown</td>
-                  <td>Unknown</td>
-                  <td>Unknown</td>
-                </tr>
-              </tbody>
-            </table>
-            <p class="comparison-disclaimer">
-              *Advertised price. Actual cost higher after adding required labs and medication fees.
-            </p>
-          </div>
-        </div>
-      </section>
-
       <!-- FAQ Section -->
       <section class="section faq-section" id="faq">
         <div class="container">
           <div class="section-header">
-            <h2>Pricing FAQ</h2>
-            <p>Common questions about our pricing and billing</p>
+            <h2>Questions</h2>
           </div>
 
           <div class="faq-container">
             <div class="faq-item">
               <button class="faq-question" aria-expanded="false">
-                <span>How much does it cost?</span>
+                <span>What does $249/month actually cover?</span>
                 <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path d="M6 9l6 6 6-6"/>
                 </svg>
               </button>
               <div class="faq-answer">
                 <div class="faq-answer-content">
-                  <p>Our membership is <strong>$249/month</strong> and includes everything: comprehensive blood panels, personalized hormone protocol, monthly medication delivery, quarterly monitoring labs, unlimited telehealth visits, and AI-powered progress tracking.</p>
-                  <p>You can also save $498/year with annual billing at $2,490/year.</p>
+                  <p>Everything. Initial and quarterly bloodwork, a physician-designed TRT protocol, monthly testosterone delivery, unlimited telehealth consultations, real-time progress tracking, and a 90-day money-back guarantee. HSA/FSA cards accepted. Add HGH for $449/mo — same all-inclusive model.</p>
                 </div>
               </div>
             </div>
@@ -503,23 +379,7 @@
               </button>
               <div class="faq-answer">
                 <div class="faq-answer-content">
-                  <p><strong>No hidden fees. Ever.</strong> Unlike competitors who advertise low prices then add $100+ for labs and medication fees, our price includes everything. What you see is what you pay.</p>
-                  <p>This includes: medication, labs, telehealth visits, shipping, and ongoing monitoring. No surprise charges.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
-                <span>What payment methods do you accept?</span>
-                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path d="M6 9l6 6 6-6"/>
-                </svg>
-              </button>
-              <div class="faq-answer">
-                <div class="faq-answer-content">
-                  <p>We accept all major credit cards (Visa, Mastercard, American Express, Discover), debit cards, and HSA/FSA cards.</p>
-                  <p>Your card will be charged monthly (or annually if you choose yearly billing). We use Stripe for secure payment processing.</p>
+                  <p><strong>None.</strong> Medication, labs, telehealth, shipping, monitoring — it's all in the price. No surprise charges, no add-ons, no upsells.</p>
                 </div>
               </div>
             </div>
@@ -533,23 +393,7 @@
               </button>
               <div class="faq-answer">
                 <div class="faq-answer-content">
-                  <p><strong>Yes, cancel anytime.</strong> No contracts, no cancellation fees, no hassle. You can cancel directly from your account dashboard or contact our support team.</p>
-                  <p>Plus, we offer a 90-day money-back guarantee. If you're not satisfied within the first 90 days, we'll give you a full refund.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="faq-item">
-              <button class="faq-question" aria-expanded="false">
-                <span>Do you accept insurance or HSA/FSA?</span>
-                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path d="M6 9l6 6 6-6"/>
-                </svg>
-              </button>
-              <div class="faq-answer">
-                <div class="faq-answer-content">
-                  <p>We do not bill insurance directly, but we <strong>accept HSA/FSA cards</strong> for payment. Hormone therapy and lab tests are typically eligible HSA/FSA expenses.</p>
-                  <p>We can provide itemized receipts for you to submit to your insurance for potential reimbursement.</p>
+                  <p><strong>Yes.</strong> No contracts, no cancellation fees. Cancel from your dashboard or contact support. Not satisfied in the first 90 days? Full refund, no questions asked.</p>
                 </div>
               </div>
             </div>
@@ -561,10 +405,10 @@
       <section class="section cta-section">
         <div class="container">
           <div class="cta-content">
-            <h2>Ready to Get Started?</h2>
-            <p>Join thousands of men optimizing their hormones with WeightGain.</p>
+            <h2>Your Optimization Starts Here</h2>
+            <p>Physician-led. All-inclusive. Risk-free for 90 days.</p>
             <button class="btn btn-white btn-large" data-action="selectPlan" data-plan-id="optimization">
-              Start Your Transformation - $249/mo
+              Get Started — $249/mo
             </button>
             <div class="cta-guarantees">
               <span class="cta-guarantee">
@@ -709,21 +553,21 @@
           <div class="ai-chat-messages-mini" id="widgetChatMessages">
             <div class="ai-message bot">
               <div class="message-content">
-                <p>TRT from $249/mo. TRT + HGH from $449/mo. All-inclusive. Ask me anything about hormone therapy.</p>
+                <p>Hey — I can help you find the right plan. TRT starts at $249/mo, TRT + HGH at $449/mo. Everything included, no hidden fees.</p>
               </div>
             </div>
             <div class="ai-quick-buttons">
               <button class="ai-quick-btn" data-widget-preset="How much does it cost?">
-                <span class="btn-content">💰 How Much Does It Cost?</span>
+                <span class="btn-content">Pricing Breakdown</span>
               </button>
               <button class="ai-quick-btn" data-widget-preset="How does it work?">
-                <span class="btn-content">🔬 How Does It Work?</span>
+                <span class="btn-content">How It Works</span>
               </button>
               <button class="ai-quick-btn" data-widget-preset="How fast will I see results?">
-                <span class="btn-content">⚡ How Fast Will I See Results?</span>
+                <span class="btn-content">Expected Results</span>
               </button>
               <button class="ai-quick-btn" data-widget-preset="Is it safe?">
-                <span class="btn-content">🛡️ Is It Safe?</span>
+                <span class="btn-content">Safety & Side Effects</span>
               </button>
             </div>
           </div>
@@ -764,6 +608,7 @@
     <script src="js/cart.js" defer></script>
     <script src="js/ui.js" defer></script>
     <script src="js/ai-responses.js" defer></script>
+    <script src="js/ai-proxy.js" defer></script>
     <script src="js/ai-chat.js" defer></script>
     <script src="js/chat-widget.js" defer></script>
     <script src="app.js" defer></script>

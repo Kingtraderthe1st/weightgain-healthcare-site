@@ -9,7 +9,7 @@
     <!-- Security Headers -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://js.stripe.com; connect-src 'self' https://api.stripe.com;"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://js.stripe.com; connect-src 'self' https://api.stripe.com https://api.anthropic.com;"
     />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
@@ -130,16 +130,22 @@
                 <label class="plan-option-label">Select your protocol:</label>
                 <div class="plan-option-buttons gender-buttons">
                   <button type="button" class="plan-option-btn gender-btn active" data-gender="male">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" class="plan-option-icon">
-                      <circle cx="10" cy="8" r="5"/>
-                      <path d="M21 3l-4 4m0-4l4 4M10 13c-5 0-8 2.5-8 5.5V21h16v-2.5c0-3-3-5.5-8-5.5z"/>
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="plan-option-icon">
+                      <!-- Male: angular jaw, short cropped hair -->
+                      <circle cx="12" cy="7" r="4.5"/>
+                      <rect x="8" y="2" width="8" height="3" rx="1.5"/>
+                      <path d="M12 12.5c-4.5 0-7.5 2.2-7.5 5V20h15v-2.5c0-2.8-3-5-7.5-5z"/>
                     </svg>
                     <span>Male Protocol</span>
                   </button>
                   <button type="button" class="plan-option-btn gender-btn" data-gender="female">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" class="plan-option-icon">
-                      <circle cx="12" cy="7" r="5"/>
-                      <path d="M12 14c-5 0-8 2.5-8 5.5V22h16v-2.5c0-3-3-5.5-8-5.5z"/>
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="plan-option-icon">
+                      <!-- Female: rounded face, longer flowing hair -->
+                      <circle cx="12" cy="8" r="4.5"/>
+                      <path d="M7 6c0-3.3 2.2-5 5-5s5 1.7 5 5c0 .5-.1 1-.2 1.4C17.5 5.5 15 4 12 4S6.5 5.5 7.2 7.4C7.1 7 7 6.5 7 6z"/>
+                      <path d="M6.5 8.5C6 10 5.5 12 5.5 13.5c0 1 .3 1.8.5 2"/>
+                      <path d="M17.5 8.5C18 10 18.5 12 18.5 13.5c0 1-.3 1.8-.5 2"/>
+                      <path d="M12 13.5c-4.5 0-7.5 2.2-7.5 5V21h15v-2.5c0-2.8-3-5-7.5-5z"/>
                     </svg>
                     <span>Female Protocol</span>
                   </button>
@@ -287,19 +293,24 @@
                 <div class="form-group">
                   <label for="phone" class="form-label form-label--required">Phone</label>
                   <div class="input-wrapper">
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      class="form-input"
-                      required
-                      autocomplete="tel"
-                      inputmode="tel"
-                      placeholder="(555) 123-4567"
-                      aria-describedby="phone-error"
-                    />
+                    <div class="phone-input-group">
+                      <span class="phone-prefix" aria-hidden="true">+1</span>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        class="form-input"
+                        required
+                        autocomplete="tel"
+                        inputmode="tel"
+                        placeholder="(555) 123-4567"
+                        aria-describedby="phone-hint phone-error"
+                        aria-description="US phone numbers only"
+                      />
+                    </div>
                     <span class="input-status" aria-hidden="true"></span>
                   </div>
+                  <p class="form-hint" id="phone-hint">US phone numbers only</p>
                   <p class="form-error" id="phone-error" role="alert"></p>
 
                   <!-- Phone Verification -->
@@ -546,9 +557,6 @@
                 </svg>
                 <span>90-Day Money-Back Guarantee*</span>
               </div>
-              <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; text-align: center;">
-                *Conditions apply. Lab tests non-refundable once requisition is generated. See Terms for details.
-              </p>
               <div class="checkout-trust-badge">
                 <svg
                   viewBox="0 0 24 24"
@@ -579,6 +587,9 @@
                 <span>HIPAA Protected</span>
               </div>
             </div>
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; margin-bottom: 1rem; text-align: center;">
+              *Conditions apply. Lab tests non-refundable once requisition is generated. See Terms for details.
+            </p>
 
             <!-- Submit Button -->
             <button
@@ -1568,8 +1579,35 @@
             cart[0].name = gender === 'female' ? 'Total Optimization - Female' : 'Total Optimization - Male';
             localStorage.setItem('wg_cart', JSON.stringify(cart));
           }
+
+          // Auto-sync gender to biological sex dropdown and hide it
+          const sexSelect = document.getElementById('sex');
+          if (sexSelect) {
+            sexSelect.value = gender;
+            validateField(sexSelect);
+          }
+          const sexFormGroup = sexSelect ? sexSelect.closest('.form-group') : null;
+          if (sexFormGroup) {
+            sexFormGroup.style.display = 'none';
+          }
         });
       });
+
+      // On load: sync biological sex from initial gender and hide the field
+      (function() {
+        const activeGenderBtn = document.querySelector('.gender-btn.active');
+        if (activeGenderBtn) {
+          const gender = activeGenderBtn.dataset.gender;
+          const sexSelect = document.getElementById('sex');
+          if (sexSelect) {
+            sexSelect.value = gender;
+          }
+          const sexFormGroup = sexSelect ? sexSelect.closest('.form-group') : null;
+          if (sexFormGroup) {
+            sexFormGroup.style.display = 'none';
+          }
+        }
+      })();
 
       // Restore gender selection from localStorage on page load
       const savedGender = localStorage.getItem('wg_selected_gender');
@@ -1690,21 +1728,21 @@
           <div class="ai-chat-messages-mini" id="widgetChatMessages">
             <div class="ai-message bot">
               <div class="message-content">
-                <p>TRT from $249/mo. TRT + HGH from $449/mo. All-inclusive. Ask me anything about hormone therapy.</p>
+                <p>Hey — I can help you find the right plan. TRT starts at $249/mo, TRT + HGH at $449/mo. Everything included, no hidden fees.</p>
               </div>
             </div>
             <div class="ai-quick-buttons">
               <button class="ai-quick-btn" data-widget-preset="How much does it cost?">
-                <span class="btn-content">💰 How Much Does It Cost?</span>
+                <span class="btn-content">Pricing Breakdown</span>
               </button>
               <button class="ai-quick-btn" data-widget-preset="How does it work?">
-                <span class="btn-content">🔬 How Does It Work?</span>
+                <span class="btn-content">How It Works</span>
               </button>
               <button class="ai-quick-btn" data-widget-preset="How fast will I see results?">
-                <span class="btn-content">⚡ How Fast Will I See Results?</span>
+                <span class="btn-content">Expected Results</span>
               </button>
               <button class="ai-quick-btn" data-widget-preset="Is it safe?">
-                <span class="btn-content">🛡️ Is It Safe?</span>
+                <span class="btn-content">Safety &amp; Side Effects</span>
               </button>
             </div>
           </div>
@@ -1740,6 +1778,7 @@
     </div>
 
     <script src="js/ai-responses.js"></script>
+    <script src="js/ai-proxy.js"></script>
     <script src="js/ai-chat.js"></script>
     <script src="js/chat-widget.js"></script>
   </body>

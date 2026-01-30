@@ -45,7 +45,7 @@
     closeBtn.addEventListener("click", closePanel);
   }
 
-  // Widget send: builds DOM messages and calls getAiResponse directly
+  // Widget send: builds DOM messages and calls getAiResponse (async-aware)
   function widgetSend(message) {
     if (!message || !widgetMessages) return;
 
@@ -79,18 +79,19 @@
       widgetMessages.scrollTop = widgetMessages.scrollHeight;
     });
 
-    setTimeout(function () {
+    // getAiResponse now returns a Promise
+    var getAiResponseFn =
+      window.WeightGainAIChat && window.WeightGainAIChat.getAiResponse;
+
+    var responsePromise = getAiResponseFn
+      ? getAiResponseFn(message)
+      : Promise.resolve({
+          message: "I'm here to help! Ask me about TRT or HGH therapy.",
+        });
+
+    responsePromise.then(function (response) {
       var indicator = document.getElementById("widgetTypingIndicator");
       if (indicator) indicator.remove();
-
-      var getAiResponse =
-        window.WeightGainAIChat && window.WeightGainAIChat.getAiResponse;
-      var response = getAiResponse
-        ? getAiResponse(message)
-        : {
-            message:
-              "I'm here to help! Ask me about TRT or HGH therapy.",
-          };
 
       var aiMsg = document.createElement("div");
       aiMsg.className = "ai-message bot";
@@ -105,7 +106,7 @@
       requestAnimationFrame(function () {
         aiMsg.scrollIntoView({ behavior: "smooth", block: "nearest" });
       });
-    }, 1200);
+    });
   }
 
   // Send button
