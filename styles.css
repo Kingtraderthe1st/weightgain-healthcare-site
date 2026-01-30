@@ -473,6 +473,9 @@ button.trust-badge:focus {
   aspect-ratio: 1 / 1; /* Prevent CLS */
   filter: drop-shadow(0 0 15px rgba(37, 99, 235, 0.5));
   transition: transform 0.3s ease;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 .logo:hover .logo-img {
@@ -526,7 +529,9 @@ a .logo-text,
 
 .nav-link:hover {
   color: var(--brand-primary);
-  background: rgba(37, 99, 235, 0.1);
+  background: rgba(37, 99, 235, 0.08);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+  transform: translateY(-1px);
 }
 
 .nav-link svg {
@@ -780,6 +785,7 @@ a .logo-text,
 .btn-primary:hover,
 .btn--primary:hover {
   background: linear-gradient(135deg, var(--brand-primary-light) 0%, var(--brand-primary) 100%);
+  color: #ffffff;
   box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
   transform: translateY(-1px);
 }
@@ -907,37 +913,107 @@ a .logo-text,
 }
 
 .hero-text h1 span {
-  display: block;
-  font-size: 2.5rem;
-  margin-top: 0.25rem;
+  display: inline;
 }
 
-/* Animated gradient text for hero accent line */
+/* Hero keyword underline accent */
+.hero-keyword {
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Animated glowing underline */
+.hero-keyword::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--alert-red);
+  animation: keywordPulse 2s ease-in-out infinite;
+}
+
+@keyframes keywordPulse {
+  0%, 100% {
+    opacity: 0.5;
+    box-shadow: 0 0 4px rgba(239, 68, 68, 0.3);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.6);
+  }
+}
+
+.hero-keyword:hover::before {
+  animation: none;
+  opacity: 1;
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.7);
+}
+
+/* Goal tooltip */
+.hero-keyword__tooltip {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 14px);
+  transform: translateX(-50%) translateY(6px);
+  background: #0a0a0a;
+  color: #d4d4d4;
+  font-size: 0.85rem;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.5;
+  padding: 0.625rem 1rem;
+  border-radius: var(--border-radius-md);
+  white-space: nowrap;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: var(--z-tooltip);
+}
+
+.hero-keyword:hover .hero-keyword__tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Animated gold gradient text for hero accent line */
 .hero-gradient-text {
+  font-size: 0.82em;
   background: linear-gradient(
     90deg,
-    var(--brand-primary) 0%,
-    #60a5fa 35%,
-    #93c5fd 50%,
-    #60a5fa 65%,
-    var(--brand-primary) 100%
+    #b8860b 0%,
+    #d4af37 20%,
+    #f5d76e 40%,
+    #fff5c0 50%,
+    #f5d76e 60%,
+    #d4af37 80%,
+    #b8860b 100%
   );
-  background-size: 250% auto;
+  background-size: 300% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer 4s ease-in-out infinite;
+  animation: goldShimmer 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.4));
 }
 
-@keyframes shimmer {
+@keyframes goldShimmer {
   0% {
     background-position: 0% center;
+    filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.3));
   }
   50% {
     background-position: 100% center;
+    filter: drop-shadow(0 0 20px rgba(245, 215, 110, 0.6));
   }
   100% {
     background-position: 0% center;
+    filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.3));
   }
 }
 
@@ -983,7 +1059,7 @@ a .logo-text,
 .hero-trust-signals {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 0.625rem;
   margin-top: 1.5rem;
   flex-wrap: wrap;
 }
@@ -992,6 +1068,53 @@ a .logo-text,
   .hero-trust-signals {
     justify-content: center;
   }
+}
+
+/* Hero Bubbles */
+.hero-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: var(--border-radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.hero-bubble:hover {
+  transform: translateY(-1px);
+}
+
+.hero-bubble__icon {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.hero-bubble--green {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #16a34a;
+}
+
+.hero-bubble--blue {
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  color: #1d4ed8;
+}
+
+.hero-bubble--purple {
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  color: #7c3aed;
+}
+
+.hero-bubble--orange {
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.25);
+  color: #c2410c;
 }
 
 .hero-features {
@@ -3372,6 +3495,15 @@ body:has(.sticky-cart-bar.active) {
   font-size: inherit;
   width: 24px;
   height: 24px;
+}
+
+/* Default icon colors before selection */
+.gender-btn[data-gender="male"] .plan-option-icon {
+  color: #2563eb;
+}
+
+.gender-btn[data-gender="female"] .plan-option-icon {
+  color: #ec4899;
 }
 
 .gender-buttons .plan-option-btn.active {
@@ -9714,6 +9846,73 @@ body:has(.mobile-sticky-cta.active) {
 }
 
 /* ============================================
+   Savings Entrance Banner (Pricing Page)
+   ============================================ */
+
+.savings-entrance {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-toast);
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+.savings-entrance.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.savings-entrance.dismissing {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.savings-entrance__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #065f46, #059669);
+  color: #ffffff;
+  font-size: 0.9rem;
+  text-align: center;
+  position: relative;
+}
+
+.savings-entrance__icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.savings-entrance__text strong {
+  color: #ffffff;
+}
+
+.savings-entrance__close {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: color 0.15s ease;
+  display: flex;
+  align-items: center;
+}
+
+.savings-entrance__close:hover {
+  color: #ffffff;
+}
+
+/* ============================================
    Phone Verification & SMS Confirmation
    ============================================ */
 
@@ -9826,7 +10025,7 @@ body:has(.mobile-sticky-cta.active) {
 }
 
 /* ============================================
-   Results Page — Additional Classes
+   Results Page - Additional Classes
    ============================================ */
 
 /* Medical disclaimer below results header */
@@ -9892,7 +10091,7 @@ body:has(.mobile-sticky-cta.active) {
   outline-offset: 2px;
 }
 
-/* Explanation box — attention variant (orange) */
+/* Explanation box - attention variant (orange) */
 .result-item__explanation--attention {
   background: rgba(249, 115, 22, 0.1);
   padding: var(--space-4);

@@ -1,5 +1,5 @@
 /**
- * Netlify Serverless Function — Claude AI Chat Proxy
+ * Netlify Serverless Function - Claude AI Chat Proxy
  * Proxies chat requests to the Anthropic API
  *
  * Environment variable required: ANTHROPIC_API_KEY
@@ -81,7 +81,7 @@ exports.handler = async function (event) {
     };
   }
 
-  // Sanitize messages — only allow role/content
+  // Sanitize messages: only allow role/content
   const sanitizedMessages = messages.map((m) => ({
     role: m.role === "assistant" ? "assistant" : "user",
     content: String(m.content).slice(0, 2000),

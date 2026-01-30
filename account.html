@@ -245,7 +245,7 @@
                   <input type="checkbox" class="form-check__input" id="remember" />
                   <span class="form-check__label">Remember me</span>
                 </label>
-                <a href="#" style="font-size: var(--text-sm)">Forgot password?</a>
+                <a href="#" style="font-size: var(--text-sm)" data-action="showForgotPassword">Forgot password?</a>
               </div>
 
               <button type="submit" class="btn btn--primary btn--lg btn--full">Sign In</button>
@@ -632,7 +632,7 @@
                 <div class="card" style="margin-bottom: var(--space-6)">
                   <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-4)">
                     <h2 style="font-size: var(--text-lg)">Subscription Status</h2>
-                    <a href="#" style="font-size: var(--text-sm)">Manage</a>
+                    <a href="pricing.html" style="font-size: var(--text-sm)">Manage</a>
                   </div>
 
                   <div class="subscription-status">
@@ -665,7 +665,7 @@
                 <div class="card" style="margin-bottom: var(--space-6)">
                   <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-4)">
                     <h2 style="font-size: var(--text-lg)">Upcoming Appointments</h2>
-                    <a href="#" style="font-size: var(--text-sm)">Schedule New</a>
+                    <a href="pricing.html" style="font-size: var(--text-sm)">Schedule New</a>
                   </div>
 
                   <div class="appointment-item">
@@ -823,7 +823,7 @@
                       </svg>
                       View Results
                     </a>
-                    <button class="btn btn--secondary">
+                    <button class="btn btn--secondary" data-action="showComingSoon">
                       <svg
                         width="16"
                         height="16"
@@ -862,7 +862,7 @@
                   </div>
                   <div style="display: flex; gap: var(--space-4); flex-wrap: wrap">
                     <a href="results.html" class="btn btn--primary btn--sm">View Results</a>
-                    <button class="btn btn--secondary btn--sm">Download Requisition</button>
+                    <button class="btn btn--secondary btn--sm" data-action="showComingSoon">Download Requisition</button>
                   </div>
                 </div>
 
@@ -881,8 +881,8 @@
                     >
                   </div>
                   <div style="display: flex; gap: var(--space-4); flex-wrap: wrap">
-                    <button class="btn btn--primary btn--sm">View Results</button>
-                    <button class="btn btn--secondary btn--sm">Download Requisition</button>
+                    <a href="results.html" class="btn btn--primary btn--sm">View Results</a>
+                    <button class="btn btn--secondary btn--sm" data-action="showComingSoon">Download Requisition</button>
                   </div>
                 </div>
 
@@ -901,8 +901,8 @@
                     >
                   </div>
                   <div style="display: flex; gap: var(--space-4); flex-wrap: wrap">
-                    <button class="btn btn--primary btn--sm">View Results</button>
-                    <button class="btn btn--secondary btn--sm">Download Requisition</button>
+                    <a href="results.html" class="btn btn--primary btn--sm">View Results</a>
+                    <button class="btn btn--secondary btn--sm" data-action="showComingSoon">Download Requisition</button>
                   </div>
                 </div>
               </div>
@@ -960,7 +960,7 @@
                       />
                     </div>
 
-                    <button type="button" class="btn btn--primary">Save Changes</button>
+                    <button type="button" class="btn btn--primary" data-action="showComingSoon">Save Changes</button>
                   </form>
                 </div>
 
@@ -1010,6 +1010,7 @@
                   <button
                     class="btn btn--ghost"
                     style="color: var(--error-red); border-color: var(--error-red)"
+                    data-action="showComingSoon"
                   >
                     Delete Account
                   </button>
@@ -1029,9 +1030,9 @@
             &copy; 2026 WeightGain. All rights reserved.
           </p>
           <div class="footer__legal">
-            <a href="index.html" class="footer__legal-link">Privacy Policy</a>
-            <a href="index.html" class="footer__legal-link">Terms of Service</a>
-            <a href="index.html" class="footer__legal-link">HIPAA Notice</a>
+            <a href="privacy.html" class="footer__legal-link">Privacy Policy</a>
+            <a href="terms.html" class="footer__legal-link">Terms of Service</a>
+            <a href="privacy.html" class="footer__legal-link">HIPAA Notice</a>
           </div>
         </div>
       </div>
@@ -1165,7 +1166,7 @@
           <div class="ai-chat-messages-mini" id="widgetChatMessages">
             <div class="ai-message bot">
               <div class="message-content">
-                <p>Hey — I can help you find the right plan. TRT starts at $249/mo, TRT + HGH at $449/mo. Everything included, no hidden fees.</p>
+                <p>Hey! I can help you find the right plan. TRT starts at $249/mo, TRT + HGH at $449/mo. Everything included, no hidden fees.</p>
               </div>
             </div>
             <div class="ai-quick-buttons">

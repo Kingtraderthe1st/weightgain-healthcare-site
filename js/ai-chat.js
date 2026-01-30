@@ -116,7 +116,7 @@ function sendAiMessage(presetMessage = null) {
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
   });
 
-  // Get response — try API first, then fall back to keywords
+  // Get response: try API first, then fall back to keywords
   getAiResponse(message).then(function (response) {
     document.getElementById("typingIndicator")?.remove();
 
@@ -161,11 +161,11 @@ function getAiResponse(message) {
         return { message: data.reply };
       })
       .catch(function () {
-        // API unavailable — fall back to keyword matching
+        // API unavailable, fall back to keyword matching
         return getKeywordResponse(message);
       });
   }
-  // No proxy available — use keyword matching with a minimum delay for UX
+  // No proxy available, use keyword matching with a minimum delay for UX
   return new Promise(function (resolve) {
     setTimeout(function () {
       resolve(getKeywordResponse(message));
@@ -193,18 +193,18 @@ function getKeywordResponse(message) {
     if (msg.match(/trt|testos?t[eo]r+one?|testorone/i)) {
       return {
         message:
-          "Yes — women benefit from low-dose testosterone (5-15mg/week vs 100-200mg for men). Benefits include more energy, better libido, muscle tone, and mental clarity. Women should NOT use male-dosed TRT. Reach out at support@weightgain.com for women's protocols.",
+          "Yes, women benefit from low-dose testosterone (5-15mg/week vs 100-200mg for men). Benefits include more energy, better libido, muscle tone, and mental clarity. Women should NOT use male-dosed TRT. Reach out at support@weightgain.com for women's protocols.",
       };
     }
     if (msg.match(/hgh|gr[ow]+th\s*h[oa]rm[oa]ne?/i)) {
       return {
         message:
-          "HGH works great for women — 1-2 IU/day for better body composition, sleep, skin, and recovery. Often paired with low-dose testosterone for best results. Contact support@weightgain.com for women's HGH protocols.",
+          "HGH works great for women. 1-2 IU/day for better body composition, sleep, skin, and recovery. Often paired with low-dose testosterone for best results. Contact support@weightgain.com for women's HGH protocols.",
       };
     }
     return {
       message:
-        "Women can benefit from low-dose TRT (energy, libido, muscle tone), HGH (anti-aging, fat loss, sleep), or both. Dosing is much lower than men's. Our team can create a women-specific protocol — email support@weightgain.com.",
+        "Women can benefit from low-dose TRT (energy, libido, muscle tone), HGH (anti-aging, fat loss, sleep), or both. Dosing is much lower than men's. Our team can create a women-specific protocol. Email support@weightgain.com.",
     };
   }
 
@@ -215,7 +215,7 @@ function getKeywordResponse(message) {
   ) {
     return {
       message:
-        "Must be 18+ to qualify. Optimal candidates are 25-65, but men over 65 benefit too. Your labs tell the real story — low T doesn't discriminate by age.",
+        "Must be 18+ to qualify. Optimal candidates are 25-65, but men over 65 benefit too. Your labs tell the real story. Low T doesn't discriminate by age.",
     };
   }
 
@@ -227,7 +227,7 @@ function getKeywordResponse(message) {
   ) {
     return {
       message:
-        "Our doctors review your full medical history before approving treatment. Conditions like prostate issues, heart conditions, or clotting disorders need extra evaluation — but many men with these still qualify. Your safety comes first.",
+        "Our doctors review your full medical history before approving treatment. Conditions like prostate issues, heart conditions, or clotting disorders need extra evaluation, but many men with these still qualify. Your safety comes first.",
     };
   }
 
@@ -239,7 +239,7 @@ function getKeywordResponse(message) {
   ) {
     return {
       message:
-        "Sign up, get labs at 4,500+ locations, and our doctors review your levels. If they're suboptimal, you likely qualify. Must be 18+ — labs are included, no extra cost. Individual results vary.",
+        "Sign up, get labs at 4,500+ locations, and our doctors review your levels. If they're suboptimal, you likely qualify. Must be 18+. Labs are included, no extra cost. Individual results vary.",
     };
   }
 
@@ -280,7 +280,7 @@ function getKeywordResponse(message) {
   ) {
     return {
       message:
-        "TRT = energy, strength, libido, focus. HGH = recovery, body recomp, anti-aging, sleep. Total Optimization ($249/mo) includes whichever your labs say you need — or both. What's your main goal?",
+        "TRT = energy, strength, libido, focus. HGH = recovery, body recomp, anti-aging, sleep. Total Optimization ($249/mo) includes whichever your labs say you need, or both. What's your main goal?",
     };
   }
 
@@ -320,7 +320,7 @@ function getKeywordResponse(message) {
   if (msg.match(/price|cost|how much|afford|expensive|pay|money|insurance/i)) {
     return {
       message:
-        "$249/mo — everything included. Labs, personalized protocol, monthly meds, quarterly monitoring, unlimited telehealth. No hidden fees. Or $2,490/yr to save $498. Individual results may vary.",
+        "$249/mo, everything included. Labs, personalized protocol, monthly meds, quarterly monitoring, unlimited telehealth. No hidden fees. Or $2,490/yr to save $498. Individual results may vary.",
     };
   }
 
@@ -334,7 +334,7 @@ function getKeywordResponse(message) {
     }
     return {
       message:
-        "$249/mo — monthly meds, all blood panels, unlimited doctor consultations, ongoing optimization. Energy, strength, libido, and focus may all improve. First injection typically in ~7 days. Individual results vary.",
+        "$249/mo includes monthly meds, all blood panels, unlimited doctor consultations, ongoing optimization. Energy, strength, libido, and focus may all improve. First injection typically in ~7 days. Individual results vary.",
     };
   }
 
@@ -354,7 +354,7 @@ function getKeywordResponse(message) {
   ) {
     return {
       message:
-        "Those symptoms may mean your hormones need optimization. Fatigue, low libido, brain fog, can't build muscle — all tied to hormone levels. $249/mo gets you tested and on a personalized protocol. Individual results vary.",
+        "Those symptoms may mean your hormones need optimization. Fatigue, low libido, brain fog, can't build muscle. All tied to hormone levels. $249/mo gets you tested and on a personalized protocol. Individual results vary.",
     };
   }
 
@@ -370,7 +370,7 @@ function getKeywordResponse(message) {
   if (msg.match(/^(hi|hey|hello|sup|yo|what's up)/i)) {
     return {
       message:
-        "Hey! Welcome to WeightGain. I can help with TRT, HGH, pricing, timelines, safety — whatever's on your mind. What would you like to know?",
+        "Hey! Welcome to WeightGain. I can help with TRT, HGH, pricing, timelines, safety, whatever's on your mind. What would you like to know?",
     };
   }
 
@@ -386,7 +386,7 @@ function getKeywordResponse(message) {
   if (msg.match(/what('s| is) included|what do (i|you) get|include/i)) {
     return {
       message:
-        "$249/mo — monthly meds, all blood panels, unlimited telehealth, ongoing monitoring, direct doctor messaging. One price, no hidden fees. Individual results may vary.",
+        "$249/mo includes monthly meds, all blood panels, unlimited telehealth, ongoing monitoring, direct doctor messaging. One price, no hidden fees. Individual results may vary.",
     };
   }
 
@@ -404,11 +404,11 @@ function getKeywordResponse(message) {
   const defaultResponses = [
     {
       message:
-        "I can help with TRT, HGH, pricing, timelines, safety — ask me anything about hormone optimization.",
+        "I can help with TRT, HGH, pricing, timelines, safety. Ask me anything about hormone optimization.",
     },
     {
       message:
-        "Total Optimization: $249/mo — labs, personalized protocol, monthly meds, all included. What's your main goal? Individual results may vary.",
+        "Total Optimization: $249/mo. Labs, personalized protocol, monthly meds, all included. What's your main goal? Individual results may vary.",
     },
     {
       message:

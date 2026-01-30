@@ -10,12 +10,12 @@
 const aiResponses = {
   howworks: {
     message:
-      "Get labs at 4,500+ locations, our doctors analyze your results, then we design your personalized protocol — TRT, HGH, or both. Medication ships monthly. $249/mo, everything included.",
+      "Get labs at 4,500+ locations, our doctors analyze your results, then we design your personalized protocol: TRT, HGH, or both. Medication ships monthly. $249/mo, everything included.",
     plan: "optimization",
   },
   personalized: {
     message:
-      "We start with comprehensive labs, then build a protocol tailored to YOUR results. You might need TRT, HGH, or both — we figure it out based on your bloodwork, not guesswork.",
+      "We start with comprehensive labs, then build a protocol tailored to YOUR results. You might need TRT, HGH, or both. We figure it out based on your bloodwork, not guesswork.",
     plan: "optimization",
   },
   included: {
@@ -25,7 +25,7 @@ const aiResponses = {
   },
   whatsincluded: {
     message:
-      "$249/mo — everything included. Labs, personalized protocol, monthly meds, monitoring, unlimited telehealth. One price, no surprises.",
+      "$249/mo, everything included. Labs, personalized protocol, monthly meds, monitoring, unlimited telehealth. One price, no surprises.",
     plan: "optimization",
   },
   trt: {
@@ -40,12 +40,12 @@ const aiResponses = {
   },
   lowt: {
     message:
-      "Low T symptoms? Don't guess — let's test. $249/mo includes comprehensive labs and a personalized protocol based on YOUR results.",
+      "Low T symptoms? Don't guess, let's test. $249/mo includes comprehensive labs and a personalized protocol based on YOUR results.",
     plan: "optimization",
   },
   hgh: {
     message:
-      "HGH is great for recovery and body composition. $249/mo covers your full hormone panel — if HGH would help, it's included in your protocol. No extra cost.",
+      "HGH is great for recovery and body composition. $249/mo covers your full hormone panel. If HGH would help, it's included in your protocol. No extra cost.",
     plan: "optimization",
   },
   growth: {
@@ -55,7 +55,7 @@ const aiResponses = {
   },
   muscle: {
     message:
-      "Can't build muscle? Could be testosterone, growth hormone, or both. $249/mo — we test everything and design a protocol for YOUR body.",
+      "Can't build muscle? Could be testosterone, growth hormone, or both. $249/mo. We test everything and design a protocol for YOUR body.",
     plan: "optimization",
   },
   gains: {
@@ -65,7 +65,7 @@ const aiResponses = {
   },
   tired: {
     message:
-      "Always tired? Could be testosterone, thyroid, or other factors. $249/mo includes comprehensive labs — we find the issue and build your protocol.",
+      "Always tired? Could be testosterone, thyroid, or other factors. $249/mo includes comprehensive labs. We find the issue and build your protocol.",
     plan: "optimization",
   },
   fatigue: {
@@ -75,12 +75,12 @@ const aiResponses = {
   },
   energy: {
     message:
-      "Want more energy? $249/mo starts with labs, then we design your protocol — could be TRT, HGH, or both based on your results.",
+      "Want more energy? $249/mo starts with labs, then we design your protocol. Could be TRT, HGH, or both based on your results.",
     plan: "optimization",
   },
   price: {
     message:
-      "$249/mo — everything included. Labs, personalized protocol, monthly meds, quarterly monitoring, unlimited telehealth. No hidden fees. Or $2,490/yr to save $498.",
+      "$249/mo, everything included. Labs, personalized protocol, monthly meds, quarterly monitoring, unlimited telehealth. No hidden fees. Or $2,490/yr to save $498.",
     plan: "optimization",
   },
   cost: {
@@ -100,12 +100,12 @@ const aiResponses = {
   },
   results: {
     message:
-      "Most members report changes by week 6. Energy first, then strength, then visible results. Your protocol is personalized to YOUR labs — that's why it works. Individual results vary.",
+      "Most members report changes by week 6. Energy first, then strength, then visible results. Your protocol is personalized to YOUR labs. That's why it works. Individual results vary.",
     plan: "optimization",
   },
   sides: {
     message:
-      "Side effects are minimal when properly monitored. That's why we include quarterly labs and unlimited telehealth — your doctor watches your levels and adjusts as needed.",
+      "Side effects are minimal when properly monitored. That's why we include quarterly labs and unlimited telehealth. Your doctor watches your levels and adjusts as needed.",
     plan: null,
   },
   safe: {
@@ -135,7 +135,7 @@ const aiResponses = {
   },
   default: {
     message:
-      "$249/mo — we analyze your labs and create a personalized hormone protocol. Everything included. ~7 days to start.",
+      "$249/mo. We analyze your labs and create a personalized hormone protocol. Everything included. ~7 days to start.",
     plan: "optimization",
   },
   offTopic: {

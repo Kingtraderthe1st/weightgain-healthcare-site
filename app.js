@@ -651,12 +651,114 @@ const actions = {
   scrollToTop: () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   },
+  toggleViewAll: () => {
+    if (window.WeightGainResults?.toggleViewAll) {
+      window.WeightGainResults.toggleViewAll();
+    }
+  },
+  showComingSoon: () => {
+    const toast = document.getElementById("toast");
+    const toastMessage = document.getElementById("toastMessage");
+    if (toast && toastMessage) {
+      toastMessage.textContent = "Coming soon. This feature is in development.";
+      toast.classList.add("active");
+      setTimeout(() => toast.classList.remove("active"), 3000);
+    }
+  },
+  browsePlans: () => {
+    // Close the cart sidebar first
+    if (window.WeightGainCart?.closeCartSidebar) {
+      window.WeightGainCart.closeCartSidebar();
+    }
+    // If on pricing page, scroll to the first pricing card
+    var pricingCard = document.querySelector(".pricing-main-card") || document.querySelector(".pricing-teaser-card");
+    var pricingSection = document.getElementById("pricing");
+    var target = pricingCard || pricingSection;
+    if (target) {
+      setTimeout(function () {
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 300);
+    } else {
+      // Not on a page with plans, navigate to pricing.html
+      window.location.href = "pricing.html";
+    }
+  },
   scrollToChat: () => {
     var toggle = document.getElementById("chatToggle");
     var panel = document.getElementById("chatPanel");
+    var widget = document.getElementById("chatWidget");
+
+    // Open the chat panel if closed
     if (panel && !panel.classList.contains("active") && toggle) {
       toggle.click();
     }
+
+    // Scroll the widget into view
+    if (widget) {
+      widget.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+
+    // Auto-send a personalized recommendations message after panel opens
+    setTimeout(function () {
+      var widgetMessages = document.getElementById("widgetChatMessages");
+      var getAiResponseFn =
+        window.WeightGainAIChat && window.WeightGainAIChat.getAiResponse;
+
+      if (!widgetMessages) return;
+
+      var autoMsg = "Based on my lab results, what personalized recommendations do you have for me?";
+
+      // Show the user message
+      var userMsg = document.createElement("div");
+      userMsg.className = "ai-message user";
+      var userContent = document.createElement("div");
+      userContent.className = "message-content";
+      var userP = document.createElement("p");
+      userP.textContent = autoMsg;
+      userContent.appendChild(userP);
+      userMsg.appendChild(userContent);
+      widgetMessages.appendChild(userMsg);
+
+      // Typing indicator
+      var typing = document.createElement("div");
+      typing.className = "ai-message bot";
+      typing.id = "widgetTypingIndicator";
+      var typingContent = document.createElement("div");
+      typingContent.className = "message-content";
+      var dots = document.createElement("div");
+      dots.className = "typing-indicator";
+      for (var i = 0; i < 3; i++) dots.appendChild(document.createElement("span"));
+      typingContent.appendChild(dots);
+      typing.appendChild(typingContent);
+      widgetMessages.appendChild(typing);
+      widgetMessages.scrollTop = widgetMessages.scrollHeight;
+
+      var responsePromise = getAiResponseFn
+        ? getAiResponseFn(autoMsg)
+        : Promise.resolve({
+            message:
+              "Based on your results, your testosterone is in optimal range but your Vitamin D is low at 28 ng/mL. I'd recommend 5,000 IU Vitamin D3 daily with a fat source for absorption. Your thyroid and inflammation markers look great. Want me to break down a full supplement protocol?",
+          });
+
+      responsePromise.then(function (response) {
+        var indicator = document.getElementById("widgetTypingIndicator");
+        if (indicator) indicator.remove();
+
+        var aiMsg = document.createElement("div");
+        aiMsg.className = "ai-message bot";
+        var aiContent = document.createElement("div");
+        aiContent.className = "message-content";
+        var aiP = document.createElement("p");
+        aiP.textContent = response.message;
+        aiContent.appendChild(aiP);
+        aiMsg.appendChild(aiContent);
+        widgetMessages.appendChild(aiMsg);
+
+        requestAnimationFrame(function () {
+          aiMsg.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        });
+      });
+    }, 500);
   },
   toggleLabPrep: () => {
     toggleLabPrep();
@@ -1032,6 +1134,28 @@ function init() {
   // Security: Populate CSRF tokens
   if (window.WeightGainUtils?.populateCSRFTokens) {
     window.WeightGainUtils.populateCSRFTokens();
+  }
+
+  // Pricing page: savings entrance banner
+  var savingsBanner = document.getElementById("savingsEntrance");
+  if (savingsBanner) {
+    var savingsClose = document.getElementById("savingsEntranceClose");
+    setTimeout(function () {
+      savingsBanner.classList.add("active");
+    }, 800);
+    if (savingsClose) {
+      savingsClose.addEventListener("click", function () {
+        savingsBanner.classList.add("dismissing");
+        savingsBanner.classList.remove("active");
+      });
+    }
+    // Auto-dismiss after 8 seconds
+    setTimeout(function () {
+      if (savingsBanner.classList.contains("active")) {
+        savingsBanner.classList.add("dismissing");
+        savingsBanner.classList.remove("active");
+      }
+    }, 8000);
   }
 }
 

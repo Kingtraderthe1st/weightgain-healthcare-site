@@ -130,22 +130,20 @@
                 <label class="plan-option-label">Select your protocol:</label>
                 <div class="plan-option-buttons gender-buttons">
                   <button type="button" class="plan-option-btn gender-btn active" data-gender="male">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="plan-option-icon">
-                      <!-- Male: angular jaw, short cropped hair -->
-                      <circle cx="12" cy="7" r="4.5"/>
-                      <rect x="8" y="2" width="8" height="3" rx="1.5"/>
-                      <path d="M12 12.5c-4.5 0-7.5 2.2-7.5 5V20h15v-2.5c0-2.8-3-5-7.5-5z"/>
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="plan-option-icon" aria-hidden="true">
+                      <!-- Male: Mars symbol -->
+                      <circle cx="10.5" cy="13.5" r="6"/>
+                      <path d="M21 3l-6.5 6.5"/>
+                      <path d="M16 3h5v5"/>
                     </svg>
                     <span>Male Protocol</span>
                   </button>
                   <button type="button" class="plan-option-btn gender-btn" data-gender="female">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="plan-option-icon">
-                      <!-- Female: rounded face, longer flowing hair -->
-                      <circle cx="12" cy="8" r="4.5"/>
-                      <path d="M7 6c0-3.3 2.2-5 5-5s5 1.7 5 5c0 .5-.1 1-.2 1.4C17.5 5.5 15 4 12 4S6.5 5.5 7.2 7.4C7.1 7 7 6.5 7 6z"/>
-                      <path d="M6.5 8.5C6 10 5.5 12 5.5 13.5c0 1 .3 1.8.5 2"/>
-                      <path d="M17.5 8.5C18 10 18.5 12 18.5 13.5c0 1-.3 1.8-.5 2"/>
-                      <path d="M12 13.5c-4.5 0-7.5 2.2-7.5 5V21h15v-2.5c0-2.8-3-5-7.5-5z"/>
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="plan-option-icon" aria-hidden="true">
+                      <!-- Female: Venus symbol -->
+                      <circle cx="12" cy="9" r="6"/>
+                      <path d="M12 15v6"/>
+                      <path d="M9 18h6"/>
                     </svg>
                     <span>Female Protocol</span>
                   </button>
@@ -514,20 +512,8 @@
                   <span class="form-check__label">
                     I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms of Service</a> and
                     <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>. I understand that lab tests are non-refundable
-                    once the requisition is generated.
-                  </span>
-                </label>
-              </div>
-
-              <div class="form-group form-group--mt-4">
-                <label class="form-check">
-                  <input type="checkbox" class="form-check__input" id="sms-optin" />
-                  <span class="form-check__label" style="font-size: 0.85rem;">
-                    I agree to receive SMS updates from WeightGain including order confirmations, health tips, and promotions.
-                    Consent is not a condition of purchase. Msg &amp; data rates may apply. Msg frequency varies.
-                    Reply STOP to cancel, HELP for help.
-                    <a href="terms.html" target="_blank" rel="noopener">Terms</a> &amp;
-                    <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.
+                    once the requisition is generated. I also consent to receive SMS updates (order confirmations, health tips,
+                    and promotions). Msg &amp; data rates may apply. Reply STOP to cancel, HELP for help.
                   </span>
                 </label>
               </div>
@@ -693,9 +679,9 @@
             &copy; 2026 WeightGain. All rights reserved.
           </p>
           <div class="footer__legal">
-            <a href="#" class="footer__legal-link">Privacy Policy</a>
-            <a href="#" class="footer__legal-link">Terms of Service</a>
-            <a href="#" class="footer__legal-link">HIPAA Notice</a>
+            <a href="privacy.html" class="footer__legal-link">Privacy Policy</a>
+            <a href="terms.html" class="footer__legal-link">Terms of Service</a>
+            <a href="privacy.html" class="footer__legal-link">HIPAA Notice</a>
           </div>
         </div>
       </div>
@@ -1728,7 +1714,7 @@
           <div class="ai-chat-messages-mini" id="widgetChatMessages">
             <div class="ai-message bot">
               <div class="message-content">
-                <p>Hey — I can help you find the right plan. TRT starts at $249/mo, TRT + HGH at $449/mo. Everything included, no hidden fees.</p>
+                <p>Hey! I can help you find the right plan. TRT starts at $249/mo, TRT + HGH at $449/mo. Everything included, no hidden fees.</p>
               </div>
             </div>
             <div class="ai-quick-buttons">
