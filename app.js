@@ -585,6 +585,17 @@ const actions = {
       window.WeightGainPlans.selectPlan(planId);
     }
   },
+  showPlanDetail: (e) => {
+    const planId = e.target.closest("[data-plan-id]")?.dataset.planId;
+    if (planId && window.WeightGainPlans?.showPlanDetail) {
+      window.WeightGainPlans.showPlanDetail(planId);
+    }
+  },
+  closePlanDetail: () => {
+    if (window.WeightGainPlans?.closePlanDetail) {
+      window.WeightGainPlans.closePlanDetail();
+    }
+  },
   closeUpsellModal: () => {
     if (window.WeightGainUI?.closeUpsellModal) {
       window.WeightGainUI.closeUpsellModal();
@@ -730,6 +741,9 @@ function initKeyboardNavigation() {
       }
       if (window.WeightGainUI?.closeAuthModal) {
         window.WeightGainUI.closeAuthModal();
+      }
+      if (window.WeightGainPlans?.closePlanDetail) {
+        window.WeightGainPlans.closePlanDetail();
       }
       if (window.WeightGainUI?.closeWelcomePopup) {
         window.WeightGainUI.closeWelcomePopup();
@@ -1091,6 +1105,8 @@ window.renderCartSidebar = window.WeightGainCart?.renderCartSidebar;
 window.showPairingModal = window.WeightGainUI?.showPairingModal;
 window.closePairingModal = window.WeightGainUI?.closePairingModal;
 window.addPairingToCart = window.WeightGainPlans?.addPairingToCart;
+window.showPlanDetail = window.WeightGainPlans?.showPlanDetail;
+window.closePlanDetail = window.WeightGainPlans?.closePlanDetail;
 
 // =============================================================================
 // Lab Prep Toggle Function

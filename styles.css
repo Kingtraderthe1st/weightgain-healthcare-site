@@ -532,8 +532,21 @@ a .logo-text,
 .nav-link svg {
   width: 16px;
   height: 16px;
-  fill: currentColor;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
 }
+
+.nav-link:hover svg {
+  opacity: 1;
+}
+
+/* Distinct icon colors per nav item */
+.nav-links li:nth-child(1) .nav-link svg { fill: #2563eb; }  /* Pricing - blue */
+.nav-links li:nth-child(2) .nav-link svg { fill: #7c3aed; }  /* How It Works - purple */
+.nav-links li:nth-child(3) .nav-link svg { fill: #dc2626; }  /* Find a Lab - red */
+.nav-links li:nth-child(4) .nav-link svg { fill: #16a34a; }  /* My Results - green */
+.nav-links li:nth-child(5) .nav-link svg { fill: #6366f1; }  /* My Account - indigo */
 
 .nav-dropdown {
   position: relative;
@@ -574,10 +587,10 @@ a .logo-text,
 
 .dropdown-menu a {
   display: block;
-  padding: 0.5rem 0.75rem;
+  padding: 0.625rem 1rem;
   color: rgba(30, 41, 59, 0.8);
   font-size: 0.875rem;
-  border-radius: 4px;
+  border-radius: 6px;
   transition: all 0.2s;
 }
 
@@ -689,6 +702,7 @@ a .logo-text,
 .mobile-menu a {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
   padding: 1rem;
   color: #1e293b;
   font-size: 1rem;
@@ -696,6 +710,20 @@ a .logo-text,
   margin-bottom: 0.25rem;
   min-height: 48px;
 }
+
+.mobile-menu a svg {
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+/* Mobile menu icon colors */
+.mobile-menu a:nth-child(1) svg { fill: #2563eb; }  /* Pricing */
+.mobile-menu a:nth-child(2) svg { fill: #7c3aed; }  /* How It Works */
+.mobile-menu a:nth-child(3) svg { fill: #dc2626; }  /* Find a Lab */
+.mobile-menu a:nth-child(4) svg { fill: #16a34a; }  /* My Results */
+.mobile-menu a:nth-child(5) svg { fill: #6366f1; }  /* My Account */
 
 .mobile-menu a:hover {
   background: rgba(37, 99, 235, 0.1);
@@ -2021,10 +2049,10 @@ body:has(.mobile-sticky-cta.active) .footer {
 .lab-modal-close,
 .exit-popup-close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 32px;
-  height: 32px;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 44px;
+  height: 44px;
   background: rgba(37, 99, 235, 0.1);
   border-radius: 50%;
   display: flex;
@@ -2603,8 +2631,8 @@ body:has(.sticky-cart-bar.active) {
 
 .chat-widget {
   position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
+  bottom: 1rem;
+  right: 1rem;
   z-index: 9999;
   display: flex;
   flex-direction: column;
@@ -2663,7 +2691,7 @@ body:has(.sticky-cart-bar.active) {
 .chat-widget__panel {
   display: none;
   width: 380px;
-  max-height: 520px;
+  max-height: min(600px, calc(100vh - 100px));
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   border-radius: 16px;
   margin-bottom: 1rem;
@@ -2735,9 +2763,14 @@ body:has(.sticky-cart-bar.active) {
   border: none;
   color: rgba(148, 163, 184, 0.8);
   cursor: pointer;
-  padding: 4px;
-  border-radius: 6px;
+  padding: 10px;
+  border-radius: 8px;
   transition: all 0.2s;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .chat-widget__close:hover {
@@ -2755,21 +2788,25 @@ body:has(.sticky-cart-bar.active) {
 /* Override chat messages inside the widget panel */
 .chat-widget__panel .ai-chat-messages-mini {
   padding: 1rem 1.25rem;
-  max-height: 340px;
+  max-height: none;
   min-height: 200px;
   flex: 1;
+  overflow-y: auto;
 }
 
 .chat-widget__panel .ai-quick-buttons {
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
 .chat-widget__panel .ai-quick-btn {
   height: auto;
-  padding: 0.6rem 1rem;
+  padding: 0.5rem 1rem;
   font-size: 0.8rem;
-  border-radius: 10px;
+  border-radius: 999px;
+  flex: 0 0 auto;
+  min-height: 36px;
 }
 
 .chat-widget__panel .ai-chat-input-mini {
@@ -2785,13 +2822,15 @@ body:has(.sticky-cart-bar.active) {
     right: 0;
     left: 0;
     align-items: stretch;
-    padding: 0 0.5rem 0.5rem;
+    padding: 0 0.5rem calc(0.5rem + env(safe-area-inset-bottom, 0px));
   }
 
   .chat-widget__toggle {
     align-self: flex-end;
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
+    width: 52px;
+    height: 52px;
   }
 
   .chat-widget__panel {
@@ -3489,7 +3528,10 @@ body:has(.sticky-cart-bar.active) {
     width: 30px;
   }
   .progress-label {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -3539,7 +3581,7 @@ body:has(.sticky-cart-bar.active) {
 }
 
 .form-error {
-  font-size: 0.8rem;
+  font-size: 0.813rem;
   color: var(--error-red);
   margin-top: 0.375rem;
   min-height: 1.2em;
@@ -4123,7 +4165,7 @@ body:has(.sticky-cart-bar.active) {
    ============================================ */
 
 .pricing-section {
-  padding: 4rem 0;
+  padding: 1.5rem 0;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -4149,30 +4191,49 @@ body:has(.sticky-cart-bar.active) {
 .billing-toggle {
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 3rem;
-  background: rgba(37, 99, 235, 0.1);
-  padding: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.billing-toggle-track {
+  position: relative;
+  display: flex;
+  background: rgba(37, 99, 235, 0.08);
+  padding: 4px;
   border-radius: 50px;
+  border: 1px solid rgba(37, 99, 235, 0.15);
   width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.billing-toggle-thumb {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark, #1d4ed8) 100%);
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+
+.billing-toggle-track[data-active="yearly"] .billing-toggle-thumb {
+  transform: translateX(100%);
 }
 
 .billing-option {
-  padding: 0.75rem 1.5rem;
+  padding: 0.65rem 1.5rem;
   border-radius: 50px;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: rgba(71, 85, 105, 1);
   background: transparent;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
   position: relative;
-  display: flex;
-  flex-direction: column;
+  z-index: 1;
+  white-space: nowrap;
 }
 
 .billing-option:hover {
@@ -4180,21 +4241,199 @@ body:has(.sticky-cart-bar.active) {
 }
 
 .billing-option.active {
-  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark) 100%);
   color: #ffffff;
-  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+  background: transparent;
 }
 
-.billing-save {
-  display: block;
+.billing-savings-badge {
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #16a34a;
+  padding: 0.35rem 1rem;
+  border-radius: 50px;
+  background: rgba(22, 163, 74, 0.08);
+  border: 1px solid rgba(22, 163, 74, 0.15);
+  width: fit-content;
+  margin: 0 auto 0.75rem;
+}
+
+/* ============================================
+   Plan Detail Modal (homepage)
+   ============================================ */
+
+.plan-detail-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s;
+  backdrop-filter: blur(4px);
+}
+
+.plan-detail-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.plan-detail-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: #ffffff;
+  border-radius: 16px;
+  max-width: 480px;
+  width: 92%;
+  max-height: 90vh;
+  overflow-y: auto;
+  z-index: 10001;
+  padding: 1.5rem 1.5rem 1.25rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  outline: none;
+}
+
+.plan-detail-modal.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.plan-detail-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: #64748b;
+  transition: background 0.2s, color 0.2s;
+}
+
+.plan-detail-close:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #1e293b;
+}
+
+.plan-detail-close svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.plan-detail-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-dark, #1d4ed8) 100%);
+  color: #ffffff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
   font-size: 0.7rem;
-  font-weight: 500;
-  color: var(--brand-primary);
-  margin-top: 0.125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
 }
 
-.billing-option.active .billing-save {
-  color: #ffffff;
+.plan-detail-badge--premium {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+}
+
+.plan-detail-name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 0.15rem;
+}
+
+.plan-detail-tagline {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 0.75rem;
+}
+
+.plan-detail-description {
+  display: none;
+}
+
+.plan-detail-price-block {
+  display: flex;
+  align-items: baseline;
+  gap: 0.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.plan-detail-price {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.plan-detail-period {
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.plan-detail-modal .billing-toggle {
+  margin-bottom: 0.35rem;
+}
+
+.plan-detail-modal .billing-savings-badge {
+  margin-bottom: 0.75rem;
+}
+
+.plan-detail-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.plan-detail-features li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  font-size: 0.8rem;
+  color: #334155;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.plan-detail-features li:last-child {
+  border-bottom: none;
+}
+
+.plan-detail-features li svg {
+  flex-shrink: 0;
+  color: #16a34a;
+  width: 15px;
+  height: 15px;
+}
+
+.plan-detail-cta {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  padding: 0.85rem;
+}
+
+.plan-detail-compare {
+  display: block;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--brand-primary);
+  font-weight: 600;
+  padding: 0.25rem;
+}
+
+.plan-detail-compare:hover {
+  text-decoration: underline;
 }
 
 /* Pricing Grid */
@@ -8408,13 +8647,13 @@ body:has(.mobile-sticky-cta.active) {
    ============================================ */
 
 .about-page {
-  padding: 6rem 0 4rem;
+  padding: 3rem 0 1.5rem;
 }
 
 .about-hero {
   text-align: center;
   max-width: 800px;
-  margin: 0 auto 4rem;
+  margin: 0 auto 2rem;
 }
 
 .about-hero h1 {
@@ -8679,7 +8918,7 @@ body:has(.mobile-sticky-cta.active) {
    ============================================ */
 
 .faq-page {
-  padding: 6rem 0 4rem;
+  padding: 3rem 0 1.5rem;
 }
 
 .faq-page h1 {
@@ -8694,7 +8933,7 @@ body:has(.mobile-sticky-cta.active) {
   text-align: center;
   color: rgba(71, 85, 105, 1);
   max-width: 600px;
-  margin: 0 auto 3rem;
+  margin: 0 auto 1.5rem;
 }
 
 .faq-intro a {
@@ -8804,7 +9043,7 @@ body:has(.mobile-sticky-cta.active) {
    ============================================ */
 
 .contact-page {
-  padding: 6rem 0 4rem;
+  padding: 3rem 0 1.5rem;
 }
 
 .contact-page h1 {
@@ -8819,7 +9058,7 @@ body:has(.mobile-sticky-cta.active) {
   text-align: center;
   color: rgba(71, 85, 105, 1);
   max-width: 600px;
-  margin: 0 auto 3rem;
+  margin: 0 auto 1.5rem;
 }
 
 .contact-grid {
@@ -9151,9 +9390,13 @@ body:has(.mobile-sticky-cta.active) {
   /* Body class for pricing page specific styles */
 }
 
+.pricing-main-section {
+  padding-top: 1rem;
+}
+
 /* Pricing Hero */
 .pricing-hero {
-  padding: 6rem 0 4rem;
+  padding: 2rem 0 1rem;
   text-align: center;
   background: linear-gradient(180deg, rgba(37, 99, 235, 0.05) 0%, transparent 100%);
 }
@@ -9164,7 +9407,7 @@ body:has(.mobile-sticky-cta.active) {
 }
 
 .pricing-hero h1 {
-  font-size: 3rem;
+  font-size: 2.25rem;
   font-weight: 800;
   background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
   -webkit-background-clip: text;
@@ -9176,36 +9419,12 @@ body:has(.mobile-sticky-cta.active) {
 .pricing-hero-subtitle {
   font-size: 1.25rem;
   color: rgba(30, 41, 59, 0.8);
-  margin-bottom: 2rem;
-}
-
-.pricing-hero-badges {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.pricing-hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: rgba(37, 99, 235, 0.1);
-  border: 1px solid rgba(37, 99, 235, 0.3);
-  border-radius: 50px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--brand-primary);
-}
-
-.pricing-hero-badge svg {
-  flex-shrink: 0;
+  margin-bottom: 0.75rem;
 }
 
 @media (max-width: 768px) {
   .pricing-hero {
-    padding: 4rem 0 3rem;
+    padding: 1.5rem 0 1rem;
   }
 
   .pricing-hero h1 {
@@ -9214,11 +9433,6 @@ body:has(.mobile-sticky-cta.active) {
 
   .pricing-hero-subtitle {
     font-size: 1rem;
-  }
-
-  .pricing-hero-badges {
-    flex-direction: column;
-    align-items: center;
   }
 }
 
@@ -9248,14 +9462,14 @@ body:has(.mobile-sticky-cta.active) {
 .pricing-card-includes {
   list-style: none;
   text-align: left;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .pricing-card-includes li {
-  padding: 0.5rem 0;
+  padding: 0.3rem 0;
   padding-left: 1.5rem;
   position: relative;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   color: rgba(30, 41, 59, 0.85);
   border-bottom: 1px solid rgba(37, 99, 235, 0.08);
 }
@@ -9276,7 +9490,7 @@ body:has(.mobile-sticky-cta.active) {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 1) 100%);
   border: 2px solid rgba(37, 99, 235, 0.4);
   border-radius: var(--border-radius-xl);
-  padding: 2.5rem;
+  padding: 1.5rem;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -9303,7 +9517,7 @@ body:has(.mobile-sticky-cta.active) {
 
 .pricing-card-header {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
   padding-top: 0.5rem;
 }
 
@@ -9322,7 +9536,7 @@ body:has(.mobile-sticky-cta.active) {
 /* Price Anchoring */
 .pricing-card-anchor {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .price-comparison {
@@ -9352,17 +9566,17 @@ body:has(.mobile-sticky-cta.active) {
   font-weight: 600;
   padding: 0.25rem 0.75rem;
   border-radius: 50px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.25rem;
 }
 
 /* Main Price Display */
 .pricing-card-price {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .price-amount {
-  font-size: 4.5rem;
+  font-size: 3rem;
   font-weight: 800;
   background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 100%);
   -webkit-background-clip: text;
@@ -9381,7 +9595,7 @@ body:has(.mobile-sticky-cta.active) {
   text-align: center;
   font-size: 0.875rem;
   color: rgba(100, 116, 139, 1);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 /* Social Proof in Card */
@@ -9389,10 +9603,10 @@ body:has(.mobile-sticky-cta.active) {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   border-top: 1px solid rgba(37, 99, 235, 0.15);
   border-bottom: 1px solid rgba(37, 99, 235, 0.15);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .proof-item {
@@ -9401,7 +9615,7 @@ body:has(.mobile-sticky-cta.active) {
 
 .proof-value {
   display: block;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 800;
   color: var(--brand-primary);
 }
@@ -9415,7 +9629,7 @@ body:has(.mobile-sticky-cta.active) {
   text-align: center;
   font-size: 0.85rem;
   color: rgba(100, 116, 139, 1);
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 /* Trust Footer in Card */
@@ -9424,8 +9638,8 @@ body:has(.mobile-sticky-cta.active) {
   justify-content: center;
   align-items: center;
   gap: 0.75rem;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
   border-top: 1px solid rgba(37, 99, 235, 0.15);
   font-size: 0.75rem;
   font-weight: 600;

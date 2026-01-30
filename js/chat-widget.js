@@ -103,7 +103,7 @@
       widgetMessages.appendChild(aiMsg);
 
       requestAnimationFrame(function () {
-        widgetMessages.scrollTop = widgetMessages.scrollHeight;
+        aiMsg.scrollIntoView({ behavior: "smooth", block: "nearest" });
       });
     }, 1200);
   }
